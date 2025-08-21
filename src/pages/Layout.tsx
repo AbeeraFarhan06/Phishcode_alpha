@@ -7,6 +7,7 @@ import Impact from '../components/Impact';
 import Approach from '../components/Approach';
 import Resources from '../components/Resources';
 import Nextstep from '../components/NextStep';
+import Footer from '../components/Footer';
 
 const Layout = () => {
   return (
@@ -21,6 +22,7 @@ const Layout = () => {
        <Approach />
        <Resources />
        <Nextstep />
+       <Footer/>
     </>
   );
 };
