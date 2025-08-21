@@ -1,3 +1,6 @@
+// This component renders the next steps section of the page.
+// It includes a call to action to try the platform for free, as well as links to contact sales and watch a demo.
+
 import React from "react";
 import {
   Box,
@@ -15,11 +18,12 @@ import email from "../assets/icons/email.svg";
 import demo from "../assets/icons/demo.svg";
 import vecteezy_young from '../assets/vecteezy_young.png'
 
-// Motion-enhanced Chakra components
+// Motion-enhanced versions of Chakra UI components.
 const MotionBox = motion(Box);
 const MotionGridItem = motion(Box);
 
 const Nextstep = () => {
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const paddingX = useBreakpointValue({ base: 4, md: 24 });
   const topSectionPaddingLeft = useBreakpointValue({ base: 4, md: 6 });
   const topSectionPaddingRight = useBreakpointValue({ base: 4, md: 4 });
@@ -54,10 +58,10 @@ const Nextstep = () => {
         alignItems="center"
         flexWrap={topSectionFlexWrap}
         flexDirection={flexDirection}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 40 }} // Initial animation state.
+        whileInView={{ opacity: 1, y: 0 }} // Animate to this state when the component is in view.
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: "easeOut" }} // The duration of the animation.
       >
         {/* Left Side (Text) */}
         <Box flex="1" pr={leftSidePaddingRight}>

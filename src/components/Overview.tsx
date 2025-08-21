@@ -1,3 +1,6 @@
+// This component renders the overview section of the page.
+// It includes a heading, a subheading, and an accordion with a corresponding image that changes based on the open accordion item.
+
 import React, { useRef, useState } from "react";
 import {
   Box,
@@ -17,7 +20,7 @@ import {
 import { motion, useInView } from "framer-motion";
 import circles from "../assets/png imgs/circles.png";
 
-// ------------------ Content ------------------
+// The content for the accordion and images.
 type Section = {
   sectionTitle: string;
   sectionText: string;
@@ -53,20 +56,23 @@ const content: { sections: Section[] } = {
   ],
 };
 
-// ------------------ Motion ------------------
+// Motion-enhanced versions of Chakra UI components.
 const MotionVStack = motion(VStack);
 const MotionFlex = motion(Flex);
 
-// ------------------ Component ------------------
 const Overview = () => {
+  // State to keep track of the currently open accordion item.
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  // Refs for the heading and content sections, used for scroll animations.
   const headingRef = useRef(null);
   const contentRef = useRef(null);
 
+  // Hooks from Framer Motion that return true when the component is in view.
   const headingInView = useInView(headingRef, { once: true });
   const contentInView = useInView(contentRef, { once: true });
 
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const paddingX = useBreakpointValue({ base: 4, md: 16 });
   const showBackgroundImage = useBreakpointValue({ base: false, lg: true });
   const headingFontSize = useBreakpointValue({ base: "2xl", md: "36px" });
@@ -100,9 +106,9 @@ const Overview = () => {
         align="start"
         mb={10}
         ref={headingRef}
-        initial={{ opacity: 0, y: 40 }}
-        animate={headingInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+        initial={{ opacity: 0, y: 40 }} // Initial animation state.
+        animate={headingInView ? { opacity: 1, y: 0 } : {}} // Animate to this state when the component is in view.
+        transition={{ duration: 0.6 }} // The duration of the animation.
         zIndex={1}
         position="relative"
       >
@@ -186,6 +192,7 @@ const Overview = () => {
                       ml={6}
                     >
                       {section.sectionText}
+                      {/* On mobile and tablet, the image is displayed inside the accordion panel. */}
                       {(isMobile || isTablet) && (
                         <Box
                           bg="white"
@@ -207,6 +214,7 @@ const Overview = () => {
                     </AccordionPanel>
                   </AccordionItem>
 
+                  {/* A divider between accordion items. */}
                   {idx >= 0 && (
                     <Divider borderColor="gray.300" ml={8} w="90%" />
                   )}
@@ -216,7 +224,7 @@ const Overview = () => {
           </VStack>
         </Box>
 
-        {/* Image changes with openIndex OR placeholder */}
+        {/* On desktop, the image is displayed to the right of the accordion. */}
         {!(isMobile || isTablet) && (
           <Box flex={1}>
             <Box

@@ -1,3 +1,6 @@
+// This component renders the risk section of the page.
+// It includes a heading, a subheading, and a 3-column grid of features.
+
 import {
   Box,
   Flex,
@@ -14,11 +17,12 @@ import acces_icon_phishcode_1 from "../assets/icons/access_icon_phishcode_1.svg"
 import improve from "../assets/icons/improve.svg";
 import performance_icon_phishcode_1 from "../assets/icons/performance_icon_phishcode_1.svg";
 
-// Motion wrappers
+// Motion-enhanced versions of Chakra UI components.
 const MotionVStack = motion(VStack);
 const MotionHeading = motion(Heading);
 const MotionText = motion(Text);
 
+// The content for the features grid.
 const features = [
   {
     icon: acces_icon_phishcode_1,
@@ -44,6 +48,7 @@ const features = [
 ];
 
 const Risk = () => {
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const paddingX = useBreakpointValue({ base: 4, md: 16 });
   const headingFontSize = useBreakpointValue({ base: "xl", md: "36px" });
   const textFontSize = useBreakpointValue({ base: "md", md: "16px" });
@@ -57,10 +62,10 @@ const Risk = () => {
         <MotionHeading
           fontSize={headingFontSize}
           fontWeight="semibold"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40 }} // Initial animation state.
+          whileInView={{ opacity: 1, y: 0 }} // Animate to this state when the component is in view.
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6 }} // The duration of the animation.
         >
           Phishing risk evaluation and reduction platform
         </MotionHeading>

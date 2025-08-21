@@ -1,3 +1,7 @@
+// This component renders the top navigation bar of the website.
+// It includes the logo, navigation links, and buttons for signing in and getting a demo.
+// It also includes a responsive design, with a drawer for mobile devices.
+
 import {
   Box,
   Flex,
@@ -30,9 +34,12 @@ import phishcode_logoo_1 from '../assets/logo/phishcode_logoo_1.png'
 import icon_feedback_01_1 from '../assets/icons/icon_feedback_01_1.png'
 
 const Navbar = () => {
+  // useDisclosure is a Chakra UI hook that helps with managing the state of modals, drawers, and other overlay components.
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const isDesktop = useBreakpointValue({ base: false, lg: true });
 
+  // An array of objects that represent the items in the mobile drawer.
   const drawerItems = [
     {
       title: 'Explore',
@@ -83,7 +90,7 @@ const Navbar = () => {
     <Box px={0} py={1} position="sticky" zIndex={1000} pt="2px" bg="white">
       <Flex direction="column" gap="18px">
         {isDesktop ? (
-          // ✅ Desktop Navbar
+          // Render the desktop version of the navbar if the screen is large enough.
           <Box px="73px">
             <Flex h={12} alignItems="center" justifyContent="space-between">
               <HStack spacing={5} align="center">
@@ -131,9 +138,8 @@ const Navbar = () => {
             </Flex>
           </Box>
         ) : (
-          // ✅ Mobile Layout
+          // Render the mobile version of the navbar if the screen is not large enough.
           <>
-            {/* Row 1 */}
             <Box borderBottom="1px solid" borderColor="gray.200" w="100%" py={6}>
               <Flex justify="space-between" align="center" position="relative" px={4}>
                     <Box position="absolute" left="50%" transform="translateX(-50%)">
@@ -145,7 +151,7 @@ const Navbar = () => {
         )}
       </Flex>
 
-      {/* Drawer for mobile (hamburger) */}
+      {/* The drawer component that is displayed on mobile devices. */}
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>

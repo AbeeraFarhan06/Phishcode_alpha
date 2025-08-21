@@ -1,15 +1,19 @@
+// This component renders the approach section of the page.
+// It includes a heading, a subheading, a button, and an image.
+
 import React from "react";
 import { Text, Button, VStack, Image, useBreakpointValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import approach_section from "../assets/png imgs/approach_section.png";
 
-// Motion wrappers
+// Motion-enhanced versions of Chakra UI components.
 const MotionVStack = motion(VStack);
 const MotionText = motion(Text);
 const MotionButton = motion(Button);
 const MotionImage = motion(Image);
 
 export default function Approach() {
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const padding = useBreakpointValue({ base: 4, md: 8 });
   const headingFontSize = useBreakpointValue({ base: "2xl", md: "36px" });
   const subHeadingFontSize = useBreakpointValue({ base: "md", md: "16px" });
@@ -27,10 +31,10 @@ export default function Approach() {
       {/* Header Section */}
       <MotionVStack
         spacing={2}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 40 }} // Initial animation state.
+        whileInView={{ opacity: 1, y: 0 }} // Animate to this state when the component is in view.
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6 }} // The duration of the animation.
       >
         <MotionText
           fontSize="12px"

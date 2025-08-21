@@ -1,3 +1,7 @@
+// This component renders the hero banner, which is the main banner on the homepage.
+// It includes a heading, a subheading, and two buttons.
+// It also includes a video placeholder that can be clicked to play a video.
+
 import { useState, useRef } from 'react'
 import {
   Box,
@@ -12,16 +16,19 @@ import {
 import { FaPlay } from 'react-icons/fa'
 import { motion, useInView } from 'framer-motion'
 
-// Motion wrapper
+// A motion-enhanced version of the Flex component from Chakra UI.
 const MotionFlex = motion(Flex)
 
 const HeroBanner = () => {
+  // State to keep track of whether the video is playing or not.
   const [isPlaying, setIsPlaying] = useState(false)
 
-  // Scroll animation hook
+  // A ref to the component's root element, used for scroll animations.
   const ref = useRef(null)
+  // A hook from Framer Motion that returns true when the component is in view.
   const inView = useInView(ref, { once: true })
 
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const flexDirection = useBreakpointValue({ base: 'column', lg: 'row' });
   const px = useBreakpointValue({ base: 4, md: 16 });
   const py = useBreakpointValue({ base: 8, md: 20 });
@@ -41,9 +48,9 @@ const HeroBanner = () => {
       align="center"
       justify="space-between"
       flexDirection={flexDirection} // Stack on mobile/tablet, row on large
-      initial={{ opacity: 0, y: 60 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
+      initial={{ opacity: 0, y: 60 }} // Initial animation state.
+      animate={inView ? { opacity: 1, y: 0 } : {}} // Animate to this state when the component is in view.
+      transition={{ duration: 0.8 }} // The duration of the animation.
     >
       {/* Left Section: Text and Buttons */}
       <Box flex="1" pr={{ base: 0, lg: 12 }}>
@@ -117,6 +124,7 @@ const HeroBanner = () => {
           position="relative"
         >
           {isPlaying ? (
+            // If the video is playing, render the iframe.
             <Box
               as="iframe"
               title="Intro Video"
@@ -128,6 +136,7 @@ const HeroBanner = () => {
               border="0"
             />
           ) : (
+            // If the video is not playing, render the placeholder.
             <Box
               w="100%"
               h="100%"

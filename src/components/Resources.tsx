@@ -1,3 +1,6 @@
+// This component renders the resources section of the page.
+// It includes a heading, a subheading, a set of tabs, and a grid of cards that changes based on the selected tab.
+
 import {
   Box,
   VStack,
@@ -13,10 +16,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { IoIosArrowForward } from "react-icons/io";
 
-// Framer Motion wrapper for Chakra
+// Motion-enhanced versions of Chakra UI components.
 const MotionBox = motion(Box);
 const MotionVStack = motion(VStack);
 
+// The type definition for a card item.
 type CardItem = {
   tt: string;
   title: string;
@@ -25,7 +29,7 @@ type CardItem = {
   image: string;
 };
 
-// Each tab has its own card(s)
+// The data for the cards, organized by tab.
 const cardData: Record<string, CardItem[]> = {
   Infographics: [
     {
@@ -59,12 +63,16 @@ const cardData: Record<string, CardItem[]> = {
   ],
 };
 
+// An array of the tab names.
 const tabs = Object.keys(cardData);
 
 const Resources = () => {
+  // State to keep track of the currently selected tab.
   const [selectedTab, setSelectedTab] = useState("Demos");
+  // The cards for the currently selected tab.
   const cards = cardData[selectedTab];
 
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const paddingX = useBreakpointValue({ base: 4, md: 16 });
   const headingFontSize = useBreakpointValue({ base: "2xl", md: "36px" });
   const gridColumns = useBreakpointValue({ base: 1, md: 2 });
@@ -83,9 +91,9 @@ const Resources = () => {
             align="start"
             mb={10}
             mt={14}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 50 }} // Initial animation state.
+            whileInView={{ opacity: 1, y: 0 }} // Animate to this state when the component is in view.
+            transition={{ duration: 0.6, ease: "easeOut" }} // The duration of the animation.
             viewport={{ once: true, amount: 0.3 }}
           >
             <Text

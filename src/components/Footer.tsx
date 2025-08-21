@@ -1,3 +1,6 @@
+// This component renders the footer of the website.
+// It includes the company logo, social media links, and a list of links to other pages on the site.
+
 import React from "react";
 import {
   Box,
@@ -26,7 +29,7 @@ import { TbBrandTwitter } from "react-icons/tb";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
 
-// ---------------- Footer Data ----------------
+// An array of objects that represent the social media icons.
 const socialIcons = [
   { icon: FaLinkedinIn, label: "LinkedIn", href: "#" },
   { icon: TbBrandTwitter, label: "Twitter", href: "#" },
@@ -36,6 +39,7 @@ const socialIcons = [
   { icon: FaPhone, label: "Phone", href: "#" },
 ];
 
+// An array of objects that represent the sections of the footer.
 const footerSections = [
   {
     title: "Products",
@@ -67,7 +71,6 @@ const footerSections = [
   },
 ];
 
-// ---------------- Footer Component ----------------
 export default function Footer() {
   return (
     <Box bg="#f1f2f379" py={14}>
@@ -81,7 +84,7 @@ export default function Footer() {
             gap={10}
             mb={8}
           >
-            {/* Left Section */}
+            {/* Left Section: Logo, social icons, and language selector. */}
             <VStack align="flex-start" spacing={6} ml={7}>
               <Box w="140px" textAlign="left">
                 <Image src={phishcode_logoo_1} alt="PhishCode Logo" />
@@ -143,7 +146,7 @@ export default function Footer() {
                 </MenuList>
               </Menu>
             </VStack>
-            {/* Right Section */}
+            {/* Right Section: Links to other pages. */}
             <SimpleGrid
               columns={{ base: 1, md: 3 }}
               spacing={10}

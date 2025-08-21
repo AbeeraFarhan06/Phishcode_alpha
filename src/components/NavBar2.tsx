@@ -1,7 +1,11 @@
+// This component renders the second navigation bar, which is a sticky bar that highlights the current section of the page.
+// It uses IntersectionObserver to detect which section is currently in view and updates the active link accordingly.
+
 import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { useEffect, useRef, useState } from 'react'
 
+// An array of the menu items, which correspond to the IDs of the sections on the page.
 const menuItems = [
   'Overview',
   'Impact',
@@ -11,10 +15,15 @@ const menuItems = [
 ]
 
 const NavBar2 = () => {
+  // State to keep track of the currently active menu item.
   const [activeItem, setActiveItem] = useState('Overview')
+  // State to control the visibility of the mobile menu.
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  // A ref to keep track of whether the user is currently scrolling as a result of clicking a menu item.
   const isClickScrolling = useRef(false)
 
+  // This function handles the click event on a menu item.
+  // It scrolls the corresponding section into view and updates the active item.
   const handleScroll = (item: string) => {
     setActiveItem(item)
     isClickScrolling.current = true
@@ -29,6 +38,7 @@ const NavBar2 = () => {
     }, 800)
   }
 
+  // This effect sets up the IntersectionObserver to track which section is currently in view.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -52,12 +62,14 @@ const NavBar2 = () => {
       }
     )
 
+    // Observe each of the sections.
     menuItems.forEach((item) => {
       const sectionId = item.replace(/\s+/g, '-')
       const element = document.getElementById(sectionId)
       if (element) observer.observe(element)
     })
 
+    // Clean up the observer when the component unmounts.
     return () => observer.disconnect()
   }, [])
 
@@ -71,7 +83,6 @@ const NavBar2 = () => {
         px={16}
         py={2}
         borderTop="1px solid #e2e8f0"
-        // borderBottom="1px solid #e2e8f0"
         display={{ base: 'none', lg: 'flex' }}
         ml={8}
       >
@@ -92,6 +103,7 @@ const NavBar2 = () => {
               >
                 {item}
               </Text>
+              {/* The blue line under the active menu item. */}
               {activeItem === item && (
                 <Box
                   position="absolute"
@@ -108,7 +120,6 @@ const NavBar2 = () => {
           ))}
         </HStack>
 
-        {/* Try for free button - Only desktop */}
         <Button
           bg="#0E1726"
           color="white"

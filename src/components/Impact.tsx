@@ -1,3 +1,6 @@
+// This component renders the impact section of the page.
+// It includes a heading, a subheading, and a grid of stats.
+
 import {
   Box,
   Flex,
@@ -9,12 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-// Motion wrappers
+// Motion-enhanced versions of Chakra UI components.
 const MotionFlex = motion(Flex);
 const MotionHeading = motion(Heading);
 const MotionText = motion(Text);
 const MotionVStack = motion(VStack);
 
+// The content for the stats grid.
 const stats = [
   {
     value: "$164,000",
@@ -35,6 +39,7 @@ const stats = [
 ];
 
 const Impact = () => {
+  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const px = useBreakpointValue({ base: 4, md: 16 });
   const headingFontSize = useBreakpointValue({ base: "xl", md: "36px" });
   const textFontSize = useBreakpointValue({ base: "md", md: "16px" });
@@ -51,10 +56,10 @@ const Impact = () => {
             textTransform="uppercase"
             color="white"
             mb={4}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }} // Initial animation state.
+            whileInView={{ opacity: 1, y: 0 }} // Animate to this state when the component is in view.
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6 }} // The duration of the animation.
           >
             Impact
           </MotionText>

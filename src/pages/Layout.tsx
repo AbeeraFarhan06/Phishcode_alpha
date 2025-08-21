@@ -1,3 +1,6 @@
+// This is the main layout component for the application.
+// It defines the overall structure of the page, including the header, footer, and content area.
+
 import { Outlet } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 import Banner from '../components/Banner';
@@ -13,25 +16,41 @@ import Risk from '../components/Risk';
 const Layout = () => {
   return (
     <>
+      {/* The top navigation bar, contained within a centered box. */}
       <Box maxWidth="1280px" mx="auto">
         <NavBar />
       </Box>
+
+      {/* The main banner, which spans the full width of the page. */}
       <Banner />
+
+      {/* A container for the second navigation bar, the main content (Outlet), and the Risk component. */}
       <Box maxWidth="1280px" mx="auto">
         <NavBar2 />
         <Box padding={5}>
+          {/* The Outlet component renders the current route's component (e.g., HomePage). */}
           <Outlet />
         </Box>
         <Risk />
       </Box>
+
+      {/* The Impact section, which spans the full width of the page. */}
       <Impact />
+
+      {/* A container for the Approach component. */}
       <Box maxWidth="1280px" mx="auto">
         <Approach />
       </Box>
+
+      {/* The Resources section, which spans the full width of the page. */}
       <Resources />
+
+      {/* A container for the Nextstep component. */}
       <Box maxWidth="1280px" mx="auto">
         <Nextstep />
       </Box>
+
+      {/* The footer, which spans the full width of the page. */}
       <Footer />
     </>
   );
