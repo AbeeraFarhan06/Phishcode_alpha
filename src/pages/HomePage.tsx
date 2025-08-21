@@ -16,7 +16,6 @@ const HomePage = () => {
     >
       <GridItem area="main">
         <Overview />
-        <Risk />
       </GridItem>
     </Grid>
   );

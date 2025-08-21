@@ -18,7 +18,9 @@ const Banner = () => {
       width="100%"
       position="relative"
     >
-      <HeroBanner />
+      <Box maxWidth="1280px" mx="auto">
+        <HeroBanner />
+      </Box>
     </Box>
   );
 };
