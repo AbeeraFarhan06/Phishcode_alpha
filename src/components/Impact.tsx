@@ -42,65 +42,64 @@ const Impact = () => {
 
   return (
     <Box id="Impact" px={px} py={20} bg="#0f172a" color="white">
-      {/* Label */}
-      <MotionText
-        fontSize="12px"
-        fontWeight="semibold"
-        textTransform="uppercase"
-        color="white"
-        mb={4}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-      >
-        Impact
-      </MotionText>
-
-      {/* Heading + Subheading */}
-      <MotionVStack
-        align="start"
-        spacing={4}
-        mb={12}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <Heading fontSize={headingFontSize} fontWeight="semibold">
-          The Total Economical Impact of PHISHCODE Attack Simulation
-        </Heading>
-        <Text fontSize={textFontSize} color="gray.300" maxW="4xl">
-          Explore the advantages of PHISHCODE in this commissioned study conducted by security researchers.
-        </Text>
-      </MotionVStack>
-
-      {/* Stats Grid */}
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={gridSpacing}>
-        {stats.map((stat, idx) => (
-          <MotionFlex
-            key={idx}
-            align="flex-start"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: idx * 0.2 }} // staggered animation
-          >
-            {/* Vertical bar */}
-            <Box w="3px" h="30px" bg="white" mr={4} borderRadius="full" />
-
-            {/* Text */}
-            <VStack align="start" spacing={1}>
-              <Heading fontSize={{ base: "xl", md: "2xl" }} fontWeight="semibold">
-                {stat.value}
-              </Heading>
-              <Text fontSize={{ base: "sm", md: "sm" }} color="white" fontWeight="semibold" mt={4}>
-                {stat.description}
-              </Text>
-            </VStack>
-          </MotionFlex>
-        ))}
-      </SimpleGrid>
+      <Box ml={8}>
+        {/* Label */}
+        <MotionText
+          fontSize="12px"
+          fontWeight="semibold"
+          textTransform="uppercase"
+          color="white"
+          mb={4}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          Impact
+        </MotionText>
+        {/* Heading + Subheading */}
+        <MotionVStack
+          align="start"
+          spacing={4}
+          mb={12}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Heading fontSize={headingFontSize} fontWeight="semibold">
+            The Total Economical Impact of PHISHCODE Attack Simulation
+          </Heading>
+          <Text fontSize={textFontSize} color="gray.300" maxW="4xl">
+            Explore the advantages of PHISHCODE in this commissioned study conducted by security researchers.
+          </Text>
+        </MotionVStack>
+        {/* Stats Grid */}
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={gridSpacing}>
+          {stats.map((stat, idx) => (
+            <MotionFlex
+              key={idx}
+              align="flex-start"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: idx * 0.2 }} // staggered animation
+            >
+              {/* Vertical bar */}
+              <Box w="3px" h="30px" bg="white" mr={4} borderRadius="full" />
+              {/* Text */}
+              <VStack align="start" spacing={1}>
+                <Heading fontSize={{ base: "xl", md: "2xl" }} fontWeight="semibold">
+                  {stat.value}
+                </Heading>
+                <Text fontSize={{ base: "sm", md: "sm" }} color="white" fontWeight="semibold" mt={4}>
+                  {stat.description}
+                </Text>
+              </VStack>
+            </MotionFlex>
+          ))}
+        </SimpleGrid>
+      </Box>
     </Box>
   );
 };

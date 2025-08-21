@@ -71,7 +71,7 @@ const NavBar2 = () => {
         px={16}
         py={2}
         borderTop="1px solid #e2e8f0"
-        borderBottom="1px solid #e2e8f0"
+        // borderBottom="1px solid #e2e8f0"
         display={{ base: 'none', lg: 'flex' }}
         ml={8}
       >

@@ -51,7 +51,7 @@ const Risk = () => {
   const gridSpacing = useBreakpointValue({ base: 8, md: 12 });
 
   return (
-    <Box id="Risk" px={paddingX} py={16}>
+    <Box id="Risk" px={paddingX} py={16} ml={3}>
       {/* Heading + Subheading with animation */}
       <VStack spacing={3} textAlign="center" mb={14}>
         <MotionHeading
