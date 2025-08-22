@@ -18,13 +18,15 @@ const Layout = () => {
   return (
     <>
       {/* The top navigation bar, contained within a centered box. */}
-      <NavBar />
+      <Box maxWidth="1280px" mx="auto">
+        <NavBar />
+      </Box>
 
       {/* The main banner, which spans the full width of the page. */}
       <Banner />
 
       {/* A container for the second navigation bar, the main content (Outlet), and the Risk component. */}
-      <Box maxWidth="100%" mx="auto">
+      <Box maxWidth="1280px" mx="auto">
         <NavBar2 />
         <Overview />
         <Box padding={5}>
@@ -38,7 +40,7 @@ const Layout = () => {
       <Impact />
 
       {/* A container for the Approach component. */}
-      <Box maxWidth="100%" mx="auto">
+      <Box maxWidth="1280px" mx="auto">
         <Approach />
       </Box>
 
@@ -46,7 +48,7 @@ const Layout = () => {
       <Resources />
 
       {/* A container for the Nextstep component. */}
-      <Box maxWidth="100%" mx="auto">
+      <Box maxWidth="1280px" mx="auto">
         <Nextstep />
       </Box>
 
