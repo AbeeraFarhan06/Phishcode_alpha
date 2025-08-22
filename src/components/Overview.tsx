@@ -85,7 +85,7 @@ const Overview = () => {
   const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
 
   return (
-    <Box id="Overview" px={paddingX} py={10} mb="40px" position="relative" ml={3}>
+    <Box id="Overview" px={paddingX} py={10} mb="40px" position="relative" ml={8}>
       {/* Background decorative circles */}
       {showBackgroundImage && (
         <Image

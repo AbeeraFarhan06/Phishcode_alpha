@@ -12,6 +12,7 @@ import Resources from '../components/Resources';
 import Nextstep from '../components/NextStep';
 import Footer from '../components/Footer';
 import Risk from '../components/Risk';
+import Overview from '../components/Overview';
 
 const Layout = () => {
   return (
@@ -27,6 +28,7 @@ const Layout = () => {
       {/* A container for the second navigation bar, the main content (Outlet), and the Risk component. */}
       <Box maxWidth="1280px" mx="auto">
         <NavBar2 />
+        <Overview />
         <Box padding={5}>
           {/* The Outlet component renders the current route's component (e.g., HomePage). */}
           <Outlet />
