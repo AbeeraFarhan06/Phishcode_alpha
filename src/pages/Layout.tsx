@@ -17,42 +17,38 @@ import Overview from '../components/Overview';
 const Layout = () => {
   return (
     <>
-      {/* The top navigation bar, contained within a centered box. */}
       <Box maxWidth="1280px" mx="auto">
         <NavBar />
       </Box>
 
-      {/* The main banner, which spans the full width of the page. */}
       <Banner />
 
-      {/* A container for the second navigation bar, the main content (Outlet), and the Risk component. */}
+      <Box position="sticky" top="0" zIndex="sticky" bg="white">
+        <Box maxWidth="1280px" mx="auto">
+          <NavBar2 />
+        </Box>
+      </Box>
+
       <Box maxWidth="1280px" mx="auto">
-        <NavBar2 />
         <Overview />
         <Box padding={5}>
-          {/* The Outlet component renders the current route's component (e.g., HomePage). */}
           <Outlet />
         </Box>
         <Risk />
       </Box>
 
-      {/* The Impact section, which spans the full width of the page. */}
       <Impact />
 
-      {/* A container for the Approach component. */}
       <Box maxWidth="1280px" mx="auto">
         <Approach />
       </Box>
 
-      {/* The Resources section, which spans the full width of the page. */}
       <Resources />
 
-      {/* A container for the Nextstep component. */}
       <Box maxWidth="1280px" mx="auto">
         <Nextstep />
       </Box>
 
-      {/* The footer, which spans the full width of the page. */}
       <Footer />
     </>
   );
