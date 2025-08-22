@@ -42,7 +42,6 @@ const Nextstep = () => {
   return (
     <Box
       id="Next-steps"
-      minH="100vh"
       px={paddingX}
       py={20}
     >
