@@ -12,6 +12,7 @@ import {
 import { FaPlay } from 'react-icons/fa'
 import { motion, useInView } from 'framer-motion'
 import phishcode_banner_imgg from '../assets/png imgs/phishcode_banner_imgg.png'
+import Container from './Container'
 
 // Motion-enhanced Flex
 const MotionFlex = motion(Flex)
@@ -50,137 +51,135 @@ const Banner = () => {
       width="100%"
       position="relative"
     >
-      <Box maxWidth="1280px" mx="auto">
-        <MotionFlex
-          ref={ref}
-          px={px}
-          py={py}
-          align="center"
-          justify="space-between"
-          flexDirection={flexDirection}
-          initial={{ opacity: 0, y: 60 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          {/* Left: Text + Buttons */}
-          <Box flex="1" pr={{ base: 0, lg: 12 }}>
-            <Heading
-              fontSize={headingFontSize}
-              fontWeight="500"
-              color="white"
-              mb={{ base: 5, md: 7 }}
-              ml={headingMarginLeft}
-              lineHeight={headingLineHeight}
-            >
-              AI-powered <br />
-              Phishing Attack Simulation
-            </Heading>
-
-            <Text
-              color="lightgray"
-              mb={{ base: 3, md: 6 }}
-              ml={textMarginLeft}
-              fontWeight="thin"
-              fontSize="18px"
-            >
-              Empower organizations to identify and defend against<br />
-              phishing attacks with intelligent, realistic challenging<br />
-              simulations and cybersecurity awareness training.
-            </Text>
-
-            <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} ml={stackMarginLeft}>
-              <Button
-                bg="white"
-                color="#0E1726"
-                fontWeight="semibold"
-                fontSize={{ base: 'sm', md: '15px' }}
-                h="50px"
-                w="100px"
-                px={6}
-                py={6}
-                borderRadius="md"
-                _hover={{ bg: '#243B65' }}
-              >
-                Try for free
-              </Button>
-
-              <Button
-                variant="outline"
-                borderColor="white"
-                borderWidth="1px"
-                color="lightgray"
-                aria-label="Sign In"
-                size="sm"
-                h="50px"
-                fontSize={{ base: 'sm', md: '15px' }}
-                fontWeight="thin"
-                borderRadius="6px"
-              >
-                Contact sales
-              </Button>
-            </Stack>
-          </Box>
-
-          {/* Right: Video Placeholder */}
-          <Box
-            flex="1"
-            mt={rightBoxMarginTop}
-            position="relative"
-            borderRadius="xl"
-            overflow="hidden"
-            p={2}
-            w="100%"
+      <Container>
+        <Box maxWidth="1280px" mx="auto">
+          <MotionFlex
+            ref={ref}
+            px={px}
+            py={py}
+            align="center"
+            justify="space-between"
+            flexDirection={flexDirection}
+            initial={{ opacity: 0, y: 60 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
           >
-            <Box
-              bg="rgba(255, 255, 255, 0.1)"
-              borderRadius="xl"
-              borderColor="rgba(255, 255, 255, 0.1)"
-              overflow="hidden"
-              height={videoBoxHeight}
-              position="relative"
-            >
-              {isPlaying ? (
-                <Box
-                  as="iframe"
-                  title="Intro Video"
-                  borderRadius="xl"
-                  width="100%"
-                  height="100%"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  border="0"
-                />
-              ) : (
-                <Box
-                  w="100%"
-                  h="100%"
-                  borderRadius="xl"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  position="relative"
+            {/* Left: Text + Buttons */}
+            <Box flex="1" pr={{ base: 0, lg: 12 }}>
+              <Heading
+                fontSize={headingFontSize}
+                fontWeight="500"
+                color="white"
+                mb={{ base: 5, md: 7 }}
+                ml={headingMarginLeft}
+                lineHeight={headingLineHeight}
+              >
+                AI-powered <br />
+                Phishing Attack Simulation
+              </Heading>
+              <Text
+                color="lightgray"
+                mb={{ base: 3, md: 6 }}
+                ml={textMarginLeft}
+                fontWeight="thin"
+                fontSize="18px"
+              >
+                Empower organizations to identify and defend against<br />
+                phishing attacks with intelligent, realistic challenging<br />
+                simulations and cybersecurity awareness training.
+              </Text>
+              <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} ml={stackMarginLeft}>
+                <Button
+                  bg="white"
+                  color="#0E1726"
+                  fontWeight="semibold"
+                  fontSize={{ base: 'sm', md: '15px' }}
+                  h="50px"
+                  w="100px"
+                  px={6}
+                  py={6}
+                  borderRadius="md"
+                  _hover={{ bg: '#243B65' }}
                 >
-                  <Image w="100%" h="100%" objectFit="cover" />
-                  <Button
-                    position="absolute"
-                    size="16px 16px"
-                    top="15%"
-                    left="9%"
-                    transform="translate(-50%, -50%)"
-                    bg="white"
-                    borderRadius="8px"
-                    p={2}
-                    onClick={() => setIsPlaying(true)}
-                    _hover={{ bg: '#e4e4e4ff' }}
-                  >
-                    <FaPlay color="#0E1726" size="15px" />
-                  </Button>
-                </Box>
-              )}
+                  Try for free
+                </Button>
+                <Button
+                  variant="outline"
+                  borderColor="white"
+                  borderWidth="1px"
+                  color="lightgray"
+                  aria-label="Sign In"
+                  size="sm"
+                  h="50px"
+                  fontSize={{ base: 'sm', md: '15px' }}
+                  fontWeight="thin"
+                  borderRadius="6px"
+                >
+                  Contact sales
+                </Button>
+              </Stack>
             </Box>
-          </Box>
-        </MotionFlex>
-      </Box>
+            {/* Right: Video Placeholder */}
+            <Box
+              flex="1"
+              mt={rightBoxMarginTop}
+              position="relative"
+              borderRadius="xl"
+              overflow="hidden"
+              p={2}
+              w="100%"
+            >
+              <Box
+                bg="rgba(255, 255, 255, 0.1)"
+                borderRadius="xl"
+                borderColor="rgba(255, 255, 255, 0.1)"
+                overflow="hidden"
+                height={videoBoxHeight}
+                position="relative"
+              >
+                {isPlaying ? (
+                  <Box
+                    as="iframe"
+                    title="Intro Video"
+                    borderRadius="xl"
+                    width="100%"
+                    height="100%"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    border="0"
+                  />
+                ) : (
+                  <Box
+                    w="100%"
+                    h="100%"
+                    borderRadius="xl"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    position="relative"
+                  >
+                    <Image w="100%" h="100%" objectFit="cover" />
+                    <Button
+                      position="absolute"
+                      size="16px 16px"
+                      top="15%"
+                      left="9%"
+                      transform="translate(-50%, -50%)"
+                      bg="white"
+                      borderRadius="8px"
+                      p={2}
+                      onClick={() => setIsPlaying(true)}
+                      _hover={{ bg: '#e4e4e4ff' }}
+                    >
+                      <FaPlay color="#0E1726" size="15px" />
+                    </Button>
+                  </Box>
+                )}
+              </Box>
+            </Box>
+          </MotionFlex>
+        </Box>
+      </Container>
     </Box>
   )
 }
