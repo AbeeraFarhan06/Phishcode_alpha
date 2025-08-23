@@ -24,7 +24,7 @@ const MotionGridItem = motion(Box);
 
 const Nextstep = () => {
   // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
-  const paddingX = useBreakpointValue({ base: 4, md: 24 });
+  const paddingX = useBreakpointValue({ base: 4, md: 8 });
   const topSectionPaddingLeft = useBreakpointValue({ base: 4, md: 6 });
   const topSectionPaddingRight = useBreakpointValue({ base: 4, md: 4 });
   const topSectionFlexWrap = useBreakpointValue({ base: "wrap", lg: "nowrap" });
