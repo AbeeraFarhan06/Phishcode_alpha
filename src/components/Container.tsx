@@ -42,8 +42,8 @@ const Container = ({
       maxWidth="1400px" // Consistent max-width across all components
       width="100%"
       mx="auto" // Center the container
-    //   px={{ base: "4", md: "6", lg: "8", xl: "12" }} // Responsive horizontal padding
-    //   py={{ base: "4", md: "6", lg: "8" }} // Responsive vertical padding
+      px={{ base: "4", md: "6", lg: "8", xl: "12" }} // Responsive horizontal padding
+      py={{ base: "4", md: "6", lg: "8" }} // Responsive vertical padding
       {...props}
     >
       {children}
