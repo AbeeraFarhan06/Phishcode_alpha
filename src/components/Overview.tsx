@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import { motion, useInView } from "framer-motion";
 import circles from "../assets/png imgs/circles.png";
-import Container from "./Container";
 
 // The content for the accordion and images.
 type Section = {
@@ -86,8 +85,8 @@ const Overview = () => {
   const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
 
   return (
-    <Box position="relative" bg="#f9fdfe" ml={8}>
-      {/* Background decorative circles positioned to full width */}
+    <Box id="Overview" px={paddingX} py={10} mb="40px" position="relative" ml={3}>
+      {/* Background decorative circles */}
       {showBackgroundImage && (
         <Image
           src={circles}
@@ -101,181 +100,164 @@ const Overview = () => {
         />
       )}
 
-      <Container fullWidth>
-        <Box
-          id="Overview"
-          py={10}
-          mb="40px"
-          position="relative"
-          zIndex={1}
-          maxWidth="1400px"
-          mx="auto"
-          px={paddingX}
+      {/* Heading */}
+      <MotionVStack
+        spacing={2}
+        align="start"
+        mb={10}
+        ref={headingRef}
+        initial={{ opacity: 0, y: 40 }} // Initial animation state.
+        animate={headingInView ? { opacity: 1, y: 0 } : {}} // Animate to this state when the component is in view.
+        transition={{ duration: 0.6 }} // The duration of the animation.
+        zIndex={1}
+        position="relative"
+      >
+        <Text
+          fontSize="12px"
+          textTransform="uppercase"
+          color="#a9a8a8"
+          fontWeight="semibold"
         >
-          {/* Heading */}
-          <MotionVStack
-            spacing={2}
-            align="start"
-            mb={10}
-            ref={headingRef}
-            initial={{ opacity: 0, y: 40 }} // Initial animation state.
-            animate={headingInView ? { opacity: 1, y: 0 } : {}} // Animate to this state when the component is in view.
-            transition={{ duration: 0.6 }} // The duration of the animation.
-            zIndex={1}
-            position="relative"
-          >
-            <Text
-              fontSize="12px"
-              textTransform="uppercase"
-              color="#a9a8a8"
-              fontWeight="semibold"
-            >
-              OVERVIEW
-            </Text>
-            <Heading
-              fontSize={headingFontSize}
-              fontWeight="medium"
-              color="gray.800"
-            >
-              Supercharge your Cybersecurity awareness program effectiveness
-            </Heading>
-            <Text fontSize={textFontSize} mt={4}>
-              Enhance the impact of your cybersecurity awareness program for
-              stronger protection and improved employee behavior.
-            </Text>
-          </MotionVStack>
+          OVERVIEW
+        </Text>
+        <Heading fontSize={headingFontSize} fontWeight="medium" color="gray.800">
+          Supercharge your Cybersecurity awareness program effectiveness
+        </Heading>
+        <Text fontSize={textFontSize} mt={4}>
+          Enhance the impact of your cybersecurity awareness program for stronger
+          protection and improved employee behavior.
+        </Text>
+      </MotionVStack>
 
-          {/* Content: Accordion Left + Image Right */}
-          <MotionFlex
-            ref={contentRef}
-            direction={contentDirection}
-            align="center"
-            initial={{ opacity: 0, y: 50 }}
-            animate={contentInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            position="relative"
-            zIndex={1}
-          >
-            {/* Accordion */}
-            <Box flex={1}>
-              <VStack align="start" spacing={0} w="100%">
-                <Accordion
-                  allowToggle
-                  index={[openIndex ?? 0]}
-                  onChange={(index) => {
-                    if (Array.isArray(index)) {
-                      setOpenIndex(index[0] ?? null);
-                    } else {
-                      setOpenIndex(index ?? null);
-                    }
-                  }}
-                  w={accordionWidth}
-                >
-                  {content.sections.map((section, idx) => (
-                    <React.Fragment key={idx}>
-                      <AccordionItem
-                        border="none"
-                        position="relative"
-                        _before={{
-                          content: '""',
-                          position: "absolute",
-                          left: 0,
-                          top: 0,
-                          bottom: 0,
-                          width: "3px",
-                          bg: idx === openIndex ? "#0E1726" : "transparent",
-                          borderRadius: "2px",
-                          transition: "background-color 0.3s ease",
-                        }}
-                        pl={3}
-                      >
-                        <h2>
-                          <AccordionButton px={6} py={6}>
-                            <Box
-                              flex="1"
-                              textAlign="left"
-                              fontWeight="medium"
-                              fontSize={{ base: "md", md: "18px" }}
-                            >
-                              {section.sectionTitle}
-                            </Box>
-                            <AccordionIcon />
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel
-                          pb={6}
-                          fontSize={{ base: "sm", md: "16px" }}
-                          ml={6}
+      {/* Content: Accordion Left + Image Right */}
+      <MotionFlex
+        ref={contentRef}
+        direction={contentDirection}
+        align="center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={contentInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        position="relative"
+        zIndex={1}
+      >
+        {/* Accordion */}
+        <Box flex={1}>
+          <VStack align="start" spacing={0} w="100%">
+            <Accordion
+              allowToggle
+              index={[openIndex ?? 0]}
+              onChange={(index) => {
+                if (Array.isArray(index)) {
+                  setOpenIndex(index[0] ?? null);
+                } else {
+                  setOpenIndex(index ?? null);
+                }
+              }}
+              w={accordionWidth}
+            >
+              {content.sections.map((section, idx) => (
+                <React.Fragment key={idx}>
+                  <AccordionItem
+                    border="none"
+                    position="relative"
+                    _before={{
+                      content: '""',
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: "3px",
+                      bg: idx === openIndex ? "#0E1726" : "transparent",
+                      borderRadius: "2px",
+                      transition: "background-color 0.3s ease",
+                    }}
+                    pl={3}
+                  >
+                    <h2>
+                      <AccordionButton px={6} py={6}>
+                        <Box
+                          flex="1"
+                          textAlign="left"
+                          fontWeight="medium"
+                          fontSize={{ base: "md", md: "18px" }}
                         >
-                          {section.sectionText}
-                          {/* On mobile and tablet, the image is displayed inside the accordion panel. */}
-                          {(isMobile || isTablet) && (
-                            <Box
-                              bg="white"
-                              p={4}
-                              borderRadius="xl"
-                              boxShadow="md"
-                              w="100%"
-                              mt={4}
-                            >
-                              <Image
-                                src={section.image}
-                                alt={section.sectionTitle}
-                                borderRadius="md"
-                                objectFit="contain"
-                                w="100%"
-                              />
-                            </Box>
-                          )}
-                        </AccordionPanel>
-                      </AccordionItem>
-
-                      {/* A divider between accordion items. */}
-                      {idx >= 0 && (
-                        <Divider borderColor="gray.300" ml={8} w="90%" />
+                          {section.sectionTitle}
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel
+                      pb={6}
+                      fontSize={{ base: "sm", md: "16px" }}
+                      ml={6}
+                    >
+                      {section.sectionText}
+                      {/* On mobile and tablet, the image is displayed inside the accordion panel. */}
+                      {(isMobile || isTablet) && (
+                        <Box
+                          bg="white"
+                          p={4}
+                          borderRadius="xl"
+                          boxShadow="md"
+                          w="100%"
+                          mt={4}
+                        >
+                          <Image
+                            src={section.image}
+                            alt={section.sectionTitle}
+                            borderRadius="md"
+                            objectFit="contain"
+                            w="100%"
+                          />
+                        </Box>
                       )}
-                    </React.Fragment>
-                  ))}
-                </Accordion>
-              </VStack>
-            </Box>
+                    </AccordionPanel>
+                  </AccordionItem>
 
-            {/* On desktop, the image is displayed to the right of the accordion. */}
-            {!(isMobile || isTablet) && (
-              <Box flex={1}>
-                <Box
-                  bg="white"
-                  p={6}
-                  borderRadius="xl"
-                  boxShadow="md"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  h={imageContainerHeight}
-                  w={imageContainerWidth}
-                >
-                  <Image
-                    src={
-                      openIndex !== null
-                        ? content.sections[openIndex].image
-                        : "https://via.placeholder.com/600x400?text=Placeholder"
-                    }
-                    alt={
-                      openIndex !== null
-                        ? content.sections[openIndex].sectionTitle
-                        : "Placeholder"
-                    }
-                    borderRadius="md"
-                    objectFit="contain"
-                    maxH="400px"
-                    w="100%"
-                  />
-                </Box>
-              </Box>
-            )}
-          </MotionFlex>
+                  {/* A divider between accordion items. */}
+                  {idx >= 0 && (
+                    <Divider borderColor="gray.300" ml={8} w="90%" />
+                  )}
+                </React.Fragment>
+              ))}
+            </Accordion>
+          </VStack>
         </Box>
-      </Container>
+
+        {/* On desktop, the image is displayed to the right of the accordion. */}
+        {!(isMobile || isTablet) && (
+          <Box flex={1}>
+            <Box
+              bg="white"
+              p={6}
+              borderRadius="xl"
+              boxShadow="md"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              h={imageContainerHeight}
+              w={imageContainerWidth}
+            >
+              <Image
+                src={
+                  openIndex !== null
+                    ? content.sections[openIndex].image
+                    : "https://via.placeholder.com/600x400?text=Placeholder"
+                }
+                alt={
+                  openIndex !== null
+                    ? content.sections[openIndex].sectionTitle
+                    : "Placeholder"
+                }
+                borderRadius="md"
+                objectFit="contain"
+                maxH="400px"
+                w="100%"
+              />
+            </Box>
+          </Box>
+        )}
+      </MotionFlex>
     </Box>
   );
 };

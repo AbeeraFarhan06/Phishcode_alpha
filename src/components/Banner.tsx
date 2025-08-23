@@ -52,7 +52,6 @@ const Banner = () => {
       position="relative"
     >
       <Box maxWidth="1280px" mx="auto">
-        <Container>
           <MotionFlex
             ref={ref}
             px={px}
@@ -190,7 +189,6 @@ const Banner = () => {
               </Box>
             </Box>
           </MotionFlex>
-        </Container>
       </Box>
     </Box>
   );
