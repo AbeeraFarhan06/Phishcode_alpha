@@ -6,6 +6,7 @@ interface ContainerProps extends BoxProps {
   fullWidth?: boolean; // For components that need full viewport width
   noPadding?: boolean; // For components that need container width but no padding
   noVerticalPadding?: boolean; // For components like navbar that need horizontal padding but no vertical padding
+  navbar1?: boolean; //Only for top navbar
 }
 
 const Container = ({
@@ -13,6 +14,7 @@ const Container = ({
   fullWidth = false,
   noPadding = false,
   noVerticalPadding = false,
+  navbar1 = false,
   ...props
 }: ContainerProps) => {
   if (fullWidth) {
@@ -31,7 +33,7 @@ const Container = ({
         maxWidth="1400px"
         width="100%"
         mx="auto"
-        px="2.5rem" // 40px equivalent
+        px="6rem" // 40px equivalent
         py="4rem" // 64px equivalent
         {...props}
       >
@@ -47,8 +49,24 @@ const Container = ({
         maxWidth="1400px"
         width="100%"
         mx="auto"
-        px={{ base: "1rem", md: "1.5rem", lg: "2rem", xl: "3rem" }} // Responsive rem-based padding
+        px={{ base: "2rem", md: "3rem", lg: "4rem", xl: "6rem" }} // Responsive rem-based padding
         py="0" // No vertical padding
+        {...props}
+      >
+        {children}
+      </Box>
+    );
+  }
+
+    if (navbar1) {
+    // For components like navbar that need horizontal padding but no vertical padding
+    return (
+      <Box
+        maxWidth="1400px"
+        width="100%"
+        mx="auto"
+        px={{ base: "1.5rem", md: "2.25rem", lg: "3rem", xl: "4.5rem" }} //responsive horizontal padding
+        py={{ base: "0.5rem", md: "0.75rem", lg: "1rem", xl: "1.5rem" }} //responsive vertical padding
         {...props}
       >
         {children}
@@ -62,8 +80,8 @@ const Container = ({
       maxWidth="1400px"
       width="100%"
       mx="auto"
-      px={{ base: "1rem", md: "1.5rem", lg: "2rem", xl: "3rem" }} // Responsive rem-based padding
-      py={{ base: "1rem", md: "1.5rem", lg: "2rem" }} // Responsive vertical padding
+      px={{ base: "2rem", md: "3rem", lg: "4rem", xl: "6rem" }} // Responsive rem-based padding
+      py={{ base: "2rem", md: "3rem", lg: "4rem" }} // Responsive vertical padding
       {...props}
     >
       {children}

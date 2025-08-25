@@ -29,9 +29,9 @@ const Banner = () => {
   const flexDirection = useBreakpointValue({ base: "column", lg: "row" });
   const headingFontSize = useBreakpointValue({ base: "2rem", md: "38px" });
   const headingLineHeight = useBreakpointValue({ base: "2.2rem", md: "3rem" });
-  const headingMarginLeft = useBreakpointValue({ base: 0, md: 8 });
-  const textMarginLeft = useBreakpointValue({ base: 0, md: 8 });
-  const stackMarginLeft = useBreakpointValue({ base: 0, sm: 8 });
+  const headingMarginLeft = useBreakpointValue({ base: 0, md: 0 });
+  const textMarginLeft = useBreakpointValue({ base: 0, md: 0 });
+  const stackMarginLeft = useBreakpointValue({ base: 0, sm: 0 });
   const rightBoxMarginTop = useBreakpointValue({ base: 8, lg: 0 });
   const videoBoxHeight = useBreakpointValue({ base: "200px", md: "300px" });
   const bgSize = useBreakpointValue({ base: "cover", md: "60% auto" });

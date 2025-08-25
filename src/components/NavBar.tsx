@@ -98,7 +98,7 @@ const Navbar = () => {
 
   return (
     <Box position="sticky" zIndex={1000} bg="white">
-      <Container>
+      <Container navbar1>
         <Flex direction="column">
           {isDesktop ? (
             // Render the desktop version of the navbar if the screen is large enough.
