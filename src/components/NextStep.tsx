@@ -110,7 +110,7 @@ const Nextstep = () => {
               mt={10}
               mb={5}
               borderRadius="lg"
-              _hover={{ bg: "gray.800" }}
+              _hover={{ bg: "#243B65" }}
             >
               Try for free
             </Button>
@@ -190,7 +190,7 @@ const Nextstep = () => {
                     bg="#0E1726"
                     color="white"
                     borderRadius="0.4375rem"
-                    _hover={{ bg: "gray.800" }}
+                    _hover={{ bg: "#243B65" }}
                     mr={2}
                     h="2.125rem"
                     w="2.1875rem"
@@ -201,7 +201,7 @@ const Nextstep = () => {
                   </Button>
                   <Text
                     fontSize="0.875rem"
-                    color="gray.600"
+                    color="#22395fff"
                     fontWeight="medium"
                   >
                     {item.button}

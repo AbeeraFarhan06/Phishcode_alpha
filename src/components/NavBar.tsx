@@ -114,7 +114,7 @@ const Navbar = () => {
 
               <HStack spacing="10px" align="center">
                 <Text cursor="pointer" fontSize="11px">
-                  <Image src={icon_feedback_01_1} h="12px" w="18px" />
+                  <Image src={icon_feedback_01_1} h="20px" w="30px" />
                 </Text>
 
                 <Button
@@ -123,11 +123,11 @@ const Navbar = () => {
                   aria-label="Try for Free"
                   size="xs"
                   fontSize="11px"
-                  borderRadius="2px"
+                  borderRadius="3px"
                   fontWeight="normal"
                   w="70px"
                   h="26px"
-                  _hover={{ bg: "gray.800" }}
+                  _hover={{ bg: "#243B65" }}
                 >
                   Get a demo
                 </Button>
@@ -142,8 +142,8 @@ const Navbar = () => {
                   h="26px"
                   fontSize="11px"
                   fontWeight="normal"
-                  borderRadius="2px"
-                  _hover={{ bg: "blue.50" }}
+                  borderRadius="3px"
+                  _hover={{ bg: "gray.200" }}
                 >
                   Sign in
                 </Button>

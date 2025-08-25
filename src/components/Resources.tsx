@@ -199,7 +199,7 @@ const Resources = () => {
                         color="white"
                         fontSize={{ base: "0.875rem", md: "0.875rem" }}
                         borderRadius="md"
-                        _hover={{ bg: "#868686ff" }}
+                        _hover={{ bg: "#243B65" }}
                         mr={2}
                         size="sm"
                       >
@@ -207,7 +207,7 @@ const Resources = () => {
                       </Button>
                       <Text
                         fontSize={{ base: "0.875rem", md: "0.875rem" }}
-                        color="#696c6eff"
+                        color="#22395fff"
                         fontWeight="medium"
                       >
                         {card.buttonText}

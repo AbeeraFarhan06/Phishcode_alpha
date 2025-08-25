@@ -121,7 +121,7 @@ const NavBar2 = () => {
           <Button
             bg="#0E1726"
             color="white"
-            fontWeight="bold"
+            fontWeight="semibold"
             fontSize="0.875rem" // 14px to rem
             px="1rem"
             py="0.5rem"

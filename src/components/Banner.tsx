@@ -108,7 +108,7 @@ const Banner = () => {
                 px={6}
                 py={6}
                 borderRadius="md"
-                _hover={{ bg: "#243B65" }}
+                _hover={{ bg: "gray.200" }}
               >
                 Try for free
               </Button>
