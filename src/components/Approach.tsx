@@ -2,7 +2,13 @@
 // It includes a heading, a subheading, a button, and an image.
 
 import React from "react";
-import { Text, Button, VStack, Image, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Text,
+  Button,
+  VStack,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import approach_section from "../assets/png imgs/approach_section.png";
 import Container from "./Container";
@@ -15,21 +21,22 @@ const MotionImage = motion(Image);
 
 export default function Approach() {
   // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
-  const padding = useBreakpointValue({ base: 4, md: 8 });
-  const headingFontSize = useBreakpointValue({ base: "2xl", md: "36px" });
-  const subHeadingFontSize = useBreakpointValue({ base: "md", md: "16px" });
-  const imageMaxWidth = useBreakpointValue({ base: "100%", md: "1000px" });
+  const headingFontSize = useBreakpointValue({
+    base: "1.5rem",
+    md: "2.25rem",
+  });
+  const subHeadingFontSize = useBreakpointValue({
+    base: "1rem",
+    md: "1rem",
+  });
+  const imageMaxWidth = useBreakpointValue({
+    base: "100%",
+    md: "62.5rem",
+  });
 
   return (
-    <Container>
-      <VStack
-        id="Approach"
-        spacing={10}
-        align="center"
-        textAlign="center"
-        p={padding}
-        mt={12}
-      >
+    <Container noPadding>
+      <VStack id="Approach" spacing={10} align="center" textAlign="center">
         {/* Header Section */}
         <MotionVStack
           spacing={2}
@@ -39,7 +46,7 @@ export default function Approach() {
           transition={{ duration: 0.6 }} // The duration of the animation.
         >
           <MotionText
-            fontSize="12px"
+            fontSize="0.75rem"
             textTransform="uppercase"
             color="gray.500"
             initial={{ opacity: 0, y: 20 }}
@@ -49,6 +56,7 @@ export default function Approach() {
           >
             Approach
           </MotionText>
+
           <MotionText
             fontSize={headingFontSize}
             fontWeight="semibold"
@@ -60,35 +68,38 @@ export default function Approach() {
           >
             A comprehensive security approach
           </MotionText>
+
           <MotionText
             fontSize={subHeadingFontSize}
-            maxW="900px"
+            maxW="56.25rem"
             color="gray.600"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Providing your workforce with cybersecurity awareness and training is
-            a key piece of your overall PHISHCODE security strategy.
+            Providing your workforce with cybersecurity awareness and training
+            is a key piece of your overall PHISHCODE security strategy.
           </MotionText>
+
           <MotionButton
             variant="outline"
             color="black"
             borderColor="black"
-            borderRadius="3px"
+            borderRadius="0.1875rem"
             borderWidth="0.1rem"
             _hover={{ bg: "gray.100" }}
             mt={4}
-            fontSize={{ base: "sm", md: "13px" }}
+            fontSize={{ base: "0.875rem", md: "0.8125rem" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.3}}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             More about diagram
           </MotionButton>
         </MotionVStack>
+
         {/* Image Section */}
         <MotionImage
           src={approach_section}

@@ -29,7 +29,7 @@ const features = [
     icon: acces_icon_phishcode_1,
     title: "Assess phishing risk",
     description:
-      "Conduct safe attack simulations within your organization to assess security practices and evaluate employees’ awareness of phishing threats.",
+      "Conduct safe attack simulations within your organization to assess security practices and evaluate employees' awareness of phishing threats.",
     linkText: "Explore your payloads >",
   },
   {
@@ -50,15 +50,20 @@ const features = [
 
 const Risk = () => {
   // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
-  const paddingX = useBreakpointValue({ base: 4, md: 16 });
-  const headingFontSize = useBreakpointValue({ base: "xl", md: "36px" });
-  const textFontSize = useBreakpointValue({ base: "md", md: "16px" });
+  const headingFontSize = useBreakpointValue({
+    base: "1.5rem",
+    md: "2.25rem",
+  });
+  const textFontSize = useBreakpointValue({
+    base: "1rem",
+    md: "1rem",
+  });
   const gridColumns = useBreakpointValue({ base: 1, md: 3 });
   const gridSpacing = useBreakpointValue({ base: 8, md: 12 });
 
   return (
-    <Box id="Risk" px={paddingX} py={16}>
-      <Container>
+    <Container noPadding>
+      <Box id="Risk">
         {/* Heading + Subheading with animation */}
         <VStack spacing={3} textAlign="center" mb={14}>
           <MotionHeading
@@ -71,20 +76,22 @@ const Risk = () => {
           >
             Phishing risk evaluation and reduction platform
           </MotionHeading>
+
           <MotionText
             fontSize={textFontSize}
             color="gray.600"
-            maxW="800px"
+            maxW="50rem"
             mt={2}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            Seamlessly implement a security awareness training program and assess
-            user behavior improvements over time.
+            Seamlessly implement a security awareness training program and
+            assess user behavior improvements over time.
           </MotionText>
         </VStack>
+
         {/* 3 Column Features with animation */}
         <SimpleGrid columns={gridColumns} spacing={gridSpacing}>
           {features.map((feature, idx) => (
@@ -99,24 +106,33 @@ const Risk = () => {
             >
               {/* Icon */}
               <Image src={feature.icon} alt={feature.title} w={8} h={8} />
+
               {/* Title with left divider line */}
               <Flex align="center">
                 <Box
-                  w="2px"
-                  h="20px"
+                  w="0.125rem"
+                  h="1.25rem"
                   bg="gray.800"
                   mr={3}
                   borderRadius="full"
                 />
-                <Heading fontSize={{ base: "md", md: "18px" }} fontWeight="semibold" color="gray.800">
+                <Heading
+                  fontSize={{ base: "1rem", md: "1.125rem" }}
+                  fontWeight="semibold"
+                  color="gray.800"
+                >
                   {feature.title}
                 </Heading>
               </Flex>
+
               {/* Description */}
-              <Text fontSize={{ base: "sm", md: "14px" }}>{feature.description}</Text>
+              <Text fontSize={{ base: "0.875rem", md: "0.875rem" }}>
+                {feature.description}
+              </Text>
+
               {/* Link */}
               <Link
-                fontSize={{ base: "sm", md: "14px" }}
+                fontSize={{ base: "0.875rem", md: "0.875rem" }}
                 fontWeight="semibold"
                 color="gray.800"
                 textDecoration="underline"
@@ -126,10 +142,9 @@ const Risk = () => {
             </MotionVStack>
           ))}
         </SimpleGrid>
-      </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
 export default Risk;
-
