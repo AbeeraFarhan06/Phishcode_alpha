@@ -1,26 +1,30 @@
-// This component renders the approach section of the page.
-// It includes a heading, a subheading, a button, and an image.
-
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Button,
   VStack,
   Image,
   useBreakpointValue,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import approach_section from "../assets/png imgs/approach_section.png";
 import Container from "./Container";
 
-// Motion-enhanced versions of Chakra UI components.
 const MotionVStack = motion(VStack);
 const MotionText = motion(Text);
 const MotionButton = motion(Button);
 const MotionImage = motion(Image);
 
 export default function Approach() {
-  // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
+  const [isOpen, setIsOpen] = useState(false);
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
+
   const headingFontSize = useBreakpointValue({
     base: "1.5rem",
     md: "2.25rem",
@@ -29,10 +33,6 @@ export default function Approach() {
     base: "1rem",
     md: "1rem",
   });
-  const imageMaxWidth = useBreakpointValue({
-    base: "100%",
-    md: "62.5rem",
-  });
 
   return (
     <Container noPadding>
@@ -40,10 +40,10 @@ export default function Approach() {
         {/* Header Section */}
         <MotionVStack
           spacing={2}
-          initial={{ opacity: 0, y: 40 }} // Initial animation state.
-          whileInView={{ opacity: 1, y: 0 }} // Animate to this state when the component is in view.
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }} // The duration of the animation.
+          transition={{ duration: 0.6 }}
         >
           <MotionText
             fontSize="0.75rem"
@@ -95,6 +95,7 @@ export default function Approach() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            onClick={onOpen}
           >
             More about diagram
           </MotionButton>
@@ -107,7 +108,6 @@ export default function Approach() {
           borderRadius="2xl"
           border="1px solid"
           borderColor="gray.200"
-          // maxW={imageMaxWidth}
           w="100%"
           h="auto"
           initial={{ opacity: 0, y: 40 }}
@@ -115,6 +115,28 @@ export default function Approach() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         />
+
+        {/* Modal for translucent overlay */}
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
+          <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(4px)" />
+          <ModalContent
+            bg="white"
+            p={12}
+            maxW="5xl" // wider modal width
+            w="46%" // responsive: 90% of viewport
+            borderRadius="0"  //removes rounded corners
+          >
+            <ModalCloseButton />
+            <ModalBody textAlign="center">
+              <Text fontSize="14px" color="#0E1726" textAlign="justify">
+                This image depicts the overall PHISHCODE security strategy and
+                includes the following pillars with icons: secure posture,
+                prevention, detection, investigation and hunting, response and
+                remediation, and highlighted awareness and training.
+              </Text>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </VStack>
     </Container>
   );
