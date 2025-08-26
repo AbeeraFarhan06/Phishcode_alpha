@@ -141,10 +141,14 @@ export default function Approach() {
                   maxW="90%"
                   lineHeight="1.7"
                 >
-                  This image depicts the overall PHISHCODE security strategy and
-                  includes the following pillars with icons: secure posture,
-                  prevention, detection, investigation and hunting, response and
-                  remediation, and highlighted awareness and training.
+                  This image illustrates the PHISHCODE approach to anti-phishing
+                  strategies. It highlights a cycle of three core steps:
+                  assessing users' baseline phishing awareness, reducing risk
+                  through targeted behavior training, and evaluating risk
+                  mitigation across all attack vectors. The framework provides a
+                  systematic method to measure, educate, and improve user
+                  responses, ensuring comprehensive protection against phishing
+                  threats in an organization.
                 </Text>
               </Flex>
             </ModalBody>
