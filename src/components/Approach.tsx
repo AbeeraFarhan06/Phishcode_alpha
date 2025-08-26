@@ -107,7 +107,7 @@ export default function Approach() {
           borderRadius="2xl"
           border="1px solid"
           borderColor="gray.200"
-          maxW={imageMaxWidth}
+          // maxW={imageMaxWidth}
           w="100%"
           h="auto"
           initial={{ opacity: 0, y: 40 }}
