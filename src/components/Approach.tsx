@@ -10,6 +10,7 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
+  Flex,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import approach_section from "../assets/png imgs/approach_section.png";
@@ -118,22 +119,34 @@ export default function Approach() {
 
         {/* Modal for translucent overlay */}
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
-          <ModalOverlay bg="blackAlpha.800"  />
+          <ModalOverlay bg="blackAlpha.800" />
           <ModalContent
             bg="white"
-            p={12}
+            borderRadius="0" // removes rounded corners
+            p={10}
             maxW="5xl" // wider modal width
-            w="46%" // responsive: 90% of viewport
-            borderRadius="0"  //removes rounded corners
+            w="46%" // custom width
+            h="32%" // modal height
           >
             <ModalCloseButton />
-            <ModalBody textAlign="center">
-              <Text fontSize="14px" color="#0E1726" textAlign="justify">
-                This image depicts the overall PHISHCODE security strategy and
-                includes the following pillars with icons: secure posture,
-                prevention, detection, investigation and hunting, response and
-                remediation, and highlighted awareness and training.
-              </Text>
+            <ModalBody>
+              <Flex
+                align="center" // vertical centering
+                justify="center" // horizontal centering
+                h="100%" // take full modal body height
+              >
+                <Text
+                  fontSize="14px"
+                  color="#0E1726"
+                  textAlign="justify"
+                  maxW="90%" // prevents text from stretching too wide
+                >
+                  This image depicts the overall PHISHCODE security strategy and
+                  includes the following pillars with icons: secure posture,
+                  prevention, detection, investigation and hunting, response and
+                  remediation, and highlighted awareness and training.
+                </Text>
+              </Flex>
             </ModalBody>
           </ModalContent>
         </Modal>
