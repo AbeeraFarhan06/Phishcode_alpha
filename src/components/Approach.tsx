@@ -118,7 +118,7 @@ export default function Approach() {
 
         {/* Modal for translucent overlay */}
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
-          <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(4px)" />
+          <ModalOverlay bg="blackAlpha.800"  />
           <ModalContent
             bg="white"
             p={12}
