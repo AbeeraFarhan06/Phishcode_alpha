@@ -122,24 +122,24 @@ export default function Approach() {
           <ModalOverlay bg="blackAlpha.800" />
           <ModalContent
             bg="white"
-            borderRadius="0" // removes rounded corners
-            p={10}
-            maxW="5xl" // wider modal width
-            w="46%" // custom width
-            h="32%" // modal height
+            borderRadius="0"
+            p={{ base: 6, md: 10 }}
+            maxW="5xl"
+            w={{ base: "90%", md: "70%", lg: "46%" }} // responsive width
           >
             <ModalCloseButton />
             <ModalBody>
               <Flex
-                align="center" // vertical centering
-                justify="center" // horizontal centering
-                h="100%" // take full modal body height
+                align="center"
+                justify="center"
+                minH="150px" // ensures some vertical space
               >
                 <Text
-                  fontSize="14px"
+                  fontSize={{ base: "sm", md: "14px" }}
                   color="#0E1726"
                   textAlign="justify"
-                  maxW="90%" // prevents text from stretching too wide
+                  maxW="90%"
+                  lineHeight="1.7"
                 >
                   This image depicts the overall PHISHCODE security strategy and
                   includes the following pillars with icons: secure posture,
