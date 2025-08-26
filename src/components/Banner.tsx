@@ -13,11 +13,13 @@ import { FaPlay } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
 import phishcode_banner_imgg from "../assets/png imgs/phishcode_banner_imgg.png";
 import Container from "./Container";
+import { useNavigate } from "react-router-dom";
 
 // Motion-enhanced Flex
 const MotionFlex = motion(Flex);
 
 const Banner = () => {
+  const navigate = useNavigate();
   // Video state
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -109,6 +111,7 @@ const Banner = () => {
                 py={6}
                 borderRadius="md"
                 _hover={{ bg: "gray.200" }}
+                onClick={() => navigate("/signup/step1")}
               >
                 Try for free
               </Button>

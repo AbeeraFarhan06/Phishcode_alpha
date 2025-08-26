@@ -34,8 +34,10 @@ import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
 import icon_feedback_01_1 from "../assets/icons/icon_feedback_01_1.png";
 import pipeline from '../assets/icons/pipeline.png'
 import Container from "./Container";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   // useDisclosure is a Chakra UI hook that helps with managing the state of modals, drawers, and other overlay components.
   const { isOpen, onOpen, onClose } = useDisclosure();
   // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
@@ -133,8 +135,9 @@ const Navbar = () => {
                   w="70px"
                   h="26px"
                   _hover={{ bg: "#243B65" }}
+                  onClick={() => navigate("/signup/step1")}
                 >
-                  Get a demo
+                  Try for free
                 </Button>
 
                 <Button

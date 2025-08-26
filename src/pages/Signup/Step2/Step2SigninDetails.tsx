@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MdRadioButtonUnchecked, MdCheck } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./Step2SigninDetails.module.css";
-import logo from "../../../images/phishcode logoo 1.png";
+import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 
 interface FormData {
   email: string;
@@ -147,7 +147,7 @@ const Step2SigninDetails = () => {
     <div className={`min-vh-100 ${styles.container}`}>
       {/* Logo - Fixed position on left */}
       <div className={styles.logoContainer}>
-        <img src={logo} alt="PhishCode Logo" className={styles.headerLogo} />
+        <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.headerLogo} />
       </div>
 
       {/* Header - Centered */}

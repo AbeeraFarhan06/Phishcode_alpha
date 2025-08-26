@@ -18,12 +18,14 @@ import email from "../assets/icons/email.svg";
 import demo from "../assets/icons/demo.svg";
 import prof from "../assets/png imgs/prof.png";
 import Container from "./Container";
+import { useNavigate } from "react-router-dom";
 
 // Motion-enhanced versions of Chakra UI components.
 const MotionBox = motion(Box);
 const MotionGridItem = motion(Box);
 
 const Nextstep = () => {
+  const navigate = useNavigate();
   // useBreakpointValue is a Chakra UI hook that allows you to specify different values for different breakpoints.
   const topSectionPaddingLeft = useBreakpointValue({ base: 4, md: 6 });
   const topSectionPaddingRight = useBreakpointValue({ base: 4, md: 4 });
@@ -111,6 +113,7 @@ const Nextstep = () => {
               mb={5}
               borderRadius="lg"
               _hover={{ bg: "#243B65" }}
+              onClick={() => navigate("/signup/step1")}
             >
               Try for free
             </Button>

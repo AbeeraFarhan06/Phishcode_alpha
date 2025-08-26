@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdRadioButtonUnchecked } from "react-icons/md";
 import styles from "./Step1AboutYou.module.css";
-import logo from "../../../images/phishcode logoo 1.png";
+import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 
 // Type definitions
 interface Country {
@@ -278,7 +278,7 @@ const Step1AboutYou = () => {
     <div className={`min-vh-100 ${styles.container}`}>
       {/* Logo - Fixed position on left */}
       <div className={styles.logoContainer}>
-        <img src={logo} alt="PhishCode Logo" className={styles.headerLogo} />
+        <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.headerLogo} />
       </div>
 
       {/* Header - Centered */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ForgetPasswordPage.module.css";
-import logo from "../../../images/phishcode logoo 1.png";
+import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 
 const ForgetPasswordPage = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const ForgetPasswordPage = () => {
         <div className="card-body p-4 d-flex flex-column justify-content-center">
           {/* Logo - Left aligned and smaller */}
           <div className="text-start mb-3">
-            <img src={logo} alt="PhishCode Logo" className={styles.logo} />
+            <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.logo} />
           </div>
 
           {/* Main heading - Bold */}
