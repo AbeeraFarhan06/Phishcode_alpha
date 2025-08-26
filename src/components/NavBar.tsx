@@ -152,6 +152,7 @@ const Navbar = () => {
                   fontWeight="normal"
                   borderRadius="3px"
                   _hover={{ bg: "gray.200" }}
+                  onClick={() => navigate("/signin")}
                 >
                   Sign in
                 </Button>
