@@ -143,7 +143,7 @@ export default function Footer() {
                   color="#0E1726"
                   _hover={{ bg: "gray.100" }}
                 >
-                  Spanish
+                  Arabic
                 </MenuItem>
                 <MenuItem
                   bgColor="white"
@@ -151,6 +151,20 @@ export default function Footer() {
                   _hover={{ bg: "gray.100" }}
                 >
                   French
+                </MenuItem>
+                <MenuItem
+                  bgColor="white"
+                  color="#0E1726"
+                  _hover={{ bg: "gray.100" }}
+                >
+                  Malay
+                </MenuItem>
+                <MenuItem
+                  bgColor="white"
+                  color="#0E1726"
+                  _hover={{ bg: "gray.100" }}
+                >
+                  Hindi
                 </MenuItem>
               </MenuList>
             </Menu>
