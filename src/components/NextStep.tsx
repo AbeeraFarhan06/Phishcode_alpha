@@ -94,7 +94,7 @@ const Nextstep = () => {
               lineHeight="1.3"
               color="gray.700"
             >
-              Try AI-powered Phishing Attack Simulation Platform
+              Try AI-Powered Phishing Attack Simulation Platform
             </Heading>
             <Text mb={16} fontSize={textFontSize} color="gray.700">
               Deliver exceptional, proactive cybersecurity awareness that

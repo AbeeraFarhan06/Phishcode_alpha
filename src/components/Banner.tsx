@@ -77,7 +77,7 @@ const Banner = () => {
               lineHeight={headingLineHeight}
               mt={0} // Ensure no top margin on heading
             >
-              AI-powered <br />
+              AI-Powered <br />
               Phishing Attack Simulation
             </Heading>
             <Text

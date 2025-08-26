@@ -32,6 +32,7 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
 import icon_feedback_01_1 from "../assets/icons/icon_feedback_01_1.png";
+import pipeline from '../assets/icons/pipeline.png'
 import Container from "./Container";
 
 const Navbar = () => {
@@ -110,6 +111,10 @@ const Navbar = () => {
                   w="140px"
                   cursor="pointer"
                 />
+                <Image src={pipeline} />
+                <Text fontSize="14px" cursor="pointer" _hover={{ textDecoration: "underline", color:  "#243B65"}}>
+                  Why PHISHCODE?
+                </Text>
               </HStack>
 
               <HStack spacing="10px" align="center">
