@@ -1,0 +1,292 @@
+/* Step3Confirmation.module.css */
+
+/* Main Container */
+.container {
+  background-color: #f5f7fa;
+  padding-bottom: 6.25rem;
+  position: relative;
+  overflow: visible;
+}
+
+/* Logo Container - Fixed position on left */
+.logoContainer {
+  position: absolute;
+  top: 1.875rem;
+  left: 2.5rem;
+  z-index: 10;
+}
+
+.headerLogo {
+  height: 2.1875rem;
+  width: auto;
+}
+
+/* Header Section - Centered */
+.header {
+  background-color: #f5f7fa;
+  padding: 2.5rem 0 1.875rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.headerTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.headerSubtitle {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0;
+}
+
+/* Form Card with sharp edges */
+.formCard {
+  width: 90%;
+  max-width: 50rem;
+  border-radius: 0; /* Sharp edges like Microsoft */
+  box-shadow: 0 0.9375rem 2.1875rem rgba(0, 0, 0, 0.4);
+  overflow: visible;
+  position: relative;
+}
+
+/* Progress Steps - Extended layout with proper positioning */
+.progressContainer {
+  margin-bottom: 2.5rem;
+  padding: 0 0.5rem; /* Minimal padding to allow maximum expansion */
+}
+
+.progressWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  max-width: 100%;
+  height: 60px;
+  padding: 0;
+}
+
+/* Line first - spans 84% of container width with all completed (step 3) */
+.progressWrapper::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 8%;
+  width: 84%; /* 100% - 8% - 8% = 84% */
+  height: 1px;
+  background: #2d3748; /* All dark since all steps completed */
+  z-index: 1;
+}
+
+.progressStep {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Position circles at exact line endpoints and center */
+.progressStep:nth-child(1) {
+  left: 8%;
+  transform: translateX(-50%); /* Center circle on line start */
+}
+
+.progressStep:nth-child(2) {
+  left: 50%;
+  transform: translateX(-50%); /* Center circle on line middle */
+}
+
+.progressStep:nth-child(3) {
+  right: 8%;
+  transform: translateX(50%); /* Center circle on line end */
+}
+
+/* Circle Icons - same size for all */
+.stepIcon {
+  font-size: 1.25rem;
+  color: #cbd5e0;
+  margin-bottom: 0.75rem;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.125rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepActive {
+  color: #2d3748;
+}
+
+/* All steps completed - same size with dark background and white tick */
+.stepCompleted {
+  background-color: #2d3748;
+  color: white;
+  font-size: 1.25rem;
+}
+
+/* White check icon */
+.checkIcon {
+  color: white;
+  font-size: 0.875rem;
+}
+
+.stepLabel {
+  font-size: 0.8125rem;
+  color: #718096;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 400;
+  max-width: 7.5rem;
+}
+
+.stepLabelActive {
+  color: #2d3748;
+  font-weight: 500;
+}
+
+/* Form Title - Align exactly below first progress circle */
+.formTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5625rem;
+  text-align: left;
+  padding-left: calc(8% - 0.625rem); /* Align exactly below the first circle center */
+  margin-left: 0;
+}
+
+/* Thank you title */
+.thankYouTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5625rem;
+  line-height: 1.4;
+  padding-left: calc(8% - 0.625rem); /* Align with form title */
+}
+
+/* User details section */
+.userDetails {
+  margin-bottom: 1.875rem;
+  padding-left: calc(8% - 0.625rem); /* Align with other content */
+}
+
+.detailText {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-bottom: 0.625rem;
+  line-height: 1.5;
+}
+
+.boldText {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Get Started Button Container */
+.getStartedBtnContainer {
+  padding-left: calc(8% - 0.625rem); /* Align with other content */
+}
+
+/* Get Started Button */
+.getStartedBtn {
+  background-color: #2d3748;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.getStartedBtn:hover {
+  background-color: #1a202c;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .formCard {
+    width: 95%;
+    margin: 0 2.5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .logoContainer {
+    position: static;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    left: auto;
+    top: auto;
+  }
+  
+  .progressWrapper::before {
+    left: 6%;
+    width: 88%;
+  }
+  
+  .progressStep:nth-child(1) {
+    left: 6%;
+  }
+  
+  .progressStep:nth-child(3) {
+    right: 6%;
+  }
+  
+  .formTitle,
+  .thankYouTitle,
+  .userDetails,
+  .getStartedBtnContainer {
+    padding-left: calc(6% - 0.625rem); /* Align exactly below first circle on tablets */
+  }
+  
+  .thankYouTitle {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .formCard {
+    box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.3);
+  }
+  
+  .formTitle,
+  .thankYouTitle,
+  .userDetails,
+  .getStartedBtnContainer {
+    padding-left: calc(4% - 0.625rem); /* Align exactly below first circle on mobile */
+  }
+  
+  .getStartedBtn {
+    width: 100%;
+  }
+  
+  .thankYouTitle {
+    font-size: 0.875rem;
+  }
+  
+  .progressWrapper::before {
+    left: 4%;
+    width: 92%;
+  }
+  
+  .progressStep:nth-child(1) {
+    left: 4%;
+  }
+  
+  .progressStep:nth-child(3) {
+    right: 4%;
+  }
+}
