@@ -16,7 +16,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { motion } from "framer-motion";
 import email from "../assets/icons/email.svg";
 import demo from "../assets/icons/demo.svg";
-import prof from "../assets/prof.png";
+import prof from "../assets/png imgs/prof.png";
 import Container from "./Container";
 
 // Motion-enhanced versions of Chakra UI components.
