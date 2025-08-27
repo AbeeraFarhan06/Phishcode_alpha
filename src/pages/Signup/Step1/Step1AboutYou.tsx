@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MdRadioButtonUnchecked } from "react-icons/md";
 import styles from "./Step1AboutYou.module.css";
 import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
+import { MdCheck } from "react-icons/md";
 
 // Type definitions
 interface Country {

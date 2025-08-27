@@ -1,11 +1,13 @@
 import { MdCheck } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import styles from "./Step3Confirmation.module.css";
 import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 
 const Step3Confirmation = () => {
+  const navigate = useNavigate();
   const handleGetStarted = () => {
     console.log("Get Started clicked");
-    // Handle redirect to dashboard or next action
+    navigate("/");
   };
 
   return (

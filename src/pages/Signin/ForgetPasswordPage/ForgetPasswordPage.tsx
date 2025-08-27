@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./ForgetPasswordPage.module.css";
-import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
+import PageLayoutTemplate from "../../../components/PageLayoutTemplate/PageLayoutTemplate";
+import styles from "../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
+import { MdCheck } from "react-icons/md";
 
 const ForgetPasswordPage = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const ForgetPasswordPage = () => {
     setEmailError(error);
   };
 
-  const handleVerify = () => {
+  const handleNext = () => {
     const error = validateEmail(email);
 
     if (error || email.length === 0) {
@@ -43,73 +44,64 @@ const ForgetPasswordPage = () => {
 
   const handleCancel = () => {
     console.log("Form cancelled");
+    navigate("/");
+  };
+
+  const handleBackToSignIn = () => {
     navigate("/signin");
   };
 
-  return (
-    <div
-      className={`min-vh-100 d-flex align-items-center justify-content-center ${styles.container}`}
-    >
-      <div className={`card shadow-lg border-0 ${styles.card}`}>
-        <div className="card-body p-4 d-flex flex-column justify-content-center">
-          {/* Logo - Left aligned and smaller */}
-          <div className="text-start mb-3">
-            <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.logo} />
-          </div>
-
-          {/* Main heading - Bold */}
-          <h2 className={`text-start mb-4 ${styles.title}`}>
-            Verify Your Email
-          </h2>
-
-          {/* Description */}
-          <p className={`text-start mb-4 ${styles.description}`}>
-            We'll send a code to verify your email. Please enter it below.
-          </p>
-
-          {/* Form Fields */}
-          <div>
-            {/* Email Input - Left aligned with validation */}
-            <div className="mb-4">
-              <input
-                type="email"
-                name="email"
-                className={`form-control ${styles.input} ${
-                  emailError ? styles.inputError : ""
-                }`}
-                placeholder="Email"
-                value={email}
-                onChange={handleInputChange}
-              />
-              {emailError && (
-                <div className={styles.errorMessage}>{emailError}</div>
-              )}
-            </div>
-
-            {/* Buttons - Right aligned with adjusted spacing */}
-            <div
-              className="d-flex justify-content-end mt-4"
-              style={{ gap: "0.5rem" }}
-            >
-              <button
-                type="button"
-                onClick={handleCancel}
-                className={`btn ${styles.cancelBtn}`}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleVerify}
-                className={`btn ${styles.verifyBtn}`}
-              >
-                Verify
-              </button>
-            </div>
-          </div>
+  // Content for the template - USING EXACT SAME SLOTS AS SIGN IN
+  const pageContent = (
+    <>
+      {/* Description Text - SLOT 1 (where email input is in Sign In) */}
+      <div className={styles.formField}>
+        <div className={styles.description}>
+          We'll send a code to verify your email. Please enter it below.
         </div>
       </div>
-    </div>
+
+      {/* Email Input - SLOT 2 (where password input is in Sign In) */}
+      <div className={styles.formField}>
+        <input
+          type="email"
+          name="email"
+          className={`form-control ${styles.input} ${
+            emailError ? styles.inputError : ""
+          }`}
+          placeholder="Email"
+          value={email}
+          onChange={handleInputChange}
+        />
+        {emailError && <div className={styles.errorMessage}>{emailError}</div>}
+      </div>
+
+      {/* Link - SLOT 3 (where "No account? Create one!" links are in Sign In) */}
+      <div className={styles.formField}>
+        <div className="mb-2">
+          <span className={styles.linkTextNormal}>
+            Remember your password?{" "}
+            <button
+              onClick={handleBackToSignIn}
+              className={`btn p-0 ${styles.linkButtonSpaced}`}
+            >
+              Back to Sign in
+            </button>
+          </span>
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <PageLayoutTemplate
+      title="Verify Your Email"
+      onNext={handleNext}
+      onCancel={handleCancel}
+      nextButtonText="Verify"
+    >
+      {pageContent}
+    </PageLayoutTemplate>
   );
 };
 

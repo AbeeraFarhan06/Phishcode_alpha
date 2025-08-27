@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./OTPVerificationPage.module.css";
-import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
+import PageLayoutTemplate from "../../../components/PageLayoutTemplate/PageLayoutTemplate";
+import styles from "../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
+import { MdCheck } from "react-icons/md";
 
 const OTPVerificationPage = () => {
   const navigate = useNavigate();
@@ -19,7 +20,11 @@ const OTPVerificationPage = () => {
   const handleVerify = () => {
     console.log("OTP submitted:", otpCode);
     // Handle OTP verification logic
-    navigate("/dashboard");
+    navigate("/");
+  };
+
+  const handleCancel = () => {
+    navigate("/");
   };
 
   const handleResendCode = () => {
@@ -27,69 +32,56 @@ const OTPVerificationPage = () => {
     // Handle resend OTP logic
   };
 
-  return (
-    <div
-      className={`min-vh-100 d-flex align-items-center justify-content-center ${styles.container}`}
-    >
-      <div className={`card shadow-lg border-0 ${styles.card}`}>
-        <div className="card-body p-4 d-flex flex-column justify-content-center">
-          {/* Logo - Left aligned and smaller */}
-          <div className="text-start mb-3">
-            <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.logo} />
-          </div>
-
-          {/* OTP heading - Bold */}
-          <h2 className={`text-start mb-4 ${styles.title}`}>
-            Enter code to verify your identity
-          </h2>
-
-          {/* Description */}
-          <p className={`text-start mb-4 ${styles.description}`}>
-            A code has been sent to your email. Please enter it to sign in.
-          </p>
-
-          {/* Form Fields */}
-          <div>
-            {/* OTP Input - Centered */}
-            <div className="mb-4 d-flex justify-content-center">
-              <input
-                type="text"
-                name="otpCode"
-                className={`form-control ${styles.otpInput}`}
-                placeholder="Enter OTP code"
-                value={otpCode}
-                onChange={handleInputChange}
-                maxLength={10} // Adjust as needed
-              />
-            </div>
-
-            {/* Resend Link - "Didn't receive OTP code" */}
-            <div className="mb-4 text-center">
-              <span className={styles.linkTextBold}>
-                Didn't receive OTP code?
-                <button
-                  onClick={handleResendCode}
-                  className={`btn p-0 ${styles.linkButton}`}
-                >
-                  Resend code
-                </button>
-              </span>
-            </div>
-
-            {/* Verify Button - Centered */}
-            <div className="d-flex justify-content-center mt-4">
-              <button
-                type="button"
-                onClick={handleVerify}
-                className={`btn ${styles.verifyBtn}`}
-              >
-                Verify
-              </button>
-            </div>
-          </div>
+  // Content for the template - USING EXACT SAME SLOTS AS SIGN IN
+  const pageContent = (
+    <>
+      {/* Description Text - SLOT 1 (where email input is in Sign In) */}
+      <div className={styles.formField}>
+        <div className={styles.description}>
+          A code has been sent to your email. Please enter it to sign in.
         </div>
       </div>
-    </div>
+
+      {/* OTP Input - SLOT 2 (where password input is in Sign In) - LEFT ALIGNED */}
+      <div className={styles.formField}>
+        <input
+          type="text"
+          name="otpCode"
+          className={`form-control ${styles.input}`}
+          placeholder="Enter OTP code"
+          value={otpCode}
+          onChange={handleInputChange}
+          maxLength={10}
+          style={{ letterSpacing: "0.125rem" }} // Add letter spacing for OTP codes
+        />
+      </div>
+
+      {/* Resend Link - SLOT 3 (where "No account? Create one!" links are in Sign In) */}
+      <div className={styles.formField}>
+        <div className="mb-2">
+          <span className={styles.linkTextNormal}>
+            Didn't receive OTP code?{" "}
+            <button
+              onClick={handleResendCode}
+              className={`btn p-0 ${styles.linkButtonSpaced}`}
+            >
+              Resend code
+            </button>
+          </span>
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <PageLayoutTemplate
+      title="Enter code to verify your identity"
+      onNext={handleVerify}
+      onCancel={handleCancel}
+      nextButtonText="Verify"
+    >
+      {pageContent}
+    </PageLayoutTemplate>
   );
 };
 
