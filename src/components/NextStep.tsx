@@ -206,6 +206,7 @@ const Nextstep = () => {
                     fontSize="0.875rem"
                     color="#22395fff"
                     fontWeight="medium"
+                    pt={3}
                   >
                     {item.button}
                   </Text>

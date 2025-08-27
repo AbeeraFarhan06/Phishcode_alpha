@@ -209,6 +209,7 @@ const Resources = () => {
                         fontSize={{ base: "0.875rem", md: "0.875rem" }}
                         color="#22395fff"
                         fontWeight="medium"
+                        pt={3}
                       >
                         {card.buttonText}
                       </Text>

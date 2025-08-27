@@ -99,6 +99,7 @@ const NavBar2 = () => {
                 <Text
                   fontSize="0.875rem" // 14px to rem
                   fontWeight="medium"
+                  mt={2}
                   color={activeItem === item ? "#0E1726" : "#989696ff"}
                 >
                   {item}
@@ -107,7 +108,7 @@ const NavBar2 = () => {
                 {activeItem === item && (
                   <Box
                     position="absolute"
-                    bottom="-1rem" // -16px to rem
+                    bottom="-0.6rem"
                     left="50%"
                     transform="translateX(-50%)"
                     height="0.3125rem" // 5px to rem

@@ -114,13 +114,13 @@ const Navbar = () => {
                   cursor="pointer"
                 />
                 <Image src={pipeline} />
-                <Text fontSize="14px" cursor="pointer" _hover={{ textDecoration: "underline", color:  "#243B65"}}>
+                <Text fontSize="14px" mt={4} cursor="pointer" _hover={{ textDecoration: "underline", color:  "#243B65"}}>
                   Why PHISHCODE?
                 </Text>
               </HStack>
 
               <HStack spacing="10px" align="center">
-                <Text cursor="pointer" fontSize="11px">
+                <Text cursor="pointer" fontSize="11px" mt={4}>
                   <Image src={icon_feedback_01_1} h="20px" w="30px" />
                 </Text>
 
