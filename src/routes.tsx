@@ -7,6 +7,7 @@ import ResetPasswordPage from "./pages/Signin/ResetPasswordPage/ResetPasswordPag
 import Step1AboutYou from "./pages/Signup/Step1/Step1AboutYou";
 import Step2SigninDetails from "./pages/Signup/Step2/Step2SigninDetails";
 import Step3Confirmation from "./pages/Signup/Step3/Step3Confirmation";
+import ContactUs from "./components/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/signup/step3",
     element: <Step3Confirmation />,
+  },
+  {
+    path: "/contact-us",
+    element: <ContactUs />,
   },
 ]);
 
