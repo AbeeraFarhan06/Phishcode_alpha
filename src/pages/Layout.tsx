@@ -9,6 +9,7 @@ import Nextstep from "../components/NextStep";
 import Footer from "../components/Footer";
 import Risk from "../components/Risk";
 import Overview from "../components/Overview";
+import ContactBarSticky from "../components/ContactBarSticky";
 
 const Layout = () => {
   return (
@@ -17,6 +18,7 @@ const Layout = () => {
       <Banner />
       <NavBar2 />
       <Overview/>
+      <ContactBarSticky/>
       <Outlet />
       <Risk />
       <Impact />

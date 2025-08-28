@@ -199,6 +199,11 @@ const Nextstep = () => {
                     w="2.1875rem"
                     minW="2rem"
                     p={0}
+                    onClick={() => {
+                      if (item.button === "Contact now") {
+                        navigate("/contact-us");
+                      }
+                    }}
                   >
                     <IoIosArrowForward size={18} />
                   </Button>
