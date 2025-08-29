@@ -104,8 +104,9 @@ const ResetPasswordPage = () => {
 
   // Responsive values for form elements
   const descriptionFontSize = useBreakpointValue({
-    base: "0.8rem", // xs/sm
-    sm: "0.8rem",
+    base: "0.85rem", // xs
+    xs: "0.85rem",
+    sm: "0.9rem", // sm
     md: "clamp(0.9rem, 3vw, 1rem)",
     lg: "clamp(0.9rem, 3vw, 1rem)",
   });
@@ -141,7 +142,7 @@ const ResetPasswordPage = () => {
       <Box mb="1.5rem">
         <Text
           color="#4a5568"
-          fontSize={descriptionFontSize}
+          fontSize="1.125rem"
           mb="0.5rem"
           textAlign="left"
           lineHeight="1.4"

@@ -38,7 +38,7 @@ const ForgetPasswordPage = () => {
 
     console.log("Email submitted:", email);
     alert("We've emailed your password reset link");
-    navigate("/");
+    navigate("/reset-password");
   };
 
   const handleCancel = () => {
@@ -97,7 +97,7 @@ const ForgetPasswordPage = () => {
       <Box mb="1.5rem">
         <Text
           color="#4a5568"
-          fontSize={descriptionFontSize}
+          fontSize="1.125rem"
           mb="0.5rem"
           textAlign="left"
           lineHeight="1.4"

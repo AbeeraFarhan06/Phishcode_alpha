@@ -67,19 +67,11 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
     lg: "clamp(2rem, 5vw, 3rem)",
   });
 
-  const titleSize = useBreakpointValue({
-    base: "1.25rem", // xs
-    xs: "1.25rem",
-    sm: "1.4rem", // sm
-    md: "clamp(1.4rem, 4vw, 1.6rem)",
-    lg: "clamp(1.4rem, 4vw, 1.6rem)",
-  });
-
   const titleMarginBottom = useBreakpointValue({
-    base: "1.5rem",
-    sm: "1.5rem",
-    md: "2rem",
-    lg: "2rem",
+    base: "0.25rem",
+    sm: "0.25rem",
+    md: "0.5rem",
+    lg: "0.5rem",
   });
 
   const contentMinHeight = useBreakpointValue({
@@ -146,7 +138,7 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
             <Image
               src={phishcode_logoo_1}
               alt="PhishCode Logo"
-              h="2.25rem"
+              h="2.50rem"
               w="auto"
             />
           </Box>
@@ -155,9 +147,9 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
           <Heading
             as="h2"
             textAlign="start"
-            fontWeight="bold"
+            fontWeight="normal"
             color="#2d3748"
-            fontSize={titleSize}
+            fontSize="2rem"
             mb={titleMarginBottom}
             lineHeight="1.2"
           >
@@ -180,29 +172,28 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
             {showCancelButton && (
               <Button
                 onClick={onCancel}
-                bg="transparent"
-                color="#0E1726"
-                border="1px solid #0E1726"
+                bg="#e2e8f0"
+                color="#2d3748"
+                border="none"
                 borderRadius="0"
                 fontWeight="400"
                 fontSize={buttonFontSize}
                 p={buttonPadding}
                 minW="7rem"
                 w={buttonWidth}
-                transition="background-color 0.2s ease, color 0.2s ease"
+                transition="background-color 0.2s ease"
                 _hover={{
-                  bg: "white",
-                  color: "#0E1726",
+                  bg: "#cbd5e0",
+                  color: "#2d3748",
                 }}
                 _focus={{
-                  bg: "white",
-                  color: "#0E1726",
+                  bg: "#cbd5e0",
+                  color: "#2d3748",
                   boxShadow: "none",
-                  outline: "#0E1726",
                 }}
                 _active={{
-                  bg: "white",
-                  color: "#0E1726",
+                  bg: "#cbd5e0",
+                  color: "#2d3748",
                 }}
               >
                 {cancelButtonText}
@@ -210,7 +201,7 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
             )}
             <Button
               onClick={onNext}
-              bg="#0E1726"
+              bg="#2d3748"
               color="white"
               border="none"
               borderRadius="0"
@@ -221,7 +212,7 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
               w={buttonWidth}
               transition="background-color 0.2s ease"
               _hover={{
-                bg: "#243B65",
+                bg: "#1a202c",
                 color: "white",
               }}
             >

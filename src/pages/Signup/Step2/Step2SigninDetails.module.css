@@ -17,7 +17,7 @@
 }
 
 .headerLogo {
-  height: 2.25rem;
+  height: 2.5rem; /* Changed from 2.25rem to 2.5rem */
   width: auto;
 }
 
@@ -50,7 +50,7 @@
 .formCard {
   width: 90%;
   max-width: 50rem;
-  border-radius: 0; /* Sharp edges like Microsoft */
+  border-radius: 0 !important; /* Sharp edges - force override */
   box-shadow: 0 0.9375rem 2.1875rem rgba(0, 0, 0, 0.4);
   overflow: visible;
   position: relative;
@@ -290,17 +290,21 @@
   padding-left: calc(8% - 0.625rem); /* Align with other content */
 }
 
-/* Next Button */
+/* Next Button - 112x40 pixels (7rem x 2.5rem) with sharp edges */
 .nextBtn {
   background-color: #2d3748;
   color: white;
   border: none;
-  border-radius: 0.25rem;
-  padding: 0.75rem 1.875rem;
+  border-radius: 0 !important; /* Sharp edges - force override */
+  width: 7rem; /* 112px */
+  height: 2.5rem; /* 40px */
   font-size: 0.875rem;
   font-weight: 500;
   transition: background-color 0.2s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nextBtn:hover {

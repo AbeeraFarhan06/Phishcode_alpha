@@ -36,7 +36,7 @@ const OTPVerificationPage = () => {
     base: "0.8rem", // xs
     xs: "0.8rem",
     sm: "0.8rem", // sm
-    md: "1.125rem", // 18px - larger than other pages
+    md: "1.125rem", // 18px - keep larger for OTP page
     lg: "1.125rem",
   });
 
@@ -44,8 +44,8 @@ const OTPVerificationPage = () => {
     base: "0.85rem", // xs
     xs: "0.85rem",
     sm: "0.9rem", // sm
-    md: "clamp(0.875rem, 4vw, 1rem)",
-    lg: "clamp(0.875rem, 4vw, 1rem)",
+    md: "clamp(0.9rem, 3vw, 1rem)", // SAME AS SIGNIN
+    lg: "clamp(0.9rem, 3vw, 1rem)",
   });
 
   const otpInputWidth = useBreakpointValue({
@@ -67,9 +67,9 @@ const OTPVerificationPage = () => {
   const linkFontSize = useBreakpointValue({
     base: "0.75rem", // xs
     xs: "0.75rem",
-    sm: "0.75rem", // sm
-    md: "clamp(0.75rem, 3vw, 0.8125rem)",
-    lg: "clamp(0.75rem, 3vw, 0.8125rem)",
+    sm: "0.8rem", // sm
+    md: "clamp(0.85rem, 3vw, 0.9375rem)", // SAME AS SIGNIN
+    lg: "clamp(0.85rem, 3vw, 0.9375rem)",
   });
 
   const linkFlexDirection = useBreakpointValue<"row" | "column">({
@@ -140,16 +140,13 @@ const OTPVerificationPage = () => {
           color="#4a5568"
           p={otpInputPadding}
           pt="0.5rem" // Reduce top padding
-          textAlign="center"
-          w={otpInputWidth}
+          textAlign="left"
+          w="100%"
           letterSpacing="0.125rem" // 2px
-          maxW="100%"
-          mx="auto" // Center the input
-          display="block"
           _placeholder={{
             color: "#a0aec0",
-            fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
-            textAlign: "center",
+            fontSize: otpInputFontSize, // MATCH INPUT FONT SIZE
+            textAlign: "left",
             letterSpacing: "normal",
           }}
           _focus={{

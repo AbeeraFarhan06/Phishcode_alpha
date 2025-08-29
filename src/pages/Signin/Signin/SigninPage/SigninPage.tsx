@@ -67,7 +67,7 @@ const SignInPage = () => {
   const pageContent = (
     <>
       {/* Email Input - SLOT 1 */}
-      <Box mb="1.5rem">
+      <Box mb="1.5rem" mt="1rem">
         <Input
           type="email"
           name="email"
