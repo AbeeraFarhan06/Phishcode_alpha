@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Box, Input, Text, useBreakpointValue } from "@chakra-ui/react";
 import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
-import styles from "../../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -102,51 +102,142 @@ const ResetPasswordPage = () => {
     navigate("/signin");
   };
 
+  // Responsive values for form elements
+  const descriptionFontSize = useBreakpointValue({
+    base: "0.8rem", // xs/sm
+    sm: "0.8rem",
+    md: "clamp(0.9rem, 3vw, 1rem)",
+    lg: "clamp(0.9rem, 3vw, 1rem)",
+  });
+
+  const inputFontSize = useBreakpointValue({
+    base: "0.85rem", // xs
+    xs: "0.8rem", // very small
+    sm: "0.85rem", // sm
+    md: "clamp(0.9rem, 3vw, 1rem)",
+    lg: "clamp(0.9rem, 3vw, 1rem)",
+  });
+
+  const inputPadding = useBreakpointValue({
+    base: "0.75rem 0", // xs
+    xs: "0.75rem 0",
+    sm: "0.75rem 0", // sm
+    md: "0.75rem 0",
+    lg: "0.75rem 0",
+  });
+
+  const errorFontSize = useBreakpointValue({
+    base: "0.75rem", // xs
+    xs: "0.75rem",
+    sm: "0.75rem", // sm
+    md: "clamp(0.75rem, 2.5vw, 0.8rem)",
+    lg: "clamp(0.75rem, 2.5vw, 0.8rem)",
+  });
+
   // Content for the template - USING EXACT SAME SLOTS AS SIGN IN
   const pageContent = (
     <>
       {/* Description Text - SLOT 1 (where email input is in Sign In) */}
-      <div className={styles.formField}>
-        <div className={styles.description}>
+      <Box mb="1.5rem">
+        <Text
+          color="#4a5568"
+          fontSize={descriptionFontSize}
+          mb="0.5rem"
+          textAlign="left"
+          lineHeight="1.4"
+          p="0.75rem 0"
+        >
           Your password should be 8 characters minimum; case sensitive
-        </div>
-      </div>
+        </Text>
+      </Box>
 
       {/* Password Input - SLOT 2 (where password input is in Sign In) */}
-      <div className={styles.formField}>
-        <input
+      <Box mb="1.5rem">
+        <Input
           type="password"
           name="password"
-          className={`form-control ${styles.input} ${
-            validationErrors.password ? styles.inputError : ""
-          }`}
           placeholder="Password"
           value={formData.password}
           onChange={handleInputChange}
+          bg="transparent"
+          border="none"
+          borderBottom={
+            validationErrors.password
+              ? "0.0625rem solid #e53e3e"
+              : "0.0625rem solid #4285f4"
+          }
+          borderRadius="0"
+          boxShadow="none"
+          fontSize={inputFontSize}
+          color="#4a5568"
+          p={inputPadding}
+          w="100%"
+          mb="0.5rem"
+          _placeholder={{
+            color: "#a0aec0",
+            fontSize: inputFontSize,
+          }}
+          _focus={{
+            borderBottomColor: "#4285f4",
+            boxShadow: "none",
+          }}
         />
         {validationErrors.password && (
-          <div className={styles.errorMessage}>{validationErrors.password}</div>
+          <Text
+            color="#e53e3e"
+            fontSize={errorFontSize}
+            mt="0.25rem"
+            pl="0"
+            lineHeight="1.2"
+          >
+            {validationErrors.password}
+          </Text>
         )}
-      </div>
+      </Box>
 
       {/* Confirm Password Input - SLOT 3 (where links are in Sign In) */}
-      <div className={styles.formField}>
-        <input
+      <Box mb="1.5rem">
+        <Input
           type="password"
           name="confirmPassword"
-          className={`form-control ${styles.input} ${
-            validationErrors.confirmPassword ? styles.inputError : ""
-          }`}
           placeholder="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleInputChange}
+          bg="transparent"
+          border="none"
+          borderBottom={
+            validationErrors.confirmPassword
+              ? "0.0625rem solid #e53e3e"
+              : "0.0625rem solid #4285f4"
+          }
+          borderRadius="0"
+          boxShadow="none"
+          fontSize={inputFontSize}
+          color="#4a5568"
+          p={inputPadding}
+          w="100%"
+          mb="0.5rem"
+          _placeholder={{
+            color: "#a0aec0",
+            fontSize: inputFontSize,
+          }}
+          _focus={{
+            borderBottomColor: "#4285f4",
+            boxShadow: "none",
+          }}
         />
         {validationErrors.confirmPassword && (
-          <div className={styles.errorMessage}>
+          <Text
+            color="#e53e3e"
+            fontSize={errorFontSize}
+            mt="0.25rem"
+            pl="0"
+            lineHeight="1.2"
+          >
             {validationErrors.confirmPassword}
-          </div>
+          </Text>
         )}
-      </div>
+      </Box>
     </>
   );
 

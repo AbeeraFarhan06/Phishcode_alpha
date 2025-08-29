@@ -1,5 +1,14 @@
 import React from "react";
-import styles from "./PageLayoutTemplate.module.css";
+import {
+  Box,
+  Card,
+  CardBody,
+  Flex,
+  Image,
+  Heading,
+  Button,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import phishcode_logoo_1 from "../../assets/logo/phishcode_logoo_1.png";
 
 interface PageLayoutTemplateProps {
@@ -21,45 +30,207 @@ const PageLayoutTemplate: React.FC<PageLayoutTemplateProps> = ({
   nextButtonText = "Next",
   showCancelButton = true,
 }) => {
+  // Responsive values
+  const cardWidth = useBreakpointValue({
+    base: "95vw", // mobile
+    xs: "98vw", // very small mobile
+    sm: "90vw", // small mobile
+    md: "70vw", // tablet
+    lg: "32rem", // desktop
+  });
+
+  const cardHeight = useBreakpointValue({
+    base: "75vh",
+    xs: "auto",
+    sm: "auto",
+    md: "70vh",
+    lg: "32rem",
+  });
+
+  const cardMaxWidth = useBreakpointValue({
+    base: "none",
+    md: "34rem",
+    lg: "32rem",
+  });
+
+  const cardMaxHeight = useBreakpointValue({
+    base: "none",
+    md: "34rem",
+    lg: "32rem",
+  });
+
+  const cardPadding = useBreakpointValue({
+    base: "2rem 1.5rem", // xs
+    xs: "2rem 1.5rem",
+    sm: "2.5rem", // sm
+    md: "clamp(2rem, 5vw, 3rem)",
+    lg: "clamp(2rem, 5vw, 3rem)",
+  });
+
+  const titleSize = useBreakpointValue({
+    base: "1.25rem", // xs
+    xs: "1.25rem",
+    sm: "1.4rem", // sm
+    md: "clamp(1.4rem, 4vw, 1.6rem)",
+    lg: "clamp(1.4rem, 4vw, 1.6rem)",
+  });
+
+  const titleMarginBottom = useBreakpointValue({
+    base: "1.5rem",
+    sm: "1.5rem",
+    md: "2rem",
+    lg: "2rem",
+  });
+
+  const contentMinHeight = useBreakpointValue({
+    base: "10rem", // xs
+    xs: "10rem",
+    sm: "12rem", // sm
+    md: "14rem",
+    lg: "14rem",
+  });
+
+  const buttonPadding = useBreakpointValue({
+    base: "0.6rem 1.2rem", // xs
+    xs: "0.6rem 1.2rem",
+    sm: "0.7rem 1.5rem", // sm
+    md: "0.6rem 2rem",
+    lg: "0.6rem 2rem",
+  });
+
+  const buttonWidth = useBreakpointValue({
+    base: "5.5rem", // xs
+    xs: "5.5rem",
+    sm: "6rem", // sm
+    md: "7rem",
+    lg: "7rem",
+  });
+
+  const buttonFontSize = useBreakpointValue({
+    base: "0.75rem", // xs
+    xs: "0.75rem",
+    sm: "0.8rem", // sm
+    md: "clamp(0.8rem, 3vw, 0.875rem)",
+    lg: "clamp(0.8rem, 3vw, 0.875rem)",
+  });
+
   return (
-    <div
-      className={`min-vh-100 d-flex align-items-center justify-content-center ${styles.container}`}
+    <Box
+      minH="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      bg="#f5f5f5"
     >
-      <div className={`card shadow-lg border-0 ${styles.card}`}>
-        <div className="card-body p-0 d-flex flex-column">
+      <Card
+        w={cardWidth}
+        h={cardHeight}
+        minH="32rem"
+        maxW={cardMaxWidth}
+        maxH={cardMaxHeight}
+        borderRadius="0"
+        boxShadow="lg"
+        border="none"
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-start"
+      >
+        <CardBody
+          p={cardPadding}
+          display="flex"
+          flexDirection="column"
+          flex="1"
+        >
           {/* Logo */}
-          <div className="text-start mb-4">
-            <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.logo} />
-          </div>
+          <Box textAlign="start" mb="4">
+            <Image
+              src={phishcode_logoo_1}
+              alt="PhishCode Logo"
+              h="2.25rem"
+              w="auto"
+            />
+          </Box>
 
           {/* Title */}
-          <h2 className={`text-start ${styles.title}`}>{title}</h2>
+          <Heading
+            as="h2"
+            textAlign="start"
+            fontWeight="bold"
+            color="#2d3748"
+            fontSize={titleSize}
+            mb={titleMarginBottom}
+            lineHeight="1.2"
+          >
+            {title}
+          </Heading>
 
           {/* Content Area */}
-          <div className={styles.contentArea}>{children}</div>
+          <Box
+            flex="1"
+            minH={contentMinHeight}
+            display="flex"
+            flexDirection="column"
+            justifyContent="flex-start"
+          >
+            {children}
+          </Box>
 
           {/* Buttons */}
-          <div className="d-flex justify-content-end mt-auto" style={{ gap: "0.5rem" }}>
+          <Flex justifyContent="flex-end" mt="auto" gap="0.5rem">
             {showCancelButton && (
-              <button
-                type="button"
+              <Button
                 onClick={onCancel}
-                className={`btn ${styles.cancelBtn}`}
+                bg="transparent"
+                color="#0E1726"
+                border="1px solid #0E1726"
+                borderRadius="0"
+                fontWeight="400"
+                fontSize={buttonFontSize}
+                p={buttonPadding}
+                minW="7rem"
+                w={buttonWidth}
+                transition="background-color 0.2s ease, color 0.2s ease"
+                _hover={{
+                  bg: "white",
+                  color: "#0E1726",
+                }}
+                _focus={{
+                  bg: "white",
+                  color: "#0E1726",
+                  boxShadow: "none",
+                  outline: "#0E1726",
+                }}
+                _active={{
+                  bg: "white",
+                  color: "#0E1726",
+                }}
               >
                 {cancelButtonText}
-              </button>
+              </Button>
             )}
-            <button
-              type="button"
+            <Button
               onClick={onNext}
-              className={`btn ${styles.nextBtn}`}
+              bg="#0E1726"
+              color="white"
+              border="none"
+              borderRadius="0"
+              fontWeight="400"
+              fontSize={buttonFontSize}
+              p={buttonPadding}
+              minW="7rem"
+              w={buttonWidth}
+              transition="background-color 0.2s ease"
+              _hover={{
+                bg: "#243B65",
+                color: "white",
+              }}
             >
               {nextButtonText}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Button>
+          </Flex>
+        </CardBody>
+      </Card>
+    </Box>
   );
 };
 
