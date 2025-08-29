@@ -339,11 +339,13 @@ const Navbar = () => {
           <ModalCloseButton />
           <ModalBody px={6} pb={4} pt={2}>
             <VStack spacing={4} align="stretch">
-              <Textarea
-                value={feedbackText}
-                onChange={(e) => setFeedbackText(e.target.value)}
-                placeholder="Enter feedback here..."
-              />
+              <Box border="1px solid #0E1726" borderRadius="6px" >
+                <Textarea
+                  value={feedbackText}
+                  onChange={(e) => setFeedbackText(e.target.value)}
+                  placeholder="Enter feedback here..."
+                />
+              </Box>
               <Checkbox
                 isChecked={includeEmail}
                 defaultChecked

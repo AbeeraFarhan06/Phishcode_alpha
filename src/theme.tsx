@@ -16,6 +16,18 @@ const breakpoints = {
 const theme = extendTheme({ 
     breakpoints,
     config,
+    components: {
+        Checkbox: {
+            baseStyle: {
+                control: {
+                    borderColor: '#0E1726',
+                    _checked: {
+                        borderColor: '#0E1726',
+                    }
+                }
+            }
+        }
+    },
      styles: {
         global: {
         body: {
