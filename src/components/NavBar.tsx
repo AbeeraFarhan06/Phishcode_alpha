@@ -29,10 +29,10 @@ import {
   AccordionIcon,
   Button,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
 import icon_feedback_01_1 from "../assets/icons/icon_feedback_01_1.png";
-import pipeline from '../assets/icons/pipeline.png'
+import pipeline from "../assets/icons/pipeline.png";
 import Container from "./Container";
 import { useNavigate } from "react-router-dom";
 
@@ -46,22 +46,8 @@ const Navbar = () => {
   // An array of objects that represent the items in the mobile drawer.
   const drawerItems = [
     {
-      title: "Explore",
-      links: [
-        "How to get Copilot",
-        "Features",
-        "Try free version of Copilot",
-        "For business",
-      ],
-    },
-    {
       title: "Products",
-      links: [
-        "Copilot Labs",
-        "Copilot in Edge",
-        "Copilot in Windows",
-        "Copilot Pro",
-      ],
+      links: [],
     },
     {
       title: "Pricing",
@@ -69,33 +55,7 @@ const Navbar = () => {
     },
     {
       title: "Resources",
-      links: [
-        "Privacy & Security",
-        "Do more with Copilot",
-        "AI art prompting guide",
-        "Copilot blog",
-        "AI blog",
-        "AI",
-        "Learn",
-        "Build",
-      ],
-    },
-    {
-      title: "Partners",
-      links: [
-        "Find a partner",
-        "Become a partner",
-        "Partner resources",
-        "AppSource",
-      ],
-    },
-    {
-      title: "Support",
-      links: [
-        "Product documentation",
-        "Technical support",
-        "On=premises product support",
-      ],
+      links: [],
     },
   ];
 
@@ -114,7 +74,12 @@ const Navbar = () => {
                   cursor="pointer"
                 />
                 <Image src={pipeline} />
-                <Text fontSize="14px" mt={4} cursor="pointer" _hover={{ textDecoration: "underline", color:  "#243B65"}}>
+                <Text
+                  fontSize="14px"
+                  mt={4}
+                  cursor="pointer"
+                  _hover={{ textDecoration: "underline", color: "#243B65" }}
+                >
                   Why PHISHCODE?
                 </Text>
               </HStack>
@@ -159,9 +124,18 @@ const Navbar = () => {
               </HStack>
             </Flex>
           ) : (
-            // Render the mobile version of the navbar if the screen is not large enough.
-            <Box borderBottom="1px solid" borderColor="gray.200" w="100%">
+            // Mobile Navbar
+            <Box w="100%">
               <Flex justify="space-between" align="center" position="relative">
+                {/* Hamburger menu */}
+                <IconButton
+                  aria-label="Open Menu"
+                  icon={<HamburgerIcon w={4} h={4} color="#0E1726" />} // ✅ Proper hamburger icon
+                  variant="ghost"
+                  onClick={onOpen}
+                />
+
+                {/* Center logo */}
                 <Box
                   position="absolute"
                   left="50%"
@@ -180,40 +154,65 @@ const Navbar = () => {
         </Flex>
       </Container>
 
-      {/* The drawer component that is displayed on mobile devices. */}
+      {/* ✅ Drawer should be here, not inside Flex */}
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg="white">
           <DrawerCloseButton />
           <DrawerHeader bgColor="white">
             <Image src={phishcode_logoo_1} h="6" />
           </DrawerHeader>
-          <DrawerBody p={0} bgColor="white">
-            <VStack align="stretch" spacing={0}>
-              <Box px={4} py={3} borderBottom="1px dotted gray">
-                <Text fontWeight="medium">Microsoft 365</Text>
-              </Box>
-              {[
-                "Teams",
-                "Copilot",
-                "Windows",
-                "Surface",
-                "Xbox",
-                "Deals",
-                "Small Business",
-                "Support",
-              ].map((item, index) => (
-                <Box
-                  key={index}
-                  px={4}
-                  py={3}
-                  _hover={{ bg: "gray.400" }}
-                  borderBottom="1px solid"
-                  borderColor="gray.100"
-                >
-                  <Text fontWeight="normal">{item}</Text>
-                </Box>
-              ))}
+          <DrawerBody>
+            <VStack align="stretch" spacing={4}>
+              {/* Sign in */}
+              <Button
+                variant="outline"
+                w="full"
+                borderColor="#0E1726" // ✅ blue border
+                color="#0E1726" // ✅ blue text
+                bg="white"
+                _hover={{ bg: "#243B65" }}
+                onClick={() => navigate("/signin")}
+              >
+                Sign in
+              </Button>
+
+              <Button
+                bgColor="#0E1726"
+                fontWeight="normal"
+                w="full"
+                _hover={{ bg: "#243B65" }}
+                onClick={() => navigate("/signup/step1")}
+              >
+                Try for Free
+              </Button>
+
+              {/* Accordion Menu */}
+              <Accordion allowToggle>
+                {drawerItems.map((section, i) => (
+                  <AccordionItem key={i}>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        {section.title}
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
+                      {section.links.map((link, j) => (
+                        <Text
+                          key={j}
+                          px={2}
+                          py={1}
+                          cursor="pointer"
+                          _hover={{ color: "blue.600" }}
+                        >
+                          {link}
+                        </Text>
+                      ))}
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </VStack>
           </DrawerBody>
         </DrawerContent>
