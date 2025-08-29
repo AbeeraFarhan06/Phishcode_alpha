@@ -5,63 +5,16 @@
   background-color: #f5f5f5;
 }
 
-/* Card Styling - FIXED SIZE */
-.card {
-  width: min(90vw, 32rem);
-  height: min(90vh, 32rem);
-  border-radius: 0 !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Change from center to flex-start for consistent positioning */
-  padding: 3rem; /* Increased from 2rem to 3rem */
-}
-
-/* Logo - FIXED POSITION */
-.logo {
-  height: 2.25rem;
-  width: auto;
-}
-
-/* Title - FIXED POSITION */
-.title {
-  font-weight: bold;
-  color: #2d3748;
-  font-size: clamp(1.4rem, 4vw, 1.6rem);
-  margin-bottom: 2rem;
-  text-align: left;
-  line-height: 1.2;
-}
-
-/* Content Area - FIXED HEIGHT TO ENSURE BUTTON ALIGNMENT */
-.contentArea {
-  height: 16rem; /* Fixed height instead of min-height for consistent positioning */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Ensure content starts from top */
-}
-
-/* Standard spacing for form fields */
-.formField {
-  margin-bottom: 1.5rem;
-}
-
-/* PageLayoutTemplate.module.css - UNIVERSAL TEMPLATE CSS */
-
-/* Container Background */
-.container {
-  background-color: #f5f5f5;
-}
-
 /* Card Styling - RESPONSIVE SIZE */
 .card {
   width: min(90vw, 32rem);
-  height: auto; /* Changed from fixed height to auto */
-  min-height: 32rem; /* Set a minimum height for consistency */
+  height: auto;
+  min-height: 32rem;
   border-radius: 0 !important;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: clamp(2rem, 5vw, 3rem); /* Dynamic padding */
+  padding: clamp(2rem, 5vw, 3rem);
 }
 
 /* Logo - FIXED POSITION */
@@ -80,10 +33,10 @@
   line-height: 1.2;
 }
 
-/* Content Area - FLEXIBLE HEIGHT */
+/* Content Area */
 .contentArea {
-  flex-grow: 1; /* Allow content to expand */
-  min-height: 14rem; /* Minimum height for content */
+  flex-grow: 1;
+  min-height: 14rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -94,7 +47,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Input styling - to be used by child components */
+/* Input styling */
 .input {
   background-color: transparent !important;
   border: none !important;
@@ -103,9 +56,15 @@
   box-shadow: none !important;
   font-size: clamp(0.9rem, 3vw, 1rem);
   color: #4a5568;
-  padding: 0.75rem 0;
+  padding: 0.75rem 0 !important;   /* remove side padding */
   width: 100%;
   margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.input.form-control {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .input:focus {
@@ -132,7 +91,7 @@
   line-height: 1.2;
 }
 
-/* Description text styling */
+/* Description */
 .description {
   color: #4a5568;
   font-size: clamp(0.9rem, 3vw, 1rem);
@@ -142,7 +101,7 @@
   padding: 0.75rem 0;
 }
 
-/* Link text styling */
+/* Link text */
 .linkTextNormal {
   color: #2d3748;
   font-size: clamp(0.85rem, 3vw, 0.9375rem);
@@ -152,20 +111,8 @@
   align-items: baseline;
 }
 
-/* Link button styling */
-.linkButton {
-  color: #4285f4 !important;
-  font-weight: 400;
-  font-size: clamp(0.85rem, 3vw, 0.9375rem);
-  background: none !important;
-  border: none !important;
-  text-decoration: none;
-  cursor: pointer;
-  vertical-align: baseline;
-  line-height: inherit;
-  padding: 0.125rem 0;
-}
-
+/* Link buttons */
+.linkButton,
 .linkButtonSpaced {
   color: #4285f4 !important;
   font-weight: 400;
@@ -177,25 +124,45 @@
   vertical-align: baseline;
   line-height: inherit;
   padding: 0.125rem 0;
-  margin-left: 0.375rem;
 }
+.linkButtonSpaced { margin-left: 0.375rem; }
 
 .linkButton:hover,
 .linkButtonSpaced:hover {
   color: #3367d6 !important;
   text-decoration: underline !important;
 }
-
 .linkButton:focus,
 .linkButtonSpaced:focus {
   box-shadow: none !important;
   outline: none;
 }
 
-/* Cancel Button - FIXED POSITION */
+/* Cancel Button */
 .cancelBtn {
-  background-color: #e2e8f0;
-  color: #2d3748;
+  background-color: transparent;
+  color: #0E1726;
+  border: 1px solid #0E1726 !important;
+  border-radius: 0;
+  font-weight: 400;
+  font-size: clamp(0.8rem, 3vw, 0.875rem);
+  padding: 0.6rem 2rem;
+  min-width: 7rem;
+  width: 7rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.cancelBtn:hover,
+.cancelBtn:focus,
+.cancelBtn:active {
+  background-color: white;
+  color: #0E1726;
+  outline: #0E1726; /* Remove default outline */
+}
+
+/* Next Button */
+.nextBtn {
+  background-color: #0E1726 !important;  /* dark blue */
+  color: white !important;
   border: none;
   border-radius: 0;
   font-weight: 400;
@@ -205,258 +172,37 @@
   width: 7rem;
   transition: background-color 0.2s ease;
 }
-
-.cancelBtn:hover {
-  background-color: #cbd5e0;
-  color: #2d3748;
-}
-
-/* Next Button - FIXED POSITION */
-.nextBtn {
-  background-color: #2d3748;
-  color: white;
-  border: none;
-  border-radius: 0;
-  font-weight: 400;
-  font-size: clamp(0.8rem, 3vw, 0.875rem);
-  padding: 0.6rem 2rem;
-  min-width: 7rem;
-  width: 7rem;
-  transition: background-color 0.2s ease;
-}
-
 .nextBtn:hover {
-  background-color: #1a202c;
-  color: white;
+  background-color: #243B65 !important;
+  color: white !important;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 576px) {
   .card {
     width: 95vw;
     min-height: 75vh;
-    padding: 2.5rem; /* Adjusted padding */
+    padding: 2.5rem;
   }
-  
-  .title {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem; /* Adjusted margin */
-  }
-  
-  .contentArea {
-    min-height: 12rem; /* Adjusted min-height */
-  }
-  
-  .input,
-  .description {
-    font-size: 0.9rem;
-    padding: 0.7rem 0; /* Adjusted padding */
-  }
-  
-  .cancelBtn,
-  .nextBtn {
-    padding: 0.7rem 1.5rem; /* Adjusted padding */
+  .title { font-size: 1.4rem; margin-bottom: 1.5rem; }
+  .contentArea { min-height: 12rem; }
+  .input, .description { font-size: 0.9rem; padding: 0.7rem 0 !important; }
+  .cancelBtn, .nextBtn {
+    padding: 0.7rem 1.5rem;
     font-size: 0.8rem;
-    width: 6rem; /* Adjusted width */
-  }
-}
-
-@media (max-width: 360px) {
-  .card {
-    width: 98vw;
-    padding: 2rem 1.5rem; /* Adjusted padding */
-  }
-  
-  .title {
-    font-size: 1.25rem;
-  }
-  
-  .contentArea {
-    min-height: 10rem; /* Adjusted min-height */
-  }
-  
-  .input,
-  .description {
-    font-size: 0.85rem;
-  }
-  
-  .cancelBtn,
-  .nextBtn {
-    padding: 0.6rem 1.2rem; /* Adjusted padding */
-    font-size: 0.75rem;
-    width: 5.5rem; /* Adjusted width */
-  }
-}
-
-
-/* Input error state */
-.inputError {
-  border-bottom-color: #e53e3e !important;
-}
-
-/* Error message */
-.errorMessage {
-  color: #e53e3e;
-  font-size: clamp(0.75rem, 2.5vw, 0.8rem);
-  margin-top: 0.25rem;
-  padding-left: 0;
-  line-height: 1.2;
-}
-
-/* Description text styling */
-.description {
-  color: #4a5568;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-  margin-bottom: 0.5rem;
-  text-align: left;
-  line-height: 1.4;
-  padding: 0.75rem 0;
-}
-
-/* Link text styling */
-.linkTextNormal {
-  color: #2d3748;
-  font-size: clamp(0.85rem, 3vw, 0.9375rem);
-  font-weight: normal;
-  line-height: 1.4;
-  display: inline-flex;
-  align-items: baseline;
-}
-
-/* Link button styling */
-.linkButton {
-  color: #4285f4 !important;
-  font-weight: 400;
-  font-size: clamp(0.85rem, 3vw, 0.9375rem);
-  background: none !important;
-  border: none !important;
-  text-decoration: none;
-  cursor: pointer;
-  vertical-align: baseline;
-  line-height: inherit;
-  padding: 0.125rem 0;
-}
-
-.linkButtonSpaced {
-  color: #4285f4 !important;
-  font-weight: 400;
-  font-size: clamp(0.85rem, 3vw, 0.9375rem);
-  background: none !important;
-  border: none !important;
-  text-decoration: none;
-  cursor: pointer;
-  vertical-align: baseline;
-  line-height: inherit;
-  padding: 0.125rem 0;
-  margin-left: 0.375rem;
-}
-
-.linkButton:hover,
-.linkButtonSpaced:hover {
-  color: #3367d6 !important;
-  text-decoration: underline !important;
-}
-
-.linkButton:focus,
-.linkButtonSpaced:focus {
-  box-shadow: none !important;
-  outline: none;
-}
-
-/* Cancel Button - FIXED POSITION */
-.cancelBtn {
-  background-color: #e2e8f0;
-  color: #2d3748;
-  border: none;
-  border-radius: 0;
-  font-weight: 400;
-  font-size: clamp(0.8rem, 3vw, 0.875rem);
-  padding: 0.6rem 2rem;
-  min-width: 7rem; /* Increased from 5.5rem to accommodate longer text */
-  width: 7rem; /* Fixed width to ensure all buttons are identical */
-  transition: background-color 0.2s ease;
-}
-
-.cancelBtn:hover {
-  background-color: #cbd5e0;
-  color: #2d3748;
-}
-
-/* Next Button - FIXED POSITION */
-.nextBtn {
-  background-color: #2d3748;
-  color: white;
-  border: none;
-  border-radius: 0;
-  font-weight: 400;
-  font-size: clamp(0.8rem, 3vw, 0.875rem);
-  padding: 0.6rem 2rem;
-  min-width: 7rem; /* Increased from 5.5rem to accommodate longer text */
-  width: 7rem; /* Fixed width to ensure all buttons are identical */
-  transition: background-color 0.2s ease;
-}
-
-.nextBtn:hover {
-  background-color: #1a202c;
-  color: white;
-}
-
-/* Responsive Design */
-@media (max-width: 576px) {
-  .card {
-    width: 95vw;
-    height: auto;
-    min-height: 75vh;
-    padding: 3rem 2.5rem; /* Increased from 2.5rem 2rem */
-  }
-  
-  .title {
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
-  }
-  
-  .contentArea {
-    height: 14rem;
-  }
-  
-  .input,
-  .description {
-    font-size: 0.9rem;
-    padding: 0.8rem 0;
-  }
-  
-  .cancelBtn,
-  .nextBtn {
-    padding: 0.8rem 1.8rem;
-    font-size: 0.8rem;
-    width: 6.5rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .card {
-    width: 98vw;
-    padding: 2.5rem 2rem; /* Increased from 2rem 1.5rem */
-  }
-  
-  .title {
-    font-size: 1.25rem;
-  }
-  
-  .contentArea {
-    height: 12rem;
-  }
-  
-  .input,
-  .description {
-    font-size: 0.85rem;
-  }
-  
-  .cancelBtn,
-  .nextBtn {
-    padding: 0.7rem 1.4rem;
-    font-size: 0.75rem;
     width: 6rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .card { width: 98vw; padding: 2rem 1.5rem; }
+  .title { font-size: 1.25rem; }
+  .contentArea { min-height: 10rem; }
+  .input, .description { font-size: 0.85rem; }
+  .cancelBtn, .nextBtn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    width: 5.5rem;
   }
 }
 
