@@ -200,7 +200,7 @@
 
 /* Get Started Button */
 .getStartedBtn {
-background-color: #003366 !important;  /* dark blue */
+background-color: #0E1726 !important;  /* dark blue */
   color: white !important;
   border: none;
   border-radius: 0.25rem;
@@ -211,7 +211,7 @@ background-color: #003366 !important;  /* dark blue */
 }
 
 .getStartedBtn:hover {
-   background-color: #00264d !important;
+   background-color: #243B65 !important;
   color: white !important;
 }
 

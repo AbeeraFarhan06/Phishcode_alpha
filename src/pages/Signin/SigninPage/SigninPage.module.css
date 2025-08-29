@@ -127,7 +127,7 @@
 
 /* Next Button - Responsive - MODERATELY LARGER SIZE */
 .nextBtn {
-  background-color: #2d3748;
+  background-color: #0E1726 !important;
   color: white;
   border: none;
   border-radius: 0; /* Sharp edges */
@@ -139,7 +139,7 @@
 }
 
 .nextBtn:hover {
-  background-color: #1a202c;
+  background-color: #243B65;
   color: white;
 }
 

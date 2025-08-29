@@ -292,7 +292,7 @@
 
 /* Next Button */
 .nextBtn {
-  background-color: #003366 !important;  /* dark blue */
+  background-color: #0E1726 !important;  /* dark blue */
   color: white !important;
   border: none;
   border-radius: 0.25rem;
@@ -302,7 +302,7 @@
   transition: background-color 0.2s ease;
 }
 .nextBtn:hover {
-  background-color: #00264d !important;
+  background-color: #243B65 !important;
   color: white !important;
 }
 
