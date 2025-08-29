@@ -289,8 +289,8 @@
 
 /* Next Button */
 .nextBtn {
-  background-color: #2d3748;
-  color: white;
+  background-color: #003366 !important;  /* dark blue */
+  color: white !important;
   border: none;
   border-radius: 0.25rem;
   padding: 0.75rem 1.875rem;
@@ -298,10 +298,9 @@
   font-weight: 500;
   transition: background-color 0.2s ease;
 }
-
 .nextBtn:hover {
-  background-color: #1a202c;
-  color: white;
+  background-color: #00264d !important;
+  color: white !important;
 }
 
 /* Responsive Design */

@@ -279,7 +279,11 @@ const Step1AboutYou = () => {
     <div className={`min-vh-100 ${styles.container}`}>
       {/* Logo - Fixed position on left */}
       <div className={styles.logoContainer}>
-        <img src={phishcode_logoo_1} alt="PhishCode Logo" className={styles.headerLogo} />
+        <img
+          src={phishcode_logoo_1}
+          alt="PhishCode Logo"
+          className={styles.headerLogo}
+        />
       </div>
 
       {/* Header - Centered */}
@@ -625,7 +629,7 @@ const Step1AboutYou = () => {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className={`btn ${styles.nextBtn}`}
+                  className={styles.nextBtn}
                 >
                   Next
                 </button>
