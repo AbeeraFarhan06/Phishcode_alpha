@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageLayoutTemplate from "../../../components/PageLayoutTemplate/PageLayoutTemplate";
-import styles from "../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
-import { MdCheck } from "react-icons/md";
+import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
+import styles from "../../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
 
 const ForgetPasswordPage = () => {
   const navigate = useNavigate();
@@ -39,11 +38,10 @@ const ForgetPasswordPage = () => {
 
     console.log("Email submitted:", email);
     alert("We've emailed your password reset link");
-    navigate("/reset-password");
+    navigate("/");
   };
 
   const handleCancel = () => {
-    console.log("Form cancelled");
     navigate("/");
   };
 
@@ -95,7 +93,7 @@ const ForgetPasswordPage = () => {
 
   return (
     <PageLayoutTemplate
-      title="Verify Your Email"
+      title="Verify your email"
       onNext={handleNext}
       onCancel={handleCancel}
       nextButtonText="Verify"

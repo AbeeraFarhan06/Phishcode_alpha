@@ -8,10 +8,10 @@
   overflow: visible;
 }
 
-/* Logo Container - Fixed position on left */
+/* Logo Container - Fixed position on left - ALIGNED WITH TEXT */
 .logoContainer {
   position: absolute;
-  top: 1.875rem;
+  top: 2.5rem; /* Adjusted to match header text positioning */
   left: 2.5rem;
   z-index: 10;
 }
@@ -34,14 +34,14 @@
 }
 
 .headerTitle {
-  font-size: 1.5rem;
+  font-size: 2rem; /* 32px = 2rem (32/16) */
   font-weight: 600;
   color: #2d3748;
   margin-bottom: 0.5rem;
 }
 
 .headerSubtitle {
-  font-size: 1rem;
+  font-size: 1.125rem; /* 18px = 1.125rem (18/16) */
   color: #718096;
   margin: 0;
 }
@@ -156,7 +156,7 @@
 
 /* Form Title - Align exactly with first progress circle */
 .formTitle {
-  font-size: 1.5rem;
+  font-size: 2rem; /* 32px = 2rem (32/16) */
   font-weight: 600;
   color: #2d3748;
   margin-bottom: 1.25rem;
@@ -292,18 +292,20 @@
 
 /* Next Button */
 .nextBtn {
-  background-color: #0E1726 !important;  /* dark blue */
-  color: white !important;
+  background-color: #2d3748;
+  color: white;
   border: none;
   border-radius: 0.25rem;
   padding: 0.75rem 1.875rem;
   font-size: 0.875rem;
   font-weight: 500;
   transition: background-color 0.2s ease;
+  cursor: pointer;
 }
+
 .nextBtn:hover {
-  background-color: #243B65 !important;
-  color: white !important;
+  background-color: #1a202c;
+  color: white;
 }
 
 .nextBtn:disabled {

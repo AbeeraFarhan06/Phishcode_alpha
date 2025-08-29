@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageLayoutTemplate from "../../../components/PageLayoutTemplate/PageLayoutTemplate";
-import styles from "../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
-import { MdCheck } from "react-icons/md";
+import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
+import styles from "../../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -96,11 +95,11 @@ const ResetPasswordPage = () => {
     }
 
     console.log("Password reset form submitted:", formData);
-    navigate("/");
+    navigate("/signin");
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate("/signin");
   };
 
   // Content for the template - USING EXACT SAME SLOTS AS SIGN IN
@@ -153,7 +152,7 @@ const ResetPasswordPage = () => {
 
   return (
     <PageLayoutTemplate
-      title="Reset Your Password"
+      title="Reset your password"
       onNext={handleDone}
       onCancel={handleCancel}
       nextButtonText="Done"

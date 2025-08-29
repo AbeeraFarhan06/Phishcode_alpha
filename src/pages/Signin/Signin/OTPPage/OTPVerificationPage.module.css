@@ -22,22 +22,23 @@
   width: auto;
 }
 
-/* Title Styling - Bold and left aligned, responsive */
+/* Title Styling - REMOVED BOLD and left aligned, responsive */
 .title {
-  font-weight: bold;
+  font-weight: normal; /* Changed from bold to normal */
   color: #2d3748;
   font-size: clamp(1.25rem, 4vw, 1.5rem); /* Responsive font size */
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced from 1rem to 0.5rem for closer spacing */
   text-align: left;
   line-height: 1.2;
   word-wrap: break-word; /* Handle long text on small screens */
 }
 
-/* Description text - Responsive */
+/* Description text - Responsive with reduced top margin */
 .description {
   color: #4a5568;
   font-size: clamp(0.8rem, 3vw, 0.875rem); /* Responsive font size */
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Reduced from 2rem to 1.5rem to match email field spacing */
+  margin-top: 0; /* Ensure no extra top margin */
   text-align: left;
   line-height: 1.4;
 }
@@ -56,6 +57,7 @@
   width: min(15.625rem, 80vw); /* Responsive width: 250px max, 80% on small screens */
   letter-spacing: 0.125rem; /* 2px in rem */
   max-width: 100%;
+  margin-bottom: 1.5rem; /* Added consistent spacing to match email field */
 }
 
 .otpInput:focus {
@@ -138,18 +140,19 @@
   
   .title {
     font-size: 1.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem; /* Adjusted for mobile */
   }
   
   .description {
     font-size: 0.8rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem; /* Adjusted for mobile */
   }
   
   .otpInput {
     width: 90%;
     font-size: 0.9rem;
     padding: 1rem 0;
+    margin-bottom: 1.25rem; /* Consistent mobile spacing */
   }
   
   .linkTextBold {

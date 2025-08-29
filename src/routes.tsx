@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
-import SigninPage from "./pages/Signin/SigninPage/SigninPage";
-import ForgetPasswordPage from "./pages/Signin/ForgetPasswordPage/ForgetPasswordPage";
-import OTPVerificationPage from "./pages/Signin/OTPPage/OTPVerificationPage";
-import ResetPasswordPage from "./pages/Signin/ResetPasswordPage/ResetPasswordPage";
 import Step1AboutYou from "./pages/Signup/Step1/Step1AboutYou";
 import Step2SigninDetails from "./pages/Signup/Step2/Step2SigninDetails";
 import Step3Confirmation from "./pages/Signup/Step3/Step3Confirmation";
 import ContactUs from "./components/ContactUs";
+import ForgetPasswordPage from "./pages/Signin/Signin/ForgetPasswordPage/ForgetPasswordPage";
+import OTPVerificationPage from "./pages/Signin/Signin/OTPPage/OTPVerificationPage";
+import ResetPasswordPage from "./pages/Signin/Signin/ResetPasswordPage/ResetPasswordPage";
+import SigninPage from "./pages/Signin/Signin/SigninPage/SigninPage";
 
 const router = createBrowserRouter([
   {

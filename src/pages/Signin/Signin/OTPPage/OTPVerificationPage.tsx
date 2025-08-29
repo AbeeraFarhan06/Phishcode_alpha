@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageLayoutTemplate from "../../../components/PageLayoutTemplate/PageLayoutTemplate";
-import styles from "../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
-import { MdCheck } from "react-icons/md";
+import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
+import styles from "../../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
 
 const OTPVerificationPage = () => {
   const navigate = useNavigate();
@@ -32,35 +31,49 @@ const OTPVerificationPage = () => {
     // Handle resend OTP logic
   };
 
-  // Content for the template - USING EXACT SAME SLOTS AS SIGN IN
+  // Content for the template - USING DIRECT INLINE STYLES TO FORCE CHANGES
   const pageContent = (
     <>
-      {/* Description Text - SLOT 1 (where email input is in Sign In) */}
-      <div className={styles.formField}>
-        <div className={styles.description}>
+      {/* Description Text - SLOT 1 with forced spacing */}
+      <div className={styles.formField} style={{ marginBottom: "0.5rem" }}>
+        <div
+          style={{
+            color: "#4a5568",
+            fontSize: "1.125rem", // 18px
+            marginBottom: "0.25rem", // Very tight spacing before input
+            marginTop: "0",
+            textAlign: "left",
+            lineHeight: "1.4",
+            padding: "0.75rem 0",
+          }}
+        >
           A code has been sent to your email. Please enter it to sign in.
         </div>
       </div>
 
-      {/* OTP Input - SLOT 2 (where password input is in Sign In) - LEFT ALIGNED */}
-      <div className={styles.formField}>
+      {/* OTP Input - SLOT 2 with forced positioning */}
+      <div className={styles.formField} style={{ marginBottom: "1.5rem" }}>
         <input
           type="text"
           name="otpCode"
           className={`form-control ${styles.input}`}
-          placeholder="Enter OTP code"
+          placeholder="Enter Code"
           value={otpCode}
           onChange={handleInputChange}
           maxLength={10}
-          style={{ letterSpacing: "0.125rem" }} // Add letter spacing for OTP codes
+          style={{
+            letterSpacing: "0.125rem",
+            marginTop: "0", // Force no top margin
+            paddingTop: "0.5rem", // Reduce top padding
+          }}
         />
       </div>
 
-      {/* Resend Link - SLOT 3 (where "No account? Create one!" links are in Sign In) */}
+      {/* Resend Link - SLOT 3 with minimal spacing to match sign-in exactly */}
       <div className={styles.formField}>
         <div className="mb-2">
           <span className={styles.linkTextNormal}>
-            Didn't receive OTP code?{" "}
+            Did not receive code?{" "}
             <button
               onClick={handleResendCode}
               className={`btn p-0 ${styles.linkButtonSpaced}`}
@@ -69,6 +82,8 @@ const OTPVerificationPage = () => {
             </button>
           </span>
         </div>
+        {/* Minimal space to match sign-in button positioning exactly */}
+        <div style={{ height: "0.25rem" }}></div>
       </div>
     </>
   );

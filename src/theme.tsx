@@ -25,6 +25,27 @@ const theme = extendTheme({
         html: {
             bg: "#F9FDFE", // Also apply to html
         },
+        select: {
+            bg: "white",
+            color: "black",
+        },
+        'select option': {
+            bg: "white",
+            color: "black",
+        },
+        '::-webkit-scrollbar': {
+          width: '10px',
+        },
+        '::-webkit-scrollbar-track': {
+          background: '#ffffff',
+        },
+        '::-webkit-scrollbar-thumb': {
+          background: '#e0e0e0',
+          borderRadius: '5px',
+        },
+        '::-webkit-scrollbar-thumb:hover': {
+          background: '#c0c0c0',
+        }
         },
     }
 

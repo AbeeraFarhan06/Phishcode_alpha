@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageLayoutTemplate from "../../../components/PageLayoutTemplate/PageLayoutTemplate";
-import styles from "../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
-import { MdCheck } from "react-icons/md";
+import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
+import styles from "../../../../components/PageLayoutTemplate/PageLayoutTemplate.module.css";
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ const SignInPage = () => {
   };
 
   const handleCancel = () => {
-    console.log("Form cancelled");
     navigate("/");
   };
 
