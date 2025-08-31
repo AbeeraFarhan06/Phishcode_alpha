@@ -58,7 +58,7 @@ const Risk = () => {
     base: "1rem",
     md: "1rem",
   });
-  const gridColumns = useBreakpointValue({ base: 1, md: 3 });
+  const gridColumns = useBreakpointValue({ base: 1, md: 1, lg:2, xl:3 });
   const gridSpacing = useBreakpointValue({ base: 8, md: 12 });
 
   return (

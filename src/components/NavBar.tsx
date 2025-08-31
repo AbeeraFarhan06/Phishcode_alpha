@@ -199,6 +199,16 @@ const Navbar = () => {
                   cursor="pointer"
                 />
               </Box>
+
+              {/* Feedback Icon */}
+              <Text
+                cursor="pointer"
+                fontSize="11px"
+                mt={4}
+                onClick={onFeedbackOpen}
+              >
+                <Image src={icon_feedback_01_1} h="20px" w="30px" />
+              </Text>
             </Flex>
           </Box>
         </Flex>
@@ -210,7 +220,18 @@ const Navbar = () => {
         <DrawerContent bg="white">
           <DrawerCloseButton />
           <DrawerHeader bgColor="white">
-            <Image src={phishcode_logoo_1} h="6" />
+            <HStack>
+              <Image src={phishcode_logoo_1} h="6" />
+              <Image src={pipeline} h="20px"/>
+                <Text
+                  fontSize="12px"
+                  mt={4}
+                  cursor="pointer"
+                  _hover={{ textDecoration: "underline", color: "#243B65" }}
+                >
+                  Why PHISHCODE?
+                </Text>
+            </HStack>
           </DrawerHeader>
           <DrawerBody>
             <VStack align="stretch" spacing={4}>
@@ -233,6 +254,7 @@ const Navbar = () => {
                 w="full"
                 _hover={{ bg: "#243B65" }}
                 onClick={() => navigate("/signup/step1")}
+                color="white"
               >
                 Try for Free
               </Button>

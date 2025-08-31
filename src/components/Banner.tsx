@@ -28,16 +28,16 @@ const Banner = () => {
   const inView = useInView(ref, { once: true });
 
   // Responsive values
-  const flexDirection = useBreakpointValue({ base: "column", lg: "row" });
+  const flexDirection = useBreakpointValue({ base: "column", md:"column", lg: "row" });
   const headingFontSize = useBreakpointValue({ base: "2rem", md: "38px" });
   const headingLineHeight = useBreakpointValue({ base: "2.2rem", md: "3rem" });
   const headingMarginLeft = useBreakpointValue({ base: 0, md: 0 });
   const textMarginLeft = useBreakpointValue({ base: 0, md: 0 });
   const stackMarginLeft = useBreakpointValue({ base: 0, sm: 0 });
   const rightBoxMarginTop = useBreakpointValue({ base: 8, lg: 0 });
-  const videoBoxHeight = useBreakpointValue({ base: "200px", md: "300px" });
+  const videoBoxHeight = useBreakpointValue({ base: "300px", md: "300px" });
   const bgSize = useBreakpointValue({ base: "cover", md: "60% auto" });
-  const height = useBreakpointValue({ base: "auto", md: "513px" });
+  const height = useBreakpointValue({ base: "auto", md: "auto" });
   const bgPosition = useBreakpointValue({ base: "center", md: "right" });
 
   return (

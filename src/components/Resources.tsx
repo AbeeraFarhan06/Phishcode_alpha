@@ -78,7 +78,7 @@ const Resources = () => {
     base: "1.5rem",
     md: "2.25rem",
   });
-  const gridColumns = useBreakpointValue({ base: 1, md: 2 });
+  const gridColumns = useBreakpointValue({ base: 1, md:1, lg: 1, xl:2 });
 
   return (
     <Box

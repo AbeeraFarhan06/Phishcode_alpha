@@ -88,7 +88,7 @@ const Impact = () => {
             </Text>
           </MotionVStack>
           {/* Stats Grid */}
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={gridSpacing}>
+          <SimpleGrid columns={{ base: 1, md: 1, lg:1, xl:2  }} spacing={gridSpacing}>
             {stats.map((stat, idx) => (
               <MotionFlex
                 key={idx}

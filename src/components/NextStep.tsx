@@ -47,13 +47,17 @@ const Nextstep = () => {
   const imageMarginLeft = useBreakpointValue({ base: 0, md: 10 });
   const gridTemplateColumns = useBreakpointValue({
     base: "1fr",
-    md: "repeat(2, 1fr)",
+    md: "repeat(1, 1fr)",
+    lg: "repeat(1, 1fr)",
+    xl: "repeat(2, 1fr)",
   });
   const gridGap = useBreakpointValue({ base: 4, md: 8 });
   const gridItemPadding = useBreakpointValue({ base: 4, md: 8 });
   const flexDirection = useBreakpointValue({
     base: "column-reverse",
-    md: "row",
+    md: "column-reverse",
+    lg: "column-reverse",
+    xl: "row",
   });
   const imageMarginBottom = useBreakpointValue({ base: 8, md: 0 });
 
