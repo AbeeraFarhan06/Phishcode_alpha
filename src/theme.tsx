@@ -37,14 +37,6 @@ const theme = extendTheme({
         html: {
             bg: "#F9FDFE", // Also apply to html
         },
-        select: {
-            bg: "white",
-            color: "black",
-        },
-        'select option': {
-            bg: "white",
-            color: "black",
-        },
         '::-webkit-scrollbar': {
           width: '10px',
         },

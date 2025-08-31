@@ -9,16 +9,14 @@ import {
   FormControl,
   FormLabel,
   VStack,
-  Link,
   Image,
-  Spinner,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
 import contact_banner from "../assets/png imgs/contact_banner.png";
 import Container from "./Container";
 
-// Define interfaces for country data
 interface CountryCode {
   name: string;
   code: string;
@@ -31,7 +29,7 @@ const ContactUs = () => {
   const [countries, setCountries] = useState<string[]>([]);
   const [loadingCountries, setLoadingCountries] = useState(true);
 
-  // Fetch country codes for phone numbers
+  // Fetch country codes
   useEffect(() => {
     const fetchCountryCodes = async () => {
       try {
@@ -41,14 +39,12 @@ const ContactUs = () => {
         );
         const data = await response.json();
 
-        // Process and sort country codes
         const codes: CountryCode[] = data
           .filter(
             (country: any) =>
               country.idd?.root && country.idd?.suffixes?.length > 0
           )
           .map((country: any) => {
-            // Handle multiple suffixes (like US has +1 242, +1 246, etc.)
             const mainCode = country.idd.root + (country.idd.suffixes[0] || "");
             return {
               name: country.name.common,
@@ -59,7 +55,6 @@ const ContactUs = () => {
           .sort((a: CountryCode, b: CountryCode) =>
             a.name.localeCompare(b.name)
           )
-          // Remove duplicates (some countries might have same calling codes)
           .filter(
             (country: CountryCode, index: number, self: CountryCode[]) =>
               index ===
@@ -72,7 +67,6 @@ const ContactUs = () => {
         setCountryCodes(codes);
       } catch (error) {
         console.error("Error fetching country codes:", error);
-        // Fallback to basic codes if API fails
         setCountryCodes([
           { name: "United States", code: "+1", flag: "🇺🇸" },
           { name: "United Kingdom", code: "+44", flag: "🇬🇧" },
@@ -88,7 +82,7 @@ const ContactUs = () => {
     fetchCountryCodes();
   }, []);
 
-  // Fetch countries for the country/region dropdown
+  // Fetch countries
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -105,7 +99,6 @@ const ContactUs = () => {
         setCountries(countryNames);
       } catch (error) {
         console.error("Error fetching countries:", error);
-        // Fallback to basic countries if API fails
         setCountries([
           "United States",
           "United Kingdom",
@@ -120,24 +113,47 @@ const ContactUs = () => {
 
     fetchCountries();
   }, []);
+
+  const inputSelectStyle = {
+    border: "0.0625rem solid #d1d5db",
+    borderRadius: "0.25rem",
+    _hover: {
+      border: "0.0625rem solid #d1d5db", // keep same border
+    },
+    _focus: {
+      border: "0.0625rem solid #4f7cff", // blue border on focus
+      boxShadow: "none", // remove Chakra's blue shadow
+    },
+  };
+
+  // Common style for Select option background
+  const selectOptionStyle = {
+    "& option": {
+      backgroundColor: "white",
+      color: "black",
+    },
+  };
+
   return (
     <Box bg="white" width="100%">
       {/* Header */}
       <Box borderBottom="1px solid #e5e5e5" width="100%">
         <Container navbar1>
           <Flex>
-            <Image
-              src={phishcode_logoo_1}
-              h="32px"
-              w="140px"
-              cursor="pointer"
-              mt={-3}
-            />
+            <Link to="/">
+              <Image
+                src={phishcode_logoo_1}
+                h="32px"
+                w="140px"
+                cursor="pointer"
+                mt={-3}
+              />
+            </Link>
           </Flex>
         </Container>
       </Box>
 
-      {/* Banner - Full Width */}
+      {/* Banner */}
       <Container fullWidth>
         <Image src={contact_banner} width="100%" />
       </Container>
@@ -159,6 +175,7 @@ const ContactUs = () => {
               and help you understand what PHISHCODE can do for your business.
             </Text>
           </Box>
+
           {/* Right Form */}
           <Box
             flex="1"
@@ -172,10 +189,8 @@ const ContactUs = () => {
             </Heading>
             <Text fontSize="16px" mb={4} textAlign="justify">
               If you are a current customer and need technical or billing
-              support, please visit our{" "}
-              <Link color="blue.500">support area</Link> or{" "}
-              <Link color="blue.500">log in</Link> to your account to see more
-              options.
+              support, please visit our <Link to="#">support area</Link> or{" "}
+              <Link to="#">log in</Link> to your account to see more options.
             </Text>
             <Text fontSize="16px" mb={4}>
               Fill out the form and we'll be in touch.
@@ -183,36 +198,30 @@ const ContactUs = () => {
             <VStack spacing={4} align="stretch">
               <FormControl isRequired>
                 <FormLabel fontSize="16px">First name</FormLabel>
-                <Input borderColor="#0E1726" />
+                <Input {...inputSelectStyle} />
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Last name</FormLabel>
-                <Input borderColor="#0E1726" />
+                <Input {...inputSelectStyle} />
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Email</FormLabel>
-                <Input type="email" borderColor="#0E1726" />
+                <Input type="email" {...inputSelectStyle} />
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Company name</FormLabel>
-                <Input borderColor="#0E1726" />
+                <Input {...inputSelectStyle} />
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Company size</FormLabel>
                 <Select
                   placeholder="Company size"
-                  borderColor="#0E1726"
-                  bg="white"
-                  color="black"
-                  fontFamily="'Segoe UI', sans-serif"
-                  _placeholder={{ color: "gray.500" }}
-                  sx={{
-                    option: {
-                      bg: "white",
-                      color: "black",
-                      fontFamily: "'Segoe UI', sans-serif",
-                    },
-                  }}
+                  {...inputSelectStyle}
+                  sx={selectOptionStyle}
                 >
                   <option>1</option>
                   <option>2-4</option>
@@ -224,28 +233,21 @@ const ContactUs = () => {
                   <option>1000+</option>
                 </Select>
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Job role</FormLabel>
-                <Input borderColor="#0E1726" />
+                <Input {...inputSelectStyle} />
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Phone</FormLabel>
                 <Flex gap={2} bgColor="white">
                   <Select
                     placeholder={loadingCodes ? "Loading..." : "Country Code"}
-                    bg="white"
-                    color="black"
                     maxW="40%"
-                    borderColor="#0E1726"
-                    fontFamily="'Segoe UI', sans-serif"
                     disabled={loadingCodes}
-                    _placeholder={{ color: "gray.500" }}
-                    sx={{
-                      option: {
-                        bg: "white",
-                        color: "black",
-                      },
-                    }}
+                    {...inputSelectStyle}
+                    sx={selectOptionStyle}
                   >
                     {loadingCodes ? (
                       <option disabled>Loading country codes...</option>
@@ -253,25 +255,26 @@ const ContactUs = () => {
                       <>
                         {countryCodes.map((country) => (
                           <option key={country.code} value={country.code}>
-                            {" "}
-                            {country.flag} {country.code}{" "}
+                            {country.flag} {country.code}
                           </option>
                         ))}
                       </>
                     )}
                   </Select>
 
-                  <Input borderColor="#0E1726" placeholder="Phone number" />
+                  <Input placeholder="Phone number" {...inputSelectStyle} />
                 </Flex>
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel fontSize="16px">Country/Region</FormLabel>
                 <Select
                   placeholder={
                     loadingCountries ? "Loading..." : "Select country"
                   }
-                  borderColor="#0E1726"
                   disabled={loadingCountries}
+                  {...inputSelectStyle}
+                  sx={selectOptionStyle}
                 >
                   {loadingCountries ? (
                     <option disabled>Loading countries...</option>
@@ -289,14 +292,17 @@ const ContactUs = () => {
                   )}
                 </Select>
               </FormControl>
+
               <Button
                 bg="#0E1726"
                 color="white"
                 _hover={{ bg: "#243B65" }}
+                borderRadius="sm"
                 w="12rem"
               >
                 Contact me
               </Button>
+
               <Text fontSize="xs" color="#0E1726">
                 * Please complete required fields
               </Text>
@@ -310,8 +316,9 @@ const ContactUs = () => {
         <Container noVerticalPadding py={3}>
           <Flex justify="left" align="center" fontSize="12px" color="gray.600">
             <Text pt={3}>
-              <Link>Your Privacy Choices</Link> | <Link>Trademarks</Link> |{" "}
-              <Link>Privacy & Cookies</Link> | © PHISHCODE
+              <Link to="#">Your Privacy Choices</Link> |{" "}
+              <Link to="#">Trademarks</Link> |{" "}
+              <Link to="#">Privacy & Cookies</Link> | © PHISHCODE
             </Text>
           </Flex>
         </Container>
