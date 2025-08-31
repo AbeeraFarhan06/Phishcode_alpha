@@ -1,12 +1,8 @@
-// This component renders the footer of the website.
-// It includes the company logo, social media links, and a list of links to other pages on the site.
-
 import React from "react";
 import {
   Box,
   Flex,
   VStack,
-  HStack,
   Text,
   Link,
   IconButton,
@@ -14,7 +10,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
   Image,
   SimpleGrid,
 } from "@chakra-ui/react";
@@ -29,8 +24,8 @@ import { TbBrandTwitter } from "react-icons/tb";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
 import Container from "./Container";
+import { useTranslation } from "react-i18next";
 
-// An array of objects that represent the social media icons.
 const socialIcons = [
   { icon: FaLinkedinIn, label: "LinkedIn", href: "#" },
   { icon: TbBrandTwitter, label: "Twitter", href: "#" },
@@ -40,39 +35,32 @@ const socialIcons = [
   { icon: FaPhone, label: "Phone", href: "#" },
 ];
 
-// An array of objects that represent the sections of the footer.
-const footerSections = [
-  {
-    title: "Products",
-    links: [
-      "Overview",
-      "Impact",
-      "Approach",
-      "Resources",
-      "Next Step",
-      "Email",
-      "Sign In",
-    ],
-  },
-  {
-    title: "Our AI",
-    links: ["Cyber AI", "AI Research Centre"],
-  },
-  {
-    title: "Company",
-    links: ["Company Overview", "Contact Us", "Free Trial"],
-  },
-  {
-    title: "Resources",
-    links: ["All Resources", "Blog", "Demo", "Infographics"],
-  },
-  {
-    title: "Legal",
-    links: ["Privacy Policy", "Cookie Policy"],
-  },
-];
-
 export default function Footer() {
+  const { t, i18n } = useTranslation();
+
+  const footerSections = [
+    {
+      title: t("footer.products.title"),
+      links: Object.values(t("footer.products.links", { returnObjects: true })),
+    },
+    {
+      title: t("footer.ourAI.title"),
+      links: Object.values(t("footer.ourAI.links", { returnObjects: true })),
+    },
+    {
+      title: t("footer.company.title"),
+      links: Object.values(t("footer.company.links", { returnObjects: true })),
+    },
+    {
+      title: t("footer.resources.title"),
+      links: Object.values(t("footer.resources.links", { returnObjects: true })),
+    },
+    {
+      title: t("footer.legal.title"),
+      links: Object.values(t("footer.legal.links", { returnObjects: true })),
+    },
+  ];
+
   return (
     <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" py={14} width="100%">
       <Container>
@@ -84,7 +72,6 @@ export default function Footer() {
           gap={{ base: "2rem", md: "2.5rem" }}
           mb={{ base: "2rem", md: "2rem" }}
         >
-          {/* Left Section: Logo, social icons, and language selector. */}
           <VStack align="flex-start" spacing={{ base: "1.5rem", md: "1.5rem" }}>
             <Box w={{ base: "8rem", md: "8.75rem" }} textAlign="left">
               <Image src={phishcode_logoo_1} alt="PhishCode Logo" />
@@ -94,10 +81,9 @@ export default function Footer() {
                 fontWeight="medium"
                 mt="0"
               >
-                Remediates human errors
+                {t("tagline")}
               </Text>
             </Box>
-            {/* Social Icons */}
             <SimpleGrid
               columns={{ base: 2, md: 3 }}
               spacing={{ base: "1rem", md: "1rem" }}
@@ -119,7 +105,6 @@ export default function Footer() {
                 />
               ))}
             </SimpleGrid>
-            {/* Language Selector */}
             <Menu>
               <MenuButton
                 as={Text}
@@ -128,13 +113,17 @@ export default function Footer() {
                 fontSize="0.875rem"
                 fontWeight="semibold"
               >
-                Language <ChevronDownIcon />
+                {t("language")} <ChevronDownIcon />
               </MenuButton>
               <MenuList bgColor="white">
                 <MenuItem
                   bgColor="white"
                   color="#0E1726"
                   _hover={{ bg: "gray.100" }}
+                  onClick={() => {
+                    i18n.changeLanguage("en");
+                    document.documentElement.lang = "en";
+                  }}
                 >
                   English
                 </MenuItem>
@@ -142,35 +131,50 @@ export default function Footer() {
                   bgColor="white"
                   color="#0E1726"
                   _hover={{ bg: "gray.100" }}
+                  onClick={() => {
+                    i18n.changeLanguage("ar");
+                    document.documentElement.lang = "ar";
+                  }}
                 >
-                  Arabic
+                  العربية
                 </MenuItem>
                 <MenuItem
                   bgColor="white"
                   color="#0E1726"
                   _hover={{ bg: "gray.100" }}
+                  onClick={() => {
+                    i18n.changeLanguage("fr");
+                    document.documentElement.lang = "fr";
+                  }}
                 >
-                  French
+                  Français
                 </MenuItem>
                 <MenuItem
                   bgColor="white"
                   color="#0E1726"
                   _hover={{ bg: "gray.100" }}
+                  onClick={() => {
+                    i18n.changeLanguage("ms");
+                    document.documentElement.lang = "ms";
+                  }}
                 >
-                  Malay
+                  Melayu
                 </MenuItem>
                 <MenuItem
                   bgColor="white"
                   color="#0E1726"
                   _hover={{ bg: "gray.100" }}
+                  onClick={() => {
+                    i18n.changeLanguage("hi");
+                    document.documentElement.lang = "hi";
+                  }}
                 >
-                  Hindi
+                  हिन्दी
                 </MenuItem>
               </MenuList>
             </Menu>
           </VStack>
 
-          {/* Right Section: Links to other pages. */}
           <SimpleGrid
             columns={{ base: 1, md: 3 }}
             spacing={{ base: "2rem", md: "2.5rem" }}
@@ -178,7 +182,6 @@ export default function Footer() {
             minChildWidth={{ base: "100%", md: "11.25rem" }}
             ml={{ base: "0", md: "6.25rem" }}
           >
-            {/* Column 1: Products */}
             <VStack align="flex-start" spacing="0.5rem">
               <Text fontWeight="semibold">{footerSections[0].title}</Text>
               <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
@@ -188,7 +191,6 @@ export default function Footer() {
               </VStack>
             </VStack>
 
-            {/* Column 2: Our AI + Company */}
             <VStack align="flex-start" spacing="2rem">
               <Box>
                 <Text fontWeight="semibold" mb="0.5rem">
@@ -212,7 +214,6 @@ export default function Footer() {
               </Box>
             </VStack>
 
-            {/* Column 3: Resources + Legal */}
             <VStack align="flex-start" spacing="2rem">
               <Box>
                 <Text fontWeight="semibold" mb="0.5rem">
