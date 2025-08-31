@@ -292,6 +292,9 @@ const Navbar = () => {
           <ModalBody px={6} pb={6} pt={2}>
             <VStack spacing={3} align="stretch">
               <Button
+                fontSize="15px"
+                fontWeight="normal"
+                color="white"
                 bgColor="#0E1726"
                 _hover={{ bg: "#243B65" }}
                 onClick={() => openDetail("issue")}
@@ -299,6 +302,9 @@ const Navbar = () => {
                 Report an issue
               </Button>
               <Button
+                fontSize="15px"
+                fontWeight="normal"
+                color="white"
                 bgColor="#0E1726"
                 _hover={{ bg: "#243B65" }}
                 onClick={() => openDetail("idea")}
@@ -306,6 +312,9 @@ const Navbar = () => {
                 Share an idea
               </Button>
               <Button
+                fontSize="15px"
+                fontWeight="normal"
+                color="white"
                 bgColor="#0E1726"
                 _hover={{ bg: "#243B65" }}
                 onClick={() => openDetail("complaint")}
@@ -339,7 +348,7 @@ const Navbar = () => {
           <ModalCloseButton />
           <ModalBody px={6} pb={4} pt={2}>
             <VStack spacing={4} align="stretch">
-              <Box border="1px solid #0E1726" borderRadius="6px" >
+              <Box border="1px solid #0E1726" borderRadius="6px">
                 <Textarea
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}

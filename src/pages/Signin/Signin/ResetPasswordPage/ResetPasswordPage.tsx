@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Input, Text, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Text,
+  useBreakpointValue,
+  InputGroup,
+  InputRightElement,
+  IconButton,
+} from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
 
 const ResetPasswordPage = () => {
@@ -15,6 +24,10 @@ const ResetPasswordPage = () => {
     password: "",
     confirmPassword: "",
   });
+
+  // ⬇️ Added: local visibility state for both fields
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const validatePassword = (password: string) => {
     if (password.length === 0) return "";
@@ -154,35 +167,47 @@ const ResetPasswordPage = () => {
 
       {/* Password Input - SLOT 2 (where password input is in Sign In) */}
       <Box mb="1.5rem">
-        <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-          bg="transparent"
-          border="none"
-          borderBottom={
-            validationErrors.password
-              ? "0.0625rem solid #e53e3e"
-              : "0.0625rem solid #4285f4"
-          }
-          borderRadius="0"
-          boxShadow="none"
-          fontSize={inputFontSize}
-          color="#4a5568"
-          p={inputPadding}
-          w="100%"
-          mb="0.5rem"
-          _placeholder={{
-            color: "#a0aec0",
-            fontSize: inputFontSize,
-          }}
-          _focus={{
-            borderBottomColor: "#4285f4",
-            boxShadow: "none",
-          }}
-        />
+        <InputGroup>
+          <Input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+            bg="transparent"
+            border="none"
+            borderBottom={
+              validationErrors.password
+                ? "0.0625rem solid #e53e3e"
+                : "0.0625rem solid #4285f4"
+            }
+            borderRadius="0"
+            boxShadow="none"
+            fontSize={inputFontSize}
+            color="#4a5568"
+            p={inputPadding}
+            w="100%"
+            mb="0.5rem"
+            _placeholder={{
+              color: "#a0aec0",
+              fontSize: inputFontSize,
+            }}
+            _focus={{
+              borderBottomColor: "#4285f4",
+              boxShadow: "none",
+            }}
+          />
+          <InputRightElement width="3rem">
+            <IconButton
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              icon={showPassword ? <ViewIcon /> : <ViewOffIcon />} // icon reflects current state
+              size="sm"
+              variant="ghost"
+              color="gray.500"
+              onClick={() => setShowPassword((p) => !p)}
+            />
+          </InputRightElement>
+        </InputGroup>
         {validationErrors.password && (
           <Text
             color="#e53e3e"
@@ -198,35 +223,49 @@ const ResetPasswordPage = () => {
 
       {/* Confirm Password Input - SLOT 3 (where links are in Sign In) */}
       <Box mb="1.5rem">
-        <Input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
-          bg="transparent"
-          border="none"
-          borderBottom={
-            validationErrors.confirmPassword
-              ? "0.0625rem solid #e53e3e"
-              : "0.0625rem solid #4285f4"
-          }
-          borderRadius="0"
-          boxShadow="none"
-          fontSize={inputFontSize}
-          color="#4a5568"
-          p={inputPadding}
-          w="100%"
-          mb="0.5rem"
-          _placeholder={{
-            color: "#a0aec0",
-            fontSize: inputFontSize,
-          }}
-          _focus={{
-            borderBottomColor: "#4285f4",
-            boxShadow: "none",
-          }}
-        />
+        <InputGroup>
+          <Input
+            type={showConfirm ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            bg="transparent"
+            border="none"
+            borderBottom={
+              validationErrors.confirmPassword
+                ? "0.0625rem solid #e53e3e"
+                : "0.0625rem solid #4285f4"
+            }
+            borderRadius="0"
+            boxShadow="none"
+            fontSize={inputFontSize}
+            color="#4a5568"
+            p={inputPadding}
+            w="100%"
+            mb="0.5rem"
+            _placeholder={{
+              color: "#a0aec0",
+              fontSize: inputFontSize,
+            }}
+            _focus={{
+              borderBottomColor: "#4285f4",
+              boxShadow: "none",
+            }}
+          />
+          <InputRightElement width="3rem">
+            <IconButton
+              aria-label={
+                showConfirm ? "Hide confirm password" : "Show confirm password"
+              }
+              icon={showConfirm ? <ViewIcon /> : <ViewOffIcon />} // icon reflects current state
+              size="sm"
+              variant="ghost"
+              color="gray.500"
+              onClick={() => setShowConfirm((p) => !p)}
+            />
+          </InputRightElement>
+        </InputGroup>
         {validationErrors.confirmPassword && (
           <Text
             color="#e53e3e"

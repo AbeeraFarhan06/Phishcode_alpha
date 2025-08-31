@@ -4,6 +4,8 @@ import { MdRadioButtonUnchecked } from "react-icons/md";
 import styles from "./Step1AboutYou.module.css";
 import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 import { MdCheck } from "react-icons/md";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 // Type definitions
 interface Country {
@@ -270,6 +272,20 @@ const Step1AboutYou = () => {
     }
   };
 
+  // Dedicated phone change handler (digits only; no brackets)
+  const handleBusinessPhoneChange = (phone: string) => {
+    setFormData((prev) => ({ ...prev, businessPhone: phone }));
+    const err =
+      phone.length === 0
+        ? ""
+        : phone.length < 10
+        ? "Phone number must be at least 10 digits"
+        : phone.length > 15
+        ? "Phone number must be less than 15 digits"
+        : "";
+    setValidationErrors((prev) => ({ ...prev, businessPhone: err }));
+  };
+
   const handleNext = () => {
     console.log("Form submitted:", formData);
     navigate("/signup/step2");
@@ -440,15 +456,24 @@ const Step1AboutYou = () => {
                   Business phone number{" "}
                   <span className={styles.required}>*</span>
                 </label>
-                <input
-                  type="tel"
-                  name="businessPhone"
-                  className={`form-control ${styles.input} ${
+                <PhoneInput
+                  country={"us"}
+                  value={formData.businessPhone}
+                  onChange={handleBusinessPhoneChange}
+                  inputProps={{ name: "businessPhone" }}
+                  // Make it behave like a Bootstrap input (full width + height)
+                  containerStyle={{ width: "100%" }}
+                  inputStyle={{
+                    width: "100%",
+                    height: "calc(1.5em + .75rem + 7px)",
+                    border: "1px solid #d7dee3ff",
+                    borderRadius: ".375rem", // same as .form-control default in BS5
+                  }}
+                  containerClass="w-100"
+                  inputClass={`form-control ${styles.input} ${
                     validationErrors.businessPhone ? styles.inputError : ""
                   }`}
-                  value={formData.businessPhone}
-                  onChange={handleInputChange}
-                  placeholder="+XXXXXXXXXX"
+                  placeholder="Enter phone number"
                 />
                 {validationErrors.businessPhone && (
                   <div className={styles.errorMessage}>

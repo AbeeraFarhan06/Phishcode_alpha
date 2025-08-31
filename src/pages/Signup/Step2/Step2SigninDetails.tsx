@@ -255,7 +255,8 @@ const Step2SigninDetails = () => {
                     className={styles.eyeButton}
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    {/* icon reflects CURRENT STATE */}
+                    {showPassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
                 </div>
                 {touched.password && errors.password && (
@@ -290,7 +291,8 @@ const Step2SigninDetails = () => {
                     className={styles.eyeButton}
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    {/* icon reflects CURRENT STATE */}
+                    {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
                 </div>
                 {touched.confirmPassword && errors.confirmPassword && (

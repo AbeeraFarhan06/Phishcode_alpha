@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Input, Text, Button, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Text,
+  Button,
+  useBreakpointValue,
+  InputGroup,
+  InputRightElement,
+  IconButton,
+} from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
 
 const SignInPage = () => {
@@ -10,6 +20,8 @@ const SignInPage = () => {
     email: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,25 +52,25 @@ const SignInPage = () => {
 
   // Responsive values for form elements
   const inputFontSize = useBreakpointValue({
-    base: "0.85rem", // xs
+    base: "0.85rem",
     xs: "0.85rem",
-    sm: "0.9rem", // sm
+    sm: "0.9rem",
     md: "clamp(0.9rem, 3vw, 1rem)",
     lg: "clamp(0.9rem, 3vw, 1rem)",
   });
 
   const linkFontSize = useBreakpointValue({
-    base: "0.75rem", // xs
+    base: "0.75rem",
     xs: "0.75rem",
-    sm: "0.8rem", // sm
+    sm: "0.8rem",
     md: "clamp(0.85rem, 3vw, 0.9375rem)",
     lg: "clamp(0.85rem, 3vw, 0.9375rem)",
   });
 
   const inputPadding = useBreakpointValue({
-    base: "0.75rem 0", // xs
+    base: "0.75rem 0",
     xs: "0.75rem 0",
-    sm: "0.8rem 0", // sm
+    sm: "0.8rem 0",
     md: "0.75rem 0",
     lg: "0.75rem 0",
   });
@@ -97,35 +109,48 @@ const SignInPage = () => {
         />
       </Box>
 
-      {/* Password Input - SLOT 2 */}
+      {/* Password Input with Eye Toggle - SLOT 2 */}
       <Box mb="1.5rem">
-        <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-          minLength={8}
-          title="Password must be at least 8 characters long"
-          bg="transparent"
-          border="none"
-          borderBottom="0.0625rem solid #4285f4"
-          borderRadius="0"
-          boxShadow="none"
-          fontSize={inputFontSize}
-          color="#4a5568"
-          p={inputPadding}
-          w="100%"
-          mb="0.5rem"
-          _placeholder={{
-            color: "#a0aec0",
-            fontSize: inputFontSize,
-          }}
-          _focus={{
-            borderBottomColor: "#4285f4",
-            boxShadow: "none",
-          }}
-        />
+        <InputGroup>
+          <Input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+            minLength={8}
+            title="Password must be at least 8 characters long"
+            bg="transparent"
+            border="none"
+            borderBottom="0.0625rem solid #4285f4"
+            borderRadius="0"
+            boxShadow="none"
+            fontSize={inputFontSize}
+            color="#4a5568"
+            p={inputPadding}
+            w="100%"
+            mb="0.5rem"
+            _placeholder={{
+              color: "#a0aec0",
+              fontSize: inputFontSize,
+            }}
+            _focus={{
+              borderBottomColor: "#4285f4",
+              boxShadow: "none",
+            }}
+          />
+          <InputRightElement width="3rem">
+            <IconButton
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              // (open eye when visible)
+              icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
+              size="sm"
+              variant="ghost"
+              color="gray.500"
+              onClick={() => setShowPassword((prev) => !prev)}
+            />
+          </InputRightElement>
+        </InputGroup>
       </Box>
 
       {/* Links - SLOT 3 */}
