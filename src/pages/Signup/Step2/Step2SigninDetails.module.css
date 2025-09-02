@@ -34,14 +34,15 @@
 }
 
 .headerTitle {
-  font-size: 2rem; /* 32px = 2rem (32/16) */
-  font-weight: 600;
+  font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font scaling */
+  font-weight: normal; /* Changed from 600 to normal to match signin style */
   color: #2d3748;
   margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
 
 .headerSubtitle {
-  font-size: 1.125rem; /* 18px = 1.125rem (18/16) */
+  font-size: clamp(1rem, 2.5vw, 1.125rem); /* Responsive font scaling */
   color: #718096;
   margin: 0;
 }
@@ -141,7 +142,7 @@
 }
 
 .stepLabel {
-  font-size: 0.8125rem;
+  font-size: clamp(0.75rem, 1.8vw, 0.8125rem); /* Responsive font scaling */
   color: #718096;
   text-align: center;
   line-height: 1.2;
@@ -156,8 +157,8 @@
 
 /* Form Title - Align exactly with first progress circle */
 .formTitle {
-  font-size: 2rem; /* 32px = 2rem (32/16) */
-  font-weight: 600;
+  font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font scaling */
+  font-weight: normal; /* Changed from 600 to normal to match signin style */
   color: #2d3748;
   margin-bottom: 1.25rem;
   text-align: left;
@@ -167,7 +168,7 @@
 
 /* Form Description */
 .formDescription {
-  font-size: 0.875rem;
+  font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   color: #4a5568;
   margin-bottom: 1.875rem;
   line-height: 1.5;
@@ -176,7 +177,7 @@
 
 /* Form Labels */
 .label {
-  font-size: 0.875rem;
+  font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   color: #2d3748;
   font-weight: 500;
   margin-bottom: 0.375rem;
@@ -188,41 +189,42 @@
   color: #e53e3e;
 }
 
-/* Form Inputs - Positioned to align exactly with labels, width matches description text */
+/* Form Inputs - Enhanced blue focus border */
 .input {
   border: 0.0625rem solid #d1d5db;
   border-radius: 0.25rem;
   padding: 0.625rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive font scaling */
   color: #374151;
   background-color: white;
   width: 27rem; /* Slightly longer width */
   max-width: 27rem;
   margin-left: calc(8% - 0.625rem); /* Align exactly below the first circle */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  min-height: 2.75rem; /* Touch-friendly height */
 }
 
+/* Enhanced blue focus border - matching other pages */
 .input:focus {
-  border-color: #4f7cff;
-  box-shadow: 0 0 0 0.1875rem rgba(79, 124, 255, 0.1);
-  outline: none;
+  border: 0.125rem solid #4f7cff !important;
+  box-shadow: 0 0 0 1px #4f7cff !important;
+  outline: none !important;
 }
 
 /* Input Error State */
 .inputError {
   border-color: #e53e3e !important;
-  box-shadow: 0 0 0 0.1875rem rgba(229, 62, 62, 0.1) !important;
 }
 
 .inputError:focus {
-  border-color: #e53e3e !important;
-  box-shadow: 0 0 0 0.1875rem rgba(229, 62, 62, 0.1) !important;
+  border: 0.125rem solid #e53e3e !important;
+  box-shadow: 0 0 0 1px #e53e3e !important;
 }
 
 /* Error Message */
 .errorMessage {
   color: #e53e3e;
-  font-size: 0.75rem;
+  font-size: clamp(0.75rem, 1.8vw, 0.8125rem); /* Responsive font scaling */
   margin-top: 0.375rem;
   padding-left: calc(8% - 0.625rem);
   line-height: 1.4;
@@ -258,15 +260,22 @@
   justify-content: center;
   width: 1.25rem;
   height: 1.25rem;
+  transition: color 0.2s ease;
 }
 
 .eyeButton:hover {
   color: #4a5568;
 }
 
+.eyeButton:focus {
+  outline: 2px solid #4f7cff;
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
 /* Agreement Text */
 .agreementText {
-  font-size: 0.875rem;
+  font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   color: #4a5568;
   margin-bottom: 1.25rem;
   line-height: 1.5;
@@ -298,7 +307,7 @@
   border-radius: 0 !important; /* Sharp edges - force override */
   width: 7rem; /* 112px */
   height: 2.5rem; /* 40px */
-  font-size: 0.875rem;
+  font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   font-weight: 500;
   transition: background-color 0.2s ease;
   cursor: pointer;
@@ -317,7 +326,12 @@
   cursor: not-allowed;
 }
 
-/* Responsive Design */
+.nextBtn:focus {
+  outline: 2px solid #4f7cff;
+  outline-offset: 2px;
+}
+
+/* Enhanced Responsive Design */
 @media (max-width: 992px) {
   .formCard {
     width: 95%;
@@ -344,6 +358,10 @@
     top: auto;
   }
   
+  .header {
+    padding: 1.5rem 1rem 1.25rem 1rem;
+  }
+  
   .progressWrapper::before {
     left: 6%;
     width: 88%;
@@ -355,6 +373,10 @@
   
   .progressStep:nth-child(3) {
     right: 6%;
+  }
+  
+  .stepLabel {
+    max-width: 6rem;
   }
   
   .formTitle,
@@ -384,8 +406,27 @@
 }
 
 @media (max-width: 576px) {
+  .container {
+    padding-bottom: 4rem;
+  }
+  
+  .header {
+    padding: 1rem 0.5rem;
+    max-width: 95%;
+  }
+  
   .formCard {
     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.3);
+    width: 95%;
+    margin: 0 2.5%;
+  }
+  
+  .progressContainer {
+    margin-bottom: 2rem;
+  }
+  
+  .progressWrapper {
+    height: 50px;
   }
   
   .progressWrapper::before {
@@ -401,6 +442,11 @@
     right: 4%;
   }
   
+  .stepLabel {
+    font-size: 0.75rem;
+    max-width: 5rem;
+  }
+  
   .formTitle,
   .formDescription,
   .label,
@@ -413,6 +459,9 @@
     margin-left: calc(4% - 0.625rem);
     width: 100%;
     max-width: 90%; /* Full width on mobile for usability */
+    font-size: 1rem; /* Prevent iOS zoom */
+    padding: 0.75rem;
+    min-height: 3rem;
   }
   
   .passwordContainer {
@@ -421,12 +470,67 @@
     max-width: 90%; /* Full width on mobile for usability */
   }
   
+  .passwordInput {
+    font-size: 1rem; /* Prevent iOS zoom */
+    padding: 0.75rem 3rem 0.75rem 0.75rem;
+    min-height: 3rem;
+  }
+  
+  .eyeButton {
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+  
   .errorMessage {
     padding-left: calc(4% - 0.625rem);
     max-width: 90%;
+    font-size: 0.75rem;
   }
   
   .nextBtn {
     width: 100%;
+    height: 3rem;
+  }
+}
+
+/* Ultra Small Screens */
+@media (max-width: 375px) {
+  .headerTitle {
+    font-size: 1.25rem;
+  }
+  
+  .formTitle {
+    font-size: 1.375rem;
+  }
+  
+  .stepLabel {
+    font-size: 0.6875rem;
+    max-width: 4rem;
+  }
+  
+  .progressWrapper {
+    height: 45px;
+  }
+  
+  .input,
+  .passwordInput {
+    padding: 0.875rem 0.75rem;
+    min-height: 3.25rem;
+  }
+  
+  .passwordInput {
+    padding-right: 3.25rem;
+  }
+  
+  .eyeButton {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.125rem;
+  }
+  
+  .nextBtn {
+    height: 3.25rem;
   }
 }

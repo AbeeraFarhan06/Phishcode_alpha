@@ -78,11 +78,7 @@ const Overview = () => {
   const headingFontSize = useBreakpointValue({ base: "2xl", md: "2.25rem" });
   const textFontSize = useBreakpointValue({ base: "md", md: "1rem" });
   const contentDirection = useBreakpointValue({ base: "column", lg: "row" });
-  const accordionWidth = useBreakpointValue({ base: "100%", lg: "80%" });
-  const imageContainerWidth = useBreakpointValue({
-    base: "100%",
-    lg: "39.375rem",
-  });
+  const accordionWidth = useBreakpointValue({ base: "100%", lg: "100%" });
   const imageContainerHeight = useBreakpointValue({
     base: "auto",
     lg: "20rem",
@@ -91,7 +87,7 @@ const Overview = () => {
   const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
 
   return (
-    <Box position="relative" bg="#f9fdfe">
+    <Box position="relative" bg="#f9fdfe" overflow="hidden">
       {/* Background decorative circles positioned to full width */}
       {showBackgroundImage && (
         <Image
@@ -145,15 +141,17 @@ const Overview = () => {
           <MotionFlex
             ref={contentRef}
             direction={contentDirection}
-            align="center"
+            align="flex-start"
+            gap={{ base: "2rem", lg: "3rem" }}
             initial={{ opacity: 0, y: 50 }}
             animate={contentInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
             position="relative"
             zIndex={1}
+            w="100%"
           >
             {/* Accordion */}
-            <Box flex={1}>
+            <Box flex={1} minW="0" w={{ base: "100%", lg: "50%" }}>
               <VStack align="start" spacing={0} w="100%">
                 <Accordion
                   allowToggle
@@ -213,6 +211,7 @@ const Overview = () => {
                               boxShadow="md"
                               w="100%"
                               mt="1rem"
+                              maxW="100%"
                             >
                               <Image
                                 src={section.image}
@@ -220,6 +219,8 @@ const Overview = () => {
                                 borderRadius="md"
                                 objectFit="contain"
                                 w="100%"
+                                maxW="100%"
+                                height="auto"
                               />
                             </Box>
                           )}
@@ -238,7 +239,12 @@ const Overview = () => {
 
             {/* On desktop, the image is displayed to the right of the accordion. */}
             {!(isMobile || isTablet) && (
-              <Box flex={1}>
+              <Box
+                flex={1}
+                minW="0"
+                w={{ base: "100%", lg: "45%" }}
+                maxW="100%"
+              >
                 <Box
                   bg="white"
                   p="1.5rem"
@@ -248,7 +254,10 @@ const Overview = () => {
                   justifyContent="center"
                   alignItems="center"
                   h={imageContainerHeight}
-                  w={imageContainerWidth}
+                  w="100%"
+                  maxW="100%"
+                  position="relative"
+                  overflow="hidden"
                 >
                   <Image
                     src={
@@ -263,8 +272,10 @@ const Overview = () => {
                     }
                     borderRadius="md"
                     objectFit="contain"
-                    maxH="25rem"
-                    w="100%"
+                    maxH="100%"
+                    maxW="100%"
+                    w="auto"
+                    h="auto"
                   />
                 </Box>
               </Box>

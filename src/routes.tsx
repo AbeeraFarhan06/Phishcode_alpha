@@ -8,11 +8,16 @@ import ForgetPasswordPage from "./pages/Signin/Signin/ForgetPasswordPage/ForgetP
 import OTPVerificationPage from "./pages/Signin/Signin/OTPPage/OTPVerificationPage";
 import ResetPasswordPage from "./pages/Signin/Signin/ResetPasswordPage/ResetPasswordPage";
 import SigninPage from "./pages/Signin/Signin/SigninPage/SigninPage";
+import SecurityPage from "./pages/SecurityPage"; // Add this import
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+  },
+  {
+    path: "/security",
+    element: <SecurityPage />,
   },
   {
     path: "/signin",

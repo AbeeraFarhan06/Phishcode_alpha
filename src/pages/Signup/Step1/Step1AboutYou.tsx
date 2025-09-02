@@ -4,8 +4,6 @@ import { MdRadioButtonUnchecked } from "react-icons/md";
 import styles from "./Step1AboutYou.module.css";
 import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 import { MdCheck } from "react-icons/md";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 
 // Type definitions
 interface Country {
@@ -79,8 +77,8 @@ const Step1AboutYou = () => {
     // Remove all non-digit characters for validation
     const digitsOnly = phone.replace(/\D/g, "");
 
-    if (digitsOnly.length < 10) {
-      return "Phone number must be at least 10 digits";
+    if (digitsOnly.length < 7) {
+      return "Phone number must be at least 7 digits";
     }
     if (digitsOnly.length > 15) {
       return "Phone number must be less than 15 digits";
@@ -114,41 +112,6 @@ const Step1AboutYou = () => {
     } catch {
       return "Please enter a valid website URL (e.g., https://www.example.com)";
     }
-  };
-
-  // Format phone number as user types
-  const formatPhoneNumber = (value: string) => {
-    // Remove all non-digit characters
-    const digitsOnly = value.replace(/\D/g, "");
-
-    // Limit to 15 digits
-    const limited = digitsOnly.slice(0, 15);
-
-    // Format as (XXX) XXX-XXXX for US numbers or keep as is for international
-    if (limited.length >= 10) {
-      if (limited.length === 10) {
-        return `(${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(
-          6
-        )}`;
-      } else {
-        // International format: +X XXX XXX XXXX
-        return `+${limited.slice(0, limited.length - 10)} (${limited.slice(
-          limited.length - 10,
-          limited.length - 7
-        )}) ${limited.slice(
-          limited.length - 7,
-          limited.length - 4
-        )}-${limited.slice(limited.length - 4)}`;
-      }
-    } else if (limited.length >= 6) {
-      return `(${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(
-        6
-      )}`;
-    } else if (limited.length >= 3) {
-      return `(${limited.slice(0, 3)}) ${limited.slice(3)}`;
-    }
-
-    return limited;
   };
 
   // Fetch countries from REST Countries API
@@ -242,8 +205,8 @@ const Step1AboutYou = () => {
         break;
 
       case "businessPhone":
-        processedValue = formatPhoneNumber(value);
-        error = validatePhone(processedValue);
+        // Allow any characters during typing for flexibility
+        error = validatePhone(value);
         break;
 
       case "companyName":
@@ -272,18 +235,27 @@ const Step1AboutYou = () => {
     }
   };
 
-  // Dedicated phone change handler (digits only; no brackets)
-  const handleBusinessPhoneChange = (phone: string) => {
-    setFormData((prev) => ({ ...prev, businessPhone: phone }));
-    const err =
-      phone.length === 0
-        ? ""
-        : phone.length < 10
-        ? "Phone number must be at least 10 digits"
-        : phone.length > 15
-        ? "Phone number must be less than 15 digits"
-        : "";
-    setValidationErrors((prev) => ({ ...prev, businessPhone: err }));
+  // Handle phone input blur (remove + from start if present)
+  const handlePhoneBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    let cleanedValue = value;
+
+    // Remove + from the start if present
+    if (cleanedValue.startsWith("+")) {
+      cleanedValue = cleanedValue.substring(1);
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      businessPhone: cleanedValue,
+    }));
+
+    // Validate the cleaned value
+    const error = validatePhone(cleanedValue);
+    setValidationErrors((prev) => ({
+      ...prev,
+      businessPhone: error,
+    }));
   };
 
   const handleNext = () => {
@@ -450,29 +422,21 @@ const Step1AboutYou = () => {
                 )}
               </div>
 
-              {/* Business Phone */}
+              {/* Business Phone - Simple Input */}
               <div className="mb-3">
                 <label className={styles.label}>
                   Business phone number{" "}
                   <span className={styles.required}>*</span>
                 </label>
-                <PhoneInput
-                  country={"us"}
-                  value={formData.businessPhone}
-                  onChange={handleBusinessPhoneChange}
-                  inputProps={{ name: "businessPhone" }}
-                  // Make it behave like a Bootstrap input (full width + height)
-                  containerStyle={{ width: "100%" }}
-                  inputStyle={{
-                    width: "100%",
-                    height: "calc(1.5em + .75rem + 7px)",
-                    border: "1px solid #d7dee3ff",
-                    borderRadius: ".375rem", // same as .form-control default in BS5
-                  }}
-                  containerClass="w-100"
-                  inputClass={`form-control ${styles.input} ${
+                <input
+                  type="text"
+                  name="businessPhone"
+                  className={`form-control ${styles.input} ${
                     validationErrors.businessPhone ? styles.inputError : ""
                   }`}
+                  value={formData.businessPhone}
+                  onChange={handleInputChange}
+                  onBlur={handlePhoneBlur}
                   placeholder="Enter phone number"
                 />
                 {validationErrors.businessPhone && (

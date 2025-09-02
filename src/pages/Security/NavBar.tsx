@@ -34,11 +34,11 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
-import icon_feedback_01_1 from "../assets/icons/icon_feedback_01_1.png";
-import pipeline from "../assets/icons/pipeline.png";
-import Container from "./Container";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import phishcode_logoo_1 from "../../assets/logo/phishcode_logoo_1.png";
+import icon_feedback_01_1 from "../../assets/icons/icon_feedback_01_1.png";
+import pipeline from "../../assets/icons/pipeline.png";
+import Container from "../../components/Container";
+import { useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 type FeedbackKind = "issue" | "idea" | "complaint";
@@ -123,16 +123,14 @@ const Navbar = () => {
                 cursor="pointer"
               />
               <Image src={pipeline} />
-              <RouterLink to="/security">
-                <Text
-                  fontSize="14px"
-                  mt={4}
-                  cursor="pointer"
-                  _hover={{ textDecoration: "underline", color: "#243B65" }}
-                >
-                  Why PHISHCODE?
-                </Text>
-              </RouterLink>
+              <Text
+                fontSize="14px"
+                mt={4}
+                cursor="pointer"
+                _hover={{ textDecoration: "underline", color: "#243B65" }}
+              >
+                PHISHCODE Security
+              </Text>
             </HStack>
 
             <HStack spacing="10px" align="center">
@@ -223,18 +221,16 @@ const Navbar = () => {
           <DrawerCloseButton />
           <DrawerHeader bgColor="white">
             <HStack>
-              <Image src={phishcode_logoo_1} h="2.5rem" w="auto" />
+              <Image src={phishcode_logoo_1} h="6" />
               <Image src={pipeline} h="20px" />
-              <RouterLink to="/security">
-                <Text
-                  fontSize="12px"
-                  mt={4}
-                  cursor="pointer"
-                  _hover={{ textDecoration: "underline", color: "#243B65" }}
-                >
-                  Why PHISHCODE?
-                </Text>
-              </RouterLink>
+              <Text
+                fontSize="12px"
+                mt={4}
+                cursor="pointer"
+                _hover={{ textDecoration: "underline", color: "#243B65" }}
+              >
+                PHISHCODE Security
+              </Text>
             </HStack>
           </DrawerHeader>
           <DrawerBody>

@@ -4,16 +4,22 @@
 import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import Container from "./Container";
+import Container from "../../components/Container";
 import { useNavigate } from "react-router-dom";
 
 // An array of the menu items, which correspond to the IDs of the sections on the page.
-const menuItems = ["Overview", "Impact", "Approach", "Resources", "Next steps"];
+const menuItems = [
+  "Secure your future",
+  "Zero Trust",
+  "Vital resources",
+  "Latest innovations",
+  "See the benefits",
+];
 
 const NavBar2 = () => {
   const navigate = useNavigate();
   // State to keep track of the currently active menu item.
-  const [activeItem, setActiveItem] = useState("Overview");
+  const [activeItem, setActiveItem] = useState("Secure your future");
   // State to control the visibility of the mobile menu.
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // A ref to keep track of whether the user is currently scrolling as a result of clicking a menu item.
@@ -131,12 +137,12 @@ const NavBar2 = () => {
               px="1rem"
               py="0.5rem"
               h="2.375rem" // 38px to rem
-              w="6.25rem" // 100px to rem
+              w="auto" // Changed from fixed width to auto
               borderRadius="lg"
               _hover={{ bg: "#243B65" }}
               onClick={() => navigate("/signup/step1")}
             >
-              Try for free
+              Get the latest info
             </Button>
           </Box>
         </Flex>
