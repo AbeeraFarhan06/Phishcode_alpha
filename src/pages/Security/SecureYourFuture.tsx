@@ -131,7 +131,7 @@ const SecureYourFuture: React.FC = () => {
                   <Button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    bg={activeTab === tab ? "#2A446F" : "transparent"}
+                    bg={activeTab === tab ? "#0E1726" : "transparent"}
                     color={activeTab === tab ? "white" : "#2d3748"}
                     border="none"
                     borderRadius="full"
@@ -140,7 +140,7 @@ const SecureYourFuture: React.FC = () => {
                     fontSize="sm"
                     fontWeight="medium"
                     _hover={{
-                      bg: activeTab === tab ? "#1e3458" : "#F7FAFC",
+                      bg: activeTab === tab ? "#243B65" : "#F7FAFC",
                     }}
                     transition="all 0.2s"
                     minW="120px"
@@ -216,12 +216,12 @@ const SecureYourFuture: React.FC = () => {
                     top="20px"
                     left="20px"
                     size="lg"
-                    bg="#2A446F"
+                    bg="#0E1726"
                     color="white"
                     borderRadius="md"
                     p={4}
                     onClick={() => setIsPlaying(true)}
-                    _hover={{ bg: "#1e3458", transform: "scale(1.05)" }}
+                    _hover={{ bg: "#243B65", transform: "scale(1.05)" }}
                     transition="all 0.2s"
                     boxShadow="lg"
                     minW="56px"
@@ -240,16 +240,16 @@ const SecureYourFuture: React.FC = () => {
               {currentContent.buttons.map((button, index) => (
                 <Button
                   key={index}
-                  bg={button.variant === "solid" ? "#2A446F" : "white"}
-                  color={button.variant === "solid" ? "white" : "#2A446F"}
+                  bg={button.variant === "solid" ? "#0E1726" : "white"}
+                  color={button.variant === "solid" ? "white" : "#0E1726"}
                   border={
-                    button.variant === "outline" ? "1px solid #2A446F" : "none"
+                    button.variant === "outline" ? "1px solid #0E1726" : "none"
                   }
                   borderRadius="0.5rem"
                   fontSize="0.875rem"
                   fontWeight="medium"
                   _hover={{
-                    bg: button.variant === "solid" ? "#1e3458" : "#F7FAFC",
+                    bg: button.variant === "solid" ? "#243B65" : "#F7FAFC",
                   }}
                   transition="all 0.2s"
                   whiteSpace="normal"
