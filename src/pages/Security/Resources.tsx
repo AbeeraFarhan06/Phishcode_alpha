@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { IoIosArrowForward } from "react-icons/io";
-import Container from "./Container";
+import Container from "../../components/Container";
 
 // Motion-enhanced versions of Chakra UI components.
 const MotionBox = motion(Box);
@@ -78,7 +78,7 @@ const Resources = () => {
     base: "1.5rem",
     md: "2.25rem",
   });
-  const gridColumns = useBreakpointValue({ base: 1, md:1, lg: 1, xl:2 });
+  const gridColumns = useBreakpointValue({ base: 1, md: 1, lg: 1, xl: 2 });
 
   return (
     <Box

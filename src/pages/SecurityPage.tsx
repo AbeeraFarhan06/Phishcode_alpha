@@ -9,6 +9,7 @@ import ContactBarSticky from "./Security/ContactBarSticky";
 import VitalResources from "./Security/VitalResources";
 import ZeroTrust from "./Security/ZeroTrust";
 import LatestInnovations from "./Security/LatestInnovations";
+import Resources from "./Security/Resources";
 
 const SecurityPage = () => {
   return (
@@ -16,13 +17,10 @@ const SecurityPage = () => {
       <Navbar />
       <Banner />
       <NavBar2 />
-      <ContactBarSticky/>
+      <ContactBarSticky />
       <SecureYourFuture />
-      <ZeroTrust />
-      <VitalResources/>
-      <LatestInnovations/>
+      <Resources />
       <SecurityInfoComponent />
-
       <Footer />
     </Box>
   );

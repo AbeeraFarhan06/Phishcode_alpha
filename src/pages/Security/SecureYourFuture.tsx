@@ -4,7 +4,6 @@ import {
   Button,
   Flex,
   Heading,
-  Image,
   Text,
   VStack,
   HStack,
@@ -12,58 +11,61 @@ import {
 import { FaPlay } from "react-icons/fa";
 import Container from "../../components/Container";
 
+// Define types
+type TabKey = "Empower" | "Save" | "Protect";
+
+interface TabContent {
+  title: string;
+  description: string;
+  buttons: {
+    text: string;
+    variant: "solid" | "outline";
+  }[];
+}
+
 // Define the content for each tab
-const tabContent = {
-  Protect: {
-    title: "Protects comprehensively",
+const tabContent: Record<TabKey, TabContent> = {
+  Empower: {
+    title: "Empowers your workforce",
     description:
-      "Take advantage of a broad security portfolio that has integrated tools across 50 product categories that share insights to eliminate silos.",
+      "Turn your greatest attack surface—your people—into your strongest defense.",
     buttons: [
-      { text: "Read the executive summary", variant: "solid" },
-      { text: "Learn more about unified SecOps", variant: "outline" },
+      { text: "Learn more", variant: "solid" },
+      { text: "View case studies", variant: "outline" },
     ],
   },
   Save: {
-    title: "Saves significantly",
+    title: "Proven ROI that speaks for itself",
     description:
-      "Reduce costs and complexity with unified security operations that streamline processes and eliminate redundant tools across your organization.",
+      "Delivering 276% ROI in three years and payback in record time—under 3 months.",
     buttons: [
-      { text: "View cost savings analysis", variant: "solid" },
-      { text: "Explore ROI calculator", variant: "outline" },
+      { text: "View ROI calculator", variant: "solid" },
+      { text: "Download report", variant: "outline" },
     ],
   },
-  Empower: {
-    title: "Empowers effectively",
+  Protect: {
+    title: "Gartner-backed protection",
     description:
-      "Enable your security teams with AI-powered tools and automated responses that enhance productivity and decision-making capabilities.",
+      "Gartner reports that organizations using SAT cut social engineering attacks by 70%.",
     buttons: [
-      { text: "See empowerment strategies", variant: "solid" },
-      { text: "Learn about AI integration", variant: "outline" },
-    ],
-  },
-  Safeguard: {
-    title: "Safeguards systematically",
-    description:
-      "Implement comprehensive protection strategies that secure your entire digital ecosystem from emerging threats and vulnerabilities.",
-    buttons: [
-      { text: "Explore safeguard methods", variant: "solid" },
-      { text: "View security frameworks", variant: "outline" },
+      { text: "Read Gartner report", variant: "solid" },
+      { text: "Explore protection", variant: "outline" },
     ],
   },
 };
 
-const SecureYourFuture = () => {
-  const [activeTab, setActiveTab] = useState<string>("Protect");
-  const [isPlaying, setIsPlaying] = useState(false);
+const SecureYourFuture: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<TabKey>("Empower");
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const tabs = ["Protect", "Save", "Empower", "Safeguard"];
-  const currentContent = tabContent[activeTab as keyof typeof tabContent];
+  const tabs: TabKey[] = ["Empower", "Save", "Protect"];
+  const currentContent = tabContent[activeTab];
 
   return (
-    <Box id="Secure-your-future" py={16} bgColor="#F9FDFE">
+    <Box id="Secure-your-tomorrow" bgColor="#F9FDFE">
       <Container>
         {/* Header Section */}
-        <VStack spacing={6} textAlign="center" mb={12}>
+        <VStack spacing={0} textAlign="center" mb={10}>
           <Text
             fontSize="14px"
             fontWeight="medium"
@@ -71,7 +73,7 @@ const SecureYourFuture = () => {
             textTransform="uppercase"
             letterSpacing="wider"
           >
-            SECURE YOUR FUTURE
+            SECURE YOUR TOMORROW
           </Text>
 
           <Heading
@@ -79,16 +81,17 @@ const SecureYourFuture = () => {
             fontWeight="600"
             color="#2d3748"
             maxW="600px"
+            my={2}
           >
             The PHISHCODE Difference
           </Heading>
 
-          <Text fontSize="lg" color="#2d3748" maxW="500px">
-            Four reasons to choose PHISHCODE.
+          <Text fontSize="lg" color="#2d3748" maxW="500px" my={4}>
+            Three powerful reasons to trust us.
           </Text>
 
           {/* Tab Navigation */}
-          <Box bg="white" borderRadius="full" p={2} boxShadow="sm" mt={8}>
+          <Box bg="white" borderRadius="full" p={2} m={2} boxShadow="sm">
             <HStack spacing={0} justify="center">
               {tabs.map((tab) => (
                 <Button
@@ -137,7 +140,6 @@ const SecureYourFuture = () => {
                 fontSize={{ base: "2xl", md: "3xl" }}
                 fontWeight="400"
                 color="#2d3748"
-                mb={8}
                 lineHeight="1.2"
               >
                 {currentContent.title}
@@ -204,8 +206,8 @@ const SecureYourFuture = () => {
           </Flex>
 
           {/* Bottom Buttons Area */}
-          <Box px={6}>
-            <HStack spacing={4} flexWrap="wrap" justify="flex-start">
+          <Box px="1.5rem">
+            <HStack spacing="1rem" flexWrap="wrap" justify="flex-start">
               {currentContent.buttons.map((button, index) => (
                 <Button
                   key={index}
@@ -214,8 +216,8 @@ const SecureYourFuture = () => {
                   border={
                     button.variant === "outline" ? "1px solid #2A446F" : "none"
                   }
-                  borderRadius="lg"
-                  fontSize="sm"
+                  borderRadius="0.5rem"
+                  fontSize="0.875rem"
                   fontWeight="medium"
                   _hover={{
                     bg: button.variant === "solid" ? "#1e3458" : "#F7FAFC",
@@ -223,12 +225,10 @@ const SecureYourFuture = () => {
                   transition="all 0.2s"
                   whiteSpace="normal"
                   textAlign="center"
-                  // Button sizes: 208.81px = ~13.05rem, 185.52px = ~11.6rem
-                  // Height: 74px = ~4.625rem
                   w={index === 0 ? "13rem" : "11.6rem"}
                   h="4.625rem"
-                  px={4}
-                  py={3}
+                  px="1rem"
+                  py="0.75rem"
                 >
                   {button.text}
                 </Button>

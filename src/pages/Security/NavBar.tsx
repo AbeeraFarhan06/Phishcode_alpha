@@ -129,7 +129,7 @@ const Navbar = () => {
                 cursor="pointer"
                 _hover={{ textDecoration: "underline", color: "#243B65" }}
               >
-                PHISHCODE Security
+                Why PHISHCODE?
               </Text>
             </HStack>
 

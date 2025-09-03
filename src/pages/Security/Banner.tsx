@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
-import phishcode_banner_imgg from "../../assets/png imgs/contact_banner.png";
+import phishcode_banner_imgg from "../../assets/png imgs/phishcode banner 3@5x.png";
 import Container from "../../components/Container";
 import { useNavigate } from "react-router-dom";
 
@@ -78,35 +78,34 @@ const Banner = () => {
             <Text
               fontSize="14px"
               fontWeight="bold"
-              color="#2d3748"
+              color="white"
               mb={2}
               textTransform="uppercase"
               letterSpacing="wider"
             >
-              SECURITY
+              OVERVIEW
             </Text>
             <Heading
               fontSize={headingFontSize}
               fontWeight="500"
-              color="#2d3748"
+              color="white"
               mb={{ base: 5, md: 7 }}
               ml={headingMarginLeft}
               lineHeight={headingLineHeight}
               mt={0} // Ensure no top margin on heading
             >
-              Why PHISHCODE Security?
+              Why PHISHCODE?
             </Heading>
             <Text
-              color="#2d3748"
+              color="white"
               mb={{ base: 3, md: 6 }}
               ml={textMarginLeft}
               fontWeight="thin"
               fontSize="18px"
             >
-              Safeguard your people, data, and infrastructure with an AI-first,
-              end-to-end security platform. Deliver comprehensive protection on
-              a platform that's powered by Copilot and threat intelligence
-              that's unmatched.
+              Empowers your workforce to turn human risk into strength with
+              AI-driven security, fostering trust, confidence, and resilience
+              against evolving cyber threats.
             </Text>
             <Stack
               direction={{ base: "column", sm: "row" }}
