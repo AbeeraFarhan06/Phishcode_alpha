@@ -62,12 +62,14 @@ interface ArrowButtonProps {
   direction: "left" | "right";
   onClick: () => void;
   disabled?: boolean;
+  color?: string;
 }
 
 const ArrowButton: React.FC<ArrowButtonProps> = ({
   direction,
   onClick,
   disabled,
+  color = "#0E1726"
 }) => (
   <IconButton
     aria-label={`${direction} arrow`}
@@ -79,6 +81,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({
     shadow="lg"
     border="1px"
     borderColor="gray.100"
+    color= {color}
     disabled={disabled}
     _hover={{
       shadow: "xl",
