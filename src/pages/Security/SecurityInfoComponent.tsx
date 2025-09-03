@@ -199,9 +199,9 @@ const SecurityInfoComponent = () => {
           <Box w="100%">
             {/* Very large screens (2xl+): Show all cards in a row */}
             <Box display={{ base: "none", "2xl": "block" }}>
-              <HStack spacing="1rem" align="start" justify="center">
+              <HStack spacing="1rem" align="start" justify="flex-start" wrap="wrap">
                 {cardData.map((card, index) => (
-                  <Box key={index} w={cardWidth} flexShrink={0}>
+                  <Box key={index} flex="1" minW="18rem" maxW="22rem">
                     <Card
                       bg="white"
                       shadow="lg"
