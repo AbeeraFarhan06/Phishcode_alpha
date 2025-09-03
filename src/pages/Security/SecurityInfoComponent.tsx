@@ -152,7 +152,7 @@ const SecurityInfoComponent = () => {
           left={0}
           w="100%"
           h="50%"
-          bgImage={`url(${contact_banner})`}
+          bgImage={contact_banner}
           bgSize="cover"
           bgPosition="center"
           bgRepeat="no-repeat"
