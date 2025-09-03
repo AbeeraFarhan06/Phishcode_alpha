@@ -10,6 +10,26 @@ import {
 } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa";
 import Container from "../../components/Container";
+import { motion } from "framer-motion";
+
+// Motion components
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
+const MotionVStack = motion(VStack);
+
+// Animation Variants
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
 
 // Define types
 type TabKey = "Empower" | "Save" | "Protect";
@@ -23,7 +43,6 @@ interface TabContent {
   }[];
 }
 
-// Define the content for each tab
 const tabContent: Record<TabKey, TabContent> = {
   Empower: {
     title: "Empowers your workforce",
@@ -62,79 +81,103 @@ const SecureYourFuture: React.FC = () => {
   const currentContent = tabContent[activeTab];
 
   return (
-    <Box id="Secure-your-tomorrow" bgColor="#F9FDFE">
+    <Box id="Secure-your-tomorrow" bgColor="#F9FDFE" py={16}>
       <Container>
         {/* Header Section */}
-        <VStack spacing={0} textAlign="center" mb={10}>
-          <Text
-            fontSize="12px"
-            fontWeight="medium"
-            color="#6B7280"
-            textTransform="uppercase"
-            letterSpacing="wider"
-          >
-            SECURE YOUR TOMORROW
-          </Text>
+        <MotionVStack
+          spacing={0}
+          textAlign="center"
+          mb={10}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <MotionBox variants={fadeUpVariants}>
+            <Text
+              fontSize="12px"
+              fontWeight="medium"
+              color="#6B7280"
+              textTransform="uppercase"
+              letterSpacing="wider"
+            >
+              SECURE YOUR TOMORROW
+            </Text>
+          </MotionBox>
 
-          <Heading
-            fontSize={{ base: "2xl", md: "4xl" }}
-            fontWeight="600"
-            color="#2d3748"
-            maxW="600px"
-            my={2}
-          >
-            The PHISHCODE Difference
-          </Heading>
+          <MotionBox variants={fadeUpVariants}>
+            <Heading
+              fontSize={{ base: "2xl", md: "4xl" }}
+              fontWeight="600"
+              color="#2d3748"
+              maxW="600px"
+              my={2}
+            >
+              The PHISHCODE Difference
+            </Heading>
+          </MotionBox>
 
-          <Text fontSize="16px" color="#2d3748" maxW="500px" my={4}>
-            Three powerful reasons to trust us.
-          </Text>
+          <MotionBox variants={fadeUpVariants}>
+            <Text fontSize="16px" color="#2d3748" maxW="500px" my={4}>
+              Three powerful reasons to trust us.
+            </Text>
+          </MotionBox>
 
           {/* Tab Navigation */}
-          <Box bg="white" borderRadius="full" p={2} m={2} boxShadow="sm">
-            <HStack spacing={0} justify="center">
-              {tabs.map((tab) => (
-                <Button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  bg={activeTab === tab ? "#2A446F" : "transparent"}
-                  color={activeTab === tab ? "white" : "#2d3748"}
-                  border="none"
-                  borderRadius="full"
-                  px={6}
-                  py={2}
-                  fontSize="sm"
-                  fontWeight="medium"
-                  _hover={{
-                    bg: activeTab === tab ? "#1e3458" : "#F7FAFC",
-                  }}
-                  transition="all 0.2s"
-                  minW="120px"
-                >
-                  {tab}
-                </Button>
-              ))}
-            </HStack>
-          </Box>
-        </VStack>
+          <MotionBox variants={fadeUpVariants}>
+            <Box bg="white" borderRadius="full" p={2} m={2} boxShadow="sm">
+              <HStack spacing={0} justify="center">
+                {tabs.map((tab) => (
+                  <Button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    bg={activeTab === tab ? "#2A446F" : "transparent"}
+                    color={activeTab === tab ? "white" : "#2d3748"}
+                    border="none"
+                    borderRadius="full"
+                    px={6}
+                    py={2}
+                    fontSize="sm"
+                    fontWeight="medium"
+                    _hover={{
+                      bg: activeTab === tab ? "#1e3458" : "#F7FAFC",
+                    }}
+                    transition="all 0.2s"
+                    minW="120px"
+                  >
+                    {tab}
+                  </Button>
+                ))}
+              </HStack>
+            </Box>
+          </MotionBox>
+        </MotionVStack>
 
-        {/* Content Section - Single Card Container */}
-        <Box
+        {/* Content Section */}
+        <MotionBox
           bg="white"
           borderRadius="3xl"
           boxShadow="lg"
           border="1px solid #E2E8F0"
           p={12}
           mt={12}
+          variants={fadeUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          <Flex
+          <MotionFlex
             direction={{ base: "column", lg: "row" }}
             align="stretch"
             gap={12}
             mb={8}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
           >
             {/* Left Content */}
-            <Box flex="1" maxW={{ base: "100%", lg: "45%" }} p={6}>
+            <MotionBox flex="1" maxW={{ base: "100%", lg: "45%" }} p={6} variants={fadeUpVariants}>
               <Heading
                 as="h3"
                 fontSize={{ base: "2xl", md: "3xl" }}
@@ -144,14 +187,13 @@ const SecureYourFuture: React.FC = () => {
               >
                 {currentContent.title}
               </Heading>
-
               <Text fontSize="lg" color="#4A5568" lineHeight="1.6" maxW="400px">
                 {currentContent.description}
               </Text>
-            </Box>
+            </MotionBox>
 
-            {/* Right Video Section - Extended to fill space */}
-            <Box flex="1" maxW={{ base: "100%", lg: "55%" }}>
+            {/* Right Video Section */}
+            <MotionBox flex="1" maxW={{ base: "100%", lg: "55%" }} variants={fadeUpVariants}>
               <Box
                 position="relative"
                 borderRadius="xl"
@@ -168,17 +210,7 @@ const SecureYourFuture: React.FC = () => {
                   justifyContent="center"
                   position="relative"
                 >
-                  {/* Gray placeholder for video */}
-                  <Box
-                    w="100%"
-                    h="100%"
-                    bg="gray.200"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  />
-
-                  {/* Play Button - positioned at top left with blue styling */}
+                  <Box w="100%" h="100%" bg="gray.200" />
                   <Button
                     position="absolute"
                     top="20px"
@@ -194,19 +226,16 @@ const SecureYourFuture: React.FC = () => {
                     boxShadow="lg"
                     minW="56px"
                     h="56px"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
                   >
                     <FaPlay size="20px" />
                   </Button>
                 </Box>
               </Box>
-            </Box>
-          </Flex>
+            </MotionBox>
+          </MotionFlex>
 
-          {/* Bottom Buttons Area */}
-          <Box px="1.5rem">
+          {/* Bottom Buttons */}
+          <MotionBox px="1.5rem" variants={fadeUpVariants}>
             <HStack spacing="1rem" flexWrap="wrap" justify="flex-start">
               {currentContent.buttons.map((button, index) => (
                 <Button
@@ -234,8 +263,8 @@ const SecureYourFuture: React.FC = () => {
                 </Button>
               ))}
             </HStack>
-          </Box>
-        </Box>
+          </MotionBox>
+        </MotionBox>
       </Container>
     </Box>
   );
