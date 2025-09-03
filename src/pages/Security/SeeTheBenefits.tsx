@@ -174,9 +174,9 @@ const SecurityInfoComponent = () => {
             pb="1rem"
           >
             <Text
-              fontSize="sm"
+              fontSize="12px"
               fontWeight="semibold"
-              color="gray.600"
+              color="#969494ff"
               letterSpacing="wide"
               textTransform="uppercase"
             >
@@ -184,7 +184,7 @@ const SecurityInfoComponent = () => {
             </Text>
             <Heading
               as="h1"
-              size={{ base: "xl", lg: "2xl" }}
+              size={{ base: "xl", lg: "36px" }}
               fontWeight="semibold"
               color="gray.800"
               lineHeight="shorter"

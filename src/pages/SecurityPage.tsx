@@ -4,12 +4,12 @@ import Banner from "./Security/Banner";
 import NavBar2 from "./Security/NavBar2";
 import SecureYourFuture from "./Security/SecureYourFuture";
 import Footer from "./Security/Footer";
-import SecurityInfoComponent from "./Security/SecurityInfoComponent";
 import ContactBarSticky from "./Security/ContactBarSticky";
 import VitalResources from "./Security/VitalResources";
 import ZeroTrust from "./Security/ZeroTrust";
 import LatestInnovations from "./Security/LatestInnovations";
 import Resources from "./Security/Resources";
+import SeeTheBenefits from "./Security/SeeTheBenefits";
 
 const SecurityPage = () => {
   return (
@@ -20,7 +20,7 @@ const SecurityPage = () => {
       <ContactBarSticky />
       <SecureYourFuture />
       <Resources />
-      <SecurityInfoComponent />
+      <SeeTheBenefits />
       <Footer />
     </Box>
   );

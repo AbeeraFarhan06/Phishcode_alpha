@@ -67,7 +67,7 @@ const SecureYourFuture: React.FC = () => {
         {/* Header Section */}
         <VStack spacing={0} textAlign="center" mb={10}>
           <Text
-            fontSize="14px"
+            fontSize="12px"
             fontWeight="medium"
             color="#6B7280"
             textTransform="uppercase"
@@ -86,7 +86,7 @@ const SecureYourFuture: React.FC = () => {
             The PHISHCODE Difference
           </Heading>
 
-          <Text fontSize="lg" color="#2d3748" maxW="500px" my={4}>
+          <Text fontSize="16px" color="#2d3748" maxW="500px" my={4}>
             Three powerful reasons to trust us.
           </Text>
 

@@ -76,7 +76,7 @@ const Banner = () => {
           {/* Left: Text + Buttons */}
           <Box flex="1" pr={{ base: 0, lg: 12 }}>
             <Text
-              fontSize="14px"
+              fontSize="12px"
               fontWeight="bold"
               color="white"
               mb={2}
