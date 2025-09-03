@@ -15,6 +15,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import Container from "../../components/Container";
 import contact_banner from "../../assets/png imgs/contact_banner.png";
 import { motion } from "framer-motion";
+import { transparentize } from "@chakra-ui/theme-tools"; // For generating lighter shades
 
 const MotionBox = motion(Box);
 const MotionVStack = motion(VStack);
@@ -25,48 +26,37 @@ const fadeUpVariants = {
   visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-const SecurityIcon = () => (
-  <Box
-    w="2.5rem"
-    h="2.5rem"
-    bg="blue.100"
-    borderRadius="full"
-    display="flex"
-    alignItems="center"
-    justifyContent="center"
-  >
-    <Box w="1.25rem" h="1.25rem" bg="blue.500" borderRadius="sm" />
-  </Box>
-);
+// ✅ Icon Component with Auto Background Shade
+interface IconProps {
+  color?: string; // Inner shape color
+  shape?: "circle" | "square";
+}
 
-const CommitmentIcon = () => (
-  <Box
-    w="2.5rem"
-    h="2.5rem"
-    bg="purple.100"
-    borderRadius="full"
-    display="flex"
-    alignItems="center"
-    justifyContent="center"
-  >
-    <Box w="1.25rem" h="1.25rem" bg="purple.500" borderRadius="full" />
-  </Box>
-);
+const CustomIcon: React.FC<IconProps> = ({ color = "#0E1726", shape = "square" }) => {
+  // Create a lighter version for background using Chakra's transparentize
+  const bgColor = transparentize(color, 0.85)("light"); // Makes it lighter
 
-const GenAIIcon = () => (
-  <Box
-    w="2.5rem"
-    h="2.5rem"
-    bg="pink.100"
-    borderRadius="full"
-    display="flex"
-    alignItems="center"
-    justifyContent="center"
-  >
-    <Box w="1.25rem" h="1.25rem" bg="pink.500" borderRadius="sm" />
-  </Box>
-);
+  return (
+    <Box
+      w="2.5rem"
+      h="2.5rem"
+      bg={bgColor}
+      borderRadius="full"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Box
+        w="1.25rem"
+        h="1.25rem"
+        bg={color}
+        borderRadius={shape === "circle" ? "full" : "sm"}
+      />
+    </Box>
+  );
+};
 
+// ✅ Arrow Button
 interface ArrowButtonProps {
   direction: "left" | "right";
   onClick: () => void;
@@ -107,21 +97,22 @@ const SecurityInfoComponent = () => {
   const handlePrevious = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
   const handleNext = () => setCurrentIndex((prev) => Math.min(1, prev + 1));
 
+  // ✅ Updated cardData with only main color & shape (bg auto-generated)
   const cardData = [
     {
-      icon: <SecurityIcon />,
+      icon: <CustomIcon color="#104774ff" shape="square" />,
       title: "Fewer attacks",
       text: "Organizations with SAT see up to 70% fewer social engineering threats, creating a safer environment.",
       button: "Learn more",
     },
     {
-      icon: <CommitmentIcon />,
+      icon: <CustomIcon color="#3a7eb7ff" shape="circle" />,
       title: "Stronger security culture",
       text: "Empower your workforce to become your first line of defense.",
       button: "Learn more",
     },
     {
-      icon: <GenAIIcon />,
+      icon: <CustomIcon color="#0f92e3ff" shape="square" />,
       title: "Proven protection",
       text: "Backed by Gartner research, SAT delivers measurable risk reduction, ensuring confidence and trust.",
       button: "Learn more",
