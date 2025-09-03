@@ -32,9 +32,22 @@ interface IconProps {
   shape?: "circle" | "square";
 }
 
-const CustomIcon: React.FC<IconProps> = ({ color = "#0E1726", shape = "square" }) => {
+const CustomIcon: React.FC<IconProps> = ({
+  color = "#0E1726",
+  shape = "square",
+}) => {
   // Create a lighter version for background using Chakra's transparentize
-  const bgColor = transparentize(color, 0.85)("light"); // Makes it lighter
+  const getLighterShade = (hex: string, opacity = 0.15) => {
+    // Remove #
+    const c = hex.replace("#", "");
+    const bigint = parseInt(c, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  };
+
+  const bgColor = getLighterShade(color, 0.15); // Light background
 
   return (
     <Box
