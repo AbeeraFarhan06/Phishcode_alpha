@@ -113,16 +113,16 @@ const Banner = () => {
               ml={stackMarginLeft}
             >
               <Button
-                bg="#2A446F"
-                color="white"
+                bg="white"
+                color="#0E1726"
                 fontWeight="semibold"
                 fontSize={{ base: "sm", md: "15px" }}
                 h="50px"
-                w="120px"
+                w="100px"
                 px={6}
                 py={6}
                 borderRadius="md"
-                _hover={{ bg: "#1e3458" }}
+                _hover={{ bg: "gray.200" }}
               >
                 See how
               </Button>
