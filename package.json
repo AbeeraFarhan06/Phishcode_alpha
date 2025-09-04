@@ -27,12 +27,14 @@
     "react-intersection-observer": "^9.16.0",
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^6.10.0",
+    "react-router-hash-link": "^2.4.3",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-i18next": "^8.1.0",
+    "@types/react-router-hash-link": "^2.4.9",
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
