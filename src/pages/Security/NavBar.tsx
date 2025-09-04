@@ -153,12 +153,12 @@ const Navbar = () => {
                 bg="#0E1726"
                 color="white"
                 aria-label="Try for Free"
-                size="xs"
-                fontSize="11px"
+                size="sm"
+                fontSize="12px"
                 borderRadius="3px"
                 fontWeight="normal"
-                w="70px"
-                h="26px"
+                w="94px"
+                h="31px"
                 _hover={{ bg: "#243B65" }}
                 onClick={() => navigate("/signup/step1")}
               >
@@ -171,9 +171,9 @@ const Navbar = () => {
                 color="black"
                 aria-label="Sign In"
                 size="xs"
-                w="45px"
-                h="26px"
-                fontSize="11px"
+                w="54px"
+                h="31px"
+                fontSize="12px"
                 fontWeight="normal"
                 borderRadius="3px"
                 _hover={{ bg: "gray.200" }}
