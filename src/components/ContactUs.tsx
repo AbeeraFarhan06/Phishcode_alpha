@@ -356,13 +356,7 @@ const ContactUs = () => {
         <Container navbar1>
           <Flex>
             <Link to="/">
-              <Image
-                src={phishcode_logoo_1}
-                h="32px"
-                w="140px"
-                cursor="pointer"
-                mt={-3}
-              />
+              <Image src={phishcode_logoo_1} h="2.5rem" w="auto" cursor="pointer" mt={-4}/>
             </Link>
           </Flex>
         </Container>
