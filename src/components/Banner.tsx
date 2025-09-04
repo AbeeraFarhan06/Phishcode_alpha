@@ -119,13 +119,13 @@ const Banner = () => {
                 variant="outline"
                 borderColor="white"
                 borderWidth="1px"
-                color="lightgray"
                 aria-label="Sign In"
                 size="sm"
                 h="50px"
                 fontSize={{ base: "sm", md: "15px" }}
-                fontWeight="thin"
+                fontWeight="600px"
                 borderRadius="6px"
+                onClick={() => navigate("/contact-us")}
               >
                 Contact sales
               </Button>
