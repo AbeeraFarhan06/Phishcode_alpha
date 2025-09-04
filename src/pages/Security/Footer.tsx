@@ -1,23 +1,20 @@
-// This component renders the footer of the website.
-// It includes the company logo, social media links, and a list of links to other pages on the site.
-
 import React from "react";
 import {
   Box,
   Flex,
   VStack,
-  HStack,
   Text,
   Link,
   IconButton,
+  SimpleGrid,
+  Image,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
-  Image,
-  SimpleGrid,
 } from "@chakra-ui/react";
+import { HashLink } from "react-router-hash-link";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   FaYoutube,
   FaFacebookF,
@@ -30,7 +27,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import phishcode_logoo_1 from "../../assets/logo/phishcode_logoo_1.png";
 import Container from "../../components/Container";
 
-// An array of objects that represent the social media icons.
+// Social Icons
 const socialIcons = [
   { icon: FaLinkedinIn, label: "LinkedIn", href: "#" },
   { icon: TbBrandTwitter, label: "Twitter", href: "#" },
@@ -40,35 +37,50 @@ const socialIcons = [
   { icon: FaPhone, label: "Phone", href: "#" },
 ];
 
-// An array of objects that represent the sections of the footer.
+// Footer sections with dynamic paths
 const footerSections = [
   {
     title: "Products",
     links: [
-      "Overview",
-      "Impact",
-      "Approach",
-      "Resources",
-      "Next Step",
-      "Email",
-      "Sign In",
+      { label: "Overview", path: "#Overview" },
+      { label: "Impact", path: "#Impact" },
+      { label: "Approach", path: "#Approach" },
+      { label: "Resources", path: "#Resources" },
+      { label: "Next Step", path: "#Next-steps" },
+      { label: "Email", path: "/contact-us" },
+      { label: "Sign In", path: "/signin" },
     ],
   },
   {
     title: "Our AI",
-    links: ["Cyber AI", "AI Research Centre"],
+    links: [
+      { label: "Cyber AI", path: "" },
+      { label: "AI Research Centre", path: "" },
+    ],
   },
   {
     title: "Company",
-    links: ["Company Overview", "Contact Us", "Free Trial"],
+    links: [
+      { label: "Company Overview", path: "/security" },
+      { label: "Contact Us", path: "/contact-us" },
+      { label: "Free Trial", path: "/signup/step1" },
+    ],
   },
   {
     title: "Resources",
-    links: ["All Resources", "Blog", "Demo", "Infographics"],
+    links: [
+      { label: "All Resources", path: "#Resources" },
+      { label: "Blog", path: "#Resources" },
+      { label: "Demo", path: "#Resources" },
+      { label: "Infographics", path: "#Resources" },
+    ],
   },
   {
     title: "Legal",
-    links: ["Privacy Policy", "Cookie Policy"],
+    links: [
+      { label: "Privacy Policy", path: "" },
+      { label: "Cookie Policy", path: "" },
+    ],
   },
 ];
 
@@ -84,7 +96,7 @@ export default function Footer() {
           gap={{ base: "2rem", md: "2.5rem" }}
           mb={{ base: "2rem", md: "2rem" }}
         >
-          {/* Left Section: Logo, social icons, and language selector. */}
+          {/* Left Section: Logo, Social Icons, Language Selector */}
           <VStack align="flex-start" spacing={{ base: "1.5rem", md: "1.5rem" }}>
             <Box w={{ base: "8rem", md: "8.75rem" }} textAlign="left">
               <Image src={phishcode_logoo_1} alt="PhishCode Logo" />
@@ -97,6 +109,7 @@ export default function Footer() {
                 Remediates human errors
               </Text>
             </Box>
+
             {/* Social Icons */}
             <SimpleGrid
               columns={{ base: 2, md: 3 }}
@@ -119,6 +132,7 @@ export default function Footer() {
                 />
               ))}
             </SimpleGrid>
+
             {/* Language Selector */}
             {/* <Menu>
               <MenuButton
@@ -127,50 +141,26 @@ export default function Footer() {
                 color="#0E1726"
                 fontSize="0.875rem"
                 fontWeight="semibold"
+                cursor="pointer"
               >
                 Language <ChevronDownIcon />
               </MenuButton>
               <MenuList bgColor="white">
-                <MenuItem
-                  bgColor="white"
-                  color="#0E1726"
-                  _hover={{ bg: "gray.100" }}
-                >
-                  English
-                </MenuItem>
-                <MenuItem
-                  bgColor="white"
-                  color="#0E1726"
-                  _hover={{ bg: "gray.100" }}
-                >
-                  Arabic
-                </MenuItem>
-                <MenuItem
-                  bgColor="white"
-                  color="#0E1726"
-                  _hover={{ bg: "gray.100" }}
-                >
-                  French
-                </MenuItem>
-                <MenuItem
-                  bgColor="white"
-                  color="#0E1726"
-                  _hover={{ bg: "gray.100" }}
-                >
-                  Malay
-                </MenuItem>
-                <MenuItem
-                  bgColor="white"
-                  color="#0E1726"
-                  _hover={{ bg: "gray.100" }}
-                >
-                  Hindi
-                </MenuItem>
+                {["English", "Arabic", "French", "Malay", "Hindi"].map((lang, i) => (
+                  <MenuItem
+                    key={i}
+                    bgColor="white"
+                    color="#0E1726"
+                    _hover={{ bg: "gray.100" }}
+                  >
+                    {lang}
+                  </MenuItem>
+                ))}
               </MenuList>
             </Menu> */}
           </VStack>
 
-          {/* Right Section: Links to other pages. */}
+          {/* Right Section: Footer Links */}
           <SimpleGrid
             columns={{ base: 1, md: 3 }}
             spacing={{ base: "2rem", md: "2.5rem" }}
@@ -182,8 +172,32 @@ export default function Footer() {
             <VStack align="flex-start" spacing="0.5rem">
               <Text fontWeight="semibold">{footerSections[0].title}</Text>
               <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                {footerSections[0].links.map((link, j) => (
-                  <Link key={j}>{link}</Link>
+                {footerSections[0].links.map(({ label, path }, j) => (
+                  <Link
+                    as={path && !path.startsWith("#") ? RouterLink : "button"}
+                    {...(path && !path.startsWith("#") ? { to: path } : {})}
+                    key={j}
+                    onClick={(e) => {
+                      if (!path || path.startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {label}
+                  </Link>
                 ))}
               </VStack>
             </VStack>
@@ -195,8 +209,32 @@ export default function Footer() {
                   {footerSections[1].title}
                 </Text>
                 <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                  {footerSections[1].links.map((link, j) => (
-                    <Link key={j}>{link}</Link>
+                  {footerSections[1].links.map(({ label, path }, j) => (
+                    <Link
+                    as={path && !path.startsWith("#") ? RouterLink : "button"}
+                    {...(path && !path.startsWith("#") ? { to: path } : {})}
+                    key={j}
+                    onClick={(e) => {
+                      if (!path || path.startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {label}
+                  </Link>
                   ))}
                 </VStack>
               </Box>
@@ -205,8 +243,32 @@ export default function Footer() {
                   {footerSections[2].title}
                 </Text>
                 <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                  {footerSections[2].links.map((link, j) => (
-                    <Link key={j}>{link}</Link>
+                  {footerSections[2].links.map(({ label, path }, j) => (
+                    <Link
+                    as={path && !path.startsWith("#") ? RouterLink : "button"}
+                    {...(path && !path.startsWith("#") ? { to: path } : {})}
+                    key={j}
+                    onClick={(e) => {
+                      if (!path || path.startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {label}
+                  </Link>
                   ))}
                 </VStack>
               </Box>
@@ -219,8 +281,32 @@ export default function Footer() {
                   {footerSections[3].title}
                 </Text>
                 <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                  {footerSections[3].links.map((link, j) => (
-                    <Link key={j}>{link}</Link>
+                  {footerSections[3].links.map(({ label, path }, j) => (
+                    <Link
+                    as={path && !path.startsWith("#") ? RouterLink : "button"}
+                    {...(path && !path.startsWith("#") ? { to: path } : {})}
+                    key={j}
+                    onClick={(e) => {
+                      if (!path || path.startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = path.replace("#", "");
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {label}
+                  </Link>
                   ))}
                 </VStack>
               </Box>
@@ -229,8 +315,32 @@ export default function Footer() {
                   {footerSections[4].title}
                 </Text>
                 <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                  {footerSections[4].links.map((link, j) => (
-                    <Link key={j}>{link}</Link>
+                  {footerSections[4].links.map(({ label, path }, j) => (
+                    <Link
+                    as={path && !path.startsWith("#") ? RouterLink : "button"}
+                    {...(path && !path.startsWith("#") ? { to: path } : {})}
+                    key={j}
+                    onClick={(e) => {
+                      if (!path || path.startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {label}
+                  </Link>
                   ))}
                 </VStack>
               </Box>
