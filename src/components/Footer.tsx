@@ -119,7 +119,7 @@ export default function Footer() {
                 />
               ))}
             </SimpleGrid>
-            {/* Language Selector */}
+            {/* Language Selector
             <Menu>
               <MenuButton
                 as={Text}
@@ -167,7 +167,7 @@ export default function Footer() {
                   Hindi
                 </MenuItem>
               </MenuList>
-            </Menu>
+            </Menu> */}
           </VStack>
 
           {/* Right Section: Links to other pages. */}
