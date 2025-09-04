@@ -78,7 +78,7 @@ const Banner = () => {
             <Text
               fontSize="12px"
               fontWeight="bold"
-              color="white"
+              color="#ffffffff"
               mb={2}
               textTransform="uppercase"
               letterSpacing="wider"

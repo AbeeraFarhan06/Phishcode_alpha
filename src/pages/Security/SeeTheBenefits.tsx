@@ -110,7 +110,6 @@ const SecurityInfoComponent = () => {
   const handlePrevious = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
   const handleNext = () => setCurrentIndex((prev) => Math.min(1, prev + 1));
 
-  // ✅ Updated cardData with only main color & shape (bg auto-generated)
   const cardData = [
     {
       icon: <CustomIcon color="#104774ff" shape="square" />,
@@ -168,10 +167,8 @@ const SecurityInfoComponent = () => {
         <Container>
           {/* Header */}
           <MotionVStack
-            spacing="1rem"
             align="start"
-            pt="1rem"
-            pb="1rem"
+            pb="2rem"
             variants={fadeUpVariants}
             initial="hidden"
             whileInView="visible"
@@ -206,9 +203,14 @@ const SecurityInfoComponent = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {/* Large screens */}
+            {/* Large screens - FIXED VERSION */}
             <Box display={{ base: "none", "2xl": "block" }}>
-              <HStack spacing="1rem" align="start" wrap="wrap">
+              <HStack
+                spacing="1rem"
+                align="stretch" // Changed from "start" to "stretch" for equal height
+                justify="space-between" // Added justify="space-between" for proper distribution
+                wrap="nowrap" // Ensure no wrapping
+              >
                 {cardData.map((card, index) => (
                   <motion.div
                     key={index}
@@ -217,8 +219,14 @@ const SecurityInfoComponent = () => {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ delay: index * 0.2 }}
+                    style={{ flex: 1 }} // Ensure equal distribution
                   >
-                    <Box flex="1" minW="18rem" maxW="22rem">
+                    <Box
+                      flex="1" // Allow equal expansion
+                      minW="0" // Remove minimum width constraint
+                      maxW="none" // Remove maximum width constraint
+                      w="100%" // Take full available width
+                    >
                       <Card
                         bg="white"
                         shadow="lg"
@@ -226,6 +234,7 @@ const SecurityInfoComponent = () => {
                         border="1px"
                         borderColor="gray.100"
                         h={cardHeight}
+                        w="100%" // Ensure card takes full width of container
                         _hover={{
                           shadow: "xl",
                           transform: "translateY(-0.125rem)",

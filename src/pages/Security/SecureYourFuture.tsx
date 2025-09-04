@@ -81,7 +81,7 @@ const SecureYourFuture: React.FC = () => {
   const currentContent = tabContent[activeTab];
 
   return (
-    <Box id="Secure-your-tomorrow" bgColor="#F9FDFE" py={16}>
+    <Box id="Secure-your-tomorrow" bgColor="#F9FDFE">
       <Container>
         {/* Header Section */}
         <MotionVStack
@@ -97,7 +97,7 @@ const SecureYourFuture: React.FC = () => {
             <Text
               fontSize="12px"
               fontWeight="medium"
-              color="#6B7280"
+              color="#969494ff"
               textTransform="uppercase"
               letterSpacing="wider"
             >
@@ -170,36 +170,87 @@ const SecureYourFuture: React.FC = () => {
             direction={{ base: "column", lg: "row" }}
             align="stretch"
             gap={12}
-            mb={8}
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
             {/* Left Content */}
-            <MotionBox flex="1" maxW={{ base: "100%", lg: "45%" }} p={6} variants={fadeUpVariants}>
-              <Heading
-                as="h3"
-                fontSize={{ base: "2xl", md: "3xl" }}
-                fontWeight="400"
-                color="#2d3748"
-                lineHeight="1.2"
-              >
-                {currentContent.title}
-              </Heading>
-              <Text fontSize="lg" color="#4A5568" lineHeight="1.6" maxW="400px">
-                {currentContent.description}
-              </Text>
+            <MotionBox
+              flex="1"
+              maxW={{ base: "100%", lg: "45%" }}
+              variants={fadeUpVariants}
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+            >
+              <Box>
+                <Heading
+                  as="h3"
+                  fontSize={{ base: "2xl", md: "3xl" }}
+                  fontWeight="600"
+                  color="#2d3748"
+                  lineHeight="1.2"
+                  mb={4}
+                >
+                  {currentContent.title}
+                </Heading>
+                <Text
+                  fontSize="16px"
+                  color="#4A5568"
+                  lineHeight="1.6"
+                  maxW="400px"
+                  mb={8}
+                >
+                  {currentContent.description}
+                </Text>
+              </Box>
+
+              {/* Buttons moved to left column */}
+              <HStack spacing="1rem" flexWrap="wrap" justify="flex-start">
+                {currentContent.buttons.map((button, index) => (
+                  <Button
+                    key={index}
+                    bg={button.variant === "solid" ? "#0E1726" : "white"}
+                    color={button.variant === "solid" ? "white" : "#0E1726"}
+                    border={
+                      button.variant === "outline"
+                        ? "1px solid #0E1726"
+                        : "none"
+                    }
+                    borderRadius="0.5rem"
+                    fontSize="0.875rem"
+                    fontWeight="medium"
+                    _hover={{
+                      bg: button.variant === "solid" ? "#243B65" : "#F7FAFC",
+                    }}
+                    transition="all 0.2s"
+                    whiteSpace="normal"
+                    textAlign="center"
+                    w={index === 0 ? "13rem" : "11.6rem"}
+                    h="4.625rem"
+                    px="1rem"
+                    py="0.75rem"
+                  >
+                    {button.text}
+                  </Button>
+                ))}
+              </HStack>
             </MotionBox>
 
             {/* Right Video Section */}
-            <MotionBox flex="1" maxW={{ base: "100%", lg: "55%" }} variants={fadeUpVariants}>
+            <MotionBox
+              flex="1"
+              maxW={{ base: "100%", lg: "55%" }}
+              variants={fadeUpVariants}
+            >
               <Box
                 position="relative"
                 borderRadius="xl"
                 overflow="hidden"
                 bg="gray.100"
-                h="350px"
+                h="100%"
+                minH="350px"
                 w="100%"
               >
                 <Box
@@ -233,37 +284,6 @@ const SecureYourFuture: React.FC = () => {
               </Box>
             </MotionBox>
           </MotionFlex>
-
-          {/* Bottom Buttons */}
-          <MotionBox px="1.5rem" variants={fadeUpVariants}>
-            <HStack spacing="1rem" flexWrap="wrap" justify="flex-start">
-              {currentContent.buttons.map((button, index) => (
-                <Button
-                  key={index}
-                  bg={button.variant === "solid" ? "#0E1726" : "white"}
-                  color={button.variant === "solid" ? "white" : "#0E1726"}
-                  border={
-                    button.variant === "outline" ? "1px solid #0E1726" : "none"
-                  }
-                  borderRadius="0.5rem"
-                  fontSize="0.875rem"
-                  fontWeight="medium"
-                  _hover={{
-                    bg: button.variant === "solid" ? "#243B65" : "#F7FAFC",
-                  }}
-                  transition="all 0.2s"
-                  whiteSpace="normal"
-                  textAlign="center"
-                  w={index === 0 ? "13rem" : "11.6rem"}
-                  h="4.625rem"
-                  px="1rem"
-                  py="0.75rem"
-                >
-                  {button.text}
-                </Button>
-              ))}
-            </HStack>
-          </MotionBox>
         </MotionBox>
       </Container>
     </Box>

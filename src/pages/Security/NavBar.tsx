@@ -44,6 +44,10 @@ import { useMemo, useState } from "react";
 type FeedbackKind = "issue" | "idea" | "complaint";
 
 const Navbar = () => {
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   const navigate = useNavigate();
 
   // Drawer disclosure
@@ -121,6 +125,7 @@ const Navbar = () => {
                 h="2.5rem"
                 w="auto"
                 cursor="pointer"
+                onClick={handleLogoClick}
               />
               <Image src={pipeline} />
               <Text
@@ -197,6 +202,7 @@ const Navbar = () => {
                   h="2.5rem"
                   w="auto"
                   cursor="pointer"
+                  onClick={handleLogoClick}
                 />
               </Box>
 
@@ -221,7 +227,12 @@ const Navbar = () => {
           <DrawerCloseButton />
           <DrawerHeader bgColor="white">
             <HStack>
-              <Image src={phishcode_logoo_1} h="6" />
+              <Image
+                src={phishcode_logoo_1}
+                h="6"
+                cursor="pointer"
+                onClick={handleLogoClick}
+              />
               <Image src={pipeline} h="20px" />
               <Text
                 fontSize="12px"

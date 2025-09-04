@@ -5,6 +5,12 @@ import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 
 const Step3Confirmation = () => {
   const navigate = useNavigate();
+
+  // Handle logo click to navigate to landing page
+  const handleLogoClick = () => {
+    navigate("/"); // Navigate to the landing page (root path)
+  };
+
   const handleGetStarted = () => {
     console.log("Get Started clicked");
     navigate("/");
@@ -12,12 +18,14 @@ const Step3Confirmation = () => {
 
   return (
     <div className={`min-vh-100 ${styles.container}`}>
-      {/* Logo - Fixed position on left */}
+      {/* Logo - Fixed position on left with click functionality */}
       <div className={styles.logoContainer}>
         <img
           src={phishcode_logoo_1}
           alt="PhishCode Logo"
           className={styles.headerLogo}
+          onClick={handleLogoClick}
+          style={{ cursor: "pointer" }}
         />
       </div>
 

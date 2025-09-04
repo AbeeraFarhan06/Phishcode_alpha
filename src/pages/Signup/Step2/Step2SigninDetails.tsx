@@ -47,6 +47,11 @@ const Step2SigninDetails = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // Handle logo click to navigate to landing page
+  const handleLogoClick = () => {
+    navigate("/"); // Navigate to the landing page (root path)
+  };
+
   // Validation functions
   const validateEmail = (email: string): string => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -145,12 +150,14 @@ const Step2SigninDetails = () => {
 
   return (
     <div className={`min-vh-100 ${styles.container}`}>
-      {/* Logo - Fixed position on left */}
+      {/* Logo - Fixed position on left with click functionality */}
       <div className={styles.logoContainer}>
         <img
           src={phishcode_logoo_1}
           alt="PhishCode Logo"
           className={styles.headerLogo}
+          onClick={handleLogoClick}
+          style={{ cursor: "pointer" }}
         />
       </div>
 

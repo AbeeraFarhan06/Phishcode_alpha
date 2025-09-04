@@ -43,6 +43,11 @@ const Step1AboutYou = () => {
     websiteUrl: "",
   });
 
+  // Handle logo click to navigate to landing page
+  const handleLogoClick = () => {
+    navigate("/"); // Navigate to the landing page (root path)
+  };
+
   // Validation functions
   const validateName = (name: string, fieldName: string) => {
     if (name.length === 0) return "";
@@ -265,12 +270,19 @@ const Step1AboutYou = () => {
 
   return (
     <div className={`min-vh-100 ${styles.container}`}>
-      {/* Logo - Fixed position on left */}
+      {/* Logo - Fixed position on left with click functionality */}
       <div className={styles.logoContainer}>
         <img
           src={phishcode_logoo_1}
           alt="PhishCode Logo"
           className={styles.headerLogo}
+          onClick={handleLogoClick}
+          style={{
+            cursor: "pointer",
+            transition: "opacity 0.2s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         />
       </div>
 
