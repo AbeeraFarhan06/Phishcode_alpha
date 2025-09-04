@@ -42,11 +42,11 @@ const footerSections = [
   {
     title: "Products",
     links: [
-      { label: "Overview", path: "#Overview" },
-      { label: "Impact", path: "#Impact" },
-      { label: "Approach", path: "#Approach" },
-      { label: "Resources", path: "#Resources" },
-      { label: "Next Step", path: "#Next-steps" },
+      { label: "Overview", path: "/#Overview" },
+      { label: "Impact", path: "/#Impact" },
+      { label: "Approach", path: "/#Approach" },
+      { label: "Resources", path: "/#Resources" },
+      { label: "Next Step", path: "/#Next-steps" },
       { label: "Email", path: "/contact-us" },
       { label: "Sign In", path: "/signin" },
     ],
