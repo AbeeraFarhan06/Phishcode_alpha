@@ -120,6 +120,7 @@ const Banner = () => {
                 borderColor="white"
                 borderWidth="1px"
                 aria-label="Sign In"
+                color="white"
                 size="sm"
                 h="50px"
                 fontSize={{ base: "sm", md: "15px" }}
