@@ -605,7 +605,7 @@ const Step1AboutYou = () => {
                   </label>
                 </div>
 
-                <div className="form-check">
+                <div className="form-check d-flex align-items-start">
                   <input
                     type="checkbox"
                     name="receiveInfo"
