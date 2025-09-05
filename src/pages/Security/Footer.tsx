@@ -183,13 +183,18 @@ export default function Footer() {
                         }, 100);
                       }}
                       style={{
-                        textDecoration: "none",
                         color: "#A4A4A4",
                         background: "none",
                         border: "none",
                         padding: 0,
                         textAlign: "left",
                       }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.textDecoration = "underline")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.textDecoration = "none")
+                      }
                     >
                       {label}
                     </HashLink>
@@ -198,13 +203,18 @@ export default function Footer() {
                       key={j}
                       to={path}
                       style={{
-                        textDecoration: "none",
                         color: "#A4A4A4",
                         background: "none",
                         border: "none",
                         padding: 0,
                         textAlign: "left",
                       }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.textDecoration = "underline")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.textDecoration = "none")
+                      }
                     >
                       {label}
                     </RouterLink>
