@@ -171,33 +171,45 @@ export default function Footer() {
             <VStack align="flex-start" spacing="0.5rem">
               <Text fontWeight="semibold">{footerSections[0].title}</Text>
               <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                {footerSections[0].links.map(({ label, path }, j) => (
-                  <Link
-                    as={path && !path.startsWith("#") ? RouterLink : "button"}
-                    {...(path && !path.startsWith("#") ? { to: path } : {})}
-                    key={j}
-                    onClick={(e) => {
-                      if (!path || path.startsWith("#")) {
-                        e.preventDefault();
-                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
-                        const element = document.getElementById(targetId);
-                        if (element) {
-                          element.scrollIntoView({ behavior: "smooth" });
-                        }
-                      } else {
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }
-                    }}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      padding: 0,
-                      textAlign: "left",
-                    }}
-                  >
-                    {label}
-                  </Link>
-                ))}
+                {footerSections[0].links.map(({ label, path }, j) =>
+                  path.includes("#") ? (
+                    <HashLink
+                      key={j}
+                      to={path}
+                      scroll={(el) => {
+                        // Delay ensures the element exists after route navigation
+                        setTimeout(() => {
+                          el.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                      }}
+                      style={{
+                        textDecoration: "none",
+                        color: "#A4A4A4",
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        textAlign: "left",
+                      }}
+                    >
+                      {label}
+                    </HashLink>
+                  ) : (
+                    <RouterLink
+                      key={j}
+                      to={path}
+                      style={{
+                        textDecoration: "none",
+                        color: "#A4A4A4",
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        textAlign: "left",
+                      }}
+                    >
+                      {label}
+                    </RouterLink>
+                  )
+                )}
               </VStack>
             </VStack>
 
