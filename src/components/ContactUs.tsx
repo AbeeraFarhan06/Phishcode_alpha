@@ -572,9 +572,9 @@ const ContactUs = () => {
 
                 <Button
                   type="submit"
-                  bg="#2D3748"
+                  bg="#0E1726"
                   color="white"
-                  _hover={{ bg: "#1A202C" }}
+                  _hover={{ bg: "#243B65" }}
                   borderRadius="none"
                   w="7rem"
                   h="2.5rem"
