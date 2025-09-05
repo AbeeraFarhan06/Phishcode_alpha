@@ -85,7 +85,7 @@ const footerSections = [
 
 export default function Footer() {
   return (
-    <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" pt={14} width="100%">
+    <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" width="100%">
       <Container>
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -93,7 +93,7 @@ export default function Footer() {
           align="flex-start"
           wrap="wrap"
           gap={{ base: "2rem", md: "2.5rem" }}
-          mb={{ base: "2rem", md: "2rem" }}
+          // mb={{ base: "2rem", md: "2rem" }}
         >
           {/* Left Section: Logo, Social Icons, Language Selector */}
           <VStack align="flex-start" spacing={{ base: "1.5rem", md: "1.5rem" }}>
