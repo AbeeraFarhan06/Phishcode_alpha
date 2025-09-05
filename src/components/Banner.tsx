@@ -28,7 +28,11 @@ const Banner = () => {
   const inView = useInView(ref, { once: true });
 
   // Responsive values
-  const flexDirection = useBreakpointValue({ base: "column", md:"column", lg: "row" });
+  const flexDirection = useBreakpointValue({
+    base: "column",
+    md: "column",
+    lg: "row",
+  });
   const headingFontSize = useBreakpointValue({ base: "2rem", md: "38px" });
   const headingLineHeight = useBreakpointValue({ base: "2.2rem", md: "3rem" });
   const headingMarginLeft = useBreakpointValue({ base: 0, md: 0 });
@@ -118,14 +122,17 @@ const Banner = () => {
               <Button
                 variant="outline"
                 borderColor="white"
-                borderWidth="1px"
-                aria-label="Sign In"
+                borderWidth="2px"
                 color="white"
+                aria-label="Sign In"
                 size="sm"
                 h="50px"
                 fontSize={{ base: "sm", md: "15px" }}
-                fontWeight="600px"
+                fontWeight="600"
                 borderRadius="6px"
+                _hover={{}}
+                _active={{}}
+                _focus={{}}
                 onClick={() => navigate("/contact-us")}
               >
                 Contact sales

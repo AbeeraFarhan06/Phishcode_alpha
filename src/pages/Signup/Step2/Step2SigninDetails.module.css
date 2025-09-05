@@ -155,41 +155,41 @@
   font-weight: 500;
 }
 
-/* Form Title - Align exactly with first progress circle */
+/* Form Title - Changed to 40px padding */
 .formTitle {
   font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font scaling */
   font-weight: normal; /* Changed from 600 to normal to match signin style */
   color: #2d3748;
   margin-bottom: 1.25rem;
   text-align: left;
-  padding-left: calc(8% - 0.625rem); /* Align exactly below the first circle center */
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
   margin-left: 0;
 }
 
-/* Form Description */
+/* Form Description - Changed to 40px padding */
 .formDescription {
   font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   color: #4a5568;
   margin-bottom: 1.875rem;
   line-height: 1.5;
-  padding-left: calc(8% - 0.625rem); /* Align with form title */
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
-/* Form Labels */
+/* Form Labels - Changed to 40px padding */
 .label {
   font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   color: #2d3748;
   font-weight: 500;
   margin-bottom: 0.375rem;
   display: block;
-  padding-left: calc(8% - 0.625rem); /* Align with form title */
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
 .required {
   color: #e53e3e;
 }
 
-/* Form Inputs - Enhanced blue focus border */
+/* Form Inputs - Changed to 40px margin */
 .input {
   border: 0.0625rem solid #d1d5db;
   border-radius: 0.25rem;
@@ -199,7 +199,7 @@
   background-color: white;
   width: 27rem; /* Slightly longer width */
   max-width: 27rem;
-  margin-left: calc(8% - 0.625rem); /* Align exactly below the first circle */
+  margin-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   min-height: 2.75rem; /* Touch-friendly height */
 }
@@ -221,22 +221,22 @@
   box-shadow: 0 0 0 1px #e53e3e !important;
 }
 
-/* Error Message */
+/* Error Message - Changed to 40px padding */
 .errorMessage {
   color: #e53e3e;
   font-size: clamp(0.75rem, 1.8vw, 0.8125rem); /* Responsive font scaling */
   margin-top: 0.375rem;
-  padding-left: calc(8% - 0.625rem);
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
   line-height: 1.4;
   font-weight: 400;
 }
 
-/* Password Container - Positioned to align with other inputs */
+/* Password Container - Changed to 40px margin */
 .passwordContainer {
   position: relative;
   width: 27rem; /* Match input width */
   max-width: 27rem;
-  margin-left: calc(8% - 0.625rem); /* Align exactly below the first circle */
+  margin-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
 .passwordInput {
@@ -273,13 +273,13 @@
   border-radius: 0.125rem;
 }
 
-/* Agreement Text */
+/* Agreement Text - Changed to 40px padding */
 .agreementText {
   font-size: clamp(0.8125rem, 2vw, 0.875rem); /* Responsive font scaling */
   color: #4a5568;
   margin-bottom: 1.25rem;
   line-height: 1.5;
-  padding-left: calc(8% - 0.625rem); /* Align with other content */
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
 /* Terms Link - highlighted and underlined */
@@ -294,9 +294,9 @@
   text-decoration: underline;
 }
 
-/* Next Button Container */
+/* Next Button Container - Changed to 40px padding */
 .nextBtnContainer {
-  padding-left: calc(8% - 0.625rem); /* Align with other content */
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
 /* Next Button - 112x40 pixels (7rem x 2.5rem) with sharp edges */
@@ -379,28 +379,29 @@
     max-width: 6rem;
   }
   
+  /* Changed all tablet media query padding to 35px */
   .formTitle,
   .formDescription,
   .label,
   .agreementText,
   .nextBtnContainer {
-    padding-left: calc(6% - 0.625rem); /* Align exactly below first circle on tablets */
+    padding-left: 35px; /* Changed from calc(6% - 0.625rem) to 35px */
   }
   
   .input {
-    margin-left: calc(6% - 0.625rem);
+    margin-left: 35px; /* Changed from calc(6% - 0.625rem) to 35px */
     width: 23rem;
     max-width: 65%; /* Responsive fallback for tablets */
   }
   
   .passwordContainer {
-    margin-left: calc(6% - 0.625rem);
+    margin-left: 35px; /* Changed from calc(6% - 0.625rem) to 35px */
     width: 23rem;
     max-width: 65%; /* Responsive fallback for tablets */
   }
   
   .errorMessage {
-    padding-left: calc(6% - 0.625rem);
+    padding-left: 35px; /* Changed from calc(6% - 0.625rem) to 35px */
     max-width: 65%;
   }
 }
@@ -447,16 +448,17 @@
     max-width: 5rem;
   }
   
+  /* Changed all mobile media query padding to 30px */
   .formTitle,
   .formDescription,
   .label,
   .agreementText,
   .nextBtnContainer {
-    padding-left: calc(4% - 0.625rem); /* Align exactly below first circle on mobile */
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
   }
   
   .input {
-    margin-left: calc(4% - 0.625rem);
+    margin-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
     width: 100%;
     max-width: 90%; /* Full width on mobile for usability */
     font-size: 1rem; /* Prevent iOS zoom */
@@ -465,7 +467,7 @@
   }
   
   .passwordContainer {
-    margin-left: calc(4% - 0.625rem);
+    margin-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
     width: 100%;
     max-width: 90%; /* Full width on mobile for usability */
   }
@@ -484,7 +486,7 @@
   }
   
   .errorMessage {
-    padding-left: calc(4% - 0.625rem);
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
     max-width: 90%;
     font-size: 0.75rem;
   }

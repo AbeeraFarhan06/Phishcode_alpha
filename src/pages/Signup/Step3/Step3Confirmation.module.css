@@ -156,31 +156,31 @@
   font-weight: 500;
 }
 
-/* Form Title - Responsive positioning and sizing */
+/* Form Title - Changed to 40px padding */
 .formTitle {
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: normal; /* Changed from 600 to normal to match signin style */
   color: #2d3748;
   margin-bottom: 1.5625rem;
   text-align: left;
-  padding-left: calc(8% - 0.625rem);
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
   margin-left: 0;
 }
 
-/* Thank you title - Enhanced typography */
+/* Thank you title - Changed to 40px padding */
 .thankYouTitle {
   font-size: clamp(0.9375rem, 2.5vw, 1rem);
   font-weight: normal; /* Changed from 600 to normal to match signin style */
   color: #2d3748;
   margin-bottom: 1.5625rem;
   line-height: 1.4;
-  padding-left: calc(8% - 0.625rem);
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
-/* User details section - Enhanced readability */
+/* User details section - Changed to 40px padding */
 .userDetails {
   margin-bottom: 1.875rem;
-  padding-left: calc(8% - 0.625rem);
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
 .detailText {
@@ -249,9 +249,9 @@
   outline: none !important;
 }
 
-/* Get Started Button Container */
+/* Get Started Button Container - Changed to 40px padding */
 .getStartedBtnContainer {
-  padding-left: calc(8% - 0.625rem);
+  padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
 }
 
 /* Get Started Button - Enhanced responsive sizing */
@@ -295,7 +295,7 @@
   .thankYouTitle,
   .userDetails,
   .getStartedBtnContainer {
-    padding-left: calc(8% - 0.625rem);
+    padding-left: 40px; /* Changed from calc(8% - 0.625rem) to 40px */
   }
 }
 
@@ -352,7 +352,7 @@
   .thankYouTitle,
   .userDetails,
   .getStartedBtnContainer {
-    padding-left: calc(6% - 0.625rem);
+    padding-left: 35px; /* Changed from calc(6% - 0.625rem) to 35px */
   }
   
   .thankYouTitle {
@@ -408,7 +408,7 @@
   .thankYouTitle,
   .userDetails,
   .getStartedBtnContainer {
-    padding-left: calc(4% - 0.625rem);
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
   }
   
   .getStartedBtn {
@@ -450,18 +450,18 @@
   
   .formTitle {
     font-size: 1.375rem;
-    padding-left: calc(4% - 0.625rem);
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
     margin-bottom: 1.25rem;
   }
   
   .thankYouTitle {
     font-size: 0.875rem;
-    padding-left: calc(4% - 0.625rem);
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
     margin-bottom: 1.25rem;
   }
   
   .userDetails {
-    padding-left: calc(4% - 0.625rem);
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
     margin-bottom: 1.5rem;
   }
   
@@ -478,7 +478,7 @@
   }
   
   .getStartedBtnContainer {
-    padding-left: calc(4% - 0.625rem);
+    padding-left: 30px; /* Changed from calc(4% - 0.625rem) to 30px */
   }
   
   .getStartedBtn {

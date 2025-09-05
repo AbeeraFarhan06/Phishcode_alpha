@@ -262,24 +262,6 @@ const SecureYourFuture: React.FC = () => {
                   position="relative"
                 >
                   <Box w="100%" h="100%" bg="gray.200" />
-                  <Button
-                    position="absolute"
-                    top="20px"
-                    left="20px"
-                    size="lg"
-                    bg="#0E1726"
-                    color="white"
-                    borderRadius="md"
-                    p={4}
-                    onClick={() => setIsPlaying(true)}
-                    _hover={{ bg: "#243B65", transform: "scale(1.05)" }}
-                    transition="all 0.2s"
-                    boxShadow="lg"
-                    minW="56px"
-                    h="56px"
-                  >
-                    <FaPlay size="20px" />
-                  </Button>
                 </Box>
               </Box>
             </MotionBox>

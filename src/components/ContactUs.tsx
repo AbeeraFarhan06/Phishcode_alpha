@@ -356,7 +356,13 @@ const ContactUs = () => {
         <Container navbar1>
           <Flex>
             <Link to="/">
-              <Image src={phishcode_logoo_1} h="2.5rem" w="auto" cursor="pointer" mt={-4}/>
+              <Image
+                src={phishcode_logoo_1}
+                h="2.5rem"
+                w="auto"
+                cursor="pointer"
+                mt={-4}
+              />
             </Link>
           </Flex>
         </Container>
@@ -376,12 +382,13 @@ const ContactUs = () => {
               Contact the PHISHCODE team
             </Heading>
             <Text fontSize="16px" mb={6}>
-              Let's help you get started with PHISHCODE.
+              Get Started with PHISHCODE.
             </Text>
             <Text fontSize="16px" mb={4} textAlign="justify">
-              Fill out the form and we'll have a PHISHCODE expert give you a
-              call. Our team can answer your questions, provide expert guidance,
-              and help you understand what PHISHCODE can do for your business.
+              Complete the form, and one of our PHISHCODE specialists will reach
+              out to you. Our team is ready to answer your questions, provide
+              expert guidance, and show you how PHISHCODE can benefit your
+              business.
             </Text>
           </Box>
 
@@ -398,12 +405,7 @@ const ContactUs = () => {
                 Contact me
               </Heading>
               <Text fontSize="16px" mb={4} textAlign="justify">
-                If you are a current customer and need technical or billing
-                support, please visit our <Link to="#">support area</Link> or{" "}
-                <Link to="#">log in</Link> to your account to see more options.
-              </Text>
-              <Text fontSize="16px" mb={4}>
-                Fill out the form and we'll be in touch.
+                Just fill out the form, and we’ll reach out to you soon.
               </Text>
               <VStack spacing={4} align="stretch">
                 <FormControl isRequired isInvalid={!!errors.firstName}>
@@ -573,7 +575,7 @@ const ContactUs = () => {
                   bg="#2D3748"
                   color="white"
                   _hover={{ bg: "#1A202C" }}
-                  borderRadius="sm"
+                  borderRadius="none"
                   w="7rem"
                   h="2.5rem"
                   fontSize="14px"
