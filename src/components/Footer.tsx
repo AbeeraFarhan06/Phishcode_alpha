@@ -177,9 +177,9 @@ export default function Footer() {
                     {...(path && !path.startsWith("#") ? { to: path } : {})}
                     key={j}
                     onClick={(e) => {
-                      if (!path || path.startsWith("#")) {
+                      if (!path || path.includes("#")) {
                         e.preventDefault();
-                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
+                        const targetId = path.split("#")[1]; // Get ID from path
                         const element = document.getElementById(targetId);
                         if (element) {
                           element.scrollIntoView({ behavior: "smooth" });
