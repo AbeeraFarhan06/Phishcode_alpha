@@ -12,12 +12,42 @@ interface Country {
   };
 }
 
+interface FormData {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  jobTitle: string;
+  businessPhone: string;
+  companyName: string;
+  companySize: string;
+  hasWebsite: string;
+  websiteUrl: string;
+  country: string;
+  agreeToContact: boolean;
+  receiveInfo: boolean;
+}
+
+interface ValidationErrors {
+  firstName: string;
+  lastName: string;
+  email: string;
+  jobTitle: string;
+  businessPhone: string;
+  companyName: string;
+  companySize: string;
+  hasWebsite: string;
+  websiteUrl: string;
+  country: string;
+}
+
 const Step1AboutYou = () => {
   const navigate = useNavigate();
   const [countries, setCountries] = useState<string[]>([]);
   const [loadingCountries, setLoadingCountries] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     middleName: "",
     lastName: "",
@@ -33,26 +63,28 @@ const Step1AboutYou = () => {
     receiveInfo: false,
   });
 
-  const [validationErrors, setValidationErrors] = useState({
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({
     firstName: "",
     lastName: "",
     email: "",
     jobTitle: "",
     businessPhone: "",
     companyName: "",
+    companySize: "",
+    hasWebsite: "",
     websiteUrl: "",
+    country: "",
   });
 
   // Handle logo click to navigate to landing page
   const handleLogoClick = () => {
-    navigate("/"); // Navigate to the landing page (root path)
+    navigate("/");
   };
 
-  // Validation functions
-  const validateName = (name: string, fieldName: string) => {
+  // Enhanced validation functions
+  const validateName = (name: string, fieldName: string): string => {
     if (name.length === 0) return "";
 
-    // Only allow letters, spaces, hyphens, and apostrophes
     const nameRegex = /^[a-zA-Z\s'-]+$/;
     if (!nameRegex.test(name)) {
       return `${fieldName} should only contain letters, spaces, hyphens, and apostrophes`;
@@ -66,7 +98,7 @@ const Step1AboutYou = () => {
     return "";
   };
 
-  const validateEmail = (email: string) => {
+  const validateEmail = (email: string): string => {
     if (email.length === 0) return "";
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -76,12 +108,10 @@ const Step1AboutYou = () => {
     return "";
   };
 
-  const validatePhone = (phone: string) => {
+  const validatePhone = (phone: string): string => {
     if (phone.length === 0) return "";
 
-    // Remove all non-digit characters for validation
     const digitsOnly = phone.replace(/\D/g, "");
-
     if (digitsOnly.length < 7) {
       return "Phone number must be at least 7 digits";
     }
@@ -91,10 +121,9 @@ const Step1AboutYou = () => {
     return "";
   };
 
-  const validateJobTitle = (jobTitle: string) => {
+  const validateJobTitle = (jobTitle: string): string => {
     if (jobTitle.length === 0) return "";
 
-    // Allow letters, spaces, numbers, and common punctuation
     const jobTitleRegex = /^[a-zA-Z0-9\s.,-/&()]+$/;
     if (!jobTitleRegex.test(jobTitle)) {
       return "Job title contains invalid characters";
@@ -108,7 +137,23 @@ const Step1AboutYou = () => {
     return "";
   };
 
-  const validateWebsiteUrl = (url: string) => {
+  const validateCompanyName = (companyName: string): string => {
+    if (companyName.length === 0) return "";
+
+    const companyRegex = /^[a-zA-Z0-9\s.,&'-]+$/;
+    if (!companyRegex.test(companyName)) {
+      return "Company name contains invalid characters";
+    }
+    if (companyName.length < 2) {
+      return "Company name must be at least 2 characters long";
+    }
+    if (companyName.length > 200) {
+      return "Company name must be less than 200 characters";
+    }
+    return "";
+  };
+
+  const validateWebsiteUrl = (url: string): string => {
     if (url.length === 0) return "";
 
     try {
@@ -117,6 +162,10 @@ const Step1AboutYou = () => {
     } catch {
       return "Please enter a valid website URL (e.g., https://www.example.com)";
     }
+  };
+
+  const validateRequired = (value: string): boolean => {
+    return value.trim().length > 0;
   };
 
   // Fetch countries from REST Countries API
@@ -163,6 +212,7 @@ const Step1AboutYou = () => {
     fetchCountries();
   }, []);
 
+  // Handle input changes with real-time filtering
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -178,52 +228,33 @@ const Step1AboutYou = () => {
     }
 
     let processedValue = value;
-    let error = "";
 
-    // Process and validate based on field type
+    // Apply input filtering based on field type
     switch (name) {
       case "firstName":
+      case "lastName":
+      case "middleName":
         // Only allow letters, spaces, hyphens, apostrophes
         processedValue = value.replace(/[^a-zA-Z\s'-]/g, "");
-        error = validateName(processedValue, "First name");
         break;
-
-      case "middleName":
-        processedValue = value.replace(/[^a-zA-Z\s'-]/g, "");
-        error = processedValue
-          ? validateName(processedValue, "Middle name")
-          : "";
-        break;
-
-      case "lastName":
-        processedValue = value.replace(/[^a-zA-Z\s'-]/g, "");
-        error = validateName(processedValue, "Last name");
-        break;
-
       case "email":
-        processedValue = value.toLowerCase().trim();
-        error = validateEmail(processedValue);
+        // Remove spaces and convert to lowercase
+        processedValue = value.toLowerCase().replace(/\s/g, "");
         break;
-
-      case "jobTitle":
-        error = validateJobTitle(value);
-        break;
-
       case "businessPhone":
-        // Allow any characters during typing for flexibility
-        error = validatePhone(value);
+        // Only allow numbers, spaces, hyphens, plus, and parentheses
+        processedValue = value.replace(/[^0-9\s\-\+\(\)]/g, "");
         break;
-
+      case "jobTitle":
+        // Allow letters, numbers, spaces, and common job title punctuation
+        processedValue = value.replace(/[^a-zA-Z0-9\s.,-/&()]/g, "");
+        break;
       case "companyName":
-        error =
-          value.length > 0 && value.length < 2
-            ? "Company name must be at least 2 characters long"
-            : "";
+        // Allow letters, numbers, spaces, and common business punctuation
+        processedValue = value.replace(/[^a-zA-Z0-9\s.,&'-]/g, "");
         break;
-
-      case "websiteUrl":
-        error = validateWebsiteUrl(value);
-        break;
+      default:
+        processedValue = value;
     }
 
     setFormData((prev) => ({
@@ -231,7 +262,52 @@ const Step1AboutYou = () => {
       [name]: processedValue,
     }));
 
-    // Update validation errors
+    // Clear error when user starts typing (if field was previously invalid)
+    if (
+      Object.keys(validationErrors).includes(name) &&
+      processedValue.trim().length > 0
+    ) {
+      setValidationErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+  };
+
+  // Handle field blur validation
+  const handleFieldBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    let error = "";
+
+    switch (name) {
+      case "firstName":
+        error = validateName(value, "First name");
+        break;
+      case "lastName":
+        error = validateName(value, "Last name");
+        break;
+      case "middleName":
+        error = value ? validateName(value, "Middle name") : "";
+        break;
+      case "email":
+        error = validateEmail(value);
+        break;
+      case "jobTitle":
+        error = validateJobTitle(value);
+        break;
+      case "businessPhone":
+        error = validatePhone(value);
+        break;
+      case "companyName":
+        error = validateCompanyName(value);
+        break;
+      case "websiteUrl":
+        error = validateWebsiteUrl(value);
+        break;
+    }
+
     if (Object.keys(validationErrors).includes(name)) {
       setValidationErrors((prev) => ({
         ...prev,
@@ -263,9 +339,94 @@ const Step1AboutYou = () => {
     }));
   };
 
+  // Comprehensive form validation for submission
+  const validateForm = (): boolean => {
+    const newErrors: ValidationErrors = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      jobTitle: "",
+      businessPhone: "",
+      companyName: "",
+      companySize: "",
+      hasWebsite: "",
+      websiteUrl: "",
+      country: "",
+    };
+
+    // Required field validations
+    if (!validateRequired(formData.firstName)) {
+      newErrors.firstName = "First name is required";
+    } else {
+      newErrors.firstName = validateName(formData.firstName, "First name");
+    }
+
+    if (!validateRequired(formData.lastName)) {
+      newErrors.lastName = "Last name is required";
+    } else {
+      newErrors.lastName = validateName(formData.lastName, "Last name");
+    }
+
+    if (!validateRequired(formData.email)) {
+      newErrors.email = "Email is required";
+    } else {
+      newErrors.email = validateEmail(formData.email);
+    }
+
+    if (!validateRequired(formData.jobTitle)) {
+      newErrors.jobTitle = "Job title is required";
+    } else {
+      newErrors.jobTitle = validateJobTitle(formData.jobTitle);
+    }
+
+    if (!validateRequired(formData.businessPhone)) {
+      newErrors.businessPhone = "Business phone number is required";
+    } else {
+      newErrors.businessPhone = validatePhone(formData.businessPhone);
+    }
+
+    if (!validateRequired(formData.companyName)) {
+      newErrors.companyName = "Company name is required";
+    } else {
+      newErrors.companyName = validateCompanyName(formData.companyName);
+    }
+
+    if (!validateRequired(formData.companySize)) {
+      newErrors.companySize = "Company size is required";
+    }
+
+    if (!validateRequired(formData.hasWebsite)) {
+      newErrors.hasWebsite = "Please select whether your company has a website";
+    }
+
+    if (
+      formData.hasWebsite === "yes" &&
+      !validateRequired(formData.websiteUrl)
+    ) {
+      newErrors.websiteUrl = "Website URL is required when you select 'Yes'";
+    } else if (formData.hasWebsite === "yes") {
+      newErrors.websiteUrl = validateWebsiteUrl(formData.websiteUrl);
+    }
+
+    if (!validateRequired(formData.country)) {
+      newErrors.country = "Country or Region is required";
+    }
+
+    setValidationErrors(newErrors);
+
+    // Check if there are any errors
+    return Object.values(newErrors).every((error) => error === "");
+  };
+
   const handleNext = () => {
-    console.log("Form submitted:", formData);
-    navigate("/signup/step2");
+    setIsSubmitted(true);
+
+    if (validateForm()) {
+      console.log("Form submitted:", formData);
+      navigate("/signup/step2");
+    } else {
+      console.log("Form has validation errors:", validationErrors);
+    }
   };
 
   return (
@@ -279,10 +440,7 @@ const Step1AboutYou = () => {
           onClick={handleLogoClick}
           style={{
             cursor: "pointer",
-            transition: "opacity 0.2s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         />
       </div>
 
@@ -346,7 +504,9 @@ const Step1AboutYou = () => {
                     }`}
                     value={formData.firstName}
                     onChange={handleInputChange}
+                    onBlur={handleFieldBlur}
                     maxLength={50}
+                    placeholder="Enter your first name"
                   />
                   {validationErrors.firstName && (
                     <div className={styles.errorMessage}>
@@ -364,7 +524,9 @@ const Step1AboutYou = () => {
                     className={`form-control ${styles.input}`}
                     value={formData.middleName}
                     onChange={handleInputChange}
+                    onBlur={handleFieldBlur}
                     maxLength={50}
+                    placeholder="Enter your middle name"
                   />
                 </div>
               </div>
@@ -382,7 +544,9 @@ const Step1AboutYou = () => {
                   }`}
                   value={formData.lastName}
                   onChange={handleInputChange}
+                  onBlur={handleFieldBlur}
                   maxLength={50}
+                  placeholder="Enter your last name"
                 />
                 {validationErrors.lastName && (
                   <div className={styles.errorMessage}>
@@ -404,6 +568,8 @@ const Step1AboutYou = () => {
                   }`}
                   value={formData.email}
                   onChange={handleInputChange}
+                  onBlur={handleFieldBlur}
+                  placeholder="Enter your email address"
                 />
                 {validationErrors.email && (
                   <div className={styles.errorMessage}>
@@ -425,7 +591,9 @@ const Step1AboutYou = () => {
                   }`}
                   value={formData.jobTitle}
                   onChange={handleInputChange}
+                  onBlur={handleFieldBlur}
                   maxLength={100}
+                  placeholder="Enter your job title"
                 />
                 {validationErrors.jobTitle && (
                   <div className={styles.errorMessage}>
@@ -472,7 +640,9 @@ const Step1AboutYou = () => {
                     }`}
                     value={formData.companyName}
                     onChange={handleInputChange}
+                    onBlur={handleFieldBlur}
                     maxLength={200}
+                    placeholder="Enter your company name"
                   />
                   {validationErrors.companyName && (
                     <div className={styles.errorMessage}>
@@ -488,7 +658,9 @@ const Step1AboutYou = () => {
                   </label>
                   <select
                     name="companySize"
-                    className={`form-select ${styles.select} ${styles.smoothDropdown}`}
+                    className={`form-select ${styles.select} ${
+                      styles.smoothDropdown
+                    } ${validationErrors.companySize ? styles.inputError : ""}`}
                     value={formData.companySize}
                     onChange={handleInputChange}
                   >
@@ -504,6 +676,11 @@ const Step1AboutYou = () => {
                     <option value="250-999 people">250-999 people</option>
                     <option value="1000+ people">1000+ people</option>
                   </select>
+                  {validationErrors.companySize && (
+                    <div className={styles.errorMessage}>
+                      {validationErrors.companySize}
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -521,7 +698,9 @@ const Step1AboutYou = () => {
                   </label>
                   <select
                     name="hasWebsite"
-                    className={`form-select ${styles.select} ${styles.smoothDropdown}`}
+                    className={`form-select ${styles.select} ${
+                      styles.smoothDropdown
+                    } ${validationErrors.hasWebsite ? styles.inputError : ""}`}
                     value={formData.hasWebsite}
                     onChange={handleInputChange}
                   >
@@ -532,6 +711,11 @@ const Step1AboutYou = () => {
                     <option value="no">No</option>
                     <option value="not sure">Not sure</option>
                   </select>
+                  {validationErrors.hasWebsite && (
+                    <div className={styles.errorMessage}>
+                      {validationErrors.hasWebsite}
+                    </div>
+                  )}
                 </div>
 
                 {/* Conditional Website URL Input */}
@@ -549,6 +733,7 @@ const Step1AboutYou = () => {
                       }`}
                       value={formData.websiteUrl}
                       onChange={handleInputChange}
+                      onBlur={handleFieldBlur}
                       placeholder="https://www.example.com"
                     />
                     {validationErrors.websiteUrl && (
@@ -567,7 +752,9 @@ const Step1AboutYou = () => {
                 </label>
                 <select
                   name="country"
-                  className={`form-select ${styles.select} ${styles.smoothDropdown}`}
+                  className={`form-select ${styles.select} ${
+                    styles.smoothDropdown
+                  } ${validationErrors.country ? styles.inputError : ""}`}
                   value={formData.country}
                   onChange={handleInputChange}
                   disabled={loadingCountries}
@@ -587,6 +774,11 @@ const Step1AboutYou = () => {
                     </>
                   )}
                 </select>
+                {validationErrors.country && (
+                  <div className={styles.errorMessage}>
+                    {validationErrors.country}
+                  </div>
+                )}
               </div>
 
               {/* Checkboxes */}
@@ -605,7 +797,7 @@ const Step1AboutYou = () => {
                   </label>
                 </div>
 
-                <div className="form-check d-flex align-items-start">
+                <div className="form-check">
                   <input
                     type="checkbox"
                     name="receiveInfo"

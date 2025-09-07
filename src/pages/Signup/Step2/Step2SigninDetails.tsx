@@ -25,6 +25,7 @@ interface FormTouched {
 
 const Step2SigninDetails = () => {
   const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     email: "",
@@ -49,15 +50,15 @@ const Step2SigninDetails = () => {
 
   // Handle logo click to navigate to landing page
   const handleLogoClick = () => {
-    navigate("/"); // Navigate to the landing page (root path)
+    navigate("/");
   };
 
-  // Validation functions
+  // Enhanced validation functions
   const validateEmail = (email: string): string => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim()) {
-      return "Email is required";
+      return "";
     }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return "Please enter a valid email address";
     }
@@ -66,7 +67,7 @@ const Step2SigninDetails = () => {
 
   const validatePassword = (password: string): string => {
     if (!password) {
-      return "Password is required";
+      return "";
     }
     if (password.length < 8) {
       return "Password must be at least 8 characters long";
@@ -91,7 +92,7 @@ const Step2SigninDetails = () => {
     password: string
   ): string => {
     if (!confirmPassword) {
-      return "Please confirm your password";
+      return "";
     }
     if (confirmPassword !== password) {
       return "Passwords do not match";
@@ -99,33 +100,91 @@ const Step2SigninDetails = () => {
     return "";
   };
 
-  // Handle input change with real-time validation
+  const validateRequired = (value: string): boolean => {
+    return value.trim().length > 0;
+  };
+
+  // Handle input change with real-time filtering and validation
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let processedValue = value;
+
+    // Apply input filtering based on field type
+    switch (name) {
+      case "email":
+        // Remove spaces and convert to lowercase
+        processedValue = value.toLowerCase().replace(/\s/g, "");
+        break;
+      case "password":
+      case "confirmPassword":
+        // Don't filter password fields - allow all characters
+        processedValue = value;
+        break;
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: processedValue,
     }));
 
-    // Real-time validation
-    let error = "";
-    if (name === "email") {
-      error = validateEmail(value);
-    } else if (name === "password") {
-      error = validatePassword(value);
-      // Also revalidate confirm password if it exists
-      if (formData.confirmPassword && touched.confirmPassword) {
-        const confirmError = validateConfirmPassword(
-          formData.confirmPassword,
-          value
-        );
-        setErrors((prev) => ({
-          ...prev,
-          confirmPassword: confirmError,
-        }));
-      }
+    // Clear error when user starts typing (if field was previously invalid)
+    if (
+      touched[name as keyof FormTouched] &&
+      processedValue.trim().length > 0
+    ) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+
+    // Real-time validation for password matching
+    if (
+      name === "password" &&
+      formData.confirmPassword &&
+      touched.confirmPassword
+    ) {
+      const confirmError = validateConfirmPassword(
+        formData.confirmPassword,
+        processedValue
+      );
+      setErrors((prev) => ({
+        ...prev,
+        confirmPassword: confirmError,
+      }));
     } else if (name === "confirmPassword") {
-      error = validateConfirmPassword(value, formData.password);
+      const confirmError = validateConfirmPassword(
+        processedValue,
+        formData.password
+      );
+      setErrors((prev) => ({
+        ...prev,
+        confirmPassword: confirmError,
+      }));
+    }
+  };
+
+  // Handle input blur (when user leaves the field)
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setTouched((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+
+    // Validate the field on blur
+    let error = "";
+    switch (name) {
+      case "email":
+        error = validateEmail(value);
+        break;
+      case "password":
+        error = validatePassword(value);
+        break;
+      case "confirmPassword":
+        error = validateConfirmPassword(value, formData.password);
+        break;
     }
 
     setErrors((prev) => ({
@@ -134,18 +193,56 @@ const Step2SigninDetails = () => {
     }));
   };
 
-  // Handle input blur (when user leaves the field)
-  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    setTouched((prev) => ({
-      ...prev,
-      [name]: true,
-    }));
+  // Comprehensive form validation for submission
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    };
+
+    // Required field validations
+    if (!validateRequired(formData.email)) {
+      newErrors.email = "Email is required";
+    } else {
+      newErrors.email = validateEmail(formData.email);
+    }
+
+    if (!validateRequired(formData.password)) {
+      newErrors.password = "Password is required";
+    } else {
+      newErrors.password = validatePassword(formData.password);
+    }
+
+    if (!validateRequired(formData.confirmPassword)) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else {
+      newErrors.confirmPassword = validateConfirmPassword(
+        formData.confirmPassword,
+        formData.password
+      );
+    }
+
+    setErrors(newErrors);
+    setTouched({
+      email: true,
+      password: true,
+      confirmPassword: true,
+    });
+
+    // Check if there are any errors
+    return Object.values(newErrors).every((error) => error === "");
   };
 
   const handleNext = () => {
-    console.log("Form submitted:", formData);
-    navigate("/signup/step3");
+    setIsSubmitted(true);
+
+    if (validateForm()) {
+      console.log("Form submitted:", formData);
+      navigate("/signup/step3");
+    } else {
+      console.log("Form has validation errors:", errors);
+    }
   };
 
   return (
@@ -223,14 +320,15 @@ const Step2SigninDetails = () => {
                   type="email"
                   name="email"
                   className={`form-control ${styles.input} ${
-                    touched.email && errors.email ? styles.inputError : ""
+                    errors.email ? styles.inputError : ""
                   }`}
                   value={formData.email}
                   onChange={handleInputChange}
                   onBlur={handleInputBlur}
+                  placeholder="Enter your email address"
                   required
                 />
-                {touched.email && errors.email && (
+                {errors.email && (
                   <div className={styles.errorMessage}>{errors.email}</div>
                 )}
               </div>
@@ -246,11 +344,7 @@ const Step2SigninDetails = () => {
                     name="password"
                     className={`form-control ${styles.input} ${
                       styles.passwordInput
-                    } ${
-                      touched.password && errors.password
-                        ? styles.inputError
-                        : ""
-                    }`}
+                    } ${errors.password ? styles.inputError : ""}`}
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleInputChange}
@@ -262,11 +356,10 @@ const Step2SigninDetails = () => {
                     className={styles.eyeButton}
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {/* icon reflects CURRENT STATE */}
                     {showPassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
                 </div>
-                {touched.password && errors.password && (
+                {errors.password && (
                   <div className={styles.errorMessage}>{errors.password}</div>
                 )}
               </div>
@@ -282,11 +375,7 @@ const Step2SigninDetails = () => {
                     name="confirmPassword"
                     className={`form-control ${styles.input} ${
                       styles.passwordInput
-                    } ${
-                      touched.confirmPassword && errors.confirmPassword
-                        ? styles.inputError
-                        : ""
-                    }`}
+                    } ${errors.confirmPassword ? styles.inputError : ""}`}
                     placeholder="Confirm your password"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
@@ -298,11 +387,10 @@ const Step2SigninDetails = () => {
                     className={styles.eyeButton}
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {/* icon reflects CURRENT STATE */}
                     {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
                   </button>
                 </div>
-                {touched.confirmPassword && errors.confirmPassword && (
+                {errors.confirmPassword && (
                   <div className={styles.errorMessage}>
                     {errors.confirmPassword}
                   </div>

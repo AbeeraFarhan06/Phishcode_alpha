@@ -12,25 +12,48 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import PageLayoutTemplate from "../../../../components/PageLayoutTemplate/PageLayoutTemplate";
 
+interface FormData {
+  password: string;
+  confirmPassword: string;
+}
+
+interface FormErrors {
+  password: string;
+  confirmPassword: string;
+}
+
+interface FormTouched {
+  password: boolean;
+  confirmPassword: boolean;
+}
+
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     password: "",
     confirmPassword: "",
   });
 
-  const [validationErrors, setValidationErrors] = useState({
+  const [errors, setErrors] = useState<FormErrors>({
     password: "",
     confirmPassword: "",
   });
 
-  // ⬇️ Added: local visibility state for both fields
+  const [touched, setTouched] = useState<FormTouched>({
+    password: false,
+    confirmPassword: false,
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const validatePassword = (password: string) => {
-    if (password.length === 0) return "";
+  // Enhanced validation functions
+  const validatePassword = (password: string): string => {
+    if (!password) {
+      return "";
+    }
     if (password.length < 8) {
       return "Password must be at least 8 characters long";
     }
@@ -52,14 +75,21 @@ const ResetPasswordPage = () => {
   const validateConfirmPassword = (
     confirmPassword: string,
     password: string
-  ) => {
-    if (confirmPassword.length === 0) return "";
+  ): string => {
+    if (!confirmPassword) {
+      return "";
+    }
     if (confirmPassword !== password) {
       return "Passwords do not match";
     }
     return "";
   };
 
+  const validateRequired = (value: string): boolean => {
+    return value.trim().length > 0;
+  };
+
+  // Handle input change with real-time validation clearing
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -68,47 +98,105 @@ const ResetPasswordPage = () => {
       [name]: value,
     }));
 
-    // Real-time validation
-    if (name === "password") {
-      const passwordError = validatePassword(value);
-      const confirmPasswordError = validateConfirmPassword(
+    // Clear error when user starts typing
+    if (touched[name as keyof FormTouched] && value.trim().length > 0) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+
+    // Real-time password matching validation
+    if (
+      name === "password" &&
+      formData.confirmPassword &&
+      touched.confirmPassword
+    ) {
+      const confirmError = validateConfirmPassword(
         formData.confirmPassword,
         value
       );
-      setValidationErrors((prev) => ({
+      setErrors((prev) => ({
         ...prev,
-        password: passwordError,
-        confirmPassword: confirmPasswordError,
+        confirmPassword: confirmError,
       }));
     } else if (name === "confirmPassword") {
-      const confirmPasswordError = validateConfirmPassword(
-        value,
-        formData.password
-      );
-      setValidationErrors((prev) => ({
+      const confirmError = validateConfirmPassword(value, formData.password);
+      setErrors((prev) => ({
         ...prev,
-        confirmPassword: confirmPasswordError,
+        confirmPassword: confirmError,
       }));
     }
   };
 
-  const handleDone = () => {
-    const passwordError = validatePassword(formData.password);
-    const confirmPasswordError = validateConfirmPassword(
-      formData.confirmPassword,
-      formData.password
-    );
+  // Handle field blur validation
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-    if (passwordError || confirmPasswordError) {
-      setValidationErrors({
-        password: passwordError,
-        confirmPassword: confirmPasswordError,
-      });
-      return;
+    setTouched((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+
+    // Validate the field on blur
+    let error = "";
+    switch (name) {
+      case "password":
+        error = validatePassword(value);
+        break;
+      case "confirmPassword":
+        error = validateConfirmPassword(value, formData.password);
+        break;
     }
 
-    console.log("Password reset form submitted:", formData);
-    navigate("/signin");
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error,
+    }));
+  };
+
+  // Comprehensive form validation for submission
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {
+      password: "",
+      confirmPassword: "",
+    };
+
+    // Required field validations
+    if (!validateRequired(formData.password)) {
+      newErrors.password = "Password is required";
+    } else {
+      newErrors.password = validatePassword(formData.password);
+    }
+
+    if (!validateRequired(formData.confirmPassword)) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else {
+      newErrors.confirmPassword = validateConfirmPassword(
+        formData.confirmPassword,
+        formData.password
+      );
+    }
+
+    setErrors(newErrors);
+    setTouched({
+      password: true,
+      confirmPassword: true,
+    });
+
+    // Check if there are any errors
+    return Object.values(newErrors).every((error) => error === "");
+  };
+
+  const handleDone = () => {
+    setIsSubmitted(true);
+
+    if (validateForm()) {
+      console.log("Password reset form submitted:", formData);
+      navigate("/signin");
+    } else {
+      console.log("Form has validation errors:", errors);
+    }
   };
 
   const handleCancel = () => {
@@ -116,42 +204,56 @@ const ResetPasswordPage = () => {
   };
 
   // Responsive values for form elements
-  const descriptionFontSize = useBreakpointValue({
-    base: "0.85rem", // xs
-    xs: "0.85rem",
-    sm: "0.9rem", // sm
-    md: "clamp(0.9rem, 3vw, 1rem)",
-    lg: "clamp(0.9rem, 3vw, 1rem)",
-  });
-
   const inputFontSize = useBreakpointValue({
-    base: "0.85rem", // xs
-    xs: "0.8rem", // very small
-    sm: "0.85rem", // sm
+    base: "0.85rem",
+    xs: "0.8rem",
+    sm: "0.85rem",
     md: "clamp(0.9rem, 3vw, 1rem)",
     lg: "clamp(0.9rem, 3vw, 1rem)",
   });
 
   const inputPadding = useBreakpointValue({
-    base: "0.75rem 0", // xs
+    base: "0.75rem 0",
     xs: "0.75rem 0",
-    sm: "0.75rem 0", // sm
+    sm: "0.75rem 0",
     md: "0.75rem 0",
     lg: "0.75rem 0",
   });
 
   const errorFontSize = useBreakpointValue({
-    base: "0.75rem", // xs
+    base: "0.75rem",
     xs: "0.75rem",
-    sm: "0.75rem", // sm
+    sm: "0.75rem",
     md: "clamp(0.75rem, 2.5vw, 0.8rem)",
     lg: "clamp(0.75rem, 2.5vw, 0.8rem)",
   });
 
-  // Content for the template - USING EXACT SAME SLOTS AS SIGN IN
+  // Input styles - always blue border to match other pages
+  const inputStyles = {
+    bg: "transparent",
+    border: "none",
+    borderBottom: "0.0625rem solid #4285f4",
+    borderRadius: "0",
+    boxShadow: "none",
+    fontSize: inputFontSize,
+    color: "#4a5568",
+    p: inputPadding,
+    w: "100%",
+    mb: "0.5rem",
+    _placeholder: {
+      color: "#a0aec0",
+      fontSize: inputFontSize,
+    },
+    _focus: {
+      borderBottomColor: "#4285f4",
+      boxShadow: "none",
+    },
+  };
+
+  // Content for the template
   const pageContent = (
     <>
-      {/* Description Text - SLOT 1 (where email input is in Sign In) */}
+      {/* Description Text - SLOT 1 */}
       <Box mb="1.5rem">
         <Text
           color="#4a5568"
@@ -165,7 +267,7 @@ const ResetPasswordPage = () => {
         </Text>
       </Box>
 
-      {/* Password Input - SLOT 2 (where password input is in Sign In) */}
+      {/* Password Input - SLOT 2 */}
       <Box mb="1.5rem">
         <InputGroup>
           <Input
@@ -174,33 +276,13 @@ const ResetPasswordPage = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}
-            bg="transparent"
-            border="none"
-            borderBottom={
-              validationErrors.password
-                ? "0.0625rem solid #e53e3e"
-                : "0.0625rem solid #4285f4"
-            }
-            borderRadius="0"
-            boxShadow="none"
-            fontSize={inputFontSize}
-            color="#4a5568"
-            p={inputPadding}
-            w="100%"
-            mb="0.5rem"
-            _placeholder={{
-              color: "#a0aec0",
-              fontSize: inputFontSize,
-            }}
-            _focus={{
-              borderBottomColor: "#4285f4",
-              boxShadow: "none",
-            }}
+            onBlur={handleInputBlur}
+            {...inputStyles}
           />
           <InputRightElement width="3rem">
             <IconButton
               aria-label={showPassword ? "Hide password" : "Show password"}
-              icon={showPassword ? <ViewIcon /> : <ViewOffIcon />} // icon reflects current state
+              icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
               size="sm"
               variant="ghost"
               color="gray.500"
@@ -208,7 +290,7 @@ const ResetPasswordPage = () => {
             />
           </InputRightElement>
         </InputGroup>
-        {validationErrors.password && (
+        {errors.password && (
           <Text
             color="#e53e3e"
             fontSize={errorFontSize}
@@ -216,12 +298,12 @@ const ResetPasswordPage = () => {
             pl="0"
             lineHeight="1.2"
           >
-            {validationErrors.password}
+            {errors.password}
           </Text>
         )}
       </Box>
 
-      {/* Confirm Password Input - SLOT 3 (where links are in Sign In) */}
+      {/* Confirm Password Input - SLOT 3 */}
       <Box mb="1.5rem">
         <InputGroup>
           <Input
@@ -230,35 +312,15 @@ const ResetPasswordPage = () => {
             placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleInputChange}
-            bg="transparent"
-            border="none"
-            borderBottom={
-              validationErrors.confirmPassword
-                ? "0.0625rem solid #e53e3e"
-                : "0.0625rem solid #4285f4"
-            }
-            borderRadius="0"
-            boxShadow="none"
-            fontSize={inputFontSize}
-            color="#4a5568"
-            p={inputPadding}
-            w="100%"
-            mb="0.5rem"
-            _placeholder={{
-              color: "#a0aec0",
-              fontSize: inputFontSize,
-            }}
-            _focus={{
-              borderBottomColor: "#4285f4",
-              boxShadow: "none",
-            }}
+            onBlur={handleInputBlur}
+            {...inputStyles}
           />
           <InputRightElement width="3rem">
             <IconButton
               aria-label={
                 showConfirm ? "Hide confirm password" : "Show confirm password"
               }
-              icon={showConfirm ? <ViewIcon /> : <ViewOffIcon />} // icon reflects current state
+              icon={showConfirm ? <ViewIcon /> : <ViewOffIcon />}
               size="sm"
               variant="ghost"
               color="gray.500"
@@ -266,7 +328,7 @@ const ResetPasswordPage = () => {
             />
           </InputRightElement>
         </InputGroup>
-        {validationErrors.confirmPassword && (
+        {errors.confirmPassword && (
           <Text
             color="#e53e3e"
             fontSize={errorFontSize}
@@ -274,7 +336,7 @@ const ResetPasswordPage = () => {
             pl="0"
             lineHeight="1.2"
           >
-            {validationErrors.confirmPassword}
+            {errors.confirmPassword}
           </Text>
         )}
       </Box>
@@ -282,15 +344,25 @@ const ResetPasswordPage = () => {
   );
 
   return (
-    <PageLayoutTemplate
-      title="Reset your password"
-      onNext={handleDone}
-      onCancel={handleCancel}
-      nextButtonText="Done"
-      showCancelButton={false}
+    <Box
+      sx={{
+        "& .chakra-card": {
+          height: "auto !important",
+          maxHeight: "none !important",
+          minHeight: "32rem !important",
+        },
+      }}
     >
-      {pageContent}
-    </PageLayoutTemplate>
+      <PageLayoutTemplate
+        title="Reset your password"
+        onNext={handleDone}
+        onCancel={handleCancel}
+        nextButtonText="Done"
+        showCancelButton={false}
+      >
+        {pageContent}
+      </PageLayoutTemplate>
+    </Box>
   );
 };
 

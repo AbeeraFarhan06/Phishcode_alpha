@@ -69,6 +69,11 @@ const ContactUs = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Debug: Log form data changes
+  useEffect(() => {
+    console.log("Current form data:", formData);
+  }, [formData]);
+
   // Fetch country codes
   useEffect(() => {
     const fetchCountryCodes = async () => {
@@ -105,6 +110,7 @@ const ContactUs = () => {
           );
 
         setCountryCodes(codes);
+        console.log("Country codes loaded:", codes.length);
       } catch (error) {
         console.error("Error fetching country codes:", error);
         setCountryCodes([
@@ -137,6 +143,7 @@ const ContactUs = () => {
           .sort();
 
         setCountries(countryNames);
+        console.log("Countries loaded:", countryNames.length);
       } catch (error) {
         console.error("Error fetching countries:", error);
         setCountries([
@@ -154,7 +161,7 @@ const ContactUs = () => {
     fetchCountries();
   }, []);
 
-  // Validation functions
+  // Enhanced validation functions
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -162,28 +169,82 @@ const ContactUs = () => {
 
   const validatePhone = (phone: string): boolean => {
     const phoneRegex = /^[0-9\s\-\+\(\)]+$/;
-    return phoneRegex.test(phone) && phone.replace(/[^0-9]/g, "").length >= 7;
+    const cleanPhone = phone.replace(/[^0-9]/g, "");
+    return (
+      phoneRegex.test(phone) &&
+      cleanPhone.length >= 7 &&
+      cleanPhone.length <= 15
+    );
   };
 
   const validateRequired = (value: string): boolean => {
     return value.trim().length > 0;
   };
 
-  // Handle input changes with real-time validation
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  const validateName = (name: string): boolean => {
+    const nameRegex = /^[a-zA-Z\s'-]+$/;
+    return nameRegex.test(name) && name.trim().length > 0;
+  };
 
-    // Real-time validation for specific fields
-    if (field === "phone" && value) {
-      // Only allow numbers, spaces, hyphens, plus, and parentheses
-      const cleanValue = value.replace(/[^0-9\s\-\+\(\)]/g, "");
-      if (cleanValue !== value) {
-        setFormData((prev) => ({ ...prev, [field]: cleanValue }));
-      }
+  const validateCompanyName = (companyName: string): boolean => {
+    const companyRegex = /^[a-zA-Z0-9\s.,&'-]+$/;
+    return companyRegex.test(companyName) && companyName.trim().length > 0;
+  };
+
+  const validateJobRole = (jobRole: string): boolean => {
+    const jobRegex = /^[a-zA-Z\s.,&'()-]+$/;
+    return jobRegex.test(jobRole) && jobRole.trim().length > 0;
+  };
+
+  // Simple update functions for each field
+  const updateField = (field: keyof FormData, value: string) => {
+    console.log(`Updating ${field} to:`, value);
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+      console.log("Updated form data:", updated);
+      return updated;
+    });
+
+    // Clear error when field gets a value
+    if (value.trim().length > 0 && errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
     }
   };
 
-  // Handle field blur (when user leaves the field)
+  // Handle input changes with filtering for text inputs only
+  const handleInputChange = (field: keyof FormData, value: string) => {
+    let filteredValue = value;
+
+    // Apply filtering only for text inputs
+    switch (field) {
+      case "firstName":
+      case "lastName":
+        filteredValue = value.replace(/[^a-zA-Z\s'-]/g, "");
+        break;
+      case "phone":
+        filteredValue = value.replace(/[^0-9\s\-\+\(\)]/g, "");
+        break;
+      case "companyName":
+        filteredValue = value.replace(/[^a-zA-Z0-9\s.,&'-]/g, "");
+        break;
+      case "jobRole":
+        filteredValue = value.replace(/[^a-zA-Z\s.,&'()-]/g, "");
+        break;
+      case "email":
+        filteredValue = value.replace(/\s/g, "");
+        break;
+      default:
+        filteredValue = value;
+    }
+
+    updateField(field, filteredValue);
+  };
+
+  // Handle field blur validation
   const handleFieldBlur = (field: keyof FormData, value: string) => {
     const newErrors = { ...errors };
 
@@ -191,17 +252,24 @@ const ContactUs = () => {
       case "firstName":
         if (!validateRequired(value)) {
           newErrors.firstName = "First name is required";
+        } else if (!validateName(value)) {
+          newErrors.firstName =
+            "Please enter a valid first name (letters only)";
         } else {
           delete newErrors.firstName;
         }
         break;
+
       case "lastName":
         if (!validateRequired(value)) {
           newErrors.lastName = "Last name is required";
+        } else if (!validateName(value)) {
+          newErrors.lastName = "Please enter a valid last name (letters only)";
         } else {
           delete newErrors.lastName;
         }
         break;
+
       case "email":
         if (!validateRequired(value)) {
           newErrors.email = "Email is required";
@@ -211,13 +279,17 @@ const ContactUs = () => {
           delete newErrors.email;
         }
         break;
+
       case "companyName":
         if (!validateRequired(value)) {
           newErrors.companyName = "Company name is required";
+        } else if (!validateCompanyName(value)) {
+          newErrors.companyName = "Please enter a valid company name";
         } else {
           delete newErrors.companyName;
         }
         break;
+
       case "companySize":
         if (!validateRequired(value)) {
           newErrors.companySize = "Company size is required";
@@ -225,27 +297,40 @@ const ContactUs = () => {
           delete newErrors.companySize;
         }
         break;
+
       case "jobRole":
         if (!validateRequired(value)) {
           newErrors.jobRole = "Job role is required";
+        } else if (!validateJobRole(value)) {
+          newErrors.jobRole = "Please enter a valid job role";
         } else {
           delete newErrors.jobRole;
         }
         break;
+
       case "phone":
         if (!validateRequired(value)) {
           newErrors.phone = "Phone number is required";
         } else if (!validatePhone(value)) {
-          newErrors.phone = "Please enter a valid phone number (numbers only)";
+          newErrors.phone = "Please enter a valid phone number (7-15 digits)";
         } else {
           delete newErrors.phone;
         }
         break;
+
       case "country":
         if (!validateRequired(value)) {
           newErrors.country = "Country/Region is required";
         } else {
           delete newErrors.country;
+        }
+        break;
+
+      case "countryCode":
+        if (!validateRequired(value)) {
+          newErrors.countryCode = "Country code is required";
+        } else {
+          delete newErrors.countryCode;
         }
         break;
     }
@@ -259,10 +344,14 @@ const ContactUs = () => {
 
     if (!validateRequired(formData.firstName)) {
       newErrors.firstName = "First name is required";
+    } else if (!validateName(formData.firstName)) {
+      newErrors.firstName = "Please enter a valid first name (letters only)";
     }
 
     if (!validateRequired(formData.lastName)) {
       newErrors.lastName = "Last name is required";
+    } else if (!validateName(formData.lastName)) {
+      newErrors.lastName = "Please enter a valid last name (letters only)";
     }
 
     if (!validateRequired(formData.email)) {
@@ -273,6 +362,8 @@ const ContactUs = () => {
 
     if (!validateRequired(formData.companyName)) {
       newErrors.companyName = "Company name is required";
+    } else if (!validateCompanyName(formData.companyName)) {
+      newErrors.companyName = "Please enter a valid company name";
     }
 
     if (!validateRequired(formData.companySize)) {
@@ -281,12 +372,18 @@ const ContactUs = () => {
 
     if (!validateRequired(formData.jobRole)) {
       newErrors.jobRole = "Job role is required";
+    } else if (!validateJobRole(formData.jobRole)) {
+      newErrors.jobRole = "Please enter a valid job role";
+    }
+
+    if (!validateRequired(formData.countryCode)) {
+      newErrors.countryCode = "Country code is required";
     }
 
     if (!validateRequired(formData.phone)) {
       newErrors.phone = "Phone number is required";
     } else if (!validatePhone(formData.phone)) {
-      newErrors.phone = "Please enter a valid phone number (numbers only)";
+      newErrors.phone = "Please enter a valid phone number (7-15 digits)";
     }
 
     if (!validateRequired(formData.country)) {
@@ -303,10 +400,8 @@ const ContactUs = () => {
     setIsSubmitted(true);
 
     if (validateForm()) {
-      // Form is valid, handle submission
       console.log("Form submitted successfully:", formData);
       alert("Form submitted successfully!");
-      // Here you would typically send the data to your backend
     } else {
       console.log("Form has validation errors:", errors);
     }
@@ -316,12 +411,12 @@ const ContactUs = () => {
     border: "0.0625rem solid #d1d5db",
     borderRadius: "0.25rem",
     _hover: {
-      border: "0.0625rem solid #d1d5db", // keep same border
+      border: "0.0625rem solid #d1d5db",
     },
     _focus: {
-      border: "0.125rem solid #4f7cff", // blue border on focus (slightly thicker)
-      boxShadow: "0 0 0 1px #4f7cff", // blue shadow for better visibility
-      outline: "none", // remove default outline
+      border: "0.125rem solid #4f7cff",
+      boxShadow: "0 0 0 1px #4f7cff",
+      outline: "none",
     },
     _focusVisible: {
       border: "0.125rem solid #4f7cff",
@@ -330,7 +425,6 @@ const ContactUs = () => {
     },
   };
 
-  // Style for inputs with errors
   const getInputStyle = (fieldName: keyof FormErrors) => ({
     ...inputSelectStyle,
     borderColor: errors[fieldName] ? "#e53e3e" : "#d1d5db",
@@ -340,14 +434,6 @@ const ContactUs = () => {
       boxShadow: errors[fieldName] ? "0 0 0 1px #e53e3e" : "0 0 0 1px #4f7cff",
     },
   });
-
-  // Common style for Select option background
-  const selectOptionStyle = {
-    "& option": {
-      backgroundColor: "white",
-      color: "black",
-    },
-  };
 
   return (
     <Box bg="white" width="100%">
@@ -405,7 +491,7 @@ const ContactUs = () => {
                 Contact me
               </Heading>
               <Text fontSize="16px" mb={4} textAlign="justify">
-                Just fill out the form, and we’ll reach out to you soon.
+                Just fill out the form, and we'll reach out to you soon.
               </Text>
               <VStack spacing={4} align="stretch">
                 <FormControl isRequired isInvalid={!!errors.firstName}>
@@ -417,6 +503,7 @@ const ContactUs = () => {
                       handleInputChange("firstName", e.target.value)
                     }
                     onBlur={(e) => handleFieldBlur("firstName", e.target.value)}
+                    placeholder="Enter your first name"
                   />
                   <FormErrorMessage>{errors.firstName}</FormErrorMessage>
                 </FormControl>
@@ -430,6 +517,7 @@ const ContactUs = () => {
                       handleInputChange("lastName", e.target.value)
                     }
                     onBlur={(e) => handleFieldBlur("lastName", e.target.value)}
+                    placeholder="Enter your last name"
                   />
                   <FormErrorMessage>{errors.lastName}</FormErrorMessage>
                 </FormControl>
@@ -442,6 +530,7 @@ const ContactUs = () => {
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     onBlur={(e) => handleFieldBlur("email", e.target.value)}
+                    placeholder="Enter your email address"
                   />
                   <FormErrorMessage>{errors.email}</FormErrorMessage>
                 </FormControl>
@@ -457,6 +546,7 @@ const ContactUs = () => {
                     onBlur={(e) =>
                       handleFieldBlur("companyName", e.target.value)
                     }
+                    placeholder="Enter your company name"
                   />
                   <FormErrorMessage>{errors.companyName}</FormErrorMessage>
                 </FormControl>
@@ -464,22 +554,25 @@ const ContactUs = () => {
                 <FormControl isRequired isInvalid={!!errors.companySize}>
                   <FormLabel fontSize="16px">Company size</FormLabel>
                   <Select
-                    placeholder="Company size"
+                    placeholder="Select company size"
                     {...getInputStyle("companySize")}
-                    sx={selectOptionStyle}
                     value={formData.companySize}
-                    onChange={(e) =>
-                      handleFieldBlur("companySize", e.target.value)
-                    }
+                    onChange={(e) => {
+                      console.log(
+                        "Company size onChange triggered:",
+                        e.target.value
+                      );
+                      updateField("companySize", e.target.value);
+                    }}
                   >
-                    <option>1</option>
-                    <option>2-4</option>
-                    <option>5-9</option>
-                    <option>10-24</option>
-                    <option>25-49</option>
-                    <option>50-249</option>
-                    <option>250-999</option>
-                    <option>1000+</option>
+                    <option value="1">1</option>
+                    <option value="2-4">2-4</option>
+                    <option value="5-9">5-9</option>
+                    <option value="10-24">10-24</option>
+                    <option value="25-49">25-49</option>
+                    <option value="50-249">50-249</option>
+                    <option value="250-999">250-999</option>
+                    <option value="1000+">1000+</option>
                   </Select>
                   <FormErrorMessage>{errors.companySize}</FormErrorMessage>
                 </FormControl>
@@ -493,38 +586,40 @@ const ContactUs = () => {
                       handleInputChange("jobRole", e.target.value)
                     }
                     onBlur={(e) => handleFieldBlur("jobRole", e.target.value)}
+                    placeholder="Enter your job role"
                   />
                   <FormErrorMessage>{errors.jobRole}</FormErrorMessage>
                 </FormControl>
 
-                <FormControl isRequired isInvalid={!!errors.phone}>
+                <FormControl
+                  isRequired
+                  isInvalid={!!errors.phone || !!errors.countryCode}
+                >
                   <FormLabel fontSize="16px">Phone</FormLabel>
                   <Flex gap={2} bgColor="white">
                     <Select
-                      placeholder={loadingCodes ? "Loading..." : "Country Code"}
+                      placeholder={loadingCodes ? "Loading..." : "Code"}
                       maxW="40%"
                       disabled={loadingCodes}
-                      {...inputSelectStyle}
-                      sx={selectOptionStyle}
+                      {...getInputStyle("countryCode")}
                       value={formData.countryCode}
-                      onChange={(e) =>
-                        handleInputChange("countryCode", e.target.value)
-                      }
+                      onChange={(e) => {
+                        console.log(
+                          "Country code onChange triggered:",
+                          e.target.value
+                        );
+                        updateField("countryCode", e.target.value);
+                      }}
                     >
-                      {loadingCodes ? (
-                        <option disabled>Loading country codes...</option>
-                      ) : (
-                        <>
-                          {countryCodes.map((country) => (
-                            <option
-                              key={`${country.name}-${country.code}`}
-                              value={country.code}
-                            >
-                              {country.name} {country.code}
-                            </option>
-                          ))}
-                        </>
-                      )}
+                      {!loadingCodes &&
+                        countryCodes.map((country) => (
+                          <option
+                            key={`${country.name}-${country.code}`}
+                            value={country.code}
+                          >
+                            {country.code} {country.name}
+                          </option>
+                        ))}
                     </Select>
 
                     <Input
@@ -537,7 +632,9 @@ const ContactUs = () => {
                       onBlur={(e) => handleFieldBlur("phone", e.target.value)}
                     />
                   </Flex>
-                  <FormErrorMessage>{errors.phone}</FormErrorMessage>
+                  <FormErrorMessage>
+                    {errors.countryCode || errors.phone}
+                  </FormErrorMessage>
                 </FormControl>
 
                 <FormControl isRequired isInvalid={!!errors.country}>
@@ -548,33 +645,30 @@ const ContactUs = () => {
                     }
                     disabled={loadingCountries}
                     {...getInputStyle("country")}
-                    sx={selectOptionStyle}
                     value={formData.country}
-                    onChange={(e) => handleFieldBlur("country", e.target.value)}
+                    onChange={(e) => {
+                      console.log(
+                        "Country onChange triggered:",
+                        e.target.value
+                      );
+                      updateField("country", e.target.value);
+                    }}
                   >
-                    {loadingCountries ? (
-                      <option disabled>Loading countries...</option>
-                    ) : (
-                      <>
-                        <option value="" disabled>
-                          Select country
+                    {!loadingCountries &&
+                      countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country}
                         </option>
-                        {countries.map((country) => (
-                          <option key={country} value={country}>
-                            {country}
-                          </option>
-                        ))}
-                      </>
-                    )}
+                      ))}
                   </Select>
                   <FormErrorMessage>{errors.country}</FormErrorMessage>
                 </FormControl>
 
                 <Button
                   type="submit"
-                  bg="#0E1726"
+                  bg="#2D3748"
                   color="white"
-                  _hover={{ bg: "#243B65" }}
+                  _hover={{ bg: "#1A202C" }}
                   borderRadius="none"
                   w="7rem"
                   h="2.5rem"
