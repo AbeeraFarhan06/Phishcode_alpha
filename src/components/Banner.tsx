@@ -122,7 +122,7 @@ const Banner = () => {
               <Button
                 variant="outline"
                 borderColor="white"
-                borderWidth="2px"
+                borderWidth="1px"
                 color="white"
                 aria-label="Sign In"
                 size="sm"
