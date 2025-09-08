@@ -74,61 +74,71 @@ const ContactUs = () => {
   const flexDirection = useBreakpointValue<"column" | "row">({
     base: "column", // Mobile: stack vertically
     md: "column", // Tablet: stack vertically
-    lg: "row", // Desktop: side by side
+    lg: "column", // Desktop: side by side
+    xl: "row",
   });
 
   const contentOrder = useBreakpointValue({
     base: 1, // Content first on mobile
     md: 1, // Content first on tablet
     lg: 1, // Content first on desktop (left side)
+    xl: 1,
   });
 
   const formOrder = useBreakpointValue({
     base: 2, // Form second on mobile
     md: 2, // Form second on tablet
     lg: 2, // Form second on desktop (right side)
+    xl: 2,
   });
 
   const containerPadding = useBreakpointValue({
     base: "1rem", // Mobile padding
     md: "2rem", // Tablet padding
     lg: "3rem", // Desktop padding
+    xl: "3rem",
   });
 
   const headingSize = useBreakpointValue({
     base: "28px", // Smaller on mobile
     md: "32px", // Medium on tablet
     lg: "37px", // Large on desktop
+    xl: "37px",
   });
 
   const formHeadingSize = useBreakpointValue({
     base: "24px", // Smaller on mobile
     md: "26px", // Medium on tablet
     lg: "29px", // Large on desktop
+    xl: "29px",
   });
 
   const textSize = useBreakpointValue({
     base: "14px", // Smaller on mobile
     md: "15px", // Medium on tablet
     lg: "16px", // Large on desktop
+    xl: "16px",
   });
 
   const formPadding = useBreakpointValue({
     base: "1.5rem", // Less padding on mobile
     md: "2rem", // Medium padding on tablet
     lg: "2rem", // Full padding on desktop
+    xl: "2rem",
   });
 
   const formMarginTop = useBreakpointValue({
     base: "2rem", // Space between content and form on mobile
     md: "2rem", // Space on tablet
     lg: "0", // No space on desktop (side by side)
+    xl: "0",
   });
 
   const gap = useBreakpointValue({
     base: 0, // No gap on mobile (stacked)
     md: 0, // No gap on tablet (stacked)
     lg: 12, // Gap on desktop (side by side)
+    xl: 12,
   });
 
   // Debug: Log form data changes
@@ -581,7 +591,8 @@ const ContactUs = () => {
               maxW={{
                 base: "100%", // Full width on mobile
                 md: "100%", // Full width on tablet
-                lg: "50%", // Half width on desktop
+                lg: "100%", // Half width on desktop
+                xl: "100%"
               }}
             >
               <form onSubmit={handleSubmit}>
