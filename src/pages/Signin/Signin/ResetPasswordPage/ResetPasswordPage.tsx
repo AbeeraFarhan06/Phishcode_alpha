@@ -203,32 +203,64 @@ const ResetPasswordPage = () => {
     navigate("/signin");
   };
 
-  // Responsive values for form elements
+  // Enhanced responsive values for better mobile support
   const inputFontSize = useBreakpointValue({
-    base: "0.85rem",
-    xs: "0.8rem",
-    sm: "0.85rem",
-    md: "clamp(0.9rem, 3vw, 1rem)",
-    lg: "clamp(0.9rem, 3vw, 1rem)",
+    base: "1rem", // Standard readable size on mobile
+    xs: "1rem", // Prevents zoom on iOS
+    sm: "0.95rem",
+    md: "1rem",
+    lg: "1rem",
   });
 
   const inputPadding = useBreakpointValue({
-    base: "0.75rem 0",
-    xs: "0.75rem 0",
-    sm: "0.75rem 0",
+    base: "1rem 0", // Better touch target on mobile
+    xs: "1rem 0",
+    sm: "0.875rem 0",
     md: "0.75rem 0",
     lg: "0.75rem 0",
   });
 
   const errorFontSize = useBreakpointValue({
-    base: "0.75rem",
-    xs: "0.75rem",
+    base: "0.8125rem", // Slightly larger for mobile readability
+    xs: "0.8125rem",
     sm: "0.75rem",
-    md: "clamp(0.75rem, 2.5vw, 0.8rem)",
-    lg: "clamp(0.75rem, 2.5vw, 0.8rem)",
+    md: "0.75rem",
+    lg: "0.75rem",
   });
 
-  // Input styles - always blue border to match other pages
+  const inputSpacing = useBreakpointValue({
+    base: "1.25rem", // More spacing on mobile
+    xs: "1.25rem",
+    sm: "1.25rem",
+    md: "1.5rem",
+    lg: "1.5rem",
+  });
+
+  const topSpacing = useBreakpointValue({
+    base: "0.5rem", // Less top spacing on mobile
+    xs: "0.5rem",
+    sm: "0.75rem",
+    md: "1rem",
+    lg: "1rem",
+  });
+
+  const eyeIconSize = useBreakpointValue({
+    base: "md", // Larger icon for better mobile touch
+    xs: "md",
+    sm: "sm",
+    md: "sm",
+    lg: "sm",
+  });
+
+  const descriptionFontSize = useBreakpointValue({
+    base: "1rem", // Better readability on mobile
+    xs: "1rem",
+    sm: "1.0625rem",
+    md: "1.125rem",
+    lg: "1.125rem",
+  });
+
+  // Enhanced input styles with better mobile support
   const inputStyles = {
     bg: "transparent",
     border: "none",
@@ -240,6 +272,13 @@ const ResetPasswordPage = () => {
     p: inputPadding,
     w: "100%",
     mb: "0.5rem",
+    minH: {
+      base: "2rem", // Better touch target on mobile
+      xs: "2rem",
+      sm: "auto",
+      md: "auto",
+      lg: "auto",
+    },
     _placeholder: {
       color: "#a0aec0",
       fontSize: inputFontSize,
@@ -247,28 +286,38 @@ const ResetPasswordPage = () => {
     _focus: {
       borderBottomColor: "#4285f4",
       boxShadow: "none",
+      outline: "none",
+    },
+    _hover: {
+      borderBottomColor: "#4285f4",
     },
   };
 
   // Content for the template
   const pageContent = (
-    <>
+    <Box>
       {/* Description Text - SLOT 1 */}
-      <Box mb="1.5rem">
+      <Box mb={inputSpacing} mt={topSpacing}>
         <Text
           color="#4a5568"
-          fontSize="1.125rem"
+          fontSize={descriptionFontSize}
           mb="0.5rem"
           textAlign="left"
           lineHeight="1.4"
-          p="0.75rem 0"
+          p={{
+            base: "0.5rem 0", // Less padding on mobile
+            xs: "0.5rem 0",
+            sm: "0.75rem 0",
+            md: "0.75rem 0",
+            lg: "0.75rem 0",
+          }}
         >
           Your password should be 8 characters minimum; case sensitive
         </Text>
       </Box>
 
       {/* Password Input - SLOT 2 */}
-      <Box mb="1.5rem">
+      <Box mb={inputSpacing}>
         <InputGroup>
           <Input
             type={showPassword ? "text" : "password"}
@@ -277,16 +326,38 @@ const ResetPasswordPage = () => {
             value={formData.password}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
+            autoComplete="new-password"
             {...inputStyles}
           />
-          <InputRightElement width="3rem">
+          <InputRightElement
+            width={{
+              base: "3.5rem", // Larger touch target on mobile
+              xs: "3.5rem",
+              sm: "3rem",
+              md: "3rem",
+              lg: "3rem",
+            }}
+            height={{
+              base: "2rem", // Match input height on mobile
+              xs: "2rem",
+              sm: "auto",
+              md: "auto",
+              lg: "auto",
+            }}
+          >
             <IconButton
               aria-label={showPassword ? "Hide password" : "Show password"}
               icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
-              size="sm"
+              size={eyeIconSize}
               variant="ghost"
               color="gray.500"
               onClick={() => setShowPassword((p) => !p)}
+              _hover={{
+                bg: "gray.100",
+              }}
+              _focus={{
+                boxShadow: "outline",
+              }}
             />
           </InputRightElement>
         </InputGroup>
@@ -294,9 +365,9 @@ const ResetPasswordPage = () => {
           <Text
             color="#e53e3e"
             fontSize={errorFontSize}
-            mt="0.25rem"
+            mt="0.5rem"
             pl="0"
-            lineHeight="1.2"
+            lineHeight="1.3"
           >
             {errors.password}
           </Text>
@@ -304,7 +375,7 @@ const ResetPasswordPage = () => {
       </Box>
 
       {/* Confirm Password Input - SLOT 3 */}
-      <Box mb="1.5rem">
+      <Box mb={inputSpacing}>
         <InputGroup>
           <Input
             type={showConfirm ? "text" : "password"}
@@ -313,18 +384,40 @@ const ResetPasswordPage = () => {
             value={formData.confirmPassword}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
+            autoComplete="new-password"
             {...inputStyles}
           />
-          <InputRightElement width="3rem">
+          <InputRightElement
+            width={{
+              base: "3.5rem", // Larger touch target on mobile
+              xs: "3.5rem",
+              sm: "3rem",
+              md: "3rem",
+              lg: "3rem",
+            }}
+            height={{
+              base: "2rem", // Match input height on mobile
+              xs: "2rem",
+              sm: "auto",
+              md: "auto",
+              lg: "auto",
+            }}
+          >
             <IconButton
               aria-label={
                 showConfirm ? "Hide confirm password" : "Show confirm password"
               }
               icon={showConfirm ? <ViewIcon /> : <ViewOffIcon />}
-              size="sm"
+              size={eyeIconSize}
               variant="ghost"
               color="gray.500"
               onClick={() => setShowConfirm((p) => !p)}
+              _hover={{
+                bg: "gray.100",
+              }}
+              _focus={{
+                boxShadow: "outline",
+              }}
             />
           </InputRightElement>
         </InputGroup>
@@ -332,24 +425,70 @@ const ResetPasswordPage = () => {
           <Text
             color="#e53e3e"
             fontSize={errorFontSize}
-            mt="0.25rem"
+            mt="0.5rem"
             pl="0"
-            lineHeight="1.2"
+            lineHeight="1.3"
           >
             {errors.confirmPassword}
           </Text>
         )}
       </Box>
-    </>
+    </Box>
   );
 
   return (
     <Box
       sx={{
+        // Enhanced mobile-specific styling with forced shadow
         "& .chakra-card": {
-          height: "auto !important",
-          maxHeight: "none !important",
-          minHeight: "32rem !important",
+          height: {
+            base: "100vh !important", // Full height on mobile
+            xs: "100vh !important",
+            sm: "auto !important",
+            md: "auto !important",
+            lg: "auto !important",
+          },
+          maxHeight: {
+            base: "100vh !important", // Constrain to viewport on mobile
+            xs: "100vh !important",
+            sm: "none !important",
+            md: "none !important",
+            lg: "none !important",
+          },
+          minHeight: {
+            base: "100vh !important",
+            xs: "100vh !important",
+            sm: "32rem !important",
+            md: "32rem !important",
+            lg: "32rem !important",
+          },
+          borderRadius: {
+            base: "0 !important", // Sharp edges everywhere
+            xs: "0 !important",
+            sm: "0 !important",
+            md: "0 !important",
+            lg: "0 !important",
+          },
+          // Force shadow with higher specificity
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4) !important",
+        },
+        "& .chakra-card.css-0": {
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4) !important",
+        },
+        // Media query for larger screens
+        "@media (min-width: 30em)": {
+          "& .chakra-card": {
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4) !important",
+          },
+          "& .chakra-card.css-0": {
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4) !important",
+          },
+        },
+        // Ensure proper viewport handling on mobile
+        "@media (max-width: 30em)": {
+          minHeight: "100vh",
+          height: "100vh",
+          overflow: "hidden",
         },
       }}
     >

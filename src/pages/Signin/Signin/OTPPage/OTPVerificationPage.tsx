@@ -31,99 +31,147 @@ const OTPVerificationPage = () => {
     // Handle resend OTP logic
   };
 
-  // Responsive values for form elements
+  // Enhanced responsive values for better mobile support
   const descriptionFontSize = useBreakpointValue({
-    base: "0.8rem", // xs
-    xs: "0.8rem",
-    sm: "0.8rem", // sm
-    md: "1.125rem", // 18px - keep larger for OTP page
+    base: "1rem", // Better readability on mobile
+    xs: "1rem",
+    sm: "1.0625rem",
+    md: "1.125rem",
     lg: "1.125rem",
   });
 
   const otpInputFontSize = useBreakpointValue({
-    base: "0.85rem", // xs
-    xs: "0.85rem",
-    sm: "0.9rem", // sm
-    md: "clamp(0.9rem, 3vw, 1rem)", // SAME AS SIGNIN
-    lg: "clamp(0.9rem, 3vw, 1rem)",
-  });
-
-  const otpInputWidth = useBreakpointValue({
-    base: "95%", // xs
-    xs: "95%",
-    sm: "90%", // sm
-    md: "min(15.625rem, 80vw)", // 250px max, 80% on small screens
-    lg: "min(15.625rem, 80vw)",
+    base: "1rem", // Standard readable size on mobile
+    xs: "1rem", // Prevents zoom on iOS
+    sm: "0.95rem",
+    md: "1rem",
+    lg: "1rem",
   });
 
   const otpInputPadding = useBreakpointValue({
-    base: "1rem 0", // xs
+    base: "1rem 0", // Better touch target on mobile
     xs: "1rem 0",
-    sm: "1rem 0", // sm
-    md: "0.75rem 0", // 12px
+    sm: "0.875rem 0",
+    md: "0.75rem 0",
     lg: "0.75rem 0",
   });
 
   const linkFontSize = useBreakpointValue({
-    base: "0.75rem", // xs
-    xs: "0.75rem",
-    sm: "0.8rem", // sm
-    md: "clamp(0.85rem, 3vw, 0.9375rem)", // SAME AS SIGNIN
-    lg: "clamp(0.85rem, 3vw, 0.9375rem)",
+    base: "0.875rem", // Better readability on mobile
+    xs: "0.875rem",
+    sm: "0.875rem",
+    md: "0.875rem",
+    lg: "0.875rem",
+  });
+
+  const inputSpacing = useBreakpointValue({
+    base: "1.25rem", // More spacing on mobile
+    xs: "1.25rem",
+    sm: "1.25rem",
+    md: "1.5rem",
+    lg: "1.5rem",
+  });
+
+  const topSpacing = useBreakpointValue({
+    base: "0.5rem", // Less top spacing on mobile
+    xs: "0.5rem",
+    sm: "0.75rem",
+    md: "1rem",
+    lg: "1rem",
   });
 
   const linkFlexDirection = useBreakpointValue<"row" | "column">({
-    base: "column", // xs - stack vertically
+    base: "column", // Stack vertically on mobile
     xs: "column",
-    sm: "column", // sm
-    md: "row", // desktop - inline
+    sm: "column",
+    md: "row", // Inline on desktop
     lg: "row",
   });
 
   const linkGap = useBreakpointValue({
-    base: "0.25rem", // xs
+    base: "0.25rem",
     xs: "0.25rem",
-    sm: "0.25rem", // sm
-    md: "0", // no gap on desktop
+    sm: "0.25rem",
+    md: "0",
     lg: "0",
   });
 
   const linkMarginLeft = useBreakpointValue({
-    base: "0", // xs
+    base: "0",
     xs: "0",
-    sm: "0", // sm
-    md: "0.375rem", // desktop spacing
+    sm: "0",
+    md: "0.375rem",
     lg: "0.375rem",
   });
 
   const linkMarginTop = useBreakpointValue({
-    base: "0.25rem", // xs
+    base: "0.25rem",
     xs: "0.25rem",
-    sm: "0.25rem", // sm
-    md: "0", // no top margin on desktop
+    sm: "0.25rem",
+    md: "0",
     lg: "0",
   });
 
+  // Enhanced input styles with better mobile support
+  const inputStyles = {
+    bg: "transparent",
+    border: "none",
+    borderBottom: "0.0625rem solid #4285f4",
+    borderRadius: "0",
+    boxShadow: "none",
+    fontSize: otpInputFontSize,
+    color: "#4a5568",
+    p: otpInputPadding,
+    w: "100%",
+    letterSpacing: "0.125rem",
+    minH: {
+      base: "2rem", // Better touch target on mobile
+      xs: "2rem",
+      sm: "auto",
+      md: "auto",
+      lg: "auto",
+    },
+    _placeholder: {
+      color: "#a0aec0",
+      fontSize: otpInputFontSize,
+      textAlign: "left",
+      letterSpacing: "normal",
+    },
+    _focus: {
+      borderBottomColor: "#4285f4",
+      boxShadow: "none",
+      outline: "none",
+    },
+    _hover: {
+      borderBottomColor: "#4285f4",
+    },
+  };
+
   // Content for the template
   const pageContent = (
-    <>
-      {/* Description Text - SLOT 1 with forced spacing */}
-      <Box mb="0.5rem">
+    <Box>
+      {/* Description Text - SLOT 1 */}
+      <Box mb={inputSpacing} mt={topSpacing}>
         <Text
           color="#4a5568"
           fontSize={descriptionFontSize}
-          mb="0.25rem" // Very tight spacing before input
-          mt="0"
+          mb="0.5rem"
           textAlign="left"
           lineHeight="1.4"
-          p="0.75rem 0"
+          p={{
+            base: "0.5rem 0", // Less padding on mobile
+            xs: "0.5rem 0",
+            sm: "0.75rem 0",
+            md: "0.75rem 0",
+            lg: "0.75rem 0",
+          }}
         >
           A code has been sent to your email. Please enter it to sign in.
         </Text>
       </Box>
 
-      {/* OTP Input - SLOT 2 with forced positioning */}
-      <Box mb="1.5rem">
+      {/* OTP Input - SLOT 2 */}
+      <Box mb={inputSpacing}>
         <Input
           type="text"
           name="otpCode"
@@ -131,40 +179,20 @@ const OTPVerificationPage = () => {
           value={otpCode}
           onChange={handleInputChange}
           maxLength={10}
-          bg="transparent"
-          border="none"
-          borderBottom="0.0625rem solid #4285f4"
-          borderRadius="0"
-          boxShadow="none"
-          fontSize={otpInputFontSize}
-          color="#4a5568"
-          p={otpInputPadding}
-          pt="0.5rem" // Reduce top padding
-          textAlign="left"
-          w="100%"
-          letterSpacing="0.125rem" // 2px
-          _placeholder={{
-            color: "#a0aec0",
-            fontSize: otpInputFontSize, // MATCH INPUT FONT SIZE
-            textAlign: "left",
-            letterSpacing: "normal",
-          }}
-          _focus={{
-            borderBottomColor: "#4285f4",
-            boxShadow: "none",
-            outline: "none",
-          }}
+          autoComplete="one-time-code"
+          inputMode="numeric" // Better mobile keyboard
+          {...inputStyles}
         />
       </Box>
 
-      {/* Resend Link - SLOT 3 with minimal spacing to match sign-in exactly */}
-      <Box mb="1.5rem">
-        <Box mb="2">
+      {/* Resend Link - SLOT 3 */}
+      <Box mb={inputSpacing}>
+        <Box mb="1rem">
           <Box
             display="inline-flex"
             alignItems="baseline"
             flexWrap="wrap"
-            justifyContent="center"
+            justifyContent="flex-start"
             flexDirection={linkFlexDirection}
             gap={linkGap}
           >
@@ -173,7 +201,7 @@ const OTPVerificationPage = () => {
               color="#2d3748"
               fontSize={linkFontSize}
               fontWeight="normal"
-              lineHeight="1.4"
+              lineHeight="1.5"
             >
               Did not receive code?
             </Text>
@@ -188,19 +216,27 @@ const OTPVerificationPage = () => {
               cursor="pointer"
               verticalAlign="baseline"
               lineHeight="inherit"
-              p="0.125rem 0"
+              p="0.25rem 0"
               ml={linkMarginLeft}
               mt={linkMarginTop}
               minW="auto"
               h="auto"
+              minH={{
+                base: "2rem", // Better touch target on mobile
+                xs: "2rem",
+                sm: "auto",
+                md: "auto",
+                lg: "auto",
+              }}
               _hover={{
                 color: "#3367d6",
                 textDecoration: "underline",
                 bg: "transparent",
               }}
               _focus={{
-                boxShadow: "none",
-                outline: "none",
+                boxShadow: "outline",
+                outline: "2px solid #4285f4",
+                outlineOffset: "2px",
                 bg: "transparent",
               }}
               _active={{
@@ -211,21 +247,75 @@ const OTPVerificationPage = () => {
             </Button>
           </Box>
         </Box>
-        {/* Minimal space to match sign-in button positioning exactly */}
-        <Box h="0.25rem" />
       </Box>
-    </>
+    </Box>
   );
 
   return (
-    <PageLayoutTemplate
-      title="Enter code to verify your identity"
-      onNext={handleVerify}
-      onCancel={handleCancel}
-      nextButtonText="Verify"
+    <Box
+      sx={{
+        // Enhanced mobile-specific styling with forced shadow
+        "& .chakra-card": {
+          height: {
+            base: "100vh !important", // Full height on mobile
+            xs: "100vh !important",
+            sm: "auto !important",
+            md: "auto !important",
+            lg: "auto !important",
+          },
+          maxHeight: {
+            base: "100vh !important", // Constrain to viewport on mobile
+            xs: "100vh !important",
+            sm: "none !important",
+            md: "none !important",
+            lg: "none !important",
+          },
+          minHeight: {
+            base: "100vh !important",
+            xs: "100vh !important",
+            sm: "32rem !important",
+            md: "32rem !important",
+            lg: "32rem !important",
+          },
+          borderRadius: {
+            base: "0 !important", // Sharp edges everywhere
+            xs: "0 !important",
+            sm: "0 !important",
+            md: "0 !important",
+            lg: "0 !important",
+          },
+          // Force shadow with higher specificity
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4) !important",
+        },
+        "& .chakra-card.css-0": {
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4) !important",
+        },
+        // Media query for larger screens
+        "@media (min-width: 30em)": {
+          "& .chakra-card": {
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4) !important",
+          },
+          "& .chakra-card.css-0": {
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4) !important",
+          },
+        },
+        // Ensure proper viewport handling on mobile
+        "@media (max-width: 30em)": {
+          minHeight: "100vh",
+          height: "100vh",
+          overflow: "hidden",
+        },
+      }}
     >
-      {pageContent}
-    </PageLayoutTemplate>
+      <PageLayoutTemplate
+        title="Enter code to verify your identity"
+        onNext={handleVerify}
+        onCancel={handleCancel}
+        nextButtonText="Verify"
+      >
+        {pageContent}
+      </PageLayoutTemplate>
+    </Box>
   );
 };
 

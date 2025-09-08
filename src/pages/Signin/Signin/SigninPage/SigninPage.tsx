@@ -183,40 +183,64 @@ const SignInPage = () => {
     navigate("/forget-password");
   };
 
-  // Responsive values for form elements
+  // Enhanced responsive values for better mobile support
   const inputFontSize = useBreakpointValue({
-    base: "0.85rem",
-    xs: "0.85rem",
-    sm: "0.9rem",
-    md: "clamp(0.9rem, 3vw, 1rem)",
-    lg: "clamp(0.9rem, 3vw, 1rem)",
+    base: "1rem", // Standard readable size on mobile
+    xs: "1rem", // Prevents zoom on iOS
+    sm: "0.95rem",
+    md: "1rem",
+    lg: "1rem",
   });
 
   const linkFontSize = useBreakpointValue({
-    base: "0.75rem",
-    xs: "0.75rem",
-    sm: "0.8rem",
-    md: "clamp(0.85rem, 3vw, 0.9375rem)",
-    lg: "clamp(0.85rem, 3vw, 0.9375rem)",
+    base: "0.875rem", // Better readability on mobile
+    xs: "0.875rem",
+    sm: "0.875rem",
+    md: "0.875rem",
+    lg: "0.875rem",
   });
 
   const inputPadding = useBreakpointValue({
-    base: "0.75rem 0",
-    xs: "0.75rem 0",
-    sm: "0.8rem 0",
+    base: "1rem 0", // Better touch target on mobile
+    xs: "1rem 0",
+    sm: "0.875rem 0",
     md: "0.75rem 0",
     lg: "0.75rem 0",
   });
 
   const errorFontSize = useBreakpointValue({
-    base: "0.75rem",
-    xs: "0.75rem",
+    base: "0.8125rem", // Slightly larger for mobile readability
+    xs: "0.8125rem",
     sm: "0.75rem",
-    md: "clamp(0.75rem, 2.5vw, 0.8rem)",
-    lg: "clamp(0.75rem, 2.5vw, 0.8rem)",
+    md: "0.75rem",
+    lg: "0.75rem",
   });
 
-  // Input styles - always blue border
+  const inputSpacing = useBreakpointValue({
+    base: "1.25rem", // More spacing on mobile
+    xs: "1.25rem",
+    sm: "1.25rem",
+    md: "1.5rem",
+    lg: "1.5rem",
+  });
+
+  const topSpacing = useBreakpointValue({
+    base: "0.5rem", // Less top spacing on mobile
+    xs: "0.5rem",
+    sm: "0.75rem",
+    md: "1rem",
+    lg: "1rem",
+  });
+
+  const eyeIconSize = useBreakpointValue({
+    base: "md", // Larger icon for better mobile touch
+    xs: "md",
+    sm: "sm",
+    md: "sm",
+    lg: "sm",
+  });
+
+  // Enhanced input styles with better mobile support
   const inputStyles = {
     bg: "transparent",
     border: "none",
@@ -228,6 +252,13 @@ const SignInPage = () => {
     p: inputPadding,
     w: "100%",
     mb: "0.5rem",
+    minH: {
+      base: "3rem", // Better touch target on mobile
+      xs: "3rem",
+      sm: "auto",
+      md: "auto",
+      lg: "auto",
+    },
     _placeholder: {
       color: "#a0aec0",
       fontSize: inputFontSize,
@@ -235,6 +266,10 @@ const SignInPage = () => {
     _focus: {
       borderBottomColor: "#4285f4",
       boxShadow: "none",
+      outline: "none",
+    },
+    _hover: {
+      borderBottomColor: "#4285f4",
     },
   };
 
@@ -242,7 +277,7 @@ const SignInPage = () => {
   const pageContent = (
     <Box>
       {/* Email Input - SLOT 1 */}
-      <Box mb="1.5rem" mt="1rem">
+      <Box mb={inputSpacing} mt={topSpacing}>
         <Input
           type="email"
           name="email"
@@ -251,15 +286,17 @@ const SignInPage = () => {
           onChange={handleInputChange}
           onBlur={handleInputBlur}
           title="Please enter a valid email address"
+          autoComplete="email"
+          inputMode="email" // Better mobile keyboard
           {...inputStyles}
         />
         {errors.email && (
           <Text
             color="#e53e3e"
             fontSize={errorFontSize}
-            mt="0.25rem"
+            mt="0.5rem"
             pl="0"
-            lineHeight="1.2"
+            lineHeight="1.3"
           >
             {errors.email}
           </Text>
@@ -267,7 +304,7 @@ const SignInPage = () => {
       </Box>
 
       {/* Password Input with Eye Toggle - SLOT 2 */}
-      <Box mb="1.5rem">
+      <Box mb={inputSpacing}>
         <InputGroup>
           <Input
             type={showPassword ? "text" : "password"}
@@ -277,16 +314,38 @@ const SignInPage = () => {
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             title="Password must be at least 8 characters long"
+            autoComplete="current-password"
             {...inputStyles}
           />
-          <InputRightElement width="3rem">
+          <InputRightElement
+            width={{
+              base: "3.5rem", // Larger touch target on mobile
+              xs: "3.5rem",
+              sm: "3rem",
+              md: "3rem",
+              lg: "3rem",
+            }}
+            height={{
+              base: "3rem", // Match input height on mobile
+              xs: "3rem",
+              sm: "auto",
+              md: "auto",
+              lg: "auto",
+            }}
+          >
             <IconButton
               aria-label={showPassword ? "Hide password" : "Show password"}
               icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
-              size="sm"
+              size={eyeIconSize}
               variant="ghost"
               color="gray.500"
               onClick={() => setShowPassword((prev) => !prev)}
+              _hover={{
+                bg: "gray.100",
+              }}
+              _focus={{
+                boxShadow: "outline",
+              }}
             />
           </InputRightElement>
         </InputGroup>
@@ -294,9 +353,9 @@ const SignInPage = () => {
           <Text
             color="#e53e3e"
             fontSize={errorFontSize}
-            mt="0.25rem"
+            mt="0.5rem"
             pl="0"
-            lineHeight="1.2"
+            lineHeight="1.3"
           >
             {errors.password}
           </Text>
@@ -304,16 +363,17 @@ const SignInPage = () => {
       </Box>
 
       {/* Links - SLOT 3 */}
-      <Box mb="1.5rem">
-        <Box mb="2">
+      <Box mb={inputSpacing}>
+        <Box mb="1rem">
           <Text
             as="span"
             color="#2d3748"
             fontSize={linkFontSize}
             fontWeight="normal"
-            lineHeight="1.4"
+            lineHeight="1.5"
             display="inline-flex"
             alignItems="baseline"
+            flexWrap="wrap"
           >
             No account?{" "}
             <Button
@@ -327,18 +387,26 @@ const SignInPage = () => {
               cursor="pointer"
               verticalAlign="baseline"
               lineHeight="inherit"
-              p="0.125rem 0"
-              ml="0.375rem"
+              p="0.25rem 0"
+              ml="0.25rem"
               minW="auto"
               h="auto"
+              minH={{
+                base: "2.5rem", // Better touch target on mobile
+                xs: "2.5rem",
+                sm: "auto",
+                md: "auto",
+                lg: "auto",
+              }}
               _hover={{
                 color: "#3367d6",
                 textDecoration: "underline",
                 bg: "transparent",
               }}
               _focus={{
-                boxShadow: "none",
-                outline: "none",
+                boxShadow: "outline",
+                outline: "2px solid #4285f4",
+                outlineOffset: "2px",
                 bg: "transparent",
               }}
               _active={{
@@ -361,17 +429,25 @@ const SignInPage = () => {
             cursor="pointer"
             verticalAlign="baseline"
             lineHeight="inherit"
-            p="0.125rem 0"
+            p="0.25rem 0"
             minW="auto"
             h="auto"
+            minH={{
+              base: "2.5rem", // Better touch target on mobile
+              xs: "2.5rem",
+              sm: "auto",
+              md: "auto",
+              lg: "auto",
+            }}
             _hover={{
               color: "#3367d6",
               textDecoration: "underline",
               bg: "transparent",
             }}
             _focus={{
-              boxShadow: "none",
-              outline: "none",
+              boxShadow: "outline",
+              outline: "2px solid #4285f4",
+              outlineOffset: "2px",
               bg: "transparent",
             }}
             _active={{
@@ -388,10 +464,47 @@ const SignInPage = () => {
   return (
     <Box
       sx={{
+        // Enhanced mobile-specific styling
         "& .chakra-card": {
-          height: "auto !important",
-          maxHeight: "none !important",
-          minHeight: "32rem !important",
+          height: {
+            base: "100vh !important", // Full height on mobile
+            xs: "100vh !important",
+            sm: "auto !important",
+            md: "auto !important",
+            lg: "auto !important",
+          },
+          maxHeight: {
+            base: "100vh !important", // Constrain to viewport on mobile
+            xs: "100vh !important",
+            sm: "none !important",
+            md: "none !important",
+            lg: "none !important",
+          },
+          minHeight: {
+            base: "100vh !important",
+            xs: "100vh !important",
+            sm: "32rem !important",
+            md: "32rem !important",
+            lg: "32rem !important",
+          },
+          borderRadius: {
+            base: "0 !important", // Sharp edges everywhere
+            xs: "0 !important",
+            sm: "0 !important",
+            md: "0 !important",
+            lg: "0 !important",
+          },
+          // Force the same shadow as PageLayoutTemplate
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4) !important",
+          "@media (min-width: 30em)": {
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4) !important",
+          },
+        },
+        // Ensure proper viewport handling on mobile
+        "@media (max-width: 30em)": {
+          minHeight: "100vh",
+          height: "100vh",
+          overflow: "hidden",
         },
       }}
     >

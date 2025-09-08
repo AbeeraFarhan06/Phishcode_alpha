@@ -11,6 +11,7 @@ import {
   VStack,
   Image,
   FormErrorMessage,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -68,6 +69,67 @@ const ContactUs = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Responsive values
+  const flexDirection = useBreakpointValue<"column" | "row">({
+    base: "column", // Mobile: stack vertically
+    md: "column", // Tablet: stack vertically
+    lg: "row", // Desktop: side by side
+  });
+
+  const contentOrder = useBreakpointValue({
+    base: 1, // Content first on mobile
+    md: 1, // Content first on tablet
+    lg: 1, // Content first on desktop (left side)
+  });
+
+  const formOrder = useBreakpointValue({
+    base: 2, // Form second on mobile
+    md: 2, // Form second on tablet
+    lg: 2, // Form second on desktop (right side)
+  });
+
+  const containerPadding = useBreakpointValue({
+    base: "1rem", // Mobile padding
+    md: "2rem", // Tablet padding
+    lg: "3rem", // Desktop padding
+  });
+
+  const headingSize = useBreakpointValue({
+    base: "28px", // Smaller on mobile
+    md: "32px", // Medium on tablet
+    lg: "37px", // Large on desktop
+  });
+
+  const formHeadingSize = useBreakpointValue({
+    base: "24px", // Smaller on mobile
+    md: "26px", // Medium on tablet
+    lg: "29px", // Large on desktop
+  });
+
+  const textSize = useBreakpointValue({
+    base: "14px", // Smaller on mobile
+    md: "15px", // Medium on tablet
+    lg: "16px", // Large on desktop
+  });
+
+  const formPadding = useBreakpointValue({
+    base: "1.5rem", // Less padding on mobile
+    md: "2rem", // Medium padding on tablet
+    lg: "2rem", // Full padding on desktop
+  });
+
+  const formMarginTop = useBreakpointValue({
+    base: "2rem", // Space between content and form on mobile
+    md: "2rem", // Space on tablet
+    lg: "0", // No space on desktop (side by side)
+  });
+
+  const gap = useBreakpointValue({
+    base: 0, // No gap on mobile (stacked)
+    md: 0, // No gap on tablet (stacked)
+    lg: 12, // Gap on desktop (side by side)
+  });
 
   // Debug: Log form data changes
   useEffect(() => {
@@ -410,6 +472,7 @@ const ContactUs = () => {
   const inputSelectStyle = {
     border: "0.0625rem solid #d1d5db",
     borderRadius: "0.25rem",
+    fontSize: textSize,
     _hover: {
       border: "0.0625rem solid #d1d5db",
     },
@@ -461,230 +524,308 @@ const ContactUs = () => {
 
       {/* Hero Section */}
       <Container>
-        <Flex direction={{ base: "column", lg: "row" }} gap={12}>
-          {/* Left Content */}
-          <Box flex="1">
-            <Heading fontSize="37px" mb={4} fontWeight="semibold">
-              Contact the PHISHCODE team
-            </Heading>
-            <Text fontSize="16px" mb={6}>
-              Get Started with PHISHCODE.
-            </Text>
-            <Text fontSize="16px" mb={4} textAlign="justify">
-              Complete the form, and one of our PHISHCODE specialists will reach
-              out to you. Our team is ready to answer your questions, provide
-              expert guidance, and show you how PHISHCODE can benefit your
-              business.
-            </Text>
-          </Box>
-
-          {/* Right Form */}
-          <Box
-            flex="1"
-            border="1px solid #0E1726"
-            borderRadius="md"
-            p={8}
-            bg="white"
-          >
-            <form onSubmit={handleSubmit}>
-              <Heading as="h2" fontSize="29px" mb={4} fontWeight="semibold">
-                Contact me
+        <Box p={containerPadding}>
+          <Flex direction={flexDirection} gap={gap}>
+            {/* Left Content */}
+            <Box flex="1" order={contentOrder} w="100%">
+              <Heading
+                fontSize={headingSize}
+                mb={4}
+                fontWeight="semibold"
+                textAlign={{
+                  base: "center", // Center on mobile
+                  md: "center", // Center on tablet
+                  lg: "left", // Left on desktop
+                }}
+              >
+                Contact the PHISHCODE team
               </Heading>
-              <Text fontSize="16px" mb={4} textAlign="justify">
-                Just fill out the form, and we'll reach out to you soon.
+              <Text
+                fontSize={textSize}
+                mb={6}
+                textAlign={{
+                  base: "center", // Center on mobile
+                  md: "center", // Center on tablet
+                  lg: "left", // Left on desktop
+                }}
+              >
+                Get Started with PHISHCODE.
               </Text>
-              <VStack spacing={4} align="stretch">
-                <FormControl isRequired isInvalid={!!errors.firstName}>
-                  <FormLabel fontSize="16px">First name</FormLabel>
-                  <Input
-                    {...getInputStyle("firstName")}
-                    value={formData.firstName}
-                    onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
-                    }
-                    onBlur={(e) => handleFieldBlur("firstName", e.target.value)}
-                    placeholder="Enter your first name"
-                  />
-                  <FormErrorMessage>{errors.firstName}</FormErrorMessage>
-                </FormControl>
+              <Text
+                fontSize={textSize}
+                mb={4}
+                textAlign={{
+                  base: "left", // Left-aligned text body on mobile
+                  md: "left", // Left-aligned text body on tablet
+                  lg: "justify", // Justified on desktop
+                }}
+                lineHeight="1.6"
+              >
+                Complete the form, and one of our PHISHCODE specialists will
+                reach out to you. Our team is ready to answer your questions,
+                provide expert guidance, and show you how PHISHCODE can benefit
+                your business.
+              </Text>
+            </Box>
 
-                <FormControl isRequired isInvalid={!!errors.lastName}>
-                  <FormLabel fontSize="16px">Last name</FormLabel>
-                  <Input
-                    {...getInputStyle("lastName")}
-                    value={formData.lastName}
-                    onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
-                    }
-                    onBlur={(e) => handleFieldBlur("lastName", e.target.value)}
-                    placeholder="Enter your last name"
-                  />
-                  <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isRequired isInvalid={!!errors.email}>
-                  <FormLabel fontSize="16px">Email</FormLabel>
-                  <Input
-                    type="email"
-                    {...getInputStyle("email")}
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    onBlur={(e) => handleFieldBlur("email", e.target.value)}
-                    placeholder="Enter your email address"
-                  />
-                  <FormErrorMessage>{errors.email}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isRequired isInvalid={!!errors.companyName}>
-                  <FormLabel fontSize="16px">Company name</FormLabel>
-                  <Input
-                    {...getInputStyle("companyName")}
-                    value={formData.companyName}
-                    onChange={(e) =>
-                      handleInputChange("companyName", e.target.value)
-                    }
-                    onBlur={(e) =>
-                      handleFieldBlur("companyName", e.target.value)
-                    }
-                    placeholder="Enter your company name"
-                  />
-                  <FormErrorMessage>{errors.companyName}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isRequired isInvalid={!!errors.companySize}>
-                  <FormLabel fontSize="16px">Company size</FormLabel>
-                  <Select
-                    placeholder="Select company size"
-                    {...getInputStyle("companySize")}
-                    value={formData.companySize}
-                    onChange={(e) => {
-                      console.log(
-                        "Company size onChange triggered:",
-                        e.target.value
-                      );
-                      updateField("companySize", e.target.value);
-                    }}
-                  >
-                    <option value="1">1</option>
-                    <option value="2-4">2-4</option>
-                    <option value="5-9">5-9</option>
-                    <option value="10-24">10-24</option>
-                    <option value="25-49">25-49</option>
-                    <option value="50-249">50-249</option>
-                    <option value="250-999">250-999</option>
-                    <option value="1000+">1000+</option>
-                  </Select>
-                  <FormErrorMessage>{errors.companySize}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isRequired isInvalid={!!errors.jobRole}>
-                  <FormLabel fontSize="16px">Job role</FormLabel>
-                  <Input
-                    {...getInputStyle("jobRole")}
-                    value={formData.jobRole}
-                    onChange={(e) =>
-                      handleInputChange("jobRole", e.target.value)
-                    }
-                    onBlur={(e) => handleFieldBlur("jobRole", e.target.value)}
-                    placeholder="Enter your job role"
-                  />
-                  <FormErrorMessage>{errors.jobRole}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl
-                  isRequired
-                  isInvalid={!!errors.phone || !!errors.countryCode}
+            {/* Right Form */}
+            <Box
+              flex="1"
+              order={formOrder}
+              mt={formMarginTop}
+              w="100%"
+              border="1px solid #0E1726"
+              borderRadius="md"
+              p={formPadding}
+              bg="white"
+              maxW={{
+                base: "100%", // Full width on mobile
+                md: "100%", // Full width on tablet
+                lg: "50%", // Half width on desktop
+              }}
+            >
+              <form onSubmit={handleSubmit}>
+                <Heading
+                  as="h2"
+                  fontSize={formHeadingSize}
+                  mb={4}
+                  fontWeight="semibold"
+                  textAlign={{
+                    base: "center", // Center on mobile
+                    md: "center", // Center on tablet
+                    lg: "left", // Left on desktop
+                  }}
                 >
-                  <FormLabel fontSize="16px">Phone</FormLabel>
-                  <Flex gap={2} bgColor="white">
+                  Contact me
+                </Heading>
+                <Text
+                  fontSize={textSize}
+                  mb={4}
+                  textAlign={{
+                    base: "center", // Center on mobile
+                    md: "center", // Center on tablet
+                    lg: "justify", // Justified on desktop
+                  }}
+                  lineHeight="1.6"
+                >
+                  Just fill out the form, and we'll reach out to you soon.
+                </Text>
+                <VStack spacing={4} align="stretch">
+                  <FormControl isRequired isInvalid={!!errors.firstName}>
+                    <FormLabel fontSize={textSize}>First name</FormLabel>
+                    <Input
+                      {...getInputStyle("firstName")}
+                      value={formData.firstName}
+                      onChange={(e) =>
+                        handleInputChange("firstName", e.target.value)
+                      }
+                      onBlur={(e) =>
+                        handleFieldBlur("firstName", e.target.value)
+                      }
+                      placeholder="Enter your first name"
+                    />
+                    <FormErrorMessage>{errors.firstName}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired isInvalid={!!errors.lastName}>
+                    <FormLabel fontSize={textSize}>Last name</FormLabel>
+                    <Input
+                      {...getInputStyle("lastName")}
+                      value={formData.lastName}
+                      onChange={(e) =>
+                        handleInputChange("lastName", e.target.value)
+                      }
+                      onBlur={(e) =>
+                        handleFieldBlur("lastName", e.target.value)
+                      }
+                      placeholder="Enter your last name"
+                    />
+                    <FormErrorMessage>{errors.lastName}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired isInvalid={!!errors.email}>
+                    <FormLabel fontSize={textSize}>Email</FormLabel>
+                    <Input
+                      type="email"
+                      {...getInputStyle("email")}
+                      value={formData.email}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                      onBlur={(e) => handleFieldBlur("email", e.target.value)}
+                      placeholder="Enter your email address"
+                    />
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired isInvalid={!!errors.companyName}>
+                    <FormLabel fontSize={textSize}>Company name</FormLabel>
+                    <Input
+                      {...getInputStyle("companyName")}
+                      value={formData.companyName}
+                      onChange={(e) =>
+                        handleInputChange("companyName", e.target.value)
+                      }
+                      onBlur={(e) =>
+                        handleFieldBlur("companyName", e.target.value)
+                      }
+                      placeholder="Enter your company name"
+                    />
+                    <FormErrorMessage>{errors.companyName}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired isInvalid={!!errors.companySize}>
+                    <FormLabel fontSize={textSize}>Company size</FormLabel>
                     <Select
-                      placeholder={loadingCodes ? "Loading..." : "Code"}
-                      maxW="40%"
-                      disabled={loadingCodes}
-                      {...getInputStyle("countryCode")}
-                      value={formData.countryCode}
+                      placeholder="Select company size"
+                      {...getInputStyle("companySize")}
+                      value={formData.companySize}
                       onChange={(e) => {
                         console.log(
-                          "Country code onChange triggered:",
+                          "Company size onChange triggered:",
                           e.target.value
                         );
-                        updateField("countryCode", e.target.value);
+                        updateField("companySize", e.target.value);
                       }}
                     >
-                      {!loadingCodes &&
-                        countryCodes.map((country) => (
-                          <option
-                            key={`${country.name}-${country.code}`}
-                            value={country.code}
-                          >
-                            {country.code} {country.name}
+                      <option value="1">1</option>
+                      <option value="2-4">2-4</option>
+                      <option value="5-9">5-9</option>
+                      <option value="10-24">10-24</option>
+                      <option value="25-49">25-49</option>
+                      <option value="50-249">50-249</option>
+                      <option value="250-999">250-999</option>
+                      <option value="1000+">1000+</option>
+                    </Select>
+                    <FormErrorMessage>{errors.companySize}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired isInvalid={!!errors.jobRole}>
+                    <FormLabel fontSize={textSize}>Job role</FormLabel>
+                    <Input
+                      {...getInputStyle("jobRole")}
+                      value={formData.jobRole}
+                      onChange={(e) =>
+                        handleInputChange("jobRole", e.target.value)
+                      }
+                      onBlur={(e) => handleFieldBlur("jobRole", e.target.value)}
+                      placeholder="Enter your job role"
+                    />
+                    <FormErrorMessage>{errors.jobRole}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl
+                    isRequired
+                    isInvalid={!!errors.phone || !!errors.countryCode}
+                  >
+                    <FormLabel fontSize={textSize}>Phone</FormLabel>
+                    <Flex
+                      gap={2}
+                      bgColor="white"
+                      direction={{
+                        base: "column", // Stack on mobile
+                        sm: "row", // Side by side on tablet and up
+                      }}
+                    >
+                      <Select
+                        placeholder={loadingCodes ? "Loading..." : "Code"}
+                        maxW={{
+                          base: "100%", // Full width on mobile
+                          sm: "40%", // 40% width on tablet and up
+                        }}
+                        disabled={loadingCodes}
+                        {...getInputStyle("countryCode")}
+                        value={formData.countryCode}
+                        onChange={(e) => {
+                          console.log(
+                            "Country code onChange triggered:",
+                            e.target.value
+                          );
+                          updateField("countryCode", e.target.value);
+                        }}
+                      >
+                        {!loadingCodes &&
+                          countryCodes.map((country) => (
+                            <option
+                              key={`${country.name}-${country.code}`}
+                              value={country.code}
+                            >
+                              {country.code} {country.name}
+                            </option>
+                          ))}
+                      </Select>
+
+                      <Input
+                        placeholder="Phone number"
+                        {...getInputStyle("phone")}
+                        value={formData.phone}
+                        onChange={(e) =>
+                          handleInputChange("phone", e.target.value)
+                        }
+                        onBlur={(e) => handleFieldBlur("phone", e.target.value)}
+                      />
+                    </Flex>
+                    <FormErrorMessage>
+                      {errors.countryCode || errors.phone}
+                    </FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isRequired isInvalid={!!errors.country}>
+                    <FormLabel fontSize={textSize}>Country/Region</FormLabel>
+                    <Select
+                      placeholder={
+                        loadingCountries ? "Loading..." : "Select country"
+                      }
+                      disabled={loadingCountries}
+                      {...getInputStyle("country")}
+                      value={formData.country}
+                      onChange={(e) => {
+                        console.log(
+                          "Country onChange triggered:",
+                          e.target.value
+                        );
+                        updateField("country", e.target.value);
+                      }}
+                    >
+                      {!loadingCountries &&
+                        countries.map((country) => (
+                          <option key={country} value={country}>
+                            {country}
                           </option>
                         ))}
                     </Select>
+                    <FormErrorMessage>{errors.country}</FormErrorMessage>
+                  </FormControl>
 
-                    <Input
-                      placeholder="Phone number"
-                      {...getInputStyle("phone")}
-                      value={formData.phone}
-                      onChange={(e) =>
-                        handleInputChange("phone", e.target.value)
-                      }
-                      onBlur={(e) => handleFieldBlur("phone", e.target.value)}
-                    />
-                  </Flex>
-                  <FormErrorMessage>
-                    {errors.countryCode || errors.phone}
-                  </FormErrorMessage>
-                </FormControl>
-
-                <FormControl isRequired isInvalid={!!errors.country}>
-                  <FormLabel fontSize="16px">Country/Region</FormLabel>
-                  <Select
-                    placeholder={
-                      loadingCountries ? "Loading..." : "Select country"
-                    }
-                    disabled={loadingCountries}
-                    {...getInputStyle("country")}
-                    value={formData.country}
-                    onChange={(e) => {
-                      console.log(
-                        "Country onChange triggered:",
-                        e.target.value
-                      );
-                      updateField("country", e.target.value);
+                  <Button
+                    type="submit"
+                    bg="#2D3748"
+                    color="white"
+                    _hover={{ bg: "#1A202C" }}
+                    borderRadius="none"
+                    w={{
+                      base: "100%", // Full width on mobile
+                      sm: "7rem", // Fixed width on tablet and up
+                    }}
+                    h="2.5rem"
+                    fontSize="14px"
+                    fontWeight="medium"
+                    alignSelf={{
+                      base: "center", // Center on mobile
+                      sm: "flex-start", // Left-aligned on tablet and up
                     }}
                   >
-                    {!loadingCountries &&
-                      countries.map((country) => (
-                        <option key={country} value={country}>
-                          {country}
-                        </option>
-                      ))}
-                  </Select>
-                  <FormErrorMessage>{errors.country}</FormErrorMessage>
-                </FormControl>
+                    Contact me
+                  </Button>
 
-                <Button
-                  type="submit"
-                  bg="#2D3748"
-                  color="white"
-                  _hover={{ bg: "#1A202C" }}
-                  borderRadius="none"
-                  w="7rem"
-                  h="2.5rem"
-                  fontSize="14px"
-                  fontWeight="medium"
-                >
-                  Contact me
-                </Button>
-
-                <Text fontSize="xs" color="#0E1726">
-                  * Please complete required fields
-                </Text>
-              </VStack>
-            </form>
-          </Box>
-        </Flex>
+                  <Text fontSize="xs" color="#0E1726" textAlign="center">
+                    * Please complete required fields
+                  </Text>
+                </VStack>
+              </form>
+            </Box>
+          </Flex>
+        </Box>
       </Container>
 
       {/* Footer */}

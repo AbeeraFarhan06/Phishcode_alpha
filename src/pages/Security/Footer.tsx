@@ -41,12 +41,12 @@ const footerSections = [
   {
     title: "Product",
     links: [
-      { label: "Overview", path: "/#Overview" },
-      { label: "Impact", path: "/#Impact" },
-      { label: "Approach", path: "/#Approach" },
-      { label: "Resources", path: "/#Resources" },
-      { label: "Next Step", path: "/#Next-steps" },
-      { label: "Watch Demo", path: "/#Next-steps" },
+      { label: "Overview", path: "#Overview" },
+      { label: "Impact", path: "#Impact" },
+      { label: "Approach", path: "#Approach" },
+      { label: "Resources", path: "#Resources" },
+      { label: "Next Step", path: "#Next-steps" },
+      { label: "Watch Demo", path: "#Next-steps" },
       { label: "Sign In", path: "/signin" },
     ],
   },
@@ -85,7 +85,7 @@ const footerSections = [
 
 export default function Footer() {
   return (
-    <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" width="100%">
+    <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" pt={14} width="100%">
       <Container>
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -93,7 +93,7 @@ export default function Footer() {
           align="flex-start"
           wrap="wrap"
           gap={{ base: "2rem", md: "2.5rem" }}
-          // mb={{ base: "2rem", md: "2rem" }}
+          mb={{ base: "2rem", md: "2rem" }}
         >
           {/* Left Section: Logo, Social Icons, Language Selector */}
           <VStack align="flex-start" spacing={{ base: "1.5rem", md: "1.5rem" }}>
@@ -171,55 +171,33 @@ export default function Footer() {
             <VStack align="flex-start" spacing="0.5rem">
               <Text fontWeight="semibold">{footerSections[0].title}</Text>
               <VStack align="flex-start" spacing="0.5rem" color="#A4A4A4">
-                {footerSections[0].links.map(({ label, path }, j) =>
-                  path.includes("#") ? (
-                    <HashLink
-                      key={j}
-                      to={path}
-                      scroll={(el) => {
-                        // Delay ensures the element exists after route navigation
-                        setTimeout(() => {
-                          el.scrollIntoView({ behavior: "smooth" });
-                        }, 100);
-                      }}
-                      style={{
-                        color: "#A4A4A4",
-                        background: "none",
-                        border: "none",
-                        padding: 0,
-                        textAlign: "left",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.textDecoration = "underline")
+                {footerSections[0].links.map(({ label, path }, j) => (
+                  <Link
+                    as={path && !path.startsWith("#") ? RouterLink : "button"}
+                    {...(path && !path.startsWith("#") ? { to: path } : {})}
+                    key={j}
+                    onClick={(e) => {
+                      if (!path || path.startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = label.replace(/\s+/g, "-"); // Same as NavBar2
+                        const element = document.getElementById(targetId);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      } else {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
                       }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.textDecoration = "none")
-                      }
-                    >
-                      {label}
-                    </HashLink>
-                  ) : (
-                    <RouterLink
-                      key={j}
-                      to={path}
-                      style={{
-                        color: "#A4A4A4",
-                        background: "none",
-                        border: "none",
-                        padding: 0,
-                        textAlign: "left",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.textDecoration = "underline")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.textDecoration = "none")
-                      }
-                    >
-                      {label}
-                    </RouterLink>
-                  )
-                )}
+                    }}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {label}
+                  </Link>
+                ))}
               </VStack>
             </VStack>
 
