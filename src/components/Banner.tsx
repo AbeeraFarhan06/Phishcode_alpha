@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
-import phishcode_banner_imgg from "../assets/png imgs/phishcode_banner_imgg.png";
+import phishcode_banner_imgg from "../assets/logo/phishcode_banner_imgg.png";
 import Container from "./Container";
 import { useNavigate } from "react-router-dom";
 
@@ -40,14 +40,13 @@ const Banner = () => {
   const stackMarginLeft = useBreakpointValue({ base: 0, sm: 0 });
   const rightBoxMarginTop = useBreakpointValue({ base: 8, lg: 0 });
   const videoBoxHeight = useBreakpointValue({ base: "300px", md: "300px" });
-  const bgSize = useBreakpointValue({ base: "cover", md: "60% auto" });
+  const bgSize = useBreakpointValue({ base: "cover", md: "cover" });
   const height = useBreakpointValue({ base: "auto", md: "auto" });
   const bgPosition = useBreakpointValue({ base: "center", md: "right" });
 
   return (
     <Box
       bgImage={phishcode_banner_imgg}
-      bgColor="#0E1726"
       bgSize={bgSize}
       bgPosition={bgPosition}
       bgRepeat="no-repeat"
