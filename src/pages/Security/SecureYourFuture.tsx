@@ -7,10 +7,14 @@ import {
   Text,
   VStack,
   HStack,
+  Image,
 } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa";
 import Container from "../../components/Container";
 import { motion } from "framer-motion";
+import Empower from "../../assets/Empower.png";
+import Save from "../../assets/Save.png";
+import Protect from "../../assets/Protect.png";
 
 // Motion components
 const MotionBox = motion(Box);
@@ -41,6 +45,7 @@ interface TabContent {
     text: string;
     variant: "solid" | "outline";
   }[];
+  image: string;
 }
 
 const tabContent: Record<TabKey, TabContent> = {
@@ -52,6 +57,7 @@ const tabContent: Record<TabKey, TabContent> = {
       { text: "Learn more", variant: "solid" },
       { text: "View case studies", variant: "outline" },
     ],
+    image: Empower,
   },
   Save: {
     title: "Proven ROI that speaks for itself",
@@ -61,6 +67,7 @@ const tabContent: Record<TabKey, TabContent> = {
       { text: "View ROI calculator", variant: "solid" },
       { text: "Download report", variant: "outline" },
     ],
+    image: Save,
   },
   Protect: {
     title: "Gartner-backed protection",
@@ -70,6 +77,7 @@ const tabContent: Record<TabKey, TabContent> = {
       { text: "Read Gartner report", variant: "solid" },
       { text: "Explore protection", variant: "outline" },
     ],
+    image: Protect,
   },
 };
 
@@ -261,7 +269,15 @@ const SecureYourFuture: React.FC = () => {
                   justifyContent="center"
                   position="relative"
                 >
-                  <Box w="100%" h="100%" bg="gray.200" />
+                  <Box w="100%" h="100%" bg="gray.200">
+                    <Image
+                      src={currentContent.image}
+                      alt={currentContent.title}
+                      w="100%"
+                      h="100%"
+                      objectFit="cover"
+                    />
+                  </Box>
                 </Box>
               </Box>
             </MotionBox>
