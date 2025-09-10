@@ -40,20 +40,25 @@ const Banner = () => {
   const stackMarginLeft = useBreakpointValue({ base: 0, sm: 0 });
   const rightBoxMarginTop = useBreakpointValue({ base: 8, lg: 0 });
   const videoBoxHeight = useBreakpointValue({ base: "300px", md: "300px" });
-  const bgSize = useBreakpointValue({ base: "cover", md: "cover" });
+  const bgSize = useBreakpointValue({ base: "cover", xl: "cover" });
   const height = useBreakpointValue({ base: "auto", md: "auto" });
   const bgPosition = useBreakpointValue({ base: "center", md: "right" });
 
   return (
     <Box
-      bgImage={phishcode_banner_imgg}
-      bgSize={bgSize}
-      bgPosition={bgPosition}
+      bg={{ base: "#0E1726", md: "#0E1726", lg: "#0E1726", xl: "transparent" }}
+      bgImage={{
+        base: "none",
+        md: "none",
+        lg: "none",
+        xl: phishcode_banner_imgg,
+      }}
+      bgSize={{ base: "cover", xl: "cover" }}
+      bgPosition={{ base: "center", md: "center", lg: "center", xl: "right" }}
       bgRepeat="no-repeat"
       height={height}
       width="100%"
       position="relative"
-      // Add these properties to eliminate top spacing
       mt={0}
       pt={0}
     >
