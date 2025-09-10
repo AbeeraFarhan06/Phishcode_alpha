@@ -86,7 +86,7 @@ const footerSections = [
 export default function Footer() {
   return (
     <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" width="100%">
-      <Container>
+      <Container footer>
         <Flex
           direction={{ base: "column", md: "row" }}
           justify="space-between"
@@ -131,32 +131,6 @@ export default function Footer() {
                 />
               ))}
             </SimpleGrid>
-
-            {/* Language Selector */}
-            {/* <Menu>
-              <MenuButton
-                as={Text}
-                variant="ghost"
-                color="#0E1726"
-                fontSize="0.875rem"
-                fontWeight="semibold"
-                cursor="pointer"
-              >
-                Language <ChevronDownIcon />
-              </MenuButton>
-              <MenuList bgColor="white">
-                {["English", "Arabic", "French", "Malay", "Hindi"].map((lang, i) => (
-                  <MenuItem
-                    key={i}
-                    bgColor="white"
-                    color="#0E1726"
-                    _hover={{ bg: "gray.100" }}
-                  >
-                    {lang}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu> */}
           </VStack>
 
           {/* Right Section: Footer Links */}
@@ -354,7 +328,7 @@ export default function Footer() {
           mt={{ base: "1rem", md: "1.5rem" }}
         >
           <Text fontSize="0.875rem" color="#A4A4A4" textAlign="left">
-            Copyright © 2024-2025 PHISHCODE. All rights reserved.
+            Copyright © 2025-2026 PHISHCODE. All rights reserved.
           </Text>
         </Box>
       </Container>

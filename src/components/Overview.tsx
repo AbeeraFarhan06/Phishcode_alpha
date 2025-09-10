@@ -87,7 +87,7 @@ const Overview = () => {
     base: "auto",
     lg: "20rem",
   });
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, md: true, lg: true, xl: false });
   const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
 
   return (
