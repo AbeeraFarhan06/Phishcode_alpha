@@ -1,11 +1,14 @@
+// This component renders the second navigation bar, which is a sticky bar that highlights the current section of the page.
+// It uses IntersectionObserver to detect which section is currently in view and updates the active link accordingly.
+
 import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import Container from "../../components/Container";
+import Container from '../../components/Container';
 import { useNavigate } from "react-router-dom";
 
 // An array of the menu items, which correspond to the IDs of the sections on the page.
-const menuItems = ["Secure your tomorrow", "Resources", "See the benefits"];
+const menuItems = ["Secure your tomorrow", "Resources", "See the benefits",];
 
 const NavBar2 = () => {
   const navigate = useNavigate();
@@ -94,11 +97,11 @@ const NavBar2 = () => {
                 _hover={{ color: "blue.800" }}
               >
                 <Text
-                  fontSize="0.875rem"
+                  fontSize="0.875rem" // 14px to rem
                   fontWeight="medium"
                   mt={2}
                   color={activeItem === item ? "#0E1726" : "#989696ff"}
-                  whiteSpace="nowrap"
+                  whiteSpace="nowrap" // Prevent text wrapping
                 >
                   {item}
                 </Text>
@@ -109,7 +112,7 @@ const NavBar2 = () => {
                     bottom="-0.6rem"
                     left="50%"
                     transform="translateX(-50%)"
-                    height="0.3125rem"
+                    height="0.3125rem" // 5px to rem
                     width="100%"
                     bg="#0E1726"
                     borderRadius="full"
@@ -124,11 +127,11 @@ const NavBar2 = () => {
               bg="#0E1726"
               color="white"
               fontWeight="semibold"
-              fontSize="0.875rem"
+              fontSize="0.875rem" // 14px to rem
               px="1rem"
               py="0.5rem"
-              h="2.375rem"
-              w="auto"
+              h="2.375rem" // 38px to rem
+              w="8.25rem" // 100px to rem
               borderRadius="lg"
               _hover={{ bg: "#243B65" }}
               onClick={() => navigate("/signup/step1")}
@@ -138,82 +141,69 @@ const NavBar2 = () => {
           </Box>
         </Flex>
 
-        {/* Mobile Navbar */}
-        <Box display={{ base: "block", lg: "block", xl: "none" }} w="100%" bg="white">
-          {/* Mobile Header - Clickable to toggle dropdown */}
+        {/* Mobile Navbar Header */}
+        <Box
+          display={{ base: "block", lg: "none" }}
+          w="100%"
+          borderBottom="0.25rem solid" // 4px to rem
+          borderColor="#0E1726"
+          py="1rem"
+          px="1rem"
+          bg="white"
+        >
           <Flex
             justify="space-between"
             align="center"
-            py="1rem"
-            px="1rem"
-            cursor="pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            bg="white"
-            _hover={{ bg: "gray.50" }}
+            cursor="pointer"
           >
-            <Text fontSize="1rem" fontWeight="semibold" color="#0E1726">
+            <Text fontSize="0.875rem" fontWeight="medium" color="blue.900">
               {activeItem}
             </Text>
             {isMobileMenuOpen ? (
-              <ChevronUpIcon color="#0E1726" boxSize={5} />
+              <ChevronUpIcon color="blue.900" boxSize={5} />
             ) : (
-              <ChevronDownIcon color="#0E1726" boxSize={5} />
+              <ChevronDownIcon color="blue.900" boxSize={5} />
             )}
           </Flex>
-
-          {/* Mobile Dropdown Menu */}
-          {isMobileMenuOpen && (
-            <Box
-              bg="white"
-              borderTop="1px solid"
-              borderColor="gray.200"
-              shadow="sm"
-            >
-              {menuItems.map((item, index) => (
-                <Box
-                  key={item}
-                  py="0.75rem"
-                  px="1rem"
-                  cursor="pointer"
-                  onClick={() => handleScroll(item)}
-                  _hover={{ bg: "gray.50" }}
-                  borderBottom={
-                    index !== menuItems.length - 1 ? "1px solid" : "none"
-                  }
-                  borderColor="gray.100"
-                >
-                  <Text
-                    fontSize="0.875rem"
-                    color="#0E1726"
-                    fontWeight={activeItem === item ? "semibold" : "normal"}
-                  >
-                  {item}
-                  </Text>
-                </Box>
-              ))}
-
-              {/* Mobile CTA Button */}
-              <Box p="1rem" borderTop="1px solid" borderColor="gray.200">
-                <Button
-                  bg="#0E1726"
-                  color="white"
-                  fontWeight="semibold"
-                  fontSize="0.875rem"
-                  w="100%"
-                  h="2.5rem"
-                  borderRadius="lg"
-                  _hover={{ bg: "#243B65" }}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    navigate("/signup/step1");
-                  }}
-                >
-                  Get the latest info
-                </Button>
-              </Box>
-            </Box>
-          )}
         </Box>
+
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <Box
+            display={{ base: "block", lg: "none" }}
+            bg="white"
+            px="1.5rem"
+            py="0.5rem"
+          >
+            {menuItems.map((item) => (
+              <Box
+                key={item}
+                py="0.5rem"
+                px="0.5rem"
+                borderRadius="md"
+                cursor="pointer"
+                bg={activeItem === item ? "gray.200" : "transparent"}
+                display="flex"
+                alignItems="center"
+                onClick={() => handleScroll(item)}
+              >
+                {activeItem === item && (
+                  <Box
+                    w="0.25rem" // 4px to rem
+                    h="1.25rem" // 20px to rem
+                    bg="#0E1726"
+                    borderRadius="full"
+                    mr="0.75rem" // 3 spacing units to rem
+                  />
+                )}
+                <Text fontSize="0.875rem" color="#0E1726">
+                  {item}
+                </Text>
+              </Box>
+            ))}
+          </Box>
+        )}
       </Container>
     </Box>
   );
