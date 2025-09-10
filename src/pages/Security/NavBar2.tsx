@@ -131,7 +131,7 @@ const NavBar2 = () => {
               px="1rem"
               py="0.5rem"
               h="2.375rem" // 38px to rem
-              w="8.25rem" // 100px to rem
+              w="9.13rem" // 100px to rem
               borderRadius="lg"
               _hover={{ bg: "#243B65" }}
               onClick={() => navigate("/signup/step1")}
