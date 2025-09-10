@@ -326,8 +326,9 @@ export default function Footer() {
           borderTop="1px solid #E2E8F0"
           pt={{ base: "1rem", md: "1.25rem" }}
           mt={{ base: "1rem", md: "1.5rem" }}
+          pb="0"
         >
-          <Text fontSize="0.875rem" color="#A4A4A4" textAlign="left">
+          <Text fontSize="0.875rem" color="#A4A4A4" textAlign="left" mb="0">
             Copyright © 2025-2026 PHISHCODE. All rights reserved.
           </Text>
         </Box>
