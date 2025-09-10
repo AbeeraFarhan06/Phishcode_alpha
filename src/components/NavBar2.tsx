@@ -82,7 +82,7 @@ const NavBar2 = () => {
           align="center"
           py="0.5rem"
           borderTop="1px solid #e2e8f0"
-          display={{ base: "none", lg: "flex" }}
+          display={{ base: "none", xl: "flex" }}
         >
           <HStack
             spacing={{ base: "1rem", md: "2rem", lg: "2.5rem", xl: "3.125rem" }}
@@ -143,7 +143,7 @@ const NavBar2 = () => {
 
         {/* Mobile Navbar Header */}
         <Box
-          display={{ base: "block", lg: "none" }}
+          display={{ base: "block", lg: "block", xl: "none" }}
           w="100%"
           borderBottom="0.25rem solid" // 4px to rem
           borderColor="#0E1726"
@@ -171,7 +171,7 @@ const NavBar2 = () => {
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
           <Box
-            display={{ base: "block", lg: "none" }}
+            display={{ base: "block", xl: "none" }}
             bg="white"
             px="1.5rem"
             py="0.5rem"
