@@ -216,7 +216,7 @@ const SecureYourFuture: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <MotionFlex
-            direction={{ base: "column", lg: "row" }}
+            direction={{ base: "column", xl: "row" }}
             align="stretch"
             gap={12}
             variants={staggerContainer}
@@ -227,7 +227,7 @@ const SecureYourFuture: React.FC = () => {
             {/* Left Content */}
             <MotionBox
               flex="1"
-              maxW={{ base: "100%", lg: "45%" }}
+              maxW={{ base: "100%", xl: "45%" }}
               variants={fadeUpVariants}
               display="flex"
               flexDirection="column"
@@ -298,8 +298,8 @@ const SecureYourFuture: React.FC = () => {
                 borderRadius="xl"
                 overflow="hidden"
                 bg="gray.100"
-                h="100%"
-                w="100%"
+                h={{ xl: "20rem"}}
+                w= {{xl: "32rem" }}
               >
                 <Image
                   src={currentContent.image}
