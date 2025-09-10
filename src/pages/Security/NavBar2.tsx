@@ -139,7 +139,7 @@ const NavBar2 = () => {
         </Flex>
 
         {/* Mobile Navbar */}
-        <Box display={{ base: "block", lg: "none" }} w="100%" bg="white">
+        <Box display={{ base: "block", lg: "block", xl: "none" }} w="100%" bg="white">
           {/* Mobile Header - Clickable to toggle dropdown */}
           <Flex
             justify="space-between"
@@ -187,7 +187,7 @@ const NavBar2 = () => {
                     color="#0E1726"
                     fontWeight={activeItem === item ? "semibold" : "normal"}
                   >
-                    {item}
+                  {item}
                   </Text>
                 </Box>
               ))}

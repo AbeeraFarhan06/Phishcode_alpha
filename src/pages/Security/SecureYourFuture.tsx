@@ -258,27 +258,15 @@ const SecureYourFuture: React.FC = () => {
                 overflow="hidden"
                 bg="gray.100"
                 h="100%"
-                minH="350px"
                 w="100%"
               >
-                <Box
+                <Image
+                  src={currentContent.image}
+                  alt={currentContent.title}
                   w="100%"
                   h="100%"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  position="relative"
-                >
-                  <Box w="100%" h="100%" bg="gray.200">
-                    <Image
-                      src={currentContent.image}
-                      alt={currentContent.title}
-                      w="100%"
-                      h="100%"
-                      objectFit="cover"
-                    />
-                  </Box>
-                </Box>
+                  objectFit="cover"
+                />
               </Box>
             </MotionBox>
           </MotionFlex>
