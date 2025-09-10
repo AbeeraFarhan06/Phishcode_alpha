@@ -8,10 +8,15 @@ import {
   VStack,
   HStack,
   Image,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-import { FaPlay } from "react-icons/fa";
-import Container from "../../components/Container";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
+import Container from "../../components/Container";
 import Empower from "../../assets/Empower.png";
 import Save from "../../assets/Save.png";
 import Protect from "../../assets/Protect.png";
@@ -133,31 +138,67 @@ const SecureYourFuture: React.FC = () => {
 
           {/* Tab Navigation */}
           <MotionBox variants={fadeUpVariants}>
-            <Box bg="white" borderRadius="full" p={2} m={2} boxShadow="sm">
-              <HStack spacing={0} justify="center">
-                {tabs.map((tab) => (
-                  <Button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    bg={activeTab === tab ? "#0E1726" : "transparent"}
-                    color={activeTab === tab ? "white" : "#2d3748"}
-                    border="none"
-                    borderRadius="full"
-                    px={6}
-                    py={2}
-                    fontSize="sm"
-                    fontWeight="medium"
-                    _hover={{
-                      bg: activeTab === tab ? "#243B65" : "#F7FAFC",
-                    }}
-                    transition="all 0.2s"
-                    minW="120px"
-                  >
-                    {tab}
-                  </Button>
-                ))}
-              </HStack>
-            </Box>
+            {useBreakpointValue({ base: true, md: true, lg: true, xl: false }) ? (
+              // ✅ Dropdown for base, md, lg
+              <Menu matchWidth>
+                <MenuButton
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                  w="15rem"
+                  textAlign="left"
+                  bg="white"
+                  color="#2d3748"
+                  border="1px solid #E2E8F0"
+                  borderRadius="md"
+                  _hover={{ bg: "#F7FAFC" }}
+                >
+                  {activeTab}
+                </MenuButton>
+                <MenuList w="full" bgColor="white">
+                  {tabs.map((tab) => (
+                    <MenuItem
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      bg={activeTab === tab ? "#0E1726" : "white"}
+                      color={activeTab === tab ? "white" : "#2d3748"}
+                      _hover={{
+                        bg: activeTab === tab ? "#243B65" : "#F7FAFC",
+                        color: activeTab === tab ? "white" : "#2d3748",
+                      }}
+                    >
+                      {tab}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Menu>
+            ) : (
+              // ✅ Pills for xl and above
+              <Box bg="white" borderRadius="full" p={2} m={2} boxShadow="sm">
+                <HStack spacing={0} justify="center">
+                  {tabs.map((tab) => (
+                    <Button
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      bg={activeTab === tab ? "#0E1726" : "transparent"}
+                      color={activeTab === tab ? "white" : "#2d3748"}
+                      border="none"
+                      borderRadius="full"
+                      px={6}
+                      py={2}
+                      fontSize="sm"
+                      fontWeight="medium"
+                      _hover={{
+                        bg: activeTab === tab ? "#243B65" : "#F7FAFC",
+                      }}
+                      transition="all 0.2s"
+                      minW="120px"
+                    >
+                      {tab}
+                    </Button>
+                  ))}
+                </HStack>
+              </Box>
+            )}
           </MotionBox>
         </MotionVStack>
 
@@ -249,7 +290,7 @@ const SecureYourFuture: React.FC = () => {
             {/* Right Video Section */}
             <MotionBox
               flex="1"
-              maxW={{ base: "100%", lg: "55%" }}
+              maxW={{ base: "100%", xl: "55%" }}
               variants={fadeUpVariants}
             >
               <Box
