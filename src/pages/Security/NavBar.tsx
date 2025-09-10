@@ -117,7 +117,7 @@ const Navbar = () => {
             h={2}
             alignItems="center"
             justifyContent="space-between"
-            display={{ base: "none", lg: "flex" }}
+            display={{ base: "none", xl: "flex" }}
           >
             <HStack spacing={5} align="center">
               <Image
@@ -185,7 +185,7 @@ const Navbar = () => {
           </Flex>
 
           {/* Mobile navbar */}
-          <Box w="100%" display={{ base: "block", lg: "none" }}>
+          <Box w="100%" display={{ base: "block", xl: "none" }}>
             <Flex justify="space-between" align="center" position="relative">
               {/* Hamburger menu */}
               <IconButton
