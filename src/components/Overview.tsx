@@ -87,8 +87,13 @@ const Overview = () => {
     base: "auto",
     lg: "20rem",
   });
-  const isMobile = useBreakpointValue({ base: true, md: true, lg: true, xl: false });
-  const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
+  // true only up to md
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: true,
+    xl: false,
+  });
 
   return (
     <Box position="relative" bg="#f9fdfe">
@@ -205,7 +210,7 @@ const Overview = () => {
                         >
                           {section.sectionText}
                           {/* On mobile and tablet, the image is displayed inside the accordion panel. */}
-                          {(isMobile || isTablet) && (
+                          {(isMobile) && (
                             <Box
                               bg="white"
                               p="1rem"
@@ -237,7 +242,7 @@ const Overview = () => {
             </Box>
 
             {/* On desktop, the image is displayed to the right of the accordion. */}
-            {!(isMobile || isTablet) && (
+            {!(isMobile) && (
               <Box flex={1}>
                 <Box
                   bg="white"
