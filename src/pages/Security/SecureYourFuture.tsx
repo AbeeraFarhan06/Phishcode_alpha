@@ -93,6 +93,14 @@ const SecureYourFuture: React.FC = () => {
   const tabs: TabKey[] = ["Empower", "Save", "Protect"];
   const currentContent = tabContent[activeTab];
 
+  // Better responsive breakpoint logic
+  const showDropdown = useBreakpointValue({
+    base: true, // Mobile: dropdown
+    md: true, // iPad: dropdown
+    lg: true, // Large tablet: dropdown
+    xl: false, // Desktop: pills
+  });
+
   return (
     <Box id="Secure-your-tomorrow" bgColor="#F9FDFE">
       <Container>
@@ -138,8 +146,8 @@ const SecureYourFuture: React.FC = () => {
 
           {/* Tab Navigation */}
           <MotionBox variants={fadeUpVariants}>
-            {useBreakpointValue({ base: true, md: true, lg: true, xl: false }) ? (
-              // ✅ Dropdown for base, md, lg
+            {showDropdown ? (
+              // Dropdown for mobile/tablet
               <Menu matchWidth>
                 <MenuButton
                   as={Button}
@@ -172,7 +180,7 @@ const SecureYourFuture: React.FC = () => {
                 </MenuList>
               </Menu>
             ) : (
-              // ✅ Pills for xl and above
+              // Pills for desktop
               <Box bg="white" borderRadius="full" p={2} m={2} boxShadow="sm">
                 <HStack spacing={0} justify="center">
                   {tabs.map((tab) => (
@@ -208,7 +216,7 @@ const SecureYourFuture: React.FC = () => {
           borderRadius="3xl"
           boxShadow="lg"
           border="1px solid #E2E8F0"
-          p={12}
+          p={{ base: 6, md: 8, lg: 10, xl: 12 }}
           mt={12}
           variants={fadeUpVariants}
           initial="hidden"
@@ -216,27 +224,63 @@ const SecureYourFuture: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <MotionFlex
-            direction={{ base: "column", xl: "row" }}
+            direction={{
+              base: "column",
+              md: "column",
+              lg: "column",
+              xl: "row",
+            }}
             align="stretch"
-            gap={12}
+            gap={{ base: 6, md: 8, lg: 10, xl: 12 }}
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {/* Left Content */}
+            {/* Image Section - First on mobile/tablet */}
             <MotionBox
               flex="1"
-              maxW={{ base: "100%", xl: "45%" }}
+              variants={fadeUpVariants}
+              minW="0"
+              order={{ base: 1, xl: 2 }}
+            >
+              <Box
+                position="relative"
+                borderRadius="xl"
+                overflow="hidden"
+                bg="gray.100"
+                w="100%"
+                h={{
+                  base: "250px", // Mobile
+                  md: "300px", // iPad
+                  lg: "350px", // Large tablet
+                  xl: "400px", // Desktop
+                }}
+              >
+                <Image
+                  src={currentContent.image}
+                  alt={currentContent.title}
+                  w="100%"
+                  h="100%"
+                  objectFit="cover"
+                />
+              </Box>
+            </MotionBox>
+
+            {/* Content Section - Second on mobile/tablet */}
+            <MotionBox
+              flex="1"
               variants={fadeUpVariants}
               display="flex"
               flexDirection="column"
               justifyContent="space-between"
+              minW="0"
+              order={{ base: 2, xl: 1 }}
             >
               <Box>
                 <Heading
                   as="h3"
-                  fontSize={{ base: "2xl", md: "3xl" }}
+                  fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
                   fontWeight="600"
                   color="#2d3748"
                   lineHeight="1.2"
@@ -245,18 +289,21 @@ const SecureYourFuture: React.FC = () => {
                   {currentContent.title}
                 </Heading>
                 <Text
-                  fontSize="16px"
+                  fontSize={{ base: "14px", md: "16px" }}
                   color="#4A5568"
                   lineHeight="1.6"
-                  maxW="400px"
                   mb={8}
                 >
                   {currentContent.description}
                 </Text>
               </Box>
 
-              {/* Buttons moved to left column */}
-              <HStack spacing="1rem" flexWrap="wrap" justify="flex-start">
+              {/* Buttons */}
+              <Flex
+                direction={{ base: "column", sm: "row" }}
+                gap="1rem"
+                align={{ base: "stretch", sm: "flex-start" }}
+              >
                 {currentContent.buttons.map((button, index) => (
                   <Button
                     key={index}
@@ -276,7 +323,8 @@ const SecureYourFuture: React.FC = () => {
                     transition="all 0.2s"
                     whiteSpace="normal"
                     textAlign="center"
-                    w={index === 0 ? "13rem" : "11.6rem"}
+                    minW={{ base: "100%", sm: "auto" }}
+                    w={{ base: "100%", sm: index === 0 ? "13rem" : "11.6rem" }}
                     h="4.625rem"
                     px="1rem"
                     py="0.75rem"
@@ -284,31 +332,7 @@ const SecureYourFuture: React.FC = () => {
                     {button.text}
                   </Button>
                 ))}
-              </HStack>
-            </MotionBox>
-
-            {/* Right Video Section */}
-            <MotionBox
-              flex="1"
-              maxW={{ base: "100%", xl: "55%" }}
-              variants={fadeUpVariants}
-            >
-              <Box
-                position="relative"
-                borderRadius="xl"
-                overflow="hidden"
-                bg="gray.100"
-                h={{ xl: "20rem"}}
-                w= {{xl: "32rem" }}
-              >
-                <Image
-                  src={currentContent.image}
-                  alt={currentContent.title}
-                  w="100%"
-                  h="100%"
-                  objectFit="cover"
-                />
-              </Box>
+              </Flex>
             </MotionBox>
           </MotionFlex>
         </MotionBox>
