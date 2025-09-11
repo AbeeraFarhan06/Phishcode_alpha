@@ -85,7 +85,7 @@ const footerSections = [
 
 export default function Footer() {
   return (
-    <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" width="100%">
+    <Box bg="#f1f2f379" borderTop="3px solid #8c8c8d79" width="100%" pb={3}>
       <Container footer>
         <Flex
           direction={{ base: "column", md: "row" }}
