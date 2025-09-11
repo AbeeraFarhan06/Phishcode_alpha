@@ -212,9 +212,8 @@ const OTPVerificationPage = () => {
                         bg: "transparent",
                       }}
                       _focus={{
-                        boxShadow: "outline",
-                        outline: "2px solid #4285f4",
-                        outlineOffset: "2px",
+                        boxShadow: "none",
+                        outline: "none",
                         bg: "transparent",
                       }}
                       _active={{

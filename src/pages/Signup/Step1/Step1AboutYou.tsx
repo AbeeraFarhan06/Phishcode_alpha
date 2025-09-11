@@ -783,30 +783,33 @@ const Step1AboutYou = () => {
 
               {/* Checkboxes */}
               <div className="mb-3">
-                <div className="form-check mb-3">
+                <div className={`${styles.checkboxContainer} mb-3`}>
                   <input
                     type="checkbox"
                     name="agreeToContact"
-                    className="form-check-input"
+                    className={styles.checkboxInput}
                     id="agreeToContact"
                     checked={formData.agreeToContact}
                     onChange={handleInputChange}
                   />
-                  <label className="form-check-label" htmlFor="agreeToContact">
+                  <label
+                    className={styles.checkboxLabel}
+                    htmlFor="agreeToContact"
+                  >
                     I understand that Phishcode may contact me about my trial.
                   </label>
                 </div>
 
-                <div className="form-check">
+                <div className={styles.checkboxContainer}>
                   <input
                     type="checkbox"
                     name="receiveInfo"
-                    className="form-check-input"
+                    className={styles.checkboxInput}
                     id="receiveInfo"
                     checked={formData.receiveInfo}
                     onChange={handleInputChange}
                   />
-                  <label className="form-check-label" htmlFor="receiveInfo">
+                  <label className={styles.checkboxLabel} htmlFor="receiveInfo">
                     I will receive information, tips, and offers about solutions
                     for businesses and organizations, and other Phishcode
                     products and services.{" "}
