@@ -796,7 +796,7 @@ const Step1AboutYou = () => {
                     className={styles.checkboxLabel}
                     htmlFor="agreeToContact"
                   >
-                    I understand that Phishcode may contact me about my trial.
+                    I understand that PHISHCODE may contact me about my trial.
                   </label>
                 </div>
 
@@ -811,9 +811,9 @@ const Step1AboutYou = () => {
                   />
                   <label className={styles.checkboxLabel} htmlFor="receiveInfo">
                     I will receive information, tips, and offers about solutions
-                    for businesses and organizations, and other Phishcode
+                    for businesses and organizations, and other PHISHCODE
                     products and services.{" "}
-                    <a href="#" className={styles.privacyLink}>
+                    <a href="/privacy-statement" className={styles.privacyLink}>
                       Privacy Statement
                     </a>
                   </label>

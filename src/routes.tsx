@@ -8,7 +8,9 @@ import ForgetPasswordPage from "./pages/Signin/ForgetPasswordPage";
 import OTPVerificationPage from "./pages/Signin/OTPVerificationPage";
 import ResetPasswordPage from "./pages/Signin/ResetPasswordPage";
 import SigninPage from "./pages/Signin/SigninPage";
-import SecurityPage from "./pages/SecurityPage"; // Add this import
+import SecurityPage from "./pages/SecurityPage";
+import PrivacyStatement from "./pages/PrivacyStatement";
+import TermsAndConditions from "./pages/Terms&Condition";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +18,16 @@ const router = createBrowserRouter([
     element: <Layout />,
   },
   {
-    path: "/security",
+    path: "/about-us",
     element: <SecurityPage />,
+  },
+  {
+    path: "/terms-and-conditions",
+    element: <TermsAndConditions />,
+  },
+  {
+    path: "/privacy-statement",
+    element: <PrivacyStatement />,
   },
   {
     path: "/signin",

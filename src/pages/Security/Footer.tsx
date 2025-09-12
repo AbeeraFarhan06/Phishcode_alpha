@@ -77,8 +77,8 @@ const footerSections = [
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy", path: "" },
-      { label: "Cookie Policy", path: "" },
+      { label: "Privacy Statement", path: "/privacy-statement" },
+      { label: "PHISHCODE Terms & Condition", path: "/terms-and-conditions" },
     ],
   },
 ];
