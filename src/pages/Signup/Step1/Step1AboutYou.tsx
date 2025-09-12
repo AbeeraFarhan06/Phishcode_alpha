@@ -4,6 +4,7 @@ import { MdRadioButtonUnchecked } from "react-icons/md";
 import styles from "./Step1AboutYou.module.css";
 import phishcode_logoo_1 from "../../../assets/logo/phishcode_logoo_1.png";
 import { MdCheck } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 // Type definitions
 interface Country {
@@ -813,9 +814,9 @@ const Step1AboutYou = () => {
                     I will receive information, tips, and offers about solutions
                     for businesses and organizations, and other PHISHCODE
                     products and services.{" "}
-                    <a href="/privacy-statement" className={styles.privacyLink}>
+                    <Link to="/privacy-statement" className={styles.privacyLink}>
                       Privacy Statement
-                    </a>
+                    </Link>
                   </label>
                 </div>
               </div>
