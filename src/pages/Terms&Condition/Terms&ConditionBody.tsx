@@ -15,6 +15,8 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Link as RouterLink } from "react-router-dom";
+import Container from "../../components/Container";
 
 // Custom Print Icon component
 const PrintIcon = (props: any) => (
@@ -26,17 +28,17 @@ const PrintIcon = (props: any) => (
   </Icon>
 );
 
-// Container component
-const Container = ({ children }: { children: React.ReactNode }) => (
-  <Box
-    maxW="1200px"
-    mx="auto"
-    px={{ base: "1rem", sm: "1.5rem", md: "2rem", lg: "2.5rem" }}
-    py={{ base: "2rem", md: "3rem" }}
-  >
-    {children}
-  </Box>
-);
+// // Container component
+// const Container = ({ children }: { children: React.ReactNode }) => (
+//   <Box
+//     maxW="1200px"
+//     mx="auto"
+//     px={{ base: "1rem", sm: "1.5rem", md: "2rem", lg: "2.5rem" }}
+//     py={{ base: "2rem", md: "3rem" }}
+//   >
+//     {children}
+//   </Box>
+// );
 
 const TermsAndConditions: React.FC = () => {
   return (
@@ -132,8 +134,9 @@ const TermsAndConditions: React.FC = () => {
                 fontSize={{ base: "1rem", md: "1.1rem" }}
                 mb={{ base: "1rem", md: "1.25rem" }}
                 color="gray.800"
+                fontWeight={600}
               >
-                PhishCode Terms & Conditions
+                Terms & Conditions
               </Heading>
 
               <VStack
@@ -210,6 +213,27 @@ const TermsAndConditions: React.FC = () => {
                 >
                   Governing Law & Jurisdiction
                 </Link>
+                <Link
+                  href="#modifications"
+                  color="blue.600"
+                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                >
+                  Modifications
+                </Link>
+                <Link
+                  href="#waiver"
+                  color="blue.600"
+                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                >
+                  Waiver
+                </Link>
+                <Link
+                  href="#headings"
+                  color="blue.600"
+                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                >
+                  Headings
+                </Link>
               </VStack>
 
               <Divider
@@ -223,6 +247,7 @@ const TermsAndConditions: React.FC = () => {
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   mb={{ base: "0.8rem", md: "1rem" }}
                   color="gray.800"
+                  fontWeight={600}
                 >
                   Related Information:
                 </Heading>
@@ -231,25 +256,12 @@ const TermsAndConditions: React.FC = () => {
                   spacing={{ base: "0.4rem", md: "0.5rem" }}
                 >
                   <Link
-                    href="#privacy-policy"
+                    as={RouterLink}
+                    to="/privacy-statement"
                     color="blue.600"
                     fontSize={{ base: "0.8rem", md: "0.9rem" }}
                   >
-                    Privacy Policy ›
-                  </Link>
-                  <Link
-                    href="#acceptable-use-details"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Acceptable Use Guidelines ›
-                  </Link>
-                  <Link
-                    href="#contact-us"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Contact Support ›
+                    Privacy Statement ›
                   </Link>
                 </VStack>
               </Box>
@@ -268,7 +280,8 @@ const TermsAndConditions: React.FC = () => {
                   fontSize={{ base: "1rem", md: "1.1rem", lg: "1.125rem" }}
                   mb={{ base: "1rem", md: "1.25rem" }}
                   color="black.600"
-                  fontWeight="400"
+                  fontWeight="600"
+                  textAlign="justify"
                   lineHeight={{ base: "1.5", md: "1.6" }}
                 >
                   PLEASE READ THESE TERMS OF USE CAREFULLY BEFORE ACCESSING OR
@@ -280,11 +293,16 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   These Terms of Use ("Terms") govern your access to and use of
-                  the website https://phishcode.com/ (the "Website") and all
-                  related products, services, features, or applications provided
-                  through it (collectively, the "Services").
+                  the website{" "}
+                  <span style={{ fontWeight: 600 }}>
+                    https://phishcode.com/
+                  </span>{" "}
+                  (the "Website") and all related products, services, features,
+                  or applications provided through it (collectively, the
+                  "Services").
                 </Text>
 
                 <Text
@@ -292,10 +310,12 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   By accessing or using the Website and Services, you ("User,"
                   "you," or "your") agree to be bound by these Terms, forming a
-                  legally enforceable agreement with PHISHCODE, Inc.
+                  legally enforceable agreement with{" "}
+                  <span style={{ fontWeight: 600 }}>PHISHCODE, Inc.</span>{" "}
                   ("PHISHCODE," "we," "us," or "our"). If you do not agree to
                   these Terms, you must discontinue use of the Website and
                   Services immediately.
@@ -331,6 +351,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       By creating an account, you confirm that you are at least
                       18 years old, have not been convicted of fraud, money
@@ -353,6 +374,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       If registering on behalf of a company, partnership, or
                       organization ("Entity"), you represent that you have the
@@ -374,6 +396,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       You agree to provide complete and accurate information
                       during account registration and maintain its accuracy.
@@ -395,6 +418,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       Each User may maintain only one account. Impersonation,
                       creation of fake accounts, or unauthorized use of another
@@ -415,6 +439,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       Your account is personal to you or your Entity. You may
                       not assign, sell, or transfer it to any third party.
@@ -452,6 +477,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       PHISHCODE does not guarantee that the Website or Services
                       will be error-free, uninterrupted, or free from security
@@ -472,6 +498,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       While PHISHCODE implements industry-standard security
                       measures, no system is fully secure. We are not
@@ -494,6 +521,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       The Website and Services are provided on an "as is" and
                       "as available" basis. PHISHCODE disclaims all
@@ -517,6 +545,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       Data may be transmitted over networks beyond PHISHCODE's
                       control. We assume no liability for loss, corruption, or
@@ -555,6 +584,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       You are solely responsible for safeguarding your account
                       credentials. If you suspect unauthorized access, you must
@@ -575,6 +605,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       You are responsible for maintaining appropriate safeguards
                       and backup procedures for your data.
@@ -613,6 +644,7 @@ const TermsAndConditions: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       You may use the Website and Services only for lawful,
                       professional, and ethical purposes related to
@@ -752,6 +784,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   PHISHCODE may suspend access temporarily for upgrades,
                   maintenance, or security improvements. We will endeavor to
@@ -775,6 +808,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   PHISHCODE and its affiliates, officers, employees, and
                   partners shall not be liable for:
@@ -782,6 +816,7 @@ const TermsAndConditions: React.FC = () => {
                 <UnorderedList
                   spacing={{ base: "0.5rem", md: "0.6rem" }}
                   pl={{ base: "1rem", md: "1.25rem" }}
+                  textAlign="justify"
                 >
                   <ListItem
                     color="gray.800"
@@ -829,6 +864,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   You agree to indemnify and hold harmless PHISHCODE, its
                   affiliates, officers, and employees against any claims,
@@ -837,6 +873,7 @@ const TermsAndConditions: React.FC = () => {
                 <UnorderedList
                   spacing={{ base: "0.5rem", md: "0.6rem" }}
                   pl={{ base: "1rem", md: "1.25rem" }}
+                  textAlign="justify"
                 >
                   <ListItem
                     color="gray.800"
@@ -877,6 +914,7 @@ const TermsAndConditions: React.FC = () => {
                   <ListItem
                     color="gray.800"
                     fontSize={{ base: "0.9rem", md: "1rem" }}
+                    textAlign="justify"
                   >
                     All intellectual property rights in the Website, Services,
                     software, designs, and trademarks belong exclusively to
@@ -885,6 +923,7 @@ const TermsAndConditions: React.FC = () => {
                   <ListItem
                     color="gray.800"
                     fontSize={{ base: "0.9rem", md: "1rem" }}
+                    textAlign="justify"
                   >
                     You may not copy, modify, reverse-engineer, distribute, or
                     resell our intellectual property.
@@ -892,6 +931,7 @@ const TermsAndConditions: React.FC = () => {
                   <ListItem
                     color="gray.800"
                     fontSize={{ base: "0.9rem", md: "1rem" }}
+                    textAlign="justify"
                   >
                     Any unauthorized use will result in immediate termination of
                     your rights under these Terms.
@@ -914,6 +954,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   The Website may include links to third-party websites.
                   PHISHCODE does not endorse or assume responsibility for
@@ -936,6 +977,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   These Terms do not create a partnership, joint venture, or
                   agency relationship between you and PHISHCODE.
@@ -957,6 +999,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   These Terms represent the complete agreement between you and
                   PHISHCODE, superseding any prior communications or
@@ -979,6 +1022,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   These Terms are governed by the laws of the State of
                   California, USA. Any disputes shall be subject to the
@@ -1002,6 +1046,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   PHISHCODE may update these Terms at any time without prior
                   notice. Continued use of the Website constitutes your
@@ -1024,6 +1069,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   Failure to enforce any right under these Terms shall not
                   constitute a waiver of such right.
@@ -1045,6 +1091,7 @@ const TermsAndConditions: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   Section headings are for reference only and do not affect
                   interpretation of these Terms.
@@ -1072,6 +1119,7 @@ const TermsAndConditions: React.FC = () => {
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
                   mb={{ base: "0.5rem", md: "0.75rem" }}
+                  textAlign="justify"
                 >
                   If you have any questions about these Terms & Conditions,
                   please contact us at:
@@ -1081,12 +1129,12 @@ const TermsAndConditions: React.FC = () => {
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
                 >
-                  <Text as="span" fontWeight="bold">
+                  <Text as="span" fontWeight="600">
                     Email:
                   </Text>{" "}
                   legal@phishcode.com
                   <br />
-                  <Text as="span" fontWeight="bold">
+                  <Text as="span" fontWeight="600">
                     Website:
                   </Text>{" "}
                   https://phishcode.com/

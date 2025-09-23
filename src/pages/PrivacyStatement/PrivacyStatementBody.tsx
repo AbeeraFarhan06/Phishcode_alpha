@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import Container from "../../components/Container";
+import { Link as RouterLink } from "react-router-dom";
 
 // Custom Print Icon component
 const PrintIcon = (props: any) => (
@@ -123,7 +124,7 @@ const PrivacyStatementBody: React.FC = () => {
                 color="gray.800"
                 fontWeight={600}
               >
-                PhishCode Privacy Statement
+                Privacy Statement
               </Heading>
 
               <VStack
@@ -131,81 +132,81 @@ const PrivacyStatementBody: React.FC = () => {
                 spacing={{ base: "0.4rem", md: "0.5rem" }}
               >
                 <Link
-                  href="#personal-data-collect"
+                  href="#key-definitions"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  Personal data we collect
+                  Key Definitions
                 </Link>
                 <Link
-                  href="#how-we-use"
+                  href="#information-we-collect"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  How we use personal data
+                  Information We Collect
+                </Link>
+                <Link
+                  href="#personal-info"
+                  color="blue.600"
+                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                >
+                  How We Use Personal Information
+                </Link>
+                <Link
+                  href="#collection-methods"
+                  color="blue.600"
+                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                >
+                  Collection Methods
                 </Link>
                 <Link
                   href="#sharing-info"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  Sharing of information
+                  Sharing of Information
                 </Link>
                 <Link
-                  href="#access-control"
+                  href="#third-party-links"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  How to access and control your personal data
-                </Link>
-                <Link
-                  href="#cookies"
-                  color="blue.600"
-                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                >
-                  Cookies and similar technologies
-                </Link>
-                <Link
-                  href="#data-security"
-                  color="blue.600"
-                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                >
-                  Data security
-                </Link>
-                <Link
-                  href="#phishcode-account"
-                  color="blue.600"
-                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                >
-                  PhishCode account
+                  Third-Party Links
                 </Link>
                 <Link
                   href="#data-retention"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  Data retention
+                  Data Retention
                 </Link>
                 <Link
                   href="#children-privacy"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  Children's privacy
+                  Children's Privacy
                 </Link>
                 <Link
                   href="#your-rights"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  Your rights
+                  Your Rights
+                </Link>
+                <Link
+                  href="#data-security"
+                  color="blue.600"
+                  fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                >
+                  Data Security
                 </Link>
                 <Link
                   href="#updates"
                   color="blue.600"
                   fontSize={{ base: "0.8rem", md: "0.9rem" }}
                 >
-                  Updates to this policy
+                  Updates to This Policy
                 </Link>
               </VStack>
 
@@ -222,53 +223,19 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Service-specific details:
+                  Related Information:
                 </Heading>
                 <VStack
                   align="stretch"
                   spacing={{ base: "0.4rem", md: "0.5rem" }}
                 >
                   <Link
-                    href="#cybersecurity-training"
+                    as={RouterLink}
+                    to="/terms-and-conditions"
                     color="blue.600"
                     fontSize={{ base: "0.8rem", md: "0.9rem" }}
                   >
-                    Cybersecurity Training Platforms ›
-                  </Link>
-                  <Link
-                    href="#phishing-simulation"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Phishing Simulation Services ›
-                  </Link>
-                  <Link
-                    href="#awareness-campaigns"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Security Awareness Campaigns ›
-                  </Link>
-                  <Link
-                    href="#client-portal"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Client Management Portal ›
-                  </Link>
-                  <Link
-                    href="#reporting-analytics"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Reporting and Analytics ›
-                  </Link>
-                  <Link
-                    href="#enterprise-solutions"
-                    color="blue.600"
-                    fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                  >
-                    Enterprise Solutions ›
+                    Terms & Conditions ›
                   </Link>
                 </VStack>
               </Box>
@@ -289,10 +256,18 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight="400"
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
-                  Your privacy is important to us. This privacy statement
-                  explains the personal data PhishCode processes, how PhishCode
-                  processes it, and for what purposes.
+                  PHISHCODE Technologies and its affiliated entities
+                  (collectively,{" "}
+                  <span style={{ fontWeight: 600 }}>
+                    “PHISHCODE,” “we,” “our,” or “us”
+                  </span>
+                  ) are committed to protecting your privacy. This Privacy
+                  Policy describes how we collect, use, share, and safeguard
+                  Personal Information when you interact with our websites,
+                  applications, and services (together, the{" "}
+                  <span style={{ fontWeight: 600 }}>“Services”</span>).
                 </Text>
 
                 <Text
@@ -300,95 +275,19 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
-                  PhishCode offers a wide range of cybersecurity products,
-                  including phishing simulation platforms used to help
-                  organizations worldwide, security awareness training that
-                  employees use at work, and services designed to create and
-                  host cybersecurity awareness campaigns. References to
-                  PhishCode products in this statement include PhishCode
-                  services, websites, apps, software, servers, and devices.
-                </Text>
-
-                <Text
-                  mb={{ base: "1rem", md: "1.25rem" }}
-                  color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
-                >
-                  Please read the service-specific details in this privacy
-                  statement, which provide additional relevant information. This
-                  statement applies to the interactions PhishCode has with you
-                  and the PhishCode products listed below, as well as other
-                  PhishCode products that display this statement.
-                </Text>
-
-                <Text
-                  mb={{ base: "1rem", md: "1.25rem" }}
-                  color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
-                >
-                  Young people may prefer starting with the{" "}
-                  <Link
-                    href="#privacy-young-people"
-                    color="blue.600"
-                    borderBottom="1.5px solid"
-                    borderBottomColor="blue.600"
-                    textDecoration="none"
-                    _hover={{
-                      color: "blue.700",
-                      borderBottomColor: "blue.700",
-                    }}
-                  >
-                    Privacy for young people
-                  </Link>{" "}
-                  page. That page highlights information that may be helpful for
-                  young people.
-                </Text>
-
-                <Text
-                  mb={{ base: "1rem", md: "1.25rem" }}
-                  color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
-                >
-                  For individuals in the United States, please refer to our{" "}
-                  <Link
-                    href="#us-data-privacy"
-                    color="blue.600"
-                    borderBottom="1.5px solid"
-                    borderBottomColor="blue.600"
-                    textDecoration="none"
-                    _hover={{
-                      color: "blue.700",
-                      borderBottomColor: "blue.700",
-                    }}
-                  >
-                    U.S. State Data Privacy Notice
-                  </Link>{" "}
-                  and the{" "}
-                  <Link
-                    href="#consumer-health"
-                    color="blue.600"
-                    borderBottom="1.5px solid"
-                    borderBottomColor="blue.600"
-                    textDecoration="none"
-                    _hover={{
-                      color: "blue.700",
-                      borderBottomColor: "blue.700",
-                    }}
-                  >
-                    Consumer Health Data Privacy Policy
-                  </Link>{" "}
-                  for additional information about the processing of your
-                  personal data, and your rights under applicable U.S. state
-                  data privacy laws.
+                  Our Services enable Clients to conduct and manage
+                  cybersecurity awareness initiatives, including phishing
+                  simulations, security training campaigns, and related
+                  awareness programs. If certain practices differ for specific
+                  Services, we will provide clear notice at the time information
+                  is collected.
                 </Text>
               </Box>
 
-              {/* Personal Data We Collect Section */}
-              <Box id="personal-data-collect">
+              {/* key Definitions Section */}
+              <Box id="key-definitions">
                 <Heading
                   as="h2"
                   fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
@@ -396,78 +295,100 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Personal data we collect
+                  1. Key Definitions
                 </Heading>
 
-                <Text
+                <UnorderedList
+                  spacing={{ base: "0.5rem", md: "0.6rem" }}
+                  pl={{ base: "1rem", md: "1.25rem" }}
+                  textAlign="justify"
+                >
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Affiliate:
+                    </Text>{" "}
+                    Any entity that directly or indirectly controls, is
+                    controlled by, or is under common control with PHISHCODE.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Client:
+                    </Text>{" "}
+                    Any individual or organization registered to use our
+                    Services.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Target:
+                    </Text>{" "}
+                    An individual engaged through a Client’s campaign, such as a
+                    recipient of simulated phishing emails or assigned training.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Campaign List:
+                    </Text>{" "}
+                    A list of Targets provided or managed by a Client within our
+                    platform, along with related information (e.g., names, email
+                    addresses).
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Visitor:
+                    </Text>{" "}
+                    Anyone who interacts with PhishCode outside of being a
+                    Client or Target, such as website visitors or event
+                    participants.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Personal Information:
+                    </Text>{" "}
+                    Data that identifies, relates to, or can reasonably identify
+                    an individual, including but not limited to name, email
+                    address, contact details, or job title.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight="600">
+                      Control:
+                    </Text>{" "}
+                    Ownership or authority over an entity representing 50% or
+                    more of the voting or equity interests.
+                  </ListItem>
+                </UnorderedList>
+              </Box>
+
+              <Box id="information-we-collect">
+                <Heading
+                  as="h2"
+                  fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
                   mb={{ base: "1rem", md: "1.25rem" }}
                   color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
+                  fontWeight={600}
                 >
-                  PhishCode collects data from you, through our interactions
-                  with you and through our products. You provide some of this
-                  data directly, and we get some of it by collecting data about
-                  your interactions, use, and experiences with our products. The
-                  data we collect depends on the context of your interactions
-                  with PhishCode and the choices you make, including your
-                  privacy settings and the products and features you use.
-                </Text>
-
-                <Text
-                  mb={{ base: "1rem", md: "1.25rem" }}
-                  color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
-                >
-                  If you represent an organization, such as a business or
-                  school, that utilizes Enterprise and Developer Products from
-                  PhishCode, please see the{" "}
-                  <Link
-                    href="#enterprise-products"
-                    color="blue.600"
-                    borderBottom="1.5px solid"
-                    borderBottomColor="blue.600"
-                  >
-                    Enterprise and developer products
-                  </Link>{" "}
-                  section of this privacy statement to learn how we process your
-                  data. If you are an end user of a PhishCode product or a
-                  PhishCode account provided by your organization, please see
-                  the{" "}
-                  <Link
-                    href="#organization-products"
-                    color="blue.600"
-                    borderBottom="1.5px solid"
-                    borderBottomColor="blue.600"
-                  >
-                    Products provided by your organization
-                  </Link>
-                  and the{" "}
-                  <Link
-                    href="#phishcode-account"
-                    color="blue.600"
-                    borderBottom="1.5px solid"
-                    borderBottomColor="blue.600"
-                  >
-                    PhishCode account
-                  </Link>{" "}
-                  sections for more information.
-                </Text>
-
-                <Text
-                  mb={{ base: "1.5rem", md: "2rem" }}
-                  color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
-                >
-                  You have choices when it comes to the technology you use and
-                  the data you share. When we ask you to provide personal data,
-                  you can decline. Many of our products require some personal
-                  data to provide you with a service. If you choose not to
-                  provide data required to provide you with a product or
-                  feature, you cannot use that product or feature.
-                </Text>
+                  2. Information We Collect
+                </Heading>
 
                 <VStack
                   spacing={{ base: "1.5rem", md: "2rem" }}
@@ -491,7 +412,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Identification Data:
                         </Text>{" "}
                         Name, email address, billing details, phone number, and
@@ -501,7 +422,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Transaction Data:
                         </Text>{" "}
                         Payment information and billing records.
@@ -510,7 +431,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Employment Data:
                         </Text>{" "}
                         Business information such as role, department, or
@@ -520,7 +441,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Account Data:
                         </Text>{" "}
                         Credentials used to register and access our Services.
@@ -529,7 +450,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Communication Data:
                         </Text>{" "}
                         Correspondence with customer support or account
@@ -539,7 +460,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Marketing Data:
                         </Text>{" "}
                         Contact details for campaigns or promotions.
@@ -564,8 +485,9 @@ const PrivacyStatementBody: React.FC = () => {
                       <ListItem
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
+                        textAlign="justify"
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Device Data:
                         </Text>{" "}
                         Operating system, browser type, device identifiers, and
@@ -575,7 +497,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Usage Data:
                         </Text>{" "}
                         Session activity, access dates, clicked links, and
@@ -585,7 +507,7 @@ const PrivacyStatementBody: React.FC = () => {
                         color="gray.800"
                         fontSize={{ base: "0.9rem", md: "1rem" }}
                       >
-                        <Text as="span" fontWeight="bold">
+                        <Text as="span" fontWeight="600">
                           Performance Data:
                         </Text>{" "}
                         Delivery and engagement metrics from simulated
@@ -607,6 +529,7 @@ const PrivacyStatementBody: React.FC = () => {
                     <UnorderedList
                       spacing={{ base: "0.5rem", md: "0.6rem" }}
                       pl={{ base: "1rem", md: "1.25rem" }}
+                      textAlign="justify"
                     >
                       <ListItem
                         color="gray.800"
@@ -632,6 +555,7 @@ const PrivacyStatementBody: React.FC = () => {
                       mb={{ base: "0.8rem", md: "1rem" }}
                       color="gray.800"
                       fontWeight={600}
+                      textAlign="justify"
                     >
                       Aggregated Data
                     </Heading>
@@ -639,6 +563,7 @@ const PrivacyStatementBody: React.FC = () => {
                       color="gray.800"
                       fontSize={{ base: "0.9rem", md: "1rem" }}
                       lineHeight={{ base: "1.5", md: "1.6" }}
+                      textAlign="justify"
                     >
                       Statistical or demographic insights derived from Personal
                       Information but not identifying any individual.
@@ -648,7 +573,7 @@ const PrivacyStatementBody: React.FC = () => {
               </Box>
 
               {/* How We Use Personal Information */}
-              <Box id="how-we-use">
+              <Box id="personal-info">
                 <Heading
                   as="h2"
                   fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
@@ -656,7 +581,7 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  How We Use Personal Information
+                  3. How We Use Personal Information
                 </Heading>
                 <Text
                   mb={{ base: "1rem", md: "1.25rem" }}
@@ -705,8 +630,15 @@ const PrivacyStatementBody: React.FC = () => {
                     color="gray.800"
                     fontSize={{ base: "0.9rem", md: "1rem" }}
                   >
-                    Comply with legal obligations and enforce our Terms &
-                    Conditions.
+                    Comply with legal obligations and enforce our{" "}
+                    <Link
+                      color="blue.600"
+                      fontSize={{ base: "0.8rem", md: "0.9rem" }}
+                      textDecoration="underline"
+                      href="/terms-and-conditions"
+                    >
+                      Terms & Conditions.{" "}
+                    </Link>
                   </ListItem>
                   <ListItem
                     color="gray.800"
@@ -717,8 +649,7 @@ const PrivacyStatementBody: React.FC = () => {
                 </UnorderedList>
               </Box>
 
-              {/* Key Definitions */}
-              <Box id="key-definitions">
+              <Box id="collection-methods">
                 <Heading
                   as="h2"
                   fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
@@ -726,174 +657,61 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Key Definitions
+                  4. Collection Methods
                 </Heading>
-                <Grid
-                  templateColumns={{
-                    base: "1fr",
-                    md: "repeat(2, 1fr)",
-                  }}
-                  gap={{ base: "1rem", md: "1.25rem" }}
+
+                <UnorderedList
+                  spacing={{ base: "0.5rem", md: "0.6rem" }}
+                  pl={{ base: "1rem", md: "1.25rem" }}
                 >
-                  <GridItem>
-                    <Box
-                      p={{ base: "1rem", md: "1.25rem" }}
-                      border="1px"
-                      borderColor="gray.200"
-                      borderRadius="0.5rem"
-                    >
-                      <Heading
-                        as="h4"
-                        fontSize={{ base: "0.9rem", md: "1rem" }}
-                        mb="0.5rem"
-                        color="gray.800"
-                        fontWeight={600}
-                      >
-                        Affiliate:
-                      </Heading>
-                      <Text
-                        fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                        color="gray.800"
-                        lineHeight="1.5"
-                      >
-                        Any entity that directly or indirectly controls, is
-                        controlled by, or is under common control with
-                        PhishCode.
-                      </Text>
-                    </Box>
-                  </GridItem>
-                  <GridItem>
-                    <Box
-                      p={{ base: "1rem", md: "1.25rem" }}
-                      border="1px"
-                      borderColor="gray.200"
-                      borderRadius="0.5rem"
-                    >
-                      <Heading
-                        as="h4"
-                        fontSize={{ base: "0.9rem", md: "1rem" }}
-                        mb="0.5rem"
-                        color="gray.800"
-                        fontWeight={600}
-                      >
-                        Client:
-                      </Heading>
-                      <Text
-                        fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                        color="gray.800"
-                        lineHeight="1.5"
-                      >
-                        Any individual or organization registered to use our
-                        Services.
-                      </Text>
-                    </Box>
-                  </GridItem>
-                  <GridItem>
-                    <Box
-                      p={{ base: "1rem", md: "1.25rem" }}
-                      border="1px"
-                      borderColor="gray.200"
-                      borderRadius="0.5rem"
-                    >
-                      <Heading
-                        as="h4"
-                        fontSize={{ base: "0.9rem", md: "1rem" }}
-                        mb="0.5rem"
-                        color="gray.800"
-                        fontWeight={600}
-                      >
-                        Target:
-                      </Heading>
-                      <Text
-                        fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                        color="gray.800"
-                        lineHeight="1.5"
-                      >
-                        An individual engaged through a Client's campaign, such
-                        as a recipient of simulated phishing emails or assigned
-                        training.
-                      </Text>
-                    </Box>
-                  </GridItem>
-                  <GridItem>
-                    <Box
-                      p={{ base: "1rem", md: "1.25rem" }}
-                      border="1px"
-                      borderColor="gray.200"
-                      borderRadius="0.5rem"
-                    >
-                      <Heading
-                        as="h4"
-                        fontSize={{ base: "0.9rem", md: "1rem" }}
-                        mb="0.5rem"
-                        color="gray.800"
-                        fontWeight={600}
-                      >
-                        Campaign List:
-                      </Heading>
-                      <Text
-                        fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                        color="gray.800"
-                        lineHeight="1.5"
-                      >
-                        A list of Targets provided or managed by a Client within
-                        our platform, along with related information.
-                      </Text>
-                    </Box>
-                  </GridItem>
-                  <GridItem>
-                    <Box
-                      p={{ base: "1rem", md: "1.25rem" }}
-                      border="1px"
-                      borderColor="gray.200"
-                      borderRadius="0.5rem"
-                    >
-                      <Heading
-                        as="h4"
-                        fontSize={{ base: "0.9rem", md: "1rem" }}
-                        mb="0.5rem"
-                        color="gray.800"
-                        fontWeight={600}
-                      >
-                        Visitor:
-                      </Heading>
-                      <Text
-                        fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                        color="gray.800"
-                        lineHeight="1.5"
-                      >
-                        Anyone who interacts with PhishCode outside of being a
-                        Client or Target, such as website visitors.
-                      </Text>
-                    </Box>
-                  </GridItem>
-                  <GridItem>
-                    <Box
-                      p={{ base: "1rem", md: "1.25rem" }}
-                      border="1px"
-                      borderColor="gray.200"
-                      borderRadius="0.5rem"
-                    >
-                      <Heading
-                        as="h4"
-                        fontSize={{ base: "0.9rem", md: "1rem" }}
-                        mb="0.5rem"
-                        color="gray.800"
-                        fontWeight={600}
-                      >
-                        Personal Information:
-                      </Heading>
-                      <Text
-                        fontSize={{ base: "0.8rem", md: "0.9rem" }}
-                        color="gray.800"
-                        lineHeight="1.5"
-                      >
-                        Data that identifies, relates to, or can reasonably
-                        identify an individual.
-                      </Text>
-                    </Box>
-                  </GridItem>
-                </Grid>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight={600}>
+                      Direct Interactions:
+                    </Text>{" "}
+                    Information submitted via our websites, applications, or
+                    direct communications.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight={600}>
+                      Third-Party Sources:
+                    </Text>{" "}
+                    Data from analytics tools, social media platforms, and
+                    integration providers.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight={600}>
+                      Automated Technologies:
+                    </Text>{" "}
+                    Cookies, log files, and tracking technologies.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight={600}>
+                      Regulatory Bodies:
+                    </Text>{" "}
+                    To comply with legal or regulatory requirements.
+                  </ListItem>
+                  <ListItem
+                    color="gray.800"
+                    fontSize={{ base: "0.9rem", md: "1rem" }}
+                  >
+                    <Text as="span" fontWeight={600}>
+                      Corporate Transactions:
+                    </Text>{" "}
+                    In the event of mergers, acquisitions, or restructuring.
+                  </ListItem>
+                </UnorderedList>
               </Box>
 
               {/* Sharing of Information */}
@@ -905,7 +723,7 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Sharing of Information
+                  5. Sharing of Information
                 </Heading>
                 <Text
                   mb={{ base: "1rem", md: "1.25rem" }}
@@ -970,9 +788,37 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   We may also share Aggregated Data for research, reporting, or
-                  product improvement. We do not sell Client Campaign Lists.
+                  product improvement.{" "}
+                  <Text as="span" fontWeight="600">
+                    We do not sell Client Campaign Lists.
+                  </Text>
+                </Text>
+              </Box>
+
+              {/* Third-Party Links  */}
+              <Box id="third-party-links">
+                <Heading
+                  as="h2"
+                  fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
+                  mb={{ base: "1rem", md: "1.25rem" }}
+                  color="gray.800"
+                  fontWeight={600}
+                >
+                  6. Third-Party Links
+                </Heading>
+                <Text
+                  color="gray.800"
+                  fontSize={{ base: "0.9rem", md: "1rem" }}
+                  lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
+                >
+                  Our Services may contain links to third-party websites.
+                  PHISHCODE is not responsible for their privacy practices, and
+                  we encourage you to review their policies before sharing
+                  information.
                 </Text>
               </Box>
 
@@ -985,12 +831,13 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Data Retention
+                  7. Data Retention
                 </Heading>
                 <Text
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   We retain Personal Information only as long as necessary for
                   the purposes outlined in this Policy or as required by law.
@@ -1008,12 +855,13 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Children's Privacy
+                  8. Children's Privacy
                 </Heading>
                 <Text
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   Our Services are not intended for individuals under 13 (or the
                   relevant local age of consent). We do not knowingly collect
@@ -1030,12 +878,13 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Your Rights
+                  9. Your Rights
                 </Heading>
                 <Text
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   Depending on your jurisdiction, you may have rights to access,
                   correct, delete, or restrict processing of your Personal
@@ -1052,12 +901,13 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Data Security
+                  10. Data Security
                 </Heading>
                 <Text
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
                   We implement administrative, technical, and physical
                   safeguards to protect Personal Information from unauthorized
@@ -1074,88 +924,19 @@ const PrivacyStatementBody: React.FC = () => {
                   color="gray.800"
                   fontWeight={600}
                 >
-                  Updates to This Policy
+                  11. Updates to This Policy
                 </Heading>
                 <Text
                   color="gray.800"
                   fontSize={{ base: "0.9rem", md: "1rem" }}
                   lineHeight={{ base: "1.5", md: "1.6" }}
+                  textAlign="justify"
                 >
-                  PhishCode may update this Privacy Policy periodically. Any
+                  PHISHCODE may update this Privacy Policy periodically. Any
                   material changes will be communicated by updating this page,
                   and continued use of our Services indicates acceptance of the
                   revised policy.
                 </Text>
-              </Box>
-
-              {/* Third-Party Links */}
-              <Box id="third-party-links">
-                <Heading
-                  as="h2"
-                  fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
-                  mb={{ base: "1rem", md: "1.25rem" }}
-                  color="gray.800"
-                  fontWeight={600}
-                >
-                  Third-Party Links
-                </Heading>
-                <Text
-                  color="gray.800"
-                  fontSize={{ base: "0.9rem", md: "1rem" }}
-                  lineHeight={{ base: "1.5", md: "1.6" }}
-                >
-                  Our Services may contain links to third-party websites.
-                  PhishCode is not responsible for their privacy practices, and
-                  we encourage you to review their policies before sharing
-                  information.
-                </Text>
-              </Box>
-
-              {/* Collection Methods */}
-              <Box id="collection-methods">
-                <Heading
-                  as="h2"
-                  fontSize={{ base: "1.4rem", md: "1.6rem", lg: "1.8rem" }}
-                  mb={{ base: "1rem", md: "1.25rem" }}
-                  color="gray.800"
-                  fontWeight={600}
-                >
-                  Collection Methods
-                </Heading>
-                <UnorderedList
-                  spacing={{ base: "0.5rem", md: "0.6rem" }}
-                  pl={{ base: "1rem", md: "1.25rem" }}
-                >
-                  <ListItem
-                    color="gray.800"
-                    fontSize={{ base: "0.9rem", md: "1rem" }}
-                  >
-                    <Text as="span" fontWeight={600}>
-                      Direct Interactions:
-                    </Text>{" "}
-                    Information submitted via our websites, applications, or
-                    direct communications.
-                  </ListItem>
-                  <ListItem
-                    color="gray.800"
-                    fontSize={{ base: "0.9rem", md: "1rem" }}
-                  >
-                    <Text as="span" fontWeight={600}>
-                      Third-Party Sources:
-                    </Text>{" "}
-                    Data from analytics tools, social media platforms, and
-                    integration providers.
-                  </ListItem>
-                  <ListItem
-                    color="gray.800"
-                    fontSize={{ base: "0.9rem", md: "1rem" }}
-                  >
-                    <Text as="span" fontWeight={600}>
-                      Automated Technologies:
-                    </Text>{" "}
-                    Cookies, log files, and tracking technologies.
-                  </ListItem>
-                </UnorderedList>
               </Box>
             </VStack>
           </GridItem>
