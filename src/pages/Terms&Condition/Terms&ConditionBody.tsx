@@ -316,7 +316,16 @@ const TermsAndConditions: React.FC = () => {
                   "you," or "your") agree to be bound by these Terms, forming a
                   legally enforceable agreement with{" "}
                   <span style={{ fontWeight: 600 }}>PHISHCODE, Inc.</span>{" "}
-                  ("PHISHCODE," "we," "us," or "our"). If you do not agree to
+                  ("PHISHCODE," "we," "us," or "our"). Our{" "}
+                  <Link
+                    as={RouterLink}
+                    to="/privacy-statement"
+                    color="blue.600"
+                    textDecoration="underline"
+                  >
+                    Privacy Statement
+                  </Link>{" "}
+                  explains how we handle your data. If you do not agree to
                   these Terms, you must discontinue use of the Website and
                   Services immediately.
                 </Text>

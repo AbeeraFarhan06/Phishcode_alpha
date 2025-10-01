@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, Flex, Text, useColorModeValue, Link } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import Container from "../../components/Container";
 
 const Footer: React.FC = () => {
@@ -29,9 +29,18 @@ const Footer: React.FC = () => {
             textAlign={{ base: "center", md: "left" }}
             width={{ base: "100%", md: "auto" }}
           >
-            <Link to="/privacy-statement">Your Privacy Choices</Link> |{" "}
-            <Link to="#">Privacy Statement</Link> |{" "}
-            <Link to="#">Terms & Conditions</Link> | © PHISHCODE
+            <Link as={RouterLink} to="/privacy-statement">
+              Your Privacy Choices
+            </Link>{" "}
+            |{" "}
+            <Link as={RouterLink} to="/privacy-statement">
+              Privacy Statement
+            </Link>{" "}
+            |{" "}
+            <Link as={RouterLink} to="/terms-and-conditions">
+              Terms & Conditions
+            </Link>{" "}
+            | © PHISHCODE
           </Text>
         </Flex>
       </Container>
