@@ -34,12 +34,12 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import phishcode_logoo_1 from "../assets/logo/phishcode_logoo_1.png";
-import icon_feedback_01_1 from "../assets/icons/icon_feedback_01_1.png";
-import pipeline from "../assets/icons/pipeline.png";
-import Container from "./Container";
+import phishcode_logoo_1 from "../../assets/logo/phishcode_logoo_1.png";
+import icon_feedback_01_1 from "../../assets/icons/icon_feedback_01_1.png";
+import pipeline from "../../assets/icons/pipeline.png";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useMemo, useState } from "react";
+import Container from "../../components/Container";
 
 type FeedbackKind = "issue" | "idea" | "complaint";
 

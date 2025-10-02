@@ -11,6 +11,7 @@ import SigninPage from "./pages/Signin/SigninPage";
 import SecurityPage from "./pages/SecurityPage";
 import PrivacyStatement from "./pages/PrivacyStatement";
 import TermsAndConditions from "./pages/Terms&Condition";
+import ResourcesPage from "./pages/ResourcesPage";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,14 @@ const router = createBrowserRouter([
   {
     path: "/contact-us",
     element: <ContactUs />,
+  },
+  {
+    path: "/resources",
+    element: <ResourcesPage />,
+  },
+  {
+    path: "/resources/body",
+    element: <ResourcesPage />,
   },
 ]);
 
