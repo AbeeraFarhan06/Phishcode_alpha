@@ -28,18 +28,6 @@ const PrintIcon = (props: any) => (
   </Icon>
 );
 
-// // Container component
-// const Container = ({ children }: { children: React.ReactNode }) => (
-//   <Box
-//     maxW="1200px"
-//     mx="auto"
-//     px={{ base: "1rem", sm: "1.5rem", md: "2rem", lg: "2.5rem" }}
-//     py={{ base: "2rem", md: "3rem" }}
-//   >
-//     {children}
-//   </Box>
-// );
-
 const TermsAndConditions: React.FC = () => {
   return (
     <Box bg="white" minH="100vh">
@@ -316,16 +304,7 @@ const TermsAndConditions: React.FC = () => {
                   "you," or "your") agree to be bound by these Terms, forming a
                   legally enforceable agreement with{" "}
                   <span style={{ fontWeight: 600 }}>PHISHCODE, Inc.</span>{" "}
-                  ("PHISHCODE," "we," "us," or "our"). Our{" "}
-                  <Link
-                    as={RouterLink}
-                    to="/privacy-statement"
-                    color="blue.600"
-                    textDecoration="underline"
-                  >
-                    Privacy Statement
-                  </Link>{" "}
-                  explains how we handle your data. If you do not agree to
+                  ("PHISHCODE," "we," "us," or "our"). If you do not agree to
                   these Terms, you must discontinue use of the Website and
                   Services immediately.
                 </Text>

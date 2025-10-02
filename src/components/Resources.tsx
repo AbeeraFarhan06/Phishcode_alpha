@@ -11,11 +11,13 @@ import {
   HStack,
   Heading,
   useBreakpointValue,
+  Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { IoIosArrowForward } from "react-icons/io";
 import Container from "./Container";
+import { useNavigate } from "react-router-dom";
 
 // Motion-enhanced versions of Chakra UI components.
 const MotionBox = motion(Box);
@@ -68,6 +70,7 @@ const cardData: Record<string, CardItem[]> = {
 const tabs = Object.keys(cardData);
 
 const Resources = () => {
+  const navigate = useNavigate();
   // State to keep track of the currently selected tab.
   const [selectedTab, setSelectedTab] = useState("Infographics");
   // The cards for the currently selected tab.
@@ -78,7 +81,7 @@ const Resources = () => {
     base: "1.5rem",
     md: "2.25rem",
   });
-  const gridColumns = useBreakpointValue({ base: 1, md:1, lg: 1, xl:2 });
+  const gridColumns = useBreakpointValue({ base: 1, md: 1, lg: 1, xl: 2 });
 
   return (
     <Box
@@ -228,6 +231,20 @@ const Resources = () => {
               </Box>
             )}
           </SimpleGrid>
+          <Flex justifyContent="flex-end">
+            <Button
+              mt="2rem"
+              bgColor="#0E1726"
+              textColor="white"
+              fontWeight="normal"
+              fontSize="14px"
+              borderRadius="3px"
+              _hover={ {bgColor: "#243B65", textColor: "white"}}
+              onClick={() => navigate("/resources/body")}
+            >
+              View All
+            </Button>
+          </Flex>
         </Box>
       </Container>
     </Box>

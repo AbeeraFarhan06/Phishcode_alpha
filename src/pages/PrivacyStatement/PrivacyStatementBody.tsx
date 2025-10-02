@@ -267,16 +267,7 @@ const PrivacyStatementBody: React.FC = () => {
                   Policy describes how we collect, use, share, and safeguard
                   Personal Information when you interact with our websites,
                   applications, and services (together, the{" "}
-                  <span style={{ fontWeight: 600 }}>“Services”</span>). By using our Services, you agree to these terms and our{" "}
-                  <Link
-                    as={RouterLink}
-                    to="/terms-and-conditions"
-                    color="blue.600"
-                    textDecoration="underline"
-                  >
-                    Terms & Conditions
-                  </Link>
-                  .
+                  <span style={{ fontWeight: 600 }}>“Services”</span>).
                 </Text>
 
                 <Text

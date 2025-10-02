@@ -814,7 +814,10 @@ const Step1AboutYou = () => {
                     I will receive information, tips, and offers about solutions
                     for businesses and organizations, and other PHISHCODE
                     products and services.{" "}
-                    <Link to="/privacy-statement" className={styles.privacyLink}>
+                    <Link
+                      to="/privacy-statement"
+                      className={styles.privacyLink}
+                    >
                       Privacy Statement
                     </Link>
                   </label>
