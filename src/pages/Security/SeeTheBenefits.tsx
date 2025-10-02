@@ -105,9 +105,9 @@ const SecurityInfoComponent = () => {
   const cardsPerView = useBreakpointValue({
     base: 1, // Mobile: 1 card
     md: 1, // Tablet: 1 card
-    lg: 1, // Large tablet: 1 card
-    xl: 1, // Small desktop: 1 card
-    "2xl": 3, // Large desktop: 3 cards
+    lg: 2, // Laptop: 2 cards
+    xl: 2, // Desktop: 2 cards
+    "2xl": 2, // Large desktop: 2 cards
   });
 
   const cardData = [
@@ -275,16 +275,14 @@ const SecurityInfoComponent = () => {
               </HStack>
             </Box>
 
-            {/* Carousel for mobile/tablet - 1 card at a time */}
-            <Box display={{ base: "block", "2xl": "none" }}>
-              <Box overflow="hidden" w="100%">
+            {/* Large screens - Show 2 cards side by side */}
+            <Box display={{ base: "none", lg: "block", "2xl": "none" }}>
+              <Box overflow="hidden" w="100%" position="relative">
                 <Box
                   display="flex"
                   transition="transform 0.5s ease-in-out"
-                  transform={`translateX(-${
-                    currentIndex * (100 / cardData.length)
-                  }%)`}
-                  w={`${cardData.length * 100}%`}
+                  transform={`translateX(-${currentIndex * 50}%)`}
+                  // pl={{ base: 0, lg: "4rem", xl: "6rem", "2xl": "8rem" }}
                 >
                   {cardData.map((card, index) => (
                     <motion.div
@@ -295,7 +293,94 @@ const SecurityInfoComponent = () => {
                       viewport={{ once: true, amount: 0.2 }}
                       transition={{ delay: index * 0.2 }}
                       style={{
-                        width: `${100 / cardData.length}%`,
+                        width: "100%",
+                        maxWidth: "450px",
+                        flexShrink: 0,
+                        marginRight: "1.5rem",
+                      }}
+                    >
+                      <Card
+                        bg="white"
+                        shadow="lg"
+                        borderRadius="3xl"
+                        border="1px"
+                        borderColor="gray.100"
+                        h="19.375rem"
+                        _hover={{
+                          shadow: "xl",
+                          transform: "translateY(-0.125rem)",
+                        }}
+                        transition="all 0.2s"
+                      >
+                        <CardBody p="1.5rem">
+                          <VStack align="start" spacing="1.5rem" h="100%">
+                            {card.icon}
+                            <VStack align="start" spacing="1rem" flex={1}>
+                              <Heading
+                                size="md"
+                                color="gray.800"
+                                fontWeight="semibold"
+                              >
+                                {card.title}
+                              </Heading>
+                              <Text color="gray.600" fontSize="sm">
+                                {card.text}
+                              </Text>
+                            </VStack>
+                            <Button
+                              variant="link"
+                              color="blue.600"
+                              fontWeight="semibold"
+                              fontSize="xs"
+                              textDecoration="underline"
+                            >
+                              {card.button}
+                            </Button>
+                          </VStack>
+                        </CardBody>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </Box>
+              </Box>
+              {/* Navigation arrows */}
+              <HStack
+                spacing="1rem"
+                justify="start"
+                mt="2rem"
+                // pl={{ base: 0, lg: "4rem", xl: "6rem", "2xl": "8rem" }}
+              >
+                <ArrowButton
+                  direction="left"
+                  onClick={handlePrevious}
+                  disabled={currentIndex === 0}
+                />
+                <ArrowButton
+                  direction="right"
+                  onClick={handleNext}
+                  disabled={currentIndex === maxIndex}
+                />
+              </HStack>
+            </Box>
+
+            {/* Carousel for mobile/tablet only */}
+            <Box display={{ base: "block", lg: "none" }}>
+              <Box overflow="hidden" w="100%">
+                <Box
+                  display="flex"
+                  transition="transform 0.5s ease-in-out"
+                  transform={`translateX(-${currentIndex * 100}%)`}
+                >
+                  {cardData.map((card, index) => (
+                    <motion.div
+                      key={index}
+                      variants={fadeUpVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ delay: index * 0.2 }}
+                      style={{
+                        width: "100%",
                         flexShrink: 0,
                       }}
                     >
@@ -307,10 +392,10 @@ const SecurityInfoComponent = () => {
                           border="1px"
                           borderColor="gray.100"
                           h={{
-                            base: "auto", // Auto height on mobile
-                            md: "20rem", // Fixed height on tablet+
+                            base: "auto",
+                            md: "20rem",
                           }}
-                          minH="18rem" // Minimum height to prevent too short cards
+                          minH="18rem"
                         >
                           <CardBody p={{ base: "1.25rem", md: "1.5rem" }}>
                             <VStack
@@ -358,7 +443,7 @@ const SecurityInfoComponent = () => {
                 </Box>
               </Box>
 
-              {/* Navigation arrows - Left aligned */}
+              {/* Navigation arrows */}
               <HStack spacing="1rem" justify="start" mt="2rem">
                 <ArrowButton
                   direction="left"
