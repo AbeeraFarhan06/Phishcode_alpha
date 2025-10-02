@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Container from "../../components/Container";
 
-const filters = ["AI in Security", "Cloud Security", "Risk and Compliance"];
+const filters = ["Infographics", "Blogs", "Demos"];
 
 const Body = () => {
   const [activeFilter, setActiveFilter] = useState(filters[0]);
@@ -24,19 +24,12 @@ const Body = () => {
   return (
     <Box id="resource-body">
       <Container>
-        {/* Header */}
-        <VStack spacing={4} textAlign="center" mb={10}>
-          <Box>
-            <Heading size="44px" fontWeight="semibold">Security 101</Heading>
-            <Text fontSize="16px" color="gray.600">
-              Deepen your security knowledge and gain a fundamental understanding of
-              a variety of cybersecurity, identity, and compliance topics and best
-              practices.
-            </Text>
-          </Box>
-        </VStack>
+        {/* Heading */}
+        <Heading fontSize="24px" fontWeight="semibold" py={4}>
+          Select a filter
+        </Heading>
         {/* Filters */}
-        <HStack spacing={4} justify="left" mb={8}>
+        <HStack spacing={4} justify="left" mb={4}>
           {filters.map((filter) => {
             const isSelected = activeFilter === filter;
             return (
@@ -58,6 +51,12 @@ const Body = () => {
             );
           })}
         </HStack>
+
+        {/* results text */}
+        <Text fontSize="16px" fontWeight="semibold" py={4}>
+          Showing 12 of 36 results
+        </Text>
+
         {/* Cards Grid */}
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
           {cards.map((card) => (
