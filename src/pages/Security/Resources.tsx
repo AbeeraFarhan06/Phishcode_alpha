@@ -43,6 +43,14 @@ const cardData: Record<string, CardItem[]> = {
       image:
         "https://cdn.pixabay.com/photo/2016/11/23/14/48/email-1851080_1280.jpg",
     },
+    {
+      tt: "Infographic",
+      title: "Phishing Attack Simulation demo",
+      description: "Learn how to deliver exceptional attack simulation.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2016/11/23/14/48/email-1851080_1280.jpg",
+    },
   ],
   Blogs: [
     {
@@ -53,8 +61,24 @@ const cardData: Record<string, CardItem[]> = {
       image:
         "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
     },
+    {
+      tt: "Blog",
+      title: "AI-Powered Security Insights",
+      description: "Understand how AI helps detect phishing threats faster.",
+      buttonText: "Read the blog",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
   ],
   Demos: [
+    {
+      tt: "Demo",
+      title: "AI-Powered Security Demo",
+      description: "Watch how AI-driven defenses stop phishing in real-time.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
     {
       tt: "Demo",
       title: "AI-Powered Security Demo",
