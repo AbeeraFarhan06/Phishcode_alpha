@@ -58,7 +58,7 @@ const Body = () => {
         </Text>
 
         {/* Cards Grid */}
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+        <SimpleGrid columns={{ base: 1, md: 1, lg: 1, xl: 3 }} spacing={6}>
           {cards.map((card) => (
             <Box
               key={card.id}

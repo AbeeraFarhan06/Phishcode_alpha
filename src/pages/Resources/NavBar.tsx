@@ -121,11 +121,12 @@ const Navbar = () => {
                 h="2.5rem"
                 w="auto"
                 cursor="pointer"
+                onClick={() => navigate("/")}
               />
               <Image src={pipeline} />
-              <RouterLink to="/security">
+              <RouterLink to="/about-us">
                 <Text
-                  fontSize="12px"
+                  fontSize="14px"
                   mt={4}
                   cursor="pointer"
                   _hover={{ textDecoration: "underline", color: "#243B65" }}
