@@ -38,7 +38,7 @@ import phishcode_logoo_1 from "../../assets/logo/phishcode_logoo_1.png";
 import icon_feedback_01_1 from "../../assets/icons/icon_feedback_01_1.png";
 import pipeline from "../../assets/icons/pipeline.png";
 import Container from "../../components/Container";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 type FeedbackKind = "issue" | "idea" | "complaint";
@@ -101,12 +101,6 @@ const Navbar = () => {
     onFeedbackClose();
     onDetailOpen();
   };
-
-  const drawerItems = [
-    { title: "Products", links: [] },
-    { title: "Pricing", links: [] },
-    { title: "Resources", links: [] },
-  ];
 
   return (
     <Box position="sticky" zIndex={1000} bg="white">
@@ -233,15 +227,6 @@ const Navbar = () => {
                 cursor="pointer"
                 onClick={handleLogoClick}
               />
-              <Image src={pipeline} h="20px" />
-              <Text
-                fontSize="12px"
-                mt={4}
-                cursor="pointer"
-                _hover={{ textDecoration: "underline", color: "#243B65" }}
-              >
-                Why PHISHCODE?
-              </Text>
             </HStack>
           </DrawerHeader>
           <DrawerBody>
@@ -270,32 +255,22 @@ const Navbar = () => {
                 Try for Free
               </Button>
 
-              {/* Accordion Menu */}
-              <Accordion allowToggle>
-                {drawerItems.map((section, i) => (
-                  <AccordionItem key={i}>
-                    <AccordionButton>
-                      <Box flex="1" textAlign="left">
-                        {section.title}
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel pb={4}>
-                      {section.links.map((link, j) => (
-                        <Text
-                          key={j}
-                          px={2}
-                          py={1}
-                          cursor="pointer"
-                          _hover={{ color: "blue.600" }}
-                        >
-                          {link}
-                        </Text>
-                      ))}
-                    </AccordionPanel>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <Box textAlign="left">
+                <RouterLink to="/about-us">
+                  <Text
+                    fontSize="14px"
+                    mt={3}
+                    cursor="pointer"
+                    _hover={{ textDecoration: "underline", color: "#243B65" }}
+                  >
+                    Why PHISHCODE?
+                  </Text>
+                </RouterLink>
+                {/* Feedback Icon */}
+                <Text cursor="pointer" fontSize="14px" onClick={onFeedbackOpen}>
+                  Feedback
+                </Text>
+              </Box>
             </VStack>
           </DrawerBody>
         </DrawerContent>

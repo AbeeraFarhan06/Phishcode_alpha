@@ -98,12 +98,6 @@ const Navbar = () => {
     onDetailOpen();
   };
 
-  const drawerItems = [
-    { title: "Products", links: [] },
-    { title: "Pricing", links: [] },
-    { title: "Resources", links: [] },
-  ];
-
   return (
     <Box position="sticky" zIndex={1000} bg="white">
       <Container navbar1>
@@ -225,17 +219,6 @@ const Navbar = () => {
           <DrawerHeader bgColor="white">
             <HStack>
               <Image src={phishcode_logoo_1} h="2.5rem" w="auto" />
-              <Image src={pipeline} h="20px" />
-              <RouterLink to="/security">
-                <Text
-                  fontSize="12px"
-                  mt={4}
-                  cursor="pointer"
-                  _hover={{ textDecoration: "underline", color: "#243B65" }}
-                >
-                  Why PHISHCODE?
-                </Text>
-              </RouterLink>
             </HStack>
           </DrawerHeader>
           <DrawerBody>
@@ -264,32 +247,22 @@ const Navbar = () => {
                 Try for Free
               </Button>
 
-              {/* Accordion Menu */}
-              <Accordion allowToggle>
-                {drawerItems.map((section, i) => (
-                  <AccordionItem key={i}>
-                    <AccordionButton>
-                      <Box flex="1" textAlign="left">
-                        {section.title}
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel pb={4}>
-                      {section.links.map((link, j) => (
-                        <Text
-                          key={j}
-                          px={2}
-                          py={1}
-                          cursor="pointer"
-                          _hover={{ color: "blue.600" }}
-                        >
-                          {link}
-                        </Text>
-                      ))}
-                    </AccordionPanel>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <Box textAlign="left">
+                <RouterLink to="/about-us">
+                  <Text
+                    fontSize="14px"
+                    mt={3}
+                    cursor="pointer"
+                    _hover={{ textDecoration: "underline", color: "#243B65" }}
+                  >
+                    Why PHISHCODE?
+                  </Text>
+                </RouterLink>
+                {/* Feedback Icon */}
+                <Text cursor="pointer" fontSize="14px" onClick={onFeedbackOpen}>
+                  Feedback
+                </Text>
+              </Box>
             </VStack>
           </DrawerBody>
         </DrawerContent>
