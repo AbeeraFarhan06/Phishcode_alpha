@@ -22,9 +22,7 @@ const ResourcesHerobanner = () => {
               Security 101
             </Heading>
             <Text fontSize="16px" color="gray.600" mt={4} textColor="white">
-              Deepen your security knowledge and gain a fundamental understanding of
-              a variety of cybersecurity, identity, and compliance topics and best
-              practices.
+              Empower your workforce with expert-led cybersecurity awareness training and resources from PHISHCODE.
             </Text>
           </Box>
         </VStack>
