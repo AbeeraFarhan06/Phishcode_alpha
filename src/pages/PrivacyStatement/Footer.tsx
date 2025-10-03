@@ -4,14 +4,11 @@ import { Link as RouterLink } from "react-router-dom";
 import Container from "../../components/Container";
 
 const Footer: React.FC = () => {
-  const bgColor = useColorModeValue("#f1f2f379", "gray.700");
-  const borderColor = useColorModeValue("#8c8c8d79", "gray.600");
-  const textColor = useColorModeValue("gray.600", "gray.300");
 
   return (
     <Box
-      bgColor={bgColor}
-      borderTop={`0.0625rem solid ${borderColor}`}
+      bgColor="#f1f2f379"
+      borderTop={`0.0625rem solid $"#8c8c8d79"`}
       width="100%"
     >
       <Container noVerticalPadding py="0.75rem">
@@ -19,7 +16,7 @@ const Footer: React.FC = () => {
           justify="left"
           align="center"
           fontSize={{ base: "0.7rem", md: "0.75rem" }}
-          color={textColor}
+          color="black"
           flexWrap="wrap"
           gap={{ base: "0.25rem", md: "0" }}
         >
