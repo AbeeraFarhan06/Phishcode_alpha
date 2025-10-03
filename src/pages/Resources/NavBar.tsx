@@ -123,9 +123,9 @@ const Navbar = () => {
                 cursor="pointer"
               />
               <Image src={pipeline} />
-              <RouterLink to="/about-us">
+              <RouterLink to="/security">
                 <Text
-                  fontSize="14px"
+                  fontSize="12px"
                   mt={4}
                   cursor="pointer"
                   _hover={{ textDecoration: "underline", color: "#243B65" }}
