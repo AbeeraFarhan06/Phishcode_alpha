@@ -263,8 +263,11 @@ const Resources = () => {
               fontWeight="normal"
               fontSize="14px"
               borderRadius="3px"
-              _hover={ {bgColor: "#243B65", textColor: "white"}}
-              onClick={() => navigate("/resources/body")}
+              _hover={{ bgColor: "#243B65", textColor: "white" }}
+              onClick={() => {
+                navigate("/resources");
+                window.scrollTo(0, 0);
+              }}
             >
               View All
             </Button>
