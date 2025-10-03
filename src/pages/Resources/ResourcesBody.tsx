@@ -7,19 +7,119 @@ import {
   SimpleGrid,
   VStack,
   HStack,
+  Image,
+  Flex,
 } from "@chakra-ui/react";
 import Container from "../../components/Container";
+import { motion } from "framer-motion";
+import { IoIosArrowForward } from "react-icons/io";
+
+// Motion-enhanced versions of Chakra UI components.
+const MotionBox = motion(Box);
+const MotionVStack = motion(VStack);
 
 const filters = ["Infographics", "Blogs", "Demos"];
 
-const Body = () => {
-  const [activeFilter, setActiveFilter] = useState(filters[0]);
+// The type definition for a card item.
+type CardItem = {
+  tt: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  image: string;
+};
 
-  // Dummy cards data
-  const cards = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    title: `${activeFilter} - Card ${i + 1}`,
-  }));
+// The data for the cards, organized by tab.
+const cardData: Record<string, CardItem[]> = {
+  Infographics: [
+    {
+      tt: "Infographic-1",
+      title: "Phishing Attack Simulation demo",
+      description: "Learn how to deliver exceptional attack simulation.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2016/11/23/14/48/email-1851080_1280.jpg",
+    },
+    {
+      tt: "Infographic-2",
+      title: "Phishing Attack Simulation demo",
+      description: "Learn how to deliver exceptional attack simulation.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2016/11/23/14/48/email-1851080_1280.jpg",
+    },
+    {
+      tt: "Infographic-3",
+      title: "Phishing Attack Simulation demo",
+      description: "Learn how to deliver exceptional attack simulation.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2016/11/23/14/48/email-1851080_1280.jpg",
+    },
+  ],
+  Blogs: [
+    {
+      tt: "Blog-1",
+      title: "AI-Powered Security Insights",
+      description: "Understand how AI helps detect phishing threats faster.",
+      buttonText: "Read the blog",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
+    {
+      tt: "Blog-2",
+      title: "AI-Powered Security Insights",
+      description: "Understand how AI helps detect phishing threats faster.",
+      buttonText: "Read the blog",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
+    {
+      tt: "Blog-3",
+      title: "AI-Powered Security Insights",
+      description: "Understand how AI helps detect phishing threats faster.",
+      buttonText: "Read the blog",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
+  ],
+  Demos: [
+    {
+      tt: "Demo-1",
+      title: "AI-Powered Security Demo",
+      description: "Watch how AI-driven defenses stop phishing in real-time.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
+    {
+      tt: "Demo-2",
+      title: "AI-Powered Security Demo",
+      description: "Watch how AI-driven defenses stop phishing in real-time.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
+    {
+      tt: "Demo-3",
+      title: "AI-Powered Security Demo",
+      description: "Watch how AI-driven defenses stop phishing in real-time.",
+      buttonText: "Watch the demo",
+      image:
+        "https://cdn.pixabay.com/photo/2020/04/24/06/28/cyber-5083704_1280.jpg",
+    },
+  ],
+};
+
+const Body = () => {
+  // Start with no filter applied
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+
+  // Flatten all cards into one array
+  const allCards: CardItem[] = Object.values(cardData).flat();
+
+  // Decide what to show
+  const cards = activeFilter ? cardData[activeFilter] : allCards;
 
   return (
     <Box id="resource-body">
@@ -28,6 +128,7 @@ const Body = () => {
         <Heading fontSize="24px" fontWeight="semibold" py={4}>
           Select a filter
         </Heading>
+
         {/* Filters */}
         <HStack spacing={4} justify="left" mb={4}>
           {filters.map((filter) => {
@@ -44,7 +145,9 @@ const Body = () => {
                 borderRadius="2.5rem"
                 _hover={{ bg: isSelected ? "#1A2B50" : "#c3c7c9ff" }}
                 _active={{ bg: isSelected ? "#1A2B50" : "gray.300" }}
-                onClick={() => setActiveFilter(filter)}
+                onClick={
+                  () => setActiveFilter(isSelected ? null : filter) // toggle logic
+                }
               >
                 {filter}
               </Button>
@@ -54,29 +157,124 @@ const Body = () => {
 
         {/* results text */}
         <Text fontSize="16px" fontWeight="semibold" py={4}>
-          Showing 12 of 36 results
+          {activeFilter
+            ? `Showing ${cards.length} of ${cards.length} results for ${activeFilter}`
+            : `Showing ${cards.length} of ${cards.length} results`}
         </Text>
 
-        {/* Cards Grid */}
-        <SimpleGrid columns={{ base: 1, md: 1, lg: 1, xl: 3 }} spacing={6}>
-          {cards.map((card) => (
+        {/* Cards Grid with animation */}
+        <SimpleGrid
+          columns={{ base: 1, md: 1, lg: 2, xl: 3 }}
+          spacing={6}
+          minH="25rem"
+        >
+          {cards.length > 0 ? (
+            cards.map((card: CardItem, index: number) => (
+              <MotionBox
+                key={index}
+                bg="white"
+                borderRadius="1.25rem"
+                overflow="hidden"
+                boxShadow="md"
+                display="flex"
+                flexDirection="column"
+                p={2}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.2,
+                  duration: 0.6,
+                  ease: "easeOut",
+                }}
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                <Box p={1} borderRadius="0.9375rem" overflow="hidden">
+                  <Image
+                    src={card.image}
+                    w="100%"
+                    h="12.5rem"
+                    objectFit="cover"
+                    borderRadius="1.25rem"
+                    transition="transform 0.3s ease-in-out"
+                    _hover={{ transform: "scale(1.05)" }}
+                  />
+                </Box>
+                <Box p={6} flex="1" display="flex" flexDirection="column">
+                  <Text
+                    fontSize="0.875rem"
+                    fontWeight="medium"
+                    mb={2}
+                    color="gray.600"
+                  >
+                    {card.tt}
+                  </Text>
+                  <Text
+                    fontSize={{ base: "1rem", md: "1.125rem" }}
+                    fontWeight="semibold"
+                    mb={4}
+                    color="gray.800"
+                  >
+                    {card.title}
+                  </Text>
+                  <Text
+                    fontSize={{ base: "0.875rem", md: "0.9375rem" }}
+                    color="gray.700"
+                    mb={4}
+                  >
+                    {card.description}
+                  </Text>
+                  <Box mt="auto" display="flex" alignItems="center">
+                    <Button
+                      bg="#0E1726"
+                      color="white"
+                      fontSize={{ base: "0.875rem", md: "0.875rem" }}
+                      borderRadius="md"
+                      _hover={{ bg: "#243B65" }}
+                      mr={2}
+                      size="sm"
+                    >
+                      <IoIosArrowForward />
+                    </Button>
+                    <Text
+                      fontSize={{ base: "0.875rem", md: "0.875rem" }}
+                      color="#22395fff"
+                      fontWeight="medium"
+                      pt={3}
+                    >
+                      {card.buttonText}
+                    </Text>
+                  </Box>
+                </Box>
+              </MotionBox>
+            ))
+          ) : (
             <Box
-              key={card.id}
-              bg="#1d2f4fff"
-              height="200px"
-              borderRadius="xl"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              color="white"
-              fontSize="lg"
-              fontWeight="bold"
-              shadow="md"
+              textAlign="center"
+              py={20}
+              color="gray.500"
+              fontSize="1.125rem"
             >
-              {card.title}
+              No resources available for this category yet.
             </Box>
-          ))}
+          )}
         </SimpleGrid>
+        <Flex justifyContent="flex-end">
+            <Button
+              mt="2rem"
+              bgColor="#0E1726"
+              textColor="white"
+              fontWeight="normal"
+              fontSize="14px"
+              borderRadius="3px"
+              _hover={ {bgColor: "#243B65", textColor: "white"}}
+              // onClick={() => {
+              //   navigate("/resources");
+              //   window.scrollTo(0, 0);
+              // }}
+            >
+              Learn More
+            </Button>
+          </Flex>
       </Container>
     </Box>
   );
