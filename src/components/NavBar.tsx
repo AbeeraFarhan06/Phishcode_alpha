@@ -194,16 +194,12 @@ const Navbar = () => {
 
               {/* Center logo */}
               <Box position="absolute" left="50%" transform="translateX(-50%)">
-                <RouterLink to="/about-us">
-                <Text
-                  fontSize="14px"
-                  mt={4}
+                <Image
+                  src={phishcode_logoo_1}
+                  h="2.5rem"
+                  w="auto"
                   cursor="pointer"
-                  _hover={{ textDecoration: "underline", color: "#243B65" }}
-                >
-                  Why PHISHCODE?
-                </Text>
-              </RouterLink>
+                />
               </Box>
 
               {/* Feedback Icon */}
@@ -229,7 +225,7 @@ const Navbar = () => {
             <HStack>
               <Image src={phishcode_logoo_1} h="2.5rem" w="auto" />
               <Image src={pipeline} h="20px" />
-              <RouterLink to="/security">
+              <RouterLink to="/about-us">
                 <Text
                   fontSize="12px"
                   mt={4}
